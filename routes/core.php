@@ -27,6 +27,13 @@ Route::middleware('web')->group(function () {
 
         // 登录后分流点：单模块直接进模块，多模块回门户（TC-04）
         Route::get('/home', [HomeController::class, 'index'])->name('core.home.redirect');
+
+        // 个人中心（TC-06）
+        Route::get('/profile', [\App\Core\Http\Controllers\ProfileController::class, 'index'])->name('core.profile');
+        Route::put('/profile/basic', [\App\Core\Http\Controllers\ProfileController::class, 'updateBasic'])->name('core.profile.basic');
+        Route::put('/profile/password', [\App\Core\Http\Controllers\ProfileController::class, 'updatePassword'])->name('core.profile.password');
+        Route::put('/profile/notifications', [\App\Core\Http\Controllers\ProfileController::class, 'updateNotifications'])->name('core.profile.notifications');
+        Route::delete('/profile/sessions', [\App\Core\Http\Controllers\ProfileController::class, 'destroyOtherSessions'])->name('core.profile.sessions');
     });
 
     // 门户：三张卡片（完整视觉在 TC-05 落地，此处为可点骨架）

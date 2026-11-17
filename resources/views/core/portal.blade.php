@@ -44,7 +44,8 @@
     </div>
     @if ($user)
         <div class="d-flex align-items-center gap-3">
-            <span class="text-muted small">{{ $user->name ?: $user->username ?: $user->email }}</span>
+            <a class="text-muted small" href="/profile">{{ $user->name ?: $user->username ?: $user->email }}</a>
+            <span class="dw-badge dw-badge--muted">个人中心</span>
             <form method="POST" action="/logout">
                 @csrf
                 <button class="btn btn-sm btn-outline-secondary" type="submit">退出登录</button>
