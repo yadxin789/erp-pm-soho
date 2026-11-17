@@ -276,7 +276,7 @@ function sendPrivateMessage(event) {
     const submitBtn = document.querySelector('#private-chat-form button[type="submit"]');
     submitBtn.disabled = true;
     
-    fetch(`/api/project/${PROJECT_ID}/chat/send`, {
+    fetch(`/pm/api/project/${PROJECT_ID}/chat/send`, {
         method: 'POST',
         body: formData,
         headers: {

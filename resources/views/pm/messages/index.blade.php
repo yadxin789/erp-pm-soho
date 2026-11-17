@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ==================== 成员列表 ====================
 function loadMembers() {
-    fetch(`/api/project/${PROJECT_ID}/chat/members`)
+    fetch(`/pm/api/project/${PROJECT_ID}/chat/members`)
         .then(res => res.json())
         .then(data => {
             if (data.members) {
@@ -402,13 +402,13 @@ function renderMemberList(members) {
                  id="member-${member.id}"
                  role="button"
                  tabindex="0"
-                 aria-label="与 ${escapeHtml(member.username)} 私聊"
+                 aria-label="与 ${escapeHtml(member.name || member.username)} 私聊"
                  onclick="openPrivateChat(${member.id})"
                  onkeydown="if(event.key==='Enter'||event.key===' ') openPrivateChat(${member.id})"
                  style="cursor: pointer;">
                 <div class="position-relative mr-3">
                     ${member.avatar 
-                        ? `<img src="${escapeHtml(member.avatar)}" class="rounded-circle" alt="${escapeHtml(member.username)}" style="width: 40px; height: 40px; object-fit: cover; ${member.is_online ? '' : 'filter: grayscale(100%); opacity: 0.5;'}">`
+                        ? `<img src="${escapeHtml(member.avatar)}" class="rounded-circle" alt="${escapeHtml(member.name || member.username)}" style="width: 40px; height: 40px; object-fit: cover; ${member.is_online ? '' : 'filter: grayscale(100%); opacity: 0.5;'}">`
                         : `<div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white"
                               style="width: 40px; height: 40px; font-size: 16px; ${member.is_online ? '' : 'opacity: 0.5;'}">
                               ${escapeHtml(member.username.charAt(0))}
@@ -417,7 +417,7 @@ function renderMemberList(members) {
                     <span class="online-dot ${onlineClass}"></span>
                 </div>
                 <div class="flex-grow-1 min-width-0">
-                    <div class="font-weight-bold" style="font-size: 14px;">${escapeHtml(member.username)}</div>
+                    <div class="font-weight-bold" style="font-size: 14px;">${escapeHtml(member.name || member.username)}</div>
                     <div class="text-muted" style="font-size: 12px;">${onlineText}</div>
                 </div>
             </div>`;
