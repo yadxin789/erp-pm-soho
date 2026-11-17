@@ -95,4 +95,26 @@ Route::middleware('web')->group(function () {
             ->whereNumber('id')
             ->name('core.notifications.destroy');
     });
+
+    // TC-11 审批引擎：ERP 订单审批 + SOHO 8 条 FLOW-* 共用一套流/步骤/实例/待办
+    Route::middleware('auth')->group(function () {
+        Route::get('/approvals', [\App\Core\Http\Controllers\ApprovalController::class, 'index'])
+            ->name('core.approvals.index');
+        Route::get('/approvals/create', [\App\Core\Http\Controllers\ApprovalController::class, 'create'])
+            ->name('core.approvals.create');
+        Route::post('/approvals', [\App\Core\Http\Controllers\ApprovalController::class, 'store'])
+            ->name('core.approvals.store');
+        Route::get('/approvals/{approval}', [\App\Core\Http\Controllers\ApprovalController::class, 'show'])
+            ->whereNumber('approval')
+            ->name('core.approvals.show');
+        Route::post('/approvals/{approval}/tasks/{task}/approve', [\App\Core\Http\Controllers\ApprovalController::class, 'approve'])
+            ->whereNumber('approval')->whereNumber('task')
+            ->name('core.approvals.approve');
+        Route::post('/approvals/{approval}/tasks/{task}/reject', [\App\Core\Http\Controllers\ApprovalController::class, 'reject'])
+            ->whereNumber('approval')->whereNumber('task')
+            ->name('core.approvals.reject');
+        Route::post('/approvals/{approval}/cancel', [\App\Core\Http\Controllers\ApprovalController::class, 'cancel'])
+            ->whereNumber('approval')
+            ->name('core.approvals.cancel');
+    });
 });

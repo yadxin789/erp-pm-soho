@@ -9,6 +9,9 @@
         <a href="{{ route('core.home') }}"><i class="fa-solid fa-cubes" aria-hidden="true"></i> {{ config('app.name') }}</a>
     </div>
     <nav class="dw-topbar-actions" aria-label="账号与通知">
+        <a href="{{ route('core.approvals.index') }}" class="dw-topbar-link">
+            <i class="fa-solid fa-stamp" aria-hidden="true"></i> 审批
+        </a>
         <a href="{{ route('core.notifications.index') }}" class="dw-topbar-bell">
             <i class="fa-solid fa-bell" aria-hidden="true"></i>
             <span class="dw-sr">站内通知</span>

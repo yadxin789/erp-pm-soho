@@ -1,0 +1,118 @@
+{
+    "generated_at": "2026-11-17T15:49:55+08:00",
+    "apply": true,
+    "sources": {
+        "erp": {
+            "flows": 2,
+            "steps": 4
+        },
+        "soho": {
+            "flows": 8,
+            "instances": 15
+        }
+    },
+    "migrated": [
+        {
+            "module": "erp",
+            "document_type": "sales_order",
+            "name": "销售订单审批流",
+            "steps": [
+                "1.销售经理审批 [role:erp.sales_manager]",
+                "2.总经理审批 [role:erp.admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "erp",
+            "document_type": "purchase_order",
+            "name": "采购订单审批流",
+            "steps": [
+                "1.采购经理审批 [role:erp.purchase_manager]",
+                "2.财务审批 [role:erp.admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "soho",
+            "document_type": "product_publish",
+            "name": "商品发布审批流",
+            "steps": [
+                "1.初审 [role:soho.operation_manager]",
+                "2.复审 [role:soho.super_admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "soho",
+            "document_type": "price_change",
+            "name": "价格变更审批流",
+            "steps": [
+                "1.初审 [role:soho.operation_manager]",
+                "2.复审 [role:soho.super_admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "soho",
+            "document_type": "order_cancel",
+            "name": "订单取消审批流",
+            "steps": [
+                "1.初审 [role:soho.operation_manager]",
+                "2.复审 [role:soho.super_admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "soho",
+            "document_type": "stock_adjust",
+            "name": "库存调整审批流",
+            "steps": [
+                "1.初审 [role:soho.operation_manager]",
+                "2.复审 [role:soho.super_admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "soho",
+            "document_type": "refund",
+            "name": "退款审批流",
+            "steps": [
+                "1.初审 [role:soho.operation_manager]",
+                "2.复审 [role:soho.super_admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "soho",
+            "document_type": "bill_diff",
+            "name": "账单差异审批流",
+            "steps": [
+                "1.初审 [role:soho.operation_manager]",
+                "2.复审 [role:soho.super_admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "soho",
+            "document_type": "data_export",
+            "name": "数据导出审批流",
+            "steps": [
+                "1.初审 [role:soho.operation_manager]",
+                "2.复审 [role:soho.super_admin]"
+            ],
+            "action": "insert"
+        },
+        {
+            "module": "soho",
+            "document_type": "data_delete",
+            "name": "数据删除审批流",
+            "steps": [
+                "1.初审 [role:soho.operation_manager]",
+                "2.复审 [role:soho.super_admin]"
+            ],
+            "action": "insert"
+        }
+    ],
+    "skipped": [],
+    "pending_instances": "SOHO 15 条历史实例未迁：submitted_by\/biz_id 为源库小整数，待 B-05 用户映射"
+}
