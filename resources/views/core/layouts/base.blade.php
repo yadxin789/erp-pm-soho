@@ -9,15 +9,21 @@
     <link rel="stylesheet" href="{{ asset('assets/core/css/ddwl.css') }}">
     @stack('styles')
 </head>
-<body class="dw-body">
-    <div class="dw-shell">
-        @hasSection('sidebar')
-            <aside class="dw-sidebar">@yield('sidebar')</aside>
-        @endif
-        <main class="dw-main">
-            @yield('content')
-        </main>
+@hasSection('plain')
+<body class="dw-login-body">
+    @yield('content')
+@else
+<body>
+    <div class="dw-app">
+        @include('core::partials.sidebar')
+        <div class="dw-body">
+            @include('core::partials.topstrip')
+            <main class="dw-content">
+                @yield('content')
+            </main>
+        </div>
     </div>
+@endif
 
     <span id="dw-live" class="dw-sr" role="status" aria-live="polite"></span>
 

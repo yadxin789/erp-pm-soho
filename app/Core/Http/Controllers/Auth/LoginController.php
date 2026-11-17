@@ -33,7 +33,13 @@ class LoginController extends Controller
             return redirect()->intended('/home');
         }
 
-        return view('core::auth.login');
+        return view('core::auth.login', [
+            'demoAccounts' => [
+                ['label' => 'ERP 管理员', 'login' => 'admin@erp.demo', 'password' => '123456'],
+                ['label' => 'PM 负责人', 'login' => 'pm_director', 'password' => '123456'],
+                ['label' => 'SOHO 管理员', 'login' => 'admin@soho.demo', 'password' => '123456'],
+            ],
+        ]);
     }
 
     public function login(Request $request)

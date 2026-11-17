@@ -3,7 +3,6 @@
 @section('title', '站内通知 · '.config('app.name'))
 
 @section('content')
-@include('core::partials.topbar')
 <div class="dw-page">
     <header class="dw-page-head">
         <div>

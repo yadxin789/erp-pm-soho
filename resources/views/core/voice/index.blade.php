@@ -19,7 +19,6 @@
 @endpush
 
 @section('content')
-@include('core::partials.topbar')
 <div class="dw-page">
     <header class="dw-page-head">
         <div>

@@ -3,7 +3,6 @@
 @section('title', '在线编辑 · '.$file->original_name)
 
 @section('content')
-@include('core::partials.topbar')
 <div class="dw-page">
     <header class="dw-page-head">
         <div>

@@ -13,7 +13,6 @@
 @endpush
 
 @section('content')
-@include('core::partials.topbar')
 <h1 class="dw-page-title">个人中心</h1>
 <p class="dw-page-sub">三模块共用一套账号资料；修改后立即对 ERP / PM / SOHO 同时生效。</p>
 

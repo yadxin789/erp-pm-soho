@@ -3,7 +3,6 @@
 @section('title', '审批中心 · '.config('app.name'))
 
 @section('content')
-@include('core::partials.topbar')
 <div class="dw-page">
     <header class="dw-page-head">
         <div>

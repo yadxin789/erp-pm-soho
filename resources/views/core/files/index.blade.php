@@ -3,7 +3,6 @@
 @section('title', '文件中心 · '.config('app.name'))
 
 @section('content')
-@include('core::partials.topbar')
 <div class="dw-page">
     <header class="dw-page-head">
         <div>
@@ -71,6 +70,7 @@
             @if ($items->isEmpty())
                 <p class="dw-hint">这个模块还没有文件，先在上面传一个。</p>
             @else
+                <div class="table-wrapper">
                 <table class="dw-table">
                     <caption class="dw-sr">在用文件</caption>
                     <thead>
@@ -149,6 +149,7 @@
                     @endforeach
                     </tbody>
                 </table>
+                </div>
             @endif
         </section>
     @else
