@@ -51,6 +51,30 @@ Route::middleware('web')->group(function () {
     // T0-10 组件示例页（前端基座自检）
     Route::get('/core/ui', fn () => view('core::ui'))->name('core.ui');
 
+    // TC-10 聊天：三源合并（ERP 群聊/私聊 + PM 项目留言板）
+    Route::middleware('auth')->group(function () {
+        Route::get('/chat', [\App\Core\Http\Controllers\ChatController::class, 'index'])->name('core.chat.index');
+        Route::get('/chat/messages', [\App\Core\Http\Controllers\ChatController::class, 'messages'])->name('core.chat.messages');
+        Route::post('/chat/send', [\App\Core\Http\Controllers\ChatController::class, 'send'])->name('core.chat.send');
+        Route::post('/chat/clear', [\App\Core\Http\Controllers\ChatController::class, 'clearMine'])->name('core.chat.clear');
+        Route::delete('/chat/{id}', [\App\Core\Http\Controllers\ChatController::class, 'destroy'])->whereNumber('id')->name('core.chat.destroy');
+        Route::get('/chat/{id}/file', [\App\Core\Http\Controllers\ChatController::class, 'file'])->whereNumber('id')->name('core.chat.file');
+    });
+
+    // TC-10 语音会议：母版取 ERP 的应用内信令（零外部依赖）
+    Route::middleware('auth')->group(function () {
+        Route::get('/voice', [\App\Core\Http\Controllers\VoiceController::class, 'index'])->name('core.voice.index');
+        Route::post('/voice/token', [\App\Core\Http\Controllers\VoiceController::class, 'token'])->name('core.voice.token');
+        Route::post('/voice/signal', [\App\Core\Http\Controllers\VoiceController::class, 'signal'])->name('core.voice.signal');
+        Route::get('/voice/poll', [\App\Core\Http\Controllers\VoiceController::class, 'poll'])->name('core.voice.poll');
+        Route::get('/voice/members', [\App\Core\Http\Controllers\VoiceController::class, 'members'])->name('core.voice.members');
+        Route::post('/voice/end', [\App\Core\Http\Controllers\VoiceController::class, 'end'])->name('core.voice.end');
+        Route::get('/voice/history', [\App\Core\Http\Controllers\VoiceController::class, 'history'])->name('core.voice.history');
+        // PM 外部信令服务（Swoole/Janus）可选回调，写同一张表
+        Route::post('/voice/hook/enter', [\App\Core\Http\Controllers\VoiceController::class, 'hookEnter'])->name('core.voice.hook.enter');
+        Route::post('/voice/hook/leave', [\App\Core\Http\Controllers\VoiceController::class, 'hookLeave'])->name('core.voice.hook.leave');
+    });
+
     // TC-08 菜单预览与自检：基线条数 / 当前角色可见条数 / 路由未迁入条数
     Route::get('/core/menu/{module?}', [\App\Core\Http\Controllers\MenuPreviewController::class, 'show'])
         ->middleware('auth')
