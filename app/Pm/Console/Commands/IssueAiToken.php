@@ -13,7 +13,7 @@ use Illuminate\Console\Command;
  */
 class IssueAiToken extends Command
 {
-    protected $signature = 'pm:ai-issue-token
+    protected $signature = 'ai:issue-token
                             {user : 授权人 user_id 或 username}
                             {--name=AI Agent : 令牌名称}
                             {--scopes=read : 授权范围，逗号分隔（read/write/download）}

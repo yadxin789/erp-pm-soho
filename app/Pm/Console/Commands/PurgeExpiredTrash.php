@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
  */
 class PurgeExpiredTrash extends Command
 {
-    protected $signature = 'pm:trash-purge-expired
+    protected $signature = 'trash:purge-expired
                             {--days= : 覆盖配置中的保留天数}
                             {--dry-run : 只列出将被清理的内容，不实际删除}';
 

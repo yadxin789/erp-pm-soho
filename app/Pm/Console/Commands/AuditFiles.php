@@ -5,8 +5,8 @@ namespace App\Pm\Console\Commands;
 use App\Pm\Helpers\OperationLogHelper;
 use App\Pm\Models\CollabDocument;
 use App\Pm\Models\DepartmentFile;
-use App\Core\Models\File;
-use App\Core\Models\Message;
+use App\Pm\Models\File;
+use App\Pm\Models\Message;
 use App\Core\Models\User;
 use App\Pm\Models\WecomFile;
 use App\Pm\Services\TrashService;
@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class AuditFiles extends Command
 {
-    protected $signature = 'pm:files-gc
+    protected $signature = 'files:gc
                             {--fix : 实际清理孤儿文件与空目录（不加则只检查并报告）}
                             {--purge-dead : 同时删除「库中有记录、磁盘无文件」的死记录}
                             {--grace=60 : 孤儿文件宽限期（分钟），只处理修改时间早于该时长的文件}';
@@ -155,7 +155,7 @@ class AuditFiles extends Command
 
         if ($deletedOrphans > 0 || $deletedMissing > 0) {
             OperationLogHelper::log('文件巡检', '自动清理', sprintf(
-                'pm:files-gc 自动清理：孤儿文件 %d 个、死记录 %d 条、空目录若干',
+                'files:gc 自动清理：孤儿文件 %d 个、死记录 %d 条、空目录若干',
                 $deletedOrphans,
                 $deletedMissing
             ));

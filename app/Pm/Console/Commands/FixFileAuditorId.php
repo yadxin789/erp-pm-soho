@@ -3,12 +3,12 @@
 namespace App\Pm\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Core\Models\File;
+use App\Pm\Models\File;
 use App\Pm\Models\Task;
 
 class FixFileAuditorId extends Command
 {
-    protected $signature = 'pm:files-fix-auditor-id';
+    protected $signature = 'files:fix-auditor-id';
     protected $description = '修复文件的审核人ID字段';
 
     public function __construct()

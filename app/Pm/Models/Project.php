@@ -2,136 +2,223 @@
 
 namespace App\Pm\Models;
 
-use App\Core\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\ModelStates\HasStates;
+use App\Pm\States\Project\InProgress;
+use App\Pm\States\Task\Completed as TaskCompleted;
 
 class Project extends Model
 {
-    use SoftDeletes;
-
-    protected $table = 'projects';
+    use HasStates, SoftDeletes;
 
     protected $fillable = [
-        'name', 'code', 'version', 'product_name', 'product_model', 'creator_id',
-        'start_date', 'end_date', 'status', 'progress', 'paused_reason', 'paused_at',
-        'resumed_at', 'total_paused_days',
+        'name', 'code', 'version', 'product_name', 'product_model',
+        'creator_id', 'start_date', 'end_date', 'status', 'progress',
+        'paused_reason', 'paused_at', 'resumed_at', 'total_paused_days'
     ];
 
-    protected $casts = [
+        /** B-03：共享表状态查询翻译（State 全类名 → snake 短名） */
+    public function newEloquentBuilder($query)
+    {
+        return new \App\Pm\Support\PmBuilder($query);
+    }
+
+protected $casts = [
         'start_date' => 'date',
-        'end_date'   => 'date',
-        'paused_at'  => 'datetime',
+        'end_date' => 'date',
+        'progress' => 'decimal:2',
+        'status' => \App\Pm\Casts\PmStateCast::class.':App\Pm\States\Project\ProjectState',
+        'paused_at' => 'datetime',
         'resumed_at' => 'datetime',
-        'progress'   => 'decimal:2',
     ];
 
-    public const STATUS_LABELS = [
-        'not_started'       => '未开始',
-        'in_progress'       => '进行中',
-        'completed'         => '正常结案',
-        'overdue'           => '延期结案',
-        'suspended'         => '暂停',
-        'overdue_completed' => '逾期完成',
+    protected $stateConfig = [
+        'status' => [
+            'class' => \App\Pm\States\Project\ProjectState::class,
+            'default' => InProgress::class,
+        ],
     ];
 
-    public const STATUS_COLORS = [
-        'not_started'       => '#6c757d',
-        'in_progress'       => '#ffc107',
-        'completed'         => '#28a745',
-        'overdue'           => '#fd7e14',
-        'suspended'         => '#6f42c1',
-        'overdue_completed' => '#0dcaf0',
-    ];
+    /**
+     * 记录状态转换日志
+     */
+    protected static function booted(): void
+    {
+        static::saved(function (Project $project) {
+            if ($project->wasChanged('status')) {
+                $oldStatus = $project->getOriginal('status');
+                $newStatus = $project->getAttribute('status');
+                
+                StatusTransition::log(
+                    'project',
+                    $project->id,
+                    is_string($oldStatus) ? $oldStatus : get_class($oldStatus),
+                    is_object($newStatus) ? get_class($newStatus) : $newStatus,
+                    auth()->check() ? auth()->id() : null
+                );
+            }
+        });
+    }
 
-    public function creator(): BelongsTo
+    public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
 
-    public function tasks(): HasMany
+    public function tasks()
     {
-        return $this->hasMany(Task::class)->orderBy('start_date');
+        return $this->hasMany(Task::class);
     }
 
-    public function documents(): HasMany
+    public function logs()
     {
-        return $this->hasMany(CollabDocument::class);
+        return $this->hasMany(ProjectLog::class);
     }
 
-    public function logs(): HasMany
-    {
-        return $this->hasMany(ProjectLog::class)->latest();
-    }
-
-    public function messages(): HasMany
-    {
-        return $this->hasMany(ProjectMessage::class);
-    }
-
-    public function statusLabel(): string
-    {
-        return self::STATUS_LABELS[$this->status] ?? $this->status;
-    }
-
-    public function statusColor(): string
-    {
-        return self::STATUS_COLORS[$this->status] ?? '#6c757d';
-    }
-
-    /** 参与部门：由任务所属部门推导（与原 PM 一致） */
-    public function participatingDepartments()
-    {
-        $ids = $this->tasks()->pluck('department_id')->filter()->unique();
-
-        return \App\Core\Models\Department::whereIn('id', $ids)->orderBy('id')->get();
-    }
-
-    /** 项目成员：创建人 + 任务执行人/审核人（与原 PM 一致） */
-    public function participants()
-    {
-        $ids = $this->tasks()->get(['executor_id', 'auditor_id'])->flatMap(fn ($t) => [$t->executor_id, $t->auditor_id])
-            ->filter()->unique()->prepend($this->creator_id)->unique()->values();
-
-        return User::whereIn('id', $ids)->orderBy('id')->get();
-    }
-
-    public function isMember(User $user): bool
-    {
-        if ($user->id === $this->creator_id || $user->hasAnyRole(['core.super_admin', 'pm.project_manager'])) {
-            return true;
-        }
-
-        return $this->tasks()->where(function ($q) use ($user) {
-            $q->where('executor_id', $user->id)->orWhere('auditor_id', $user->id);
-        })->exists();
-    }
-
-    public function calculateProgress(): float
+    public function calculateProgress()
     {
         $total = $this->tasks()->count();
-        if ($total === 0) {
-            return (float) $this->progress;
-        }
-        $done = $this->tasks()->whereIn('status', ['completed'])->count();
+        $completed = $this->tasks()->whereIn('status', [TaskCompleted::class, \App\Pm\States\Task\OverdueCompleted::class])->count();
 
-        return round($done / $total * 100, 2);
+        $this->progress = $total > 0 ? ($completed / $total) * 100 : 0;
+        $this->save();
+
+        // 项目已暂停：冻结状态下不做任何自动状态流转，恢复后按新排期重新计算
+        if ($this->status->equals(\App\Pm\States\Project\Suspended::class)) {
+            return $this->progress;
+        }
+
+        // 如果所有任务都已完成，自动将项目状态转为已完成或逾期XX天完成
+        if ($total > 0 && $completed == $total) {
+            $overdueState = \App\Pm\States\Project\Overdue::class;
+            if ($this->status->equals($overdueState)) {
+                // 项目原本已逾期，现在所有任务完成了 -> 转为逾期XX天完成
+                $overdueCompletedState = \App\Pm\States\Project\OverdueCompleted::class;
+                if (!$this->status->equals($overdueCompletedState)) {
+                    try {
+                        $this->status->transitionTo($overdueCompletedState);
+                        $this->save();
+                    } catch (\Exception $e) {
+                        \Log::warning("项目状态自动转换失败: {$this->id}", [
+                            'error' => $e->getMessage(),
+                            'project' => $this->name,
+                        ]);
+                    }
+                }
+            } else {
+                $completedState = \App\Pm\States\Project\Completed::class;
+                $overdueCompletedState = \App\Pm\States\Project\OverdueCompleted::class;
+                if (!$this->status->equals($completedState) && !$this->status->equals($overdueCompletedState)) {
+                    try {
+                        $this->status->transitionTo($completedState);
+                        $this->save();
+                    } catch (\Exception $e) {
+                        \Log::warning("项目状态自动转换失败: {$this->id}", [
+                            'error' => $e->getMessage(),
+                            'project' => $this->name,
+                        ]);
+                    }
+                }
+            }
+        }
+
+        return $this->progress;
     }
 
-    /** 项目统计（概览页 6 格） */
-    public function taskStats(): array
+    /**
+     * 获取该项目实际参与的部门（基于已创建的 tasks 的 department_id）
+     */
+    public function participatingDepartments()
     {
-        $tasks = $this->tasks()->get();
+        return \App\Pm\Models\Department::whereIn('id',
+            $this->tasks()->pluck('department_id')->unique()
+        )->orderBy('sort_order')->get();
+    }
 
-        return [
-            'total_tasks'      => $tasks->count(),
-            'completed_tasks'  => $tasks->where('status', 'completed')->count(),
-            'pending_tasks'    => $tasks->where('status', 'pending')->count(),
-            'for_audit_tasks'  => $tasks->where('status', 'for_audit')->count(),
-            'rejected_tasks'   => $tasks->where('status', 'rejected')->count(),
-            'overdue_tasks'    => $tasks->where('status', 'overdue')->count(),
+    public function getDepartmentProgress($departmentId)
+    {
+        $tasks = $this->tasks()->where('department_id', $departmentId);
+        $total = $tasks->count();
+        $completed = $tasks->where('status', TaskCompleted::class)->count();
+
+        return $total > 0 ? ($completed / $total) * 100 : 0;
+    }
+
+    public function participants()
+    {
+        $executors = $this->tasks()->pluck('executor_id');
+        $auditors = $this->tasks()->pluck('auditor_id');
+        $userIds = $executors->merge($auditors)->push($this->creator_id)->unique();
+
+        return User::whereIn('id', $userIds)->get();
+    }
+
+    /**
+     * 项目成员（别名方法，用于聊天室功能）
+     */
+    public function members()
+    {
+        return $this->participants();
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    /**
+     * 判断项目是否处于已暂停状态（该状态下禁止任务操作）
+     */
+    public function isInactive(): bool
+    {
+        return $this->status->equals(\App\Pm\States\Project\Suspended::class);
+    }
+
+    // ==================== 统一操作权限判断（单一可信源）====================
+
+    /**
+     * 是否允许暂停项目（只有进行中、逾期可以暂停）
+     */
+    public function canPause(?int $userId = null): bool
+    {
+        $userId = $userId ?? auth()->id();
+        if ($userId !== $this->creator_id && !($userId && auth()->check() && auth()->user()->isAdmin())) {
+            return false;
+        }
+        $allowed = [
+            \App\Pm\States\Project\InProgress::class,
+            \App\Pm\States\Project\Overdue::class,
         ];
+        return in_array(get_class($this->status), $allowed, true);
+    }
+
+    /**
+     * 是否允许恢复项目（只有已暂停可以恢复）
+     */
+    public function canResume(?int $userId = null): bool
+    {
+        $userId = $userId ?? auth()->id();
+        if ($userId !== $this->creator_id && !($userId && auth()->check() && auth()->user()->isAdmin())) {
+            return false;
+        }
+        return $this->status->equals(\App\Pm\States\Project\Suspended::class);
+    }
+
+    /**
+     * 是否允许变更项目（非终态即可，项目创建人或管理员）
+     */
+    public function canChange(?int $userId = null): bool
+    {
+        $userId = $userId ?? auth()->id();
+        if ($userId !== $this->creator_id && !($userId && auth()->check() && auth()->user()->isAdmin())) {
+            return false;
+        }
+        // 已完成/逾期完成的项目不允许变更
+        $finished = [
+            \App\Pm\States\Project\Completed::class,
+            \App\Pm\States\Project\OverdueCompleted::class,
+        ];
+        return !in_array(get_class($this->status), $finished, true);
     }
 }

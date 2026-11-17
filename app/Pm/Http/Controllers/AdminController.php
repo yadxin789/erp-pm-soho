@@ -1,0 +1,959 @@
+<?php
+
+namespace App\Pm\Http\Controllers;
+
+use App\Core\Models\User;
+use App\Pm\Models\Department;
+use App\Pm\Models\Role;
+use App\Pm\Models\Status;
+use App\Pm\Models\DefaultMember;
+use App\Pm\Models\TaskType;
+use App\Pm\Models\Notification;
+use App\Pm\Models\Todo;
+use App\Pm\Models\Project;
+use App\Pm\Models\TemplateTask;
+use Illuminate\Http\Request;
+use App\Pm\Models\File;
+use App\Pm\Models\OperationLog;
+use App\Pm\Helpers\OperationLogHelper;
+use App\Pm\Notifications\SystemNotification;
+use App\Pm\Services\TrashService;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
+class AdminController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+            // 管理员始终放行；项目总经理仅允许访问发送通知功能
+            if ($user->isAdmin()) {
+                return $next($request);
+            }
+            if ($user->isProjectManager()) {
+                $routeName = $request->route()->getName();
+                $allowedRoutes = ['admin.send-notification', 'admin.notification.post'];
+                if (in_array($routeName, $allowedRoutes)) {
+                    return $next($request);
+                }
+            }
+            abort(404);
+            return $next($request);
+        });
+    }
+
+    public function index()
+    {
+        $stats = [
+            'projects' => \App\Pm\Models\Project::count(),
+            'users' => User::count(),
+            'files' => File::count(),
+            'tasks' => \App\Pm\Models\Task::count(),
+        ];
+        return view('pm::admin.index', compact('stats'));
+    }
+
+    public function users()
+    {
+        $users = User::with('department', 'role')->paginate(10);
+        return view('pm::admin.users', compact('users'));
+    }
+
+    public function deletedUsers()
+    {
+        $users = User::onlyTrashed()->with('department', 'role')->paginate(10);
+        return view('pm::admin.deleted-users', compact('users'));
+    }
+
+    public function restoreUser($userId)
+    {
+        $user = User::withTrashed()->findOrFail($userId);
+        $user->restore();
+
+        OperationLogHelper::log('用户管理', '恢复用户', "管理员恢复了用户「{$user->name}」");
+
+        return redirect()->route('pm.admin.users.deleted')->with('success', '用户已恢复');
+    }
+
+    public function forceDeleteUser($userId)
+    {
+        $user = User::withTrashed()->findOrFail($userId);
+        $userName = $user->name;
+
+        // 硬删用户会触发大量外键 CASCADE（files / messages / tasks / projects …），
+        // 这些级联由数据库执行、不经过 Eloquent，因此必须先把其名下的物理文件清干净，
+        // 否则头像、任务文件、聊天附件都会变成无人引用的孤儿文件。
+        TrashService::purgeUserAssets($user);
+
+        $user->forceDelete();
+
+        OperationLogHelper::log('用户管理', '彻底删除用户', "管理员彻底删除了用户「{$userName}」及其关联的文件、任务与项目");
+
+        return redirect()->route('pm.admin.users.deleted')->with('success', '用户及其关联数据已彻底删除');
+    }
+
+    public function createUser()
+    {
+        $departments = Department::all();
+        $roles = Role::all();
+        return view('pm::admin.create-user', compact('departments', 'roles'));
+    }
+
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'username' => ['required', \Illuminate\Validation\Rule::unique('users')->whereNull('deleted_at')],
+            'password' => 'required',
+            'name' => 'required',
+            'department_id' => 'required',
+            'role_id' => 'required',
+        ]);
+
+        User::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'name' => $request->name,
+            'department_id' => $request->department_id,
+            'role_id' => $request->role_id,
+            'is_active' => true,
+        ]);
+
+        OperationLogHelper::log('用户管理', '创建用户', "管理员创建用户「{$request->name}」");
+
+        return redirect()->route('pm.admin.users')->with('success', '用户创建成功');
+    }
+
+    public function editUser(User $user)
+    {
+        $departments = Department::all();
+        $roles = Role::all();
+        return view('pm::admin.edit-user', compact('user', 'departments', 'roles'));
+    }
+
+    public function updateUser(Request $request, User $user)
+    {
+        $request->validate([
+            'username' => ['required', \Illuminate\Validation\Rule::unique('users')->whereNull('deleted_at')->ignore($user->id)],
+            'name' => 'required',
+            'department_id' => 'required',
+            'role_id' => 'required',
+            'is_active' => 'required|boolean',
+        ]);
+
+        $data = $request->only(['username', 'name', 'department_id', 'role_id', 'is_active']);
+        
+        if ($request->password) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        OperationLogHelper::log('用户管理', '更新用户', "管理员更新用户「{$user->name}」信息");
+
+        return redirect()->route('pm.admin.users')->with('success', '用户更新成功');
+    }
+
+    public function deleteUser(User $user)
+    {
+        $userName = $user->name;
+        $user->delete();
+
+        OperationLogHelper::log('用户管理', '删除用户', "管理员删除用户「{$userName}」");
+
+        return redirect()->route('pm.admin.users')->with('success', '用户删除成功');
+    }
+
+    public function departments()
+    {
+        $departments = Department::paginate(10);
+        return view('pm::admin.departments', compact('departments'));
+    }
+
+    public function createDepartment()
+    {
+        return view('pm::admin.create-department');
+    }
+
+    public function storeDepartment(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'code' => 'required|unique:departments',
+            'type' => 'required',
+            'sort_order' => 'required|integer',
+        ]);
+
+        Department::create($request->all());
+
+        OperationLogHelper::log('部门管理', '创建部门', "管理员创建部门「{$request->name}」");
+
+        return redirect()->route('pm.admin.departments')->with('success', '部门创建成功');
+    }
+
+    public function editDepartment(Department $department)
+    {
+        return view('pm::admin.edit-department', compact('department'));
+    }
+
+    public function updateDepartment(Request $request, Department $department)
+    {
+        $request->validate([
+            'name' => 'required',
+            'code' => 'required|unique:departments,code,' . $department->id,
+            'type' => 'required',
+            'sort_order' => 'required|integer',
+        ]);
+
+        $department->update($request->all());
+
+        OperationLogHelper::log('部门管理', '更新部门', "管理员更新部门「{$department->name}」");
+
+        return redirect()->route('pm.admin.departments')->with('success', '部门更新成功');
+    }
+
+    /**
+     * 软删除部门。
+     *
+     * 业务规则（与硬删语义完全不同）：
+     *   - 部门本身：仅软删（进回收站，15 天后由 trash:purge-expired 自动彻底删除）
+     *   - 部门成员：保留用户账号，仅把 department_id 置空 → 转为普通用户
+     *   - 部门资料 / 任务类型 / 默认成员模板：随部门一起软删（部门专属，部门没了也无意义）
+     *   - 项目 / 任务 / 聊天记录 / 通知 / 文件：完全不动
+     *   - 成员仍可通过原身份（项目 creator_id / 任务 executor_id&auditor_id / 聊天发送人）
+     *     访问自己此前参入的项目
+     *
+     * 与「硬删」对比：硬删方案会触发 users.department_id 外键冲突而失败（RESTRICT），
+     * 还会把成员作为 uploader_id/auditor_id 的 File、CASCADE 的 Project、ExtensionApplication
+     * 等一并物理删除，破坏历史数据。软删方案既避开外键问题、又完整保留成员历史。
+     */
+    public function deleteDepartment(Department $department)
+    {
+        $deptName = $department->name;
+
+        // 提前统计，便于操作日志与提示
+        $userCount = $department->users()->count();
+        $fileCount = $department->departmentFiles()->count();
+        $taskTypeCount = TaskType::where('department_id', $department->id)->count();
+        $defaultMemberCount = DefaultMember::where('department_id', $department->id)->count();
+
+        DB::transaction(function () use ($department) {
+            // 1. 部门成员 → 普通用户：仅清空 department_id，账号与历史数据全部保留
+            $department->users()->update(['department_id' => null]);
+
+            // 2. 部门资料文件 → 物理删除（含物理文件，避免遗留孤儿）。
+            //    走 TrashService::forceDelete 走「先删记录、后删文件」的安全流程；
+            //    这里没有走回收站（部门专属，部门没了它们也没业务价值），
+            //    如果将来需要「部门资料也能恢复」，再改为软删除。
+            foreach ($department->departmentFiles()->get() as $deptFile) {
+                TrashService::forceDelete($deptFile);
+            }
+
+            // 3. 部门任务类型 → 物理删除（无物理文件）
+            TaskType::where('department_id', $department->id)->delete();
+
+            // 4. 部门默认成员模板 → 物理删除（无物理文件）
+            DefaultMember::where('department_id', $department->id)->delete();
+
+            // 5. 软删部门本身（Department 模型已加 SoftDeletes trait，进回收站 15 天）
+            $department->delete();
+        });
+
+        OperationLogHelper::log('部门管理', '软删除部门', sprintf(
+            '管理员软删除部门「%s」：%d 名成员转为普通用户、%d 个资料文件、%d 个任务类型、%d 个默认成员模板随部门进入回收站（项目、任务、聊天记录、文件等成员历史数据均保留，成员仍可通过原身份访问自己此前参入的项目）',
+            $deptName, $userCount, $fileCount, $taskTypeCount, $defaultMemberCount
+        ));
+
+        return redirect()->route('pm.admin.departments')->with('success', sprintf(
+            '部门「%s」已删除，%d 名成员转为普通用户（项目、任务不受影响，成员仍可访问自己此前参入的项目）',
+            $deptName, $userCount
+        ));
+    }
+
+    public function roles()
+    {
+        $roles = Role::paginate(10);
+        return view('pm::admin.roles', compact('roles'));
+    }
+
+    public function createRole()
+    {
+        return view('pm::admin.create-role');
+    }
+
+    public function storeRole(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'code' => 'required|unique:roles',
+        ]);
+
+        Role::create($request->all());
+
+        OperationLogHelper::log('角色管理', '创建角色', "管理员创建角色「{$request->name}」");
+
+        return redirect()->route('pm.admin.roles')->with('success', '角色创建成功');
+    }
+
+    public function editRole(Role $role)
+    {
+        return view('pm::admin.edit-role', compact('role'));
+    }
+
+    public function updateRole(Request $request, Role $role)
+    {
+        $request->validate([
+            'name' => 'required',
+            'code' => 'required|unique:roles,code,' . $role->id,
+        ]);
+
+        $role->update($request->all());
+
+        OperationLogHelper::log('角色管理', '更新角色', "管理员更新角色「{$role->name}」");
+
+        return redirect()->route('pm.admin.roles')->with('success', '角色更新成功');
+    }
+
+    public function deleteRole(Role $role)
+    {
+        $roleName = $role->name;
+        $role->delete();
+
+        OperationLogHelper::log('角色管理', '删除角色', "管理员删除角色「{$roleName}」");
+
+        return redirect()->route('pm.admin.roles')->with('success', '角色删除成功');
+    }
+
+    public function statuses()
+    {
+        // 从状态机类中提取所有状态，合并自定义 label 覆盖
+        $allStates = Status::allStates();
+        $currentPage = \Illuminate\Pagination\Paginator::resolveCurrentPage();
+        $perPage = 15;
+        $statuses = new \Illuminate\Pagination\LengthAwarePaginator(
+            $allStates->forPage($currentPage, $perPage)->values(),
+            $allStates->count(),
+            $perPage,
+            $currentPage,
+            ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
+        );
+        return view('pm::admin.statuses', compact('statuses'));
+    }
+
+    public function editStatus(Status $status)
+    {
+        $stateClass = $status->state_class;
+        $defaultLabel = Status::getStateDefaultLabel($stateClass);
+        $defaultColor = Status::getStateDefaultColor($stateClass);
+
+        return view('pm::admin.edit-status', compact('status', 'defaultLabel', 'defaultColor'));
+    }
+
+    public function updateStatus(Request $request, Status $status)
+    {
+        $request->validate([
+            'custom_label' => 'nullable|string|max:255',
+        ]);
+
+        $status->custom_label = $request->custom_label ?: null;
+        $status->save();
+
+        $displayName = Status::getLabel($status->state_class);
+
+        OperationLogHelper::log('状态管理', '更新状态标签', "管理员更新状态「{$displayName}」的标签");
+
+        return redirect()->route('pm.admin.statuses')->with('success', '状态标签更新成功');
+    }
+
+    // 任务类型管理
+    public function taskTypes()
+    {
+        $taskTypes = TaskType::with('department')->orderBy('sort_order')->paginate(10);
+        $departments = Department::projectDepartments()->get();
+        return view('pm::admin.task-types', compact('taskTypes', 'departments'));
+    }
+
+    public function createTaskType()
+    {
+        $departments = Department::projectDepartments()->get();
+        return view('pm::admin.create-task-type', compact('departments'));
+    }
+
+    public function storeTaskType(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        TaskType::create($request->all());
+
+        OperationLogHelper::log('任务类型管理', '创建任务类型', "管理员创建任务类型「{$request->name}」");
+
+        return redirect()->route('pm.admin.task-types')->with('success', '任务类型创建成功');
+    }
+
+    public function editTaskType(TaskType $taskType)
+    {
+        $departments = Department::projectDepartments()->get();
+        return view('pm::admin.edit-task-type', compact('taskType', 'departments'));
+    }
+
+    public function updateTaskType(Request $request, TaskType $taskType)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $taskType->update($request->all());
+
+        OperationLogHelper::log('任务类型管理', '更新任务类型', "管理员更新任务类型「{$taskType->name}」");
+
+        return redirect()->route('pm.admin.task-types')->with('success', '任务类型更新成功');
+    }
+
+    public function deleteTaskType(TaskType $taskType)
+    {
+        $typeName = $taskType->name;
+        $taskType->delete();
+
+        OperationLogHelper::log('任务类型管理', '删除任务类型', "管理员删除任务类型「{$typeName}」");
+
+        return redirect()->route('pm.admin.task-types')->with('success', '任务类型删除成功');
+    }
+
+    public function fileRepository(Request $request)
+    {
+        $query = File::with('task.project', 'uploader');
+
+        // 按文件名查询
+        if ($request->filled('file_name')) {
+            $query->where('original_name', 'like', '%' . $request->file_name . '%');
+        }
+
+        // 按项目名称查询
+        if ($request->filled('project_name')) {
+            $query->whereHas('task.project', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->project_name . '%');
+            });
+        }
+
+        // 按上传日期范围查询
+        if ($request->filled('date_from')) {
+            $query->whereDate('created_at', '>=', $request->date_from);
+        }
+        if ($request->filled('date_to')) {
+            $query->whereDate('created_at', '<=', $request->date_to);
+        }
+
+        // 按文件状态查询
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $files = $query->orderBy('created_at', 'desc')->paginate(10)->appends($request->all());
+
+        return view('pm::admin.file-repository', compact('files'));
+    }
+
+    public function operationLogs()
+    {
+        $logs = OperationLog::with('user')->orderBy('created_at', 'desc')->paginate(10);
+        return view('pm::admin.operation-logs', compact('logs'));
+    }
+
+    public function sendNotification()
+    {
+        return view('pm::admin.send-notification');
+    }
+
+    public function postNotification(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->notify(new SystemNotification(
+                title: $request->title,
+                content: $request->content,
+                senderId: auth()->id(),
+                type: 'system',
+            ));
+        }
+
+        OperationLogHelper::log('通知管理', '发送通知', "管理员发送系统通知「{$request->title}」");
+
+        return redirect()->route('pm.admin.send-notification')->with('success', '通知发送成功');
+    }
+
+    public function todos()
+    {
+        $todos = \App\Pm\Models\Todo::with('user')->paginate(10);
+        return view('pm::admin.todos', compact('todos'));
+    }
+
+    /**
+     * 后台服务状态页面
+     */
+    public function services()
+    {
+        $schedulerRunning = $this->isSchedulerRunning();
+        $queueRunning = $this->isProcessRunning('queue:work');
+        $viteRunning = $this->isProcessRunning('vite');
+
+        // 磁盘空间
+        $diskFree = disk_free_space(storage_path());
+        $diskTotal = disk_total_space(storage_path());
+        $diskUsedPercent = $diskTotal > 0 ? round((1 - $diskFree / $diskTotal) * 100, 1) : 0;
+
+        // 数据库大小与名称（兼容 SQLite / MySQL）
+        $connection = config('database.default');
+        if ($connection === 'sqlite') {
+            $dbPath = database_path('database.sqlite');
+            $dbSize = file_exists($dbPath) ? filesize($dbPath) : 0;
+            $dbName = basename($dbPath);
+        } else {
+            $dbName = config("database.connections.{$connection}.database", 'pm_db');
+            try {
+                $dbSize = (int) \Illuminate\Support\Facades\DB::table('information_schema.tables')
+                    ->where('table_schema', $dbName)
+                    ->selectRaw('COALESCE(SUM(data_length + index_length), 0) AS total_size')
+                    ->value('total_size');
+            } catch (\Exception $e) {
+                \Log::warning('获取数据库大小失败', ['error' => $e->getMessage()]);
+                $dbSize = 0;
+            }
+        }
+
+        // 备份文件列表
+        $backupDir = storage_path('app/backups');
+        $backups = [];
+        if (is_dir($backupDir)) {
+            $files = scandir($backupDir);
+            foreach ($files as $f) {
+                if (str_ends_with($f, '.sqlite') || str_ends_with($f, '.zip') || str_ends_with($f, '.sql')) {
+                    $filePath = $backupDir . '/' . $f;
+                    $backups[] = [
+                        'name' => $f,
+                        'size' => filesize($filePath),
+                        'date' => date('Y-m-d H:i:s', filemtime($filePath)),
+                    ];
+                }
+            }
+            usort($backups, fn($a, $b) => strcmp($b['date'], $a['date']));
+        }
+
+        $serverInfo = [
+            'os' => PHP_OS,
+            'php_version' => PHP_VERSION,
+            'laravel_version' => app()->version(),
+            'server_time' => now()->toDateTimeString(),
+            'disk_free' => $diskFree,
+            'disk_total' => $diskTotal,
+            'disk_used_percent' => $diskUsedPercent,
+            'db_size' => $dbSize,
+            'db_name' => $dbName,
+        ];
+
+        return view('pm::admin.services', compact(
+            'schedulerRunning', 'queueRunning', 'viteRunning',
+            'serverInfo', 'backups'
+        ));
+    }
+
+    /**
+     * 备份数据库（MySQL 使用 mysqldump，SQLite 直接复制数据库文件）
+     */
+    public function backupDatabase()
+    {
+        try {
+            $backupDir = storage_path('app/backups');
+            if (!is_dir($backupDir)) {
+                mkdir($backupDir, 0755, true);
+            }
+
+            $connection = config('database.default');
+
+            if ($connection === 'mysql') {
+                $host = config('database.connections.mysql.host', '127.0.0.1');
+                $port = config('database.connections.mysql.port', '3306');
+                $user = config('database.connections.mysql.username', 'root');
+                $pass = config('database.connections.mysql.password', '');
+                $db = config('database.connections.mysql.database', 'pm_db');
+
+                $backupName = 'backup_' . date('Ymd_His') . '.sql';
+                $backupPath = $backupDir . '/' . $backupName;
+
+                $cmd = sprintf(
+                    'mysqldump -h%s -P%s -u%s -p%s --single-transaction --routines --triggers %s',
+                    escapeshellarg($host),
+                    escapeshellarg($port),
+                    escapeshellarg($user),
+                    escapeshellarg($pass),
+                    escapeshellarg($db)
+                );
+                $output = [];
+                $exitCode = 0;
+                exec($cmd . ' > ' . escapeshellarg($backupPath) . ' 2>&1', $output, $exitCode);
+
+                if ($exitCode !== 0 || !file_exists($backupPath) || filesize($backupPath) === 0) {
+                    @unlink($backupPath);
+                    throw new \Exception('mysqldump 执行失败，请确认服务器已安装 mysql 客户端（mysqldump）且数据库连接信息正确');
+                }
+            } else {
+                // SQLite：直接复制数据库文件
+                $dbPath = database_path('database.sqlite');
+                if (!file_exists($dbPath)) {
+                    return back()->with('error', '数据库文件不存在');
+                }
+                $backupName = 'backup_' . date('Ymd_His') . '.sqlite';
+                $backupPath = $backupDir . '/' . $backupName;
+                copy($dbPath, $backupPath);
+            }
+
+            // 清理过期备份（.sqlite / .sql / .zip）
+            $retentionDays = config('pm.backup_retention_days', 30);
+            $cutoff = now()->subDays($retentionDays)->timestamp;
+            $oldBackups = array_merge(
+                glob($backupDir . '/*.sqlite') ?: [],
+                glob($backupDir . '/*.sql') ?: [],
+                glob($backupDir . '/*.zip') ?: []
+            );
+            foreach ($oldBackups as $oldBackup) {
+                if (filemtime($oldBackup) < $cutoff) {
+                    unlink($oldBackup);
+                }
+            }
+
+            OperationLogHelper::log('系统管理', '备份数据库', "创建数据库备份：{$backupName}");
+
+            return back()->with('success', "数据库备份成功：{$backupName}");
+        } catch (\Exception $e) {
+            \Log::error('数据库备份失败', ['error' => $e->getMessage()]);
+            return back()->with('error', '数据库备份失败：' . $e->getMessage());
+        }
+    }
+
+    /**
+     * 检查指定进程是否在运行
+     */
+    private function isProcessRunning(string $processName): bool
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            // Windows: 使用 tasklist
+            $output = [];
+            $exitCode = 0;
+            exec('tasklist /FI "IMAGENAME eq php.exe" 2>&1', $output, $exitCode);
+
+            if ($exitCode !== 0) {
+                return false;
+            }
+
+            // 检查 php.exe 进程的命令行参数中是否包含目标进程名
+            // 通过 wmic 获取更详细的进程信息
+            $cmdOutput = [];
+            exec('wmic process where "name=\'php.exe\'" get commandline 2>&1', $cmdOutput);
+            foreach ($cmdOutput as $line) {
+                if (stripos($line, $processName) !== false) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            // Linux/Mac: 优先使用 systemctl 检测服务状态
+            if ($processName === 'queue:work') {
+                exec('systemctl is-active pm-queue 2>/dev/null', $svcOut, $svcRc);
+                if ($svcRc === 0 && trim(implode('', $svcOut)) === 'active') {
+                    return true;
+                }
+            }
+            // 备用方案：pgrep（可能被 SELinux 限制）
+            $output = [];
+            exec("pgrep -f '{$processName}' 2>/dev/null", $output);
+            return !empty($output);
+        }
+    }
+
+    /**
+     * 检查定时调度（Scheduler）是否运行
+     *
+     * 兼容两种部署模式（Laravel 不允许两者同时使用，否则任务会重复执行）：
+     *  - 开发环境（start.sh / start.bat）：schedule:work 常驻进程；
+     *  - 生产环境（deploy.sh）：crond 服务运行。
+     * 任一模式生效即视为定时任务已启动。
+     */
+    private function isSchedulerRunning(): bool
+    {
+        // 模式一：开发环境 schedule:work 常驻进程
+        if ($this->isProcessRunning('schedule:work')) {
+            return true;
+        }
+        // Windows 无 crond，仅支持 schedule:work 模式
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            return false;
+       }
+       // 模式二：生产环境 crond 服务运行
+       exec('systemctl is-active crond 2>/dev/null', $crondOut, $crondRc);
+       if ($crondRc !== 0 || trim(implode('', $crondOut)) !== 'active') {
+           return false;
+       }
+       return true;
+    }
+
+    /**
+     * 显示批量导入用户的表单
+     */
+    public function importUsersForm()
+    {
+        $departments = Department::all();
+        $roles = Role::all();
+        return view('pm::admin.import-users', compact('departments', 'roles'));
+    }
+
+    /**
+     * 从 CSV 文件批量导入用户
+     */
+    public function importUsers(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel|max:2048',
+        ]);
+
+        $file = $request->file('csv_file');
+        $path = $file->getRealPath();
+
+        $success = 0;
+        $skipped = 0;
+        $failed = 0;
+        $errors = [];
+
+        $handle = fopen($path, 'r');
+        if ($handle === false) {
+            return back()->with('error', '无法读取 CSV 文件')->withInput();
+        }
+
+        // 检测 BOM 并跳过
+        $bom = fread($handle, 3);
+        if ($bom !== "\xEF\xBB\xBF") {
+            rewind($handle);
+        }
+
+        $lineNumber = 0;
+        while (($row = fgetcsv($handle)) !== false) {
+            $lineNumber++;
+
+            // 跳过空行
+            if (empty(array_filter($row, fn($v) => !is_null($v) && $v !== ''))) {
+                continue;
+            }
+
+            // 检查列数
+            if (count($row) < 5) {
+                $failed++;
+                $errors[] = "第 {$lineNumber} 行：列数不足（需要 5 列，实际 " . count($row) . " 列），已跳过";
+                continue;
+            }
+
+            $username    = trim($row[0]);
+            $password    = trim($row[1]);
+            $name        = trim($row[2]);
+            $departmentId = (int) trim($row[3]);
+            $roleId      = (int) trim($row[4]);
+
+            // 必填校验
+            if (empty($username) || empty($password) || empty($name)) {
+                $failed++;
+                $errors[] = "第 {$lineNumber} 行：用户名/密码/姓名不能为空，已跳过";
+                continue;
+            }
+
+            // 部门存在校验
+            $department = Department::find($departmentId);
+            if (!$department) {
+                $failed++;
+                $errors[] = "第 {$lineNumber} 行：部门 ID {$departmentId} 不存在（{$name}），已跳过";
+                continue;
+            }
+
+            // 角色存在校验
+            $role = Role::find($roleId);
+            if (!$role) {
+                $failed++;
+                $errors[] = "第 {$lineNumber} 行：角色 ID {$roleId} 不存在（{$name}），已跳过";
+                continue;
+            }
+
+            // 密码复杂度校验
+            if (strlen($password) < 6 || !preg_match('/[a-zA-Z]/', $password) || !preg_match('/[0-9]/', $password)) {
+                $failed++;
+                $errors[] = "第 {$lineNumber} 行：密码不符合要求（{$name}），需 ≥6 位且含字母+数字，已跳过";
+                continue;
+            }
+
+            // 检查用户名是否已存在
+            if (User::where('username', $username)->whereNull('deleted_at')->exists()) {
+                $skipped++;
+                $errors[] = "第 {$lineNumber} 行：用户名 {$username} 已存在，已跳过";
+                continue;
+            }
+
+            try {
+                DB::beginTransaction();
+                User::create([
+                    'username'      => $username,
+                    'password'      => Hash::make($password),
+                    'name'          => $name,
+                    'department_id' => $departmentId,
+                    'role_id'       => $roleId,
+                    'is_active'     => true,
+                ]);
+                DB::commit();
+                $success++;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                $failed++;
+                $errors[] = "第 {$lineNumber} 行：创建用户 {$name} 失败（" . $e->getMessage() . "），已跳过";
+                \Log::error('CSV 导入用户失败', [
+                    'line' => $lineNumber,
+                    'username' => $username,
+                    'name' => $name,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+        fclose($handle);
+
+        if ($success > 0) {
+            OperationLogHelper::log('用户管理', '批量导入用户', "从 CSV 批量导入：成功 {$success}，跳过 {$skipped}，失败 {$failed}");
+        }
+
+        session()->flash('import_result', compact('success', 'skipped', 'failed', 'errors'));
+
+        return redirect()->route('pm.admin.users.import-form')->with(
+            'success',
+            $success > 0 ? "导入完成：成功 {$success} 人" . ($failed > 0 ? "，失败 {$failed} 人" : '') : null
+        );
+    }
+
+    // ========== 聊天记录管理 ==========
+
+    /**
+     * 聊天记录列表
+     */
+    public function chatMessages(Request $request)
+    {
+        $query = \App\Pm\Models\Message::with(['user', 'project']);
+
+        // 按项目筛选
+        if ($request->filled('project_id')) {
+            $query->where('project_id', $request->project_id);
+        }
+
+        // 按聊天类型筛选
+        if ($request->filled('chat_type')) {
+            if ($request->chat_type === 'group') {
+                $query->where('is_private', false);
+            } elseif ($request->chat_type === 'private') {
+                $query->where('is_private', true);
+            }
+        }
+
+        // 按时间范围筛选
+        if ($request->filled('date_from')) {
+            $query->where('created_at', '>=', $request->date_from . ' 00:00:00');
+        }
+        if ($request->filled('date_to')) {
+            $query->where('created_at', '<=', $request->date_to . ' 23:59:59');
+        }
+
+        $messages = $query->orderBy('created_at', 'desc')->paginate(20)->appends($request->query());
+
+        // 统计信息
+        $stats = [
+            'total' => \App\Pm\Models\Message::count(),
+            'group' => \App\Pm\Models\Message::where('is_private', false)->count(),
+            'private' => \App\Pm\Models\Message::where('is_private', true)->count(),
+            'with_file' => \App\Pm\Models\Message::whereNotNull('file_path')->count(),
+            'total_file_size' => $this->getChatFileSize(),
+        ];
+
+        // 项目列表（用于筛选下拉框）
+        $projects = \App\Pm\Models\Project::orderBy('name')->get(['id', 'name']);
+
+        return view('pm::admin.chat-messages', compact('messages', 'stats', 'projects'));
+    }
+
+    /**
+     * 批量删除聊天记录
+     */
+    public function deleteChatMessages(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'integer|exists:messages,id',
+        ]);
+
+        $ids = $request->ids;
+
+        // 软删除：保留附件物理文件，管理员可在回收站恢复或彻底删除。
+        $deletedCount = \App\Pm\Models\Message::whereIn('id', $ids)->delete();
+
+        OperationLogHelper::log('聊天记录管理', '批量删除聊天记录', "管理员将 {$deletedCount} 条聊天记录移入回收站");
+
+        return redirect()->route('pm.admin.chat-messages')->with('success', "已将 {$deletedCount} 条聊天记录移入回收站，可由管理员恢复");
+    }
+
+    /**
+     * 按项目清空聊天记录
+     */
+    public function clearProjectChat(Request $request)
+    {
+        $request->validate([
+            'project_id' => 'required|integer|exists:projects,id',
+            'chat_type' => 'required|in:all,group,private',
+        ]);
+
+        $projectId = $request->project_id;
+        $project = \App\Pm\Models\Project::find($projectId);
+
+        // 软删除：保留附件物理文件，管理员可在回收站恢复或彻底删除。
+        $deletedCount = \App\Pm\Models\Message::where('project_id', $projectId);
+        if ($request->chat_type === 'group') {
+            $deletedCount->where('is_private', false);
+        } elseif ($request->chat_type === 'private') {
+            $deletedCount->where('is_private', true);
+        }
+        $deletedCount = $deletedCount->delete();
+
+        OperationLogHelper::log('聊天记录管理', '清空项目聊天记录', "管理员将项目「{$project->name}」的 {$deletedCount} 条聊天记录移入回收站");
+
+        return redirect()->route('pm.admin.chat-messages')->with('success', "已将项目「{$project->name}」的 {$deletedCount} 条聊天记录移入回收站，可由管理员恢复");
+    }
+
+    /**
+     * 计算聊天文件总大小
+     */
+    private function getChatFileSize(): string
+    {
+        $totalBytes = 0;
+        $files = \App\Pm\Models\Message::whereNotNull('file_path')->pluck('file_path');
+
+        foreach ($files as $path) {
+            if (\Illuminate\Support\Facades\Storage::disk('public')->exists($path)) {
+                $totalBytes += \Illuminate\Support\Facades\Storage::disk('public')->size($path);
+            }
+        }
+
+        if ($totalBytes < 1024) {
+            return $totalBytes . ' B';
+        } elseif ($totalBytes < 1024 * 1024) {
+            return round($totalBytes / 1024, 2) . ' KB';
+        } elseif ($totalBytes < 1024 * 1024 * 1024) {
+            return round($totalBytes / (1024 * 1024), 2) . ' MB';
+        }
+        return round($totalBytes / (1024 * 1024 * 1024), 2) . ' GB';
+    }
+}

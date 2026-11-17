@@ -1,42 +1,221 @@
 @extends('pm::layouts.app')
 
-@section('title', '项目列表')
+@php
+    // 项目监督人复用项目管理页，只调整页面标题显示。
+    $pageTitle = auth()->user()->isProjectManager() && !auth()->user()->isAdmin() ? '全部项目列表' : '项目管理';
+@endphp
+
+@section('title', $pageTitle)
 
 @section('content')
-<div class="pm-panel">
-    <div class="pm-panel-head">
-        <h3><i class="fas fa-folder-open" aria-hidden="true"></i>项目列表</h3>
-        <span class="text-muted small">共 {{ $stats['total'] }} 个项目 · 进行中 {{ $stats['in_progress'] }} · 暂停 {{ $stats['suspended'] }}</span>
-    </div>
-    <div class="pm-panel-body">
-        @if ($projects->isEmpty())
-            <div class="pm-empty"><i class="fas fa-folder-open" aria-hidden="true"></i>暂无项目</div>
-        @else
-            <div class="table-responsive">
-                <table class="table table-sm align-middle mb-0">
-                    <thead class="table-light">
-                    <tr><th>项目名称</th><th>项目编码</th><th>产品型号</th><th>状态</th><th>进度</th><th>开始</th><th>结束</th><th></th></tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($projects as $p)
-                        <tr>
-                            <td><a href="{{ route('pm.project.show', $p) }}">{{ $p->name }}</a></td>
-                            <td>{{ $p->code }}</td>
-                            <td>{{ $p->product_model ?: '—' }}</td>
-                            <td><span class="pm-status" style="background:{{ $p->statusColor() }}">{{ $p->statusLabel() }}</span></td>
-                            <td style="min-width:120px">
-                                <div class="progress" style="height:8px"><div class="progress-bar" style="width:{{ (float) $p->progress }}%"></div></div>
-                                <span class="small text-muted">{{ (float) $p->progress }}%</span>
-                            </td>
-                            <td>{{ $p->start_date?->format('Y-m-d') }}</td>
-                            <td>{{ $p->end_date?->format('Y-m-d') }}</td>
-                            <td><a class="btn btn-sm btn-outline-primary" href="{{ route('pm.project.show', $p) }}">进入</a></td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+<h1 class="mb-4">{{ $pageTitle }}</h1>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <h3>{{ $stats['total'] }}</h3>
+                <p>全部项目</p>
             </div>
-        @endif
+        </div>
     </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body text-center">
+                <h3>{{ $stats['in_progress'] }}</h3>
+                <p>进行中</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <h3>{{ $stats['completed'] }}</h3>
+                <p>已完成</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body text-center">
+                <h3>{{ $stats['overdue'] }}</h3>
+                <p>已逾期</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body text-center">
+                <h3>{{ $stats['suspended'] }}</h3>
+                <p>已暂停</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <h3>{{ $stats['overdue_completed'] }}</h3>
+                <p>逾期完成</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(auth()->user()->isProjectCreator() || auth()->user()->isAdmin())
+<a href="{{ route('pm.project.create') }}" class="btn btn-primary mb-3">创建项目</a>
+@endif
+
+@php
+    // 全部项目列表按状态放入标签页，表格和操作按钮使用同一套渲染逻辑。
+    $projectTabs = [
+        [
+            'id' => 'overdue-projects',
+            'title' => '已逾期项目',
+            'icon' => 'fa-exclamation-triangle',
+            'badgeClass' => 'bg-danger',
+            'headerClass' => 'bg-danger',
+            'progressColor' => '#dc3545',
+            'dateLabel' => '截止日期',
+            'emptyText' => '暂无已逾期的项目',
+            'projects' => $overdueProjects,
+            'manageable' => true,
+            'active' => true,
+        ],
+        [
+            'id' => 'in-progress-projects',
+            'title' => '进行中项目',
+            'icon' => 'fa-spinner',
+            'badgeClass' => 'bg-warning text-dark',
+            'headerClass' => 'bg-warning',
+            'progressColor' => '#0d6efd',
+            'dateLabel' => '截止日期',
+            'emptyText' => '暂无进行中的项目',
+            'projects' => $inProgressProjects,
+            'manageable' => true,
+            'active' => false,
+        ],
+        [
+            'id' => 'completed-projects',
+            'title' => '已完成项目',
+            'icon' => 'fa-check-circle',
+            'badgeClass' => 'bg-success',
+            'headerClass' => 'bg-success',
+            'progressColor' => '#198754',
+            'dateLabel' => '完成日期',
+            'emptyText' => '暂无已完成的项目',
+            'projects' => $completedProjects,
+            'manageable' => false,
+            'active' => false,
+        ],
+        [
+            'id' => 'suspended-projects',
+            'title' => '已暂停项目',
+            'icon' => 'fa-pause-circle',
+            'badgeClass' => 'bg-secondary',
+            'headerClass' => 'bg-secondary',
+            'progressColor' => '#6c757d',
+            'dateLabel' => '暂停日期',
+            'emptyText' => '暂无已暂停的项目',
+            'projects' => $suspendedProjects,
+            'manageable' => false,
+            'active' => false,
+        ],
+        [
+            'id' => 'overdue-completed-projects',
+            'title' => '逾期完成项目',
+            'icon' => 'fa-calendar-check-o',
+            'badgeClass' => 'bg-info text-dark',
+            'headerClass' => 'bg-info',
+            'progressColor' => '#0dcaf0',
+            'dateLabel' => '完成日期',
+            'emptyText' => '暂无逾期完成的项目',
+            'projects' => $overdueCompletedProjects,
+            'manageable' => false,
+            'active' => false,
+        ],
+    ];
+@endphp
+
+<ul class="nav nav-tabs mb-3" id="allProjectTabs" role="tablist">
+    @foreach($projectTabs as $tab)
+    <li class="nav-item" role="presentation">
+        <button class="nav-link {{ $tab['active'] ? 'active' : '' }}" id="{{ $tab['id'] }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $tab['id'] }}" type="button" role="tab" aria-controls="{{ $tab['id'] }}" aria-selected="{{ $tab['active'] ? 'true' : 'false' }}">
+            <i class="fa {{ $tab['icon'] }} me-1"></i>{{ $tab['title'] }}
+            <span class="badge {{ $tab['badgeClass'] }} ms-1">{{ $tab['projects']->count() }}</span>
+        </button>
+    </li>
+    @endforeach
+</ul>
+
+<div class="tab-content" id="allProjectTabsContent">
+    @foreach($projectTabs as $tab)
+    <div class="tab-pane fade {{ $tab['active'] ? 'show active' : '' }}" id="{{ $tab['id'] }}" role="tabpanel" aria-labelledby="{{ $tab['id'] }}-tab">
+        <div class="card mb-4">
+            <div class="card-header {{ $tab['headerClass'] }} text-white">
+                <h5 class="mb-0"><i class="fa {{ $tab['icon'] }} me-2"></i>{{ $tab['title'] }} ({{ $tab['projects']->count() }})</h5>
+            </div>
+            <div class="card-body">
+                @if($tab['projects']->count() > 0)
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>项目名称</th>
+                                <th>编码</th>
+                                <th>产品型号</th>
+                                <th>进度</th>
+                                <th>状态</th>
+                                <th>开始日期</th>
+                                <th>{{ $tab['dateLabel'] }}</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($tab['projects'] as $project)
+                            <tr>
+                                <td><a href="{{ route('pm.project.show', $project) }}">{{ $project->name }}</a></td>
+                                <td>{{ $project->code }}</td>
+                                <td>{{ $project->product_model }}</td>
+                                <td>
+                                    @php $pct = is_numeric($project->progress) ? max(0, (float)$project->progress) : 0; @endphp
+                                    <div style="width: 120px; height: 20px; background-color: #e5e7eb; border-radius: 4px; overflow: hidden; display: inline-block; vertical-align: middle;">
+                                        <div style="height: 100%; width: {{ $pct }}%; background-color: {{ $tab['progressColor'] }}; border-radius: 4px; transition: width 0.3s;"></div>
+                                    </div>
+                                    <small class="ms-1">{{ round($pct) }}%</small>
+                                </td>
+                                <td><span class="badge" style="background-color: {{ $project->status->color() }}; color: white;">{{ $project->status->label() }}</span></td>
+                                <td>{{ $project->start_date->format('Y-m-d') }}</td>
+                                <td>
+                                    @if($tab['id'] === 'suspended-projects')
+                                        {{ $project->paused_at ? $project->paused_at->format('Y-m-d') : '-' }}
+                                    @else
+                                        {{ $project->end_date->format('Y-m-d') }}
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('pm.project.show', $project) }}" class="btn btn-sm btn-info">查看</a>
+                                    @if($tab['manageable'] && (auth()->user()->isProjectCreator() || auth()->user()->isAdmin()))
+                                    <a href="{{ route('pm.project.edit', $project) }}" class="btn btn-sm btn-primary">编辑</a>
+                                    <form action="{{ route('pm.project.destroy', $project) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('确定删除该项目吗？删除后可在回收站中恢复。')">删除</button>
+                                    </form>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @else
+                <p class="text-muted text-center py-3">{{ $tab['emptyText'] }}</p>
+                @endif
+            </div>
+        </div>
+    </div>
+    @endforeach
 </div>
 @endsection

@@ -151,4 +151,93 @@ class User extends Authenticatable
     {
         $this->forceFill(['last_seen_at' => now()])->saveQuietly();
     }
+
+    /* ------------------------------------------------------------------
+     | B-03：PM 原 User 模型的角色判定与关联（PM 控制器/视图直接调用）
+     | 源：E:\my-pm\pm-server-openEuler\app\Models\User.php
+     | 角色名兼容两套：PM 原始名（admin/project_manager…）与合并后的 pm.* 名
+     * ------------------------------------------------------------------ */
+
+    /** 角色判定（兼容 pm. 前缀） */
+    protected function hasModuleRole(string $role): bool
+    {
+        return $this->hasAnyRole([$role, 'pm.'.$role]);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasAnyRole(['admin', 'pm.admin', 'core.super_admin', 'erp.admin', 'soho.super_admin']);
+    }
+
+    public function isProjectCreator(): bool
+    {
+        return $this->hasModuleRole('project_creator');
+    }
+
+    public function isProjectManager(): bool
+    {
+        return $this->hasModuleRole('project_manager');
+    }
+
+    public function isTaskExecutor(): bool
+    {
+        return $this->hasModuleRole('task_executor');
+    }
+
+    public function isTaskAuditor(): bool
+    {
+        return $this->hasModuleRole('task_auditor');
+    }
+
+    public function isSupport(): bool
+    {
+        return $this->hasModuleRole('support');
+    }
+
+    /* ---------------- PM 关联 ---------------- */
+
+    public function role()
+    {
+        return $this->belongsTo(\Spatie\Permission\Models\Role::class, 'role_id');
+    }
+
+    public function createdProjects()
+    {
+        return $this->hasMany(\App\Pm\Models\Project::class, 'creator_id');
+    }
+
+    public function executedTasks()
+    {
+        return $this->hasMany(\App\Pm\Models\Task::class, 'executor_id');
+    }
+
+    public function auditedTasks()
+    {
+        return $this->hasMany(\App\Pm\Models\Task::class, 'auditor_id');
+    }
+
+    public function uploadedFiles()
+    {
+        return $this->hasMany(\App\Pm\Models\File::class, 'uploaded_by');
+    }
+
+    public function auditedFiles()
+    {
+        return $this->hasMany(\App\Pm\Models\File::class, 'auditor_id');
+    }
+
+    public function todos()
+    {
+        return $this->hasMany(\App\Pm\Models\Todo::class, 'user_id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(\App\Pm\Models\Message::class, 'user_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(\App\Pm\Models\Message::class, 'receiver_id');
+    }
 }
