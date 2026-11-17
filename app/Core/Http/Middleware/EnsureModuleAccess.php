@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * 用法：路由组 ->middleware('module.access:erp')
  * 判定链：users.module → user_module_access（未过期）→ departments.module → core
- * 无权访问统一 403，文案中文、不含内部标识。
+ * 无权访问不回 403（2026-11-17 用户口径：不该存在 403 页面），改为回门户 + 提示：
+ * 入口本身按权限隐藏，直接敲 URL 只会被温柔地送回门户，不暴露「有这个页面」。
  */
 class EnsureModuleAccess
 {
@@ -30,6 +31,14 @@ class EnsureModuleAccess
             return $next($request);
         }
 
-        abort(403, '您当前没有该模块的访问权限，请联系管理员开通。');
+        $allowed = array_values(array_diff($user->resolveModules(), ['core']));
+
+        if ($allowed) {
+            return redirect()->route('core.home')
+                ->with('warning', '当前账号未开通「'.strtoupper($module).'」模块，已跳回门户。');
+        }
+
+        return redirect()->route('core.home')
+            ->with('warning', '当前账号还没有分配业务模块，请联系管理员开通。');
     }
 }

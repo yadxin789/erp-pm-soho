@@ -168,7 +168,7 @@ class ChatService
     {
         $message = ChatMessage::with('sender')->findOrFail($id);
         abort_unless((int) $message->sender_id === (int) $user->id
-            || $this->canView($user, $message), 403, '无权访问该附件');
+            || $this->canView($user, $message), 404);
 
         $file = $message->attachments[$index] ?? null;
         abort_if($file === null, 404, '该消息没有附件');

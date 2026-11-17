@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
  * 用法：->middleware('permission:erp.sales_orders.view')
  * 判定走 spatie（`$user->can()`），权限名必须带模块前缀。
  * 模块路由迁入时逐组挂载（B-02/B-03/B-04），当前仅注册别名。
+ *
+ * 不返回 403（2026-11-17 口径）：无权限入口在页面里就不渲染，直接敲 URL 也只会被送回原页并提示。
  */
 class CheckPermission
 {
@@ -27,6 +29,6 @@ class CheckPermission
             return $next($request);
         }
 
-        abort(403, '您没有执行该操作的权限。');
+        abort_unless($user->can($permission), 404);
     }
 }

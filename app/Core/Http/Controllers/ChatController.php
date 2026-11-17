@@ -134,14 +134,29 @@ class ChatController extends Controller
         ]);
     }
 
-    /** 模块：显式传参优先，其次 session 里的活动模块，最后回落 core */
+    /**
+     * 模块：显式传参优先，其次 session 里的活动模块，最后回落 core。
+     *
+     * 2026-11-17 口径：不再用 403 —— 无权访问的模块入口本来就不渲染；
+     * 直接改 URL 时把模块收敛到本人有权进入的第一个模块，并在页面顶部提示一次。
+     */
     private function resolveModule(Request $request, User $user): string
     {
-        $module = $request->query('module') ?? $request->input('module') ?? session('active_module') ?? 'core';
-        $this->chat->ensureModule($module);
-        abort_unless(in_array($module, $user->resolveModules(), true), 403, '当前账号无权进入该模块的聊天');
+        $requested = $request->query('module') ?? $request->input('module') ?? session('active_module') ?? 'core';
+        $this->chat->ensureModule($requested);
 
-        return $module;
+        $allowed = $user->resolveModules();
+
+        if (in_array($requested, $allowed, true)) {
+            return $requested;
+        }
+
+        $fallback = array_values(array_diff($allowed, ['core']))[0] ?? 'core';
+        session()->flash('warning', '当前账号没有「'.strtoupper($requested).'」的聊天权限，已切到「'.strtoupper($fallback).'」。');
+        $request->query->set('module', $fallback);
+        $request->request->set('module', $fallback);
+
+        return $fallback;
     }
 
     private function resolveRoomType(Request $request): string

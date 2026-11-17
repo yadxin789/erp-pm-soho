@@ -57,6 +57,9 @@
             <p class="dw-hint">{{ session('status') }}</p>
         </section>
     @endif
+    @if (session('warning'))
+        <section class='dw-card dw-alert' role='alert'><p class='dw-hint'>{{ session('warning') }}</p></section>
+    @endif
     @if (session('error'))
         <section class="dw-card dw-alert" role="alert">
             <p class="dw-hint">{{ session('error') }}</p>
