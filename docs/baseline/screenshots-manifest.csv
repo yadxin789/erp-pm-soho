@@ -1,0 +1,25 @@
+module,page,uri,page_title,screenshot_file,viewport
+erp,登录页,/login,登录 · ERP企业资源管理系统,erp-01-login.png,967x883
+erp,系统概览,/admin/dashboard,系统概览,erp-02-dashboard.png,967x883
+erp,客户管理,/admin/customers,客户管理,erp-03-customers.png,967x883
+erp,物料管理,/admin/items,物料管理,erp-04-items.png,967x883
+erp,用户管理,/admin/users,用户管理,erp-05-users.png,967x883
+erp,审批流配置,/admin/approval-flows,审批流配置,erp-06-approval-flows.png,967x883
+erp,操作日志,/admin/audit-logs,操作日志,erp-07-audit-logs.png,967x883
+pm,登录页,/login,研发全生命周期管理系统 - 登录,pm-01-login.png,967x883
+pm,管理员首页,/dashboard,产品研发管理系统,pm-02-dashboard.png,967x883
+pm,用户管理,/admin/users,用户管理,pm-03-users.png,967x883
+pm,部门管理,/admin/departments,部门管理,pm-04-departments.png,967x883
+pm,项目管理,/project,项目管理,pm-05-projects.png,967x883
+pm,知识库,/knowledge,知识库,pm-06-knowledge.png,967x883
+pm,AI 设置,/ai/settings,AI 设置,pm-07-ai-settings.png,967x883
+soho,登录页,/login,登录 - 得道未来多平台电商店铺统一管理系统,soho-01-login.png,967x883
+soho,管理员首页,/dashboard,超级管理员操作页面,soho-02-dashboard.png,967x883
+soho,用户列表,/admin/users,超级管理员操作页面（用户列表）,soho-03-users.png,967x883
+soho,商品 SPU 列表,/product,超级管理员操作页面（商品 SPU 列表）,soho-04-products.png,967x883
+soho,订单列表,/order,超级管理员操作页面（订单列表）,soho-05-orders.png,967x883
+soho,平台 SKU 映射,/platform-sku,超级管理员操作页面（平台 SKU 映射列表）,soho-06-platforms.png,967x883
+soho,售后列表,/aftersale,超级管理员操作页面（售后列表）,soho-07-aftersale.png,967x883
+soho,审批实例列表,/approval-instances,超级管理员操作页面（审批实例列表）,soho-08-approval.png,967x883
+soho,聊天室,/chat,聊天室 - 多平台电商店铺统一管理系统,soho-09-chat.png,967x883
+soho,审计报表,/audit/reports,超级管理员操作页面（审计报表）,soho-10-reports.png,967x883
