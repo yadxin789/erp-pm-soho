@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Log;
  */
 class DatabaseRestoreCommand extends Command
 {
-    protected $signature = 'erp:db-restore
+    protected $signature = 'db:restore
                             {file : 备份文件路径（支持 .sql / .sql.gz）}
                             {--force : 跳过交互确认}';
 

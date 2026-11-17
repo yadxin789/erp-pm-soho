@@ -31,6 +31,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'module'        => \App\Core\Http\Middleware\SetModuleContext::class,
             'module.access' => \App\Core\Http\Middleware\EnsureModuleAccess::class,
             'permission'    => \App\Core\Http\Middleware\CheckPermission::class,
+            // ERP 原路由组使用 Spatie 的 role:xxx / role_or_permission:xxx
+            // （Laravel 11+ 不再自动注册这两个别名，需显式声明）
+            'role'               => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
 
         // 注意：erp 的 EnsureRoleScope、soho 的 LogUserActivity 一律不得全局 append，

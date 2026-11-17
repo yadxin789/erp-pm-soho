@@ -31,6 +31,7 @@
     },
     "autoload": {
         "files": [
+            "app/Erp/Support/helpers.php",
             "app/Core/helpers.php"
         ],
         "psr-4": {
@@ -40,9 +41,7 @@
         }
     },
     "autoload-dev": {
-        "files": [
-            "app/Core/helpers.php"
-        ],
+        "files": [],
         "psr-4": {
             "Tests\\": "tests/"
         }

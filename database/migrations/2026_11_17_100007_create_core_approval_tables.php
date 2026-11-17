@@ -34,8 +34,6 @@ return new class extends Migration
             // 角色名 / 用户 id / 岗位 id 等，按 approver_type 解释
             $table->string('approver_value', 255);
             $table->timestamps();
-
-            $table->foreign('approval_flow_id')->references('id')->on('approval_flows')->cascadeOnDelete();
         });
 
         Schema::create('approval_instances', function (Blueprint $table) {

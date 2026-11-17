@@ -24,7 +24,7 @@ use Symfony\Component\Process\Process;
  */
 class DatabaseBackupCommand extends Command
 {
-    protected $signature = 'erp:db-backup
+    protected $signature = 'db:backup
                             {--connection= : 备份指定数据库连接，默认使用 default}
                             {--list : 只列出已有备份记录，不执行备份}';
 

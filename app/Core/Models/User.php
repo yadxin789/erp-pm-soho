@@ -133,4 +133,22 @@ class User extends Authenticatable
     {
         return in_array($module, $this->resolveModules(), true);
     }
+
+    /* ------------------------------------------------------------------
+     | B-02：ERP 原 User 模型的两个方法（ERP 视图/聊天页直接调用）
+     | 源：D:\laravel12-erp\app\Models\User.php::isOnline() / touchLastSeen()
+     * ------------------------------------------------------------------ */
+
+    /** 是否在线：last_seen_at 在 5 分钟内（ERP 原有判定口径） */
+    public function isOnline(): bool
+    {
+        return $this->last_seen_at !== null
+            && $this->last_seen_at->gt(now()->subMinutes(5));
+    }
+
+    /** 更新最后活跃时间（ERP 聊天/语音页调用） */
+    public function touchLastSeen(): void
+    {
+        $this->forceFill(['last_seen_at' => now()])->saveQuietly();
+    }
 }

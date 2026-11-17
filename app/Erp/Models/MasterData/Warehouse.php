@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Erp\Models\MasterData;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Warehouse extends Model
+{
+    protected $table = 'erp_warehouses';
+
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'code', 'name', 'description', 'address', 'warehouse_type', 'active',
+        'created_by', 'updated_by',
+    ];
+
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
+
+    public function inventoryBalances()
+    {
+        return $this->hasMany(\App\Erp\Models\Inventory\InventoryBalance::class);
+    }
+
+    public function receipts()
+    {
+        return $this->hasMany(\App\Erp\Models\Purchasing\Receipt::class);
+    }
+
+    public function shipments()
+    {
+        return $this->hasMany(\App\Erp\Models\Sales\Shipment::class);
+    }
+
+    public function materialIssues()
+    {
+        return $this->hasMany(\App\Erp\Models\Production\MaterialIssue::class);
+    }
+
+    public function stocktakes()
+    {
+        return $this->hasMany(\App\Erp\Models\Inventory\Stocktake::class);
+    }
+}
