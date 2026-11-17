@@ -30,7 +30,8 @@ Route::middleware('web')->group(function () {
     });
 
     // 门户：三张卡片（完整视觉在 TC-05 落地，此处为可点骨架）
-    Route::get('/', fn () => view('core::portal'))->name('core.home');
+    // 门户三卡片（TC-05）
+    Route::get('/', [\App\Core\Http\Controllers\PortalController::class, 'index'])->name('core.home');
 
     // 骨架自检：确认中间件与模块上下文可用
     Route::get('/core/ping', fn () => response()->json([

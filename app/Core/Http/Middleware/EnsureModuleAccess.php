@@ -25,6 +25,7 @@ class EnsureModuleAccess
 
         if ($module === 'core' || $user->canEnterModule($module)) {
             $request->session()->put('active_module', $module);
+            $request->session()->put('last_module', $module);
 
             return $next($request);
         }
