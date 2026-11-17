@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 |   3) 模块专用中间件挂在本组内，禁止全局 append
 */
 
-Route::middleware(['web', 'module:erp'])
+Route::middleware(['web', 'auth', 'module:erp', 'module.access:erp'])
     ->prefix('erp')
     ->name('erp.')
     ->group(function () {

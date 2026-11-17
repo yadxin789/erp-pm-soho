@@ -72,4 +72,12 @@ class ModuleContext
     {
         return array_keys(config('modules.modules', []));
     }
+
+    /** 该模块标识是否已在 config/modules.php 注册（且 enabled=true） */
+    public static function exists(string $module): bool
+    {
+        $cfg = config("modules.modules.{$module}");
+
+        return is_array($cfg) && ($cfg['enabled'] ?? true) === true;
+    }
 }

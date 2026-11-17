@@ -1,5 +1,7 @@
 <?php
 
+use App\Core\Http\Controllers\Auth\LoginController;
+use App\Core\Http\Controllers\HomeController;
 use App\Core\Support\ModuleContext;
 use Illuminate\Support\Facades\Route;
 
@@ -7,11 +9,25 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Core 路由（无模块前缀）
 |--------------------------------------------------------------------------
-| 门户 /、统一登录 /login、通知、个人中心、Core 后台等。
+| 门户 /、统一登录 /login、登录后分流 /home、通知、个人中心、Core 后台等。
 | 模块路由见 routes/erp.php、routes/pm.php、routes/soho.php。
 */
 
 Route::middleware('web')->group(function () {
+
+    // 未登录
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [LoginController::class, 'showLoginForm'])->name('core.login');
+        Route::post('/login', [LoginController::class, 'login'])->name('core.login.attempt');
+    });
+
+    // 已登录
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', [LoginController::class, 'logout'])->name('core.logout');
+
+        // 登录后分流点：单模块直接进模块，多模块回门户（TC-04）
+        Route::get('/home', [HomeController::class, 'index'])->name('core.home.redirect');
+    });
 
     // 门户：三张卡片（完整视觉在 TC-05 落地，此处为可点骨架）
     Route::get('/', fn () => view('core::portal'))->name('core.home');
