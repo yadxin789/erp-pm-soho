@@ -1,0 +1,106 @@
+{
+    "generated_at": "2026-11-17 15:17:11",
+    "counts": {
+        "erp": 46,
+        "pm": 31,
+        "soho": 232
+    },
+    "unresolved_permissions": [],
+    "permission_aliases": [
+        {
+            "route": "soho.pick.tasks.index",
+            "from": "soho.pick.task.view",
+            "to": "soho.picking.view"
+        },
+        {
+            "route": "soho.pick.tasks.scan",
+            "from": "soho.pick.task.view",
+            "to": "soho.picking.execute"
+        },
+        {
+            "route": "soho.pick.tasks.exception",
+            "from": "soho.pick.task.view",
+            "to": "soho.picking.view"
+        },
+        {
+            "route": "soho.check.tasks.index",
+            "from": "soho.check.task.view",
+            "to": "soho.checking.view"
+        },
+        {
+            "route": "soho.check.tasks.scan",
+            "from": "soho.check.task.view",
+            "to": "soho.checking.execute"
+        },
+        {
+            "route": "soho.pack.tasks.index",
+            "from": "soho.pack.task.view",
+            "to": "soho.packing.view"
+        },
+        {
+            "route": "soho.pack.tasks.scan",
+            "from": "soho.pack.task.view",
+            "to": "soho.packing.execute"
+        },
+        {
+            "route": "soho.shipment.pending",
+            "from": "soho.shipment.view",
+            "to": "soho.logistics.view"
+        },
+        {
+            "route": "soho.pick.tasks.progress",
+            "from": "soho.pick.task.view",
+            "to": "soho.picking.view"
+        },
+        {
+            "route": "soho.pick.tasks.completed",
+            "from": "soho.pick.task.view",
+            "to": "soho.picking.view"
+        },
+        {
+            "route": "soho.check.tasks.exception",
+            "from": "soho.check.task.view",
+            "to": "soho.checking.view"
+        },
+        {
+            "route": "soho.check.tasks.completed",
+            "from": "soho.check.task.view",
+            "to": "soho.checking.view"
+        },
+        {
+            "route": "soho.check.tasks.record",
+            "from": "soho.check.task.view",
+            "to": "soho.checking.view"
+        },
+        {
+            "route": "soho.pack.tasks.material",
+            "from": "soho.pack.task.view",
+            "to": "soho.packing.execute"
+        },
+        {
+            "route": "soho.pack.tasks.weight",
+            "from": "soho.pack.task.view",
+            "to": "soho.packing.execute"
+        },
+        {
+            "route": "soho.pack.tasks.parcel",
+            "from": "soho.pack.task.view",
+            "to": "soho.packing.execute"
+        },
+        {
+            "route": "soho.pack.tasks.exception",
+            "from": "soho.pack.task.view",
+            "to": "soho.packing.view"
+        },
+        {
+            "route": "soho.pack.tasks.completed",
+            "from": "soho.pack.task.view",
+            "to": "soho.packing.view"
+        },
+        {
+            "route": "soho.procurement.approvals.index",
+            "from": "soho.procurement.approval",
+            "to": "soho.procurement.order.approve"
+        }
+    ]
+}

@@ -50,4 +50,9 @@ Route::middleware('web')->group(function () {
 
     // T0-10 组件示例页（前端基座自检）
     Route::get('/core/ui', fn () => view('core::ui'))->name('core.ui');
+
+    // TC-08 菜单预览与自检：基线条数 / 当前角色可见条数 / 路由未迁入条数
+    Route::get('/core/menu/{module?}', [\App\Core\Http\Controllers\MenuPreviewController::class, 'show'])
+        ->middleware('auth')
+        ->name('core.menu');
 });

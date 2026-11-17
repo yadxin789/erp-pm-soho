@@ -1,0 +1,1414 @@
+{
+    "login": {
+        "permissions": [],
+        "file": "auth.php"
+    },
+    "register": {
+        "permissions": [],
+        "file": "auth.php"
+    },
+    "logout": {
+        "permissions": [],
+        "file": "auth.php"
+    },
+    "home": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "notifications.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "notifications.read": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "notifications.mark-read": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "notifications.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "notifications.mark-all-read": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "notifications.unread-count": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attachments.upload": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attachments.download": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attachments.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.dashboard": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.masterdata.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "customers.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "suppliers.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "warehouses.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "boms.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "routings.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "admin.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.spec-sheet": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.spec-sheet.upload": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.spec-sheet.preview": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.spec-sheet.download": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.spec-sheet.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "customers.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "suppliers.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "warehouses.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.welcome": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.notice": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat.ask": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat.conversations.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat.conversations.rename": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat.conversations.clear": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat.conversations.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat.conversations.export": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat.attachments.preview": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.chat.attachments.download": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.approval-suggestion": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.invoice-ocr": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.invoice-ocr.recognize": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.ocr.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.ocr.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.invoices": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.invoices.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.invoices.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.bills": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.bills.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.bills.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.payments": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.payments.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.payments.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.finance.statements": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.leads": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.leads.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.leads.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.leads.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.leads.follow-up": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.opportunities": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.opportunities.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.opportunities.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.crm.pipeline": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.approvals.my-tasks": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.approvals.handle": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.reports.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.reports.sales": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.reports.purchase": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.reports.inventory": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.reports.quality": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.analysis-center": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.daily-report": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.stock-alerts": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.customer-credit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.supplier-quality": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.sales-forecast": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.production-cost": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.anomaly-detection": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.scheduling": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.ecommerce-merge": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ai.email-reply": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.profile.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.profile.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.profile.avatar": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.profile.avatar.upload": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.profile.avatar.reset": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.send": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.messages": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.clear": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.file": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.members": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.private": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.private.send": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.private.history": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.chat.private.clear": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.hr.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.sync-roles": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.leave": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "employees.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attendances.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attendances.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attendances.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attendances.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attendances.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "attendances.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "payroll.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "payroll.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "payroll.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "payroll.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "payroll.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "payroll.status": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "payroll.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "performances.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "performances.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "performances.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "performances.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "performances.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "performances.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "recruitments.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "recruitments.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "recruitments.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "recruitments.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "recruitments.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "recruitments.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "applications.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "applications.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "applications.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "applications.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "applications.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "applications.status": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "applications.to-employee": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "applications.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.projects.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "my-projects": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "my-projects.status": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "logs": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "gantt": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "change": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "change.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "pause": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "resume": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "tasks.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "tasks.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "tasks.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "tasks.time.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "time.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "messages.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "messages.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "messages.clear-mine": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "messages.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "messages.private": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "messages.private.clear-mine": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "collab.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "collab.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "collab.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "collab.open": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "collab.save": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "collab.download": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "collab.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "voice.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "voice.token": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "voice.members": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "voice.history": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "voice.upload-demo": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "voice.demo": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "voice.end": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.tasks.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "my-tasks": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "my-tasks.status": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "my-audit-tasks": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "my-audit-tasks.status": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "start": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "upload": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "upload.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "audit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "audit.approve": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "audit.reject": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "update-file": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "update-file.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "files.download": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "apply-extension": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "store-extension": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.messages.file": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.api.chat.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "members": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "history": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "send": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.api.voice.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "signal": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "poll": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.collab.download": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.collab.callback": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.files.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "resource-files": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "manage-resource-files": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "preview": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "raw": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "download": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "upload-department": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "store-department": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "download-department": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "update-department": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "delete-department": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "download-resource": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.todos.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "complete": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.extensions.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "approve": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "reject": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.knowledge.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "doc.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "doc.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "doc.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.project-templates.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "config": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.support.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "department-files": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "send-notification": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "notification.post": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "upload-resource-file": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "store-resource-file": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.pm-dashboard.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.recycle.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "restore": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "force-delete": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.assets.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "status": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.ecommerce.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "sync": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "dashboard": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "system-health": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "system-health.run": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "system-health.alerts.resolve": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "monitor.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "system-status": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "system-status.run-health": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "system-status.clear-cache": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "scheduled-tasks": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "scheduled-tasks.run": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "queue": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "queue.retry-all": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "queue.flush": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "queue.retry": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "queue.forget": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "queue.restart": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "auto-start": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.barcode-labels": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.barcode-label": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "items.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "customers.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "customers.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "customers.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "customers.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "customers.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "suppliers.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "suppliers.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "suppliers.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "suppliers.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "suppliers.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "warehouses.create": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "warehouses.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "warehouses.edit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "warehouses.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "warehouses.destroy": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "routings.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "settings.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "ai-settings.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "ai-settings.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "ai-settings.test": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "ai-settings.providers.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "save": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "toggle": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "default": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "test": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "remove": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "ai-settings.models.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "logistics.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "guide": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "settings": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "settings.update": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "shipments": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "providers.save": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "providers.toggle": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "providers.default": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "providers.test": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "providers.sync": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "shipments.trace": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "approval-flows.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "approval-flows.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "audit-logs.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.sales.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "orders.submit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "orders.approve": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "orders.cancel": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "orders.close": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "quotations.submit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "quotations.convert": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "shipments.confirm": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "returns.approve": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.purchase.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "requisitions.submit": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "requisitions.approve": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "receipts.confirm": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.production.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "orders.release": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "orders.start": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "orders.report": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "orders.complete": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "plans.mrp": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "plans.approve": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "plans.convert": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "issues.confirm": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.inventory.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "trace": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "trace.search": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "transactions": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "logistics": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "logistics.query": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "logistics.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "logistics.show": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "transfer": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "transfer.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "adjust": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "adjust.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "freeze": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "freeze.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "stocktake": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "stocktake.store": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "app.quality.": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "defects.index": {
+        "permissions": [],
+        "file": "web.php"
+    },
+    "reports": {
+        "permissions": [],
+        "file": "web.php"
+    }
+}

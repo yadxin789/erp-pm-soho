@@ -1,0 +1,3360 @@
+{
+    "erp": {
+        "groups": {
+            "业务概览": [
+                {
+                    "route": "app.dashboard",
+                    "label": "仪表盘",
+                    "icon": "fa-solid fa-gauge-high"
+                }
+            ],
+            "智能助手": [
+                {
+                    "route": "app.ai.chat",
+                    "label": "AI聊天",
+                    "icon": "fa-solid fa-robot"
+                },
+                {
+                    "route": "app.ai.analysis-center",
+                    "label": "智能分析中心",
+                    "icon": "fa-solid fa-wand-magic-sparkles"
+                }
+            ],
+            "协作沟通": [
+                {
+                    "route": "app.chat",
+                    "label": "群聊",
+                    "icon": "fa-solid fa-comments"
+                },
+                {
+                    "route": "app.profile.edit",
+                    "label": "个人资料",
+                    "icon": "fa-solid fa-id-card"
+                }
+            ],
+            "销售管理": [
+                {
+                    "route": "app.sales.orders.index",
+                    "label": "销售订单",
+                    "icon": "fa-solid fa-file-invoice"
+                },
+                {
+                    "route": "app.sales.quotations.index",
+                    "label": "报价单",
+                    "icon": "fa-solid fa-file-lines"
+                },
+                {
+                    "route": "app.sales.shipments.index",
+                    "label": "发货管理",
+                    "icon": "fa-solid fa-truck"
+                },
+                {
+                    "route": "app.sales.returns.index",
+                    "label": "销售退货",
+                    "icon": "fa-solid fa-rotate-left"
+                }
+            ],
+            "采购管理": [
+                {
+                    "route": "app.purchase.orders.index",
+                    "label": "采购订单",
+                    "icon": "fa-solid fa-file-invoice"
+                },
+                {
+                    "route": "app.purchase.requisitions.index",
+                    "label": "请购单",
+                    "icon": "fa-solid fa-clipboard"
+                },
+                {
+                    "route": "app.purchase.receipts.index",
+                    "label": "收货管理",
+                    "icon": "fa-solid fa-box-open"
+                },
+                {
+                    "route": "app.purchase.returns.index",
+                    "label": "采购退货",
+                    "icon": "fa-solid fa-rotate-left"
+                }
+            ],
+            "生产管理": [
+                {
+                    "route": "app.production.orders.index",
+                    "label": "生产工单",
+                    "icon": "fa-solid fa-industry"
+                },
+                {
+                    "route": "app.production.plans.index",
+                    "label": "生产计划",
+                    "icon": "fa-solid fa-diagram-project"
+                },
+                {
+                    "route": "app.production.issues.index",
+                    "label": "领料管理",
+                    "icon": "fa-solid fa-dolly"
+                },
+                {
+                    "route": "app.production.receipts.index",
+                    "label": "成品入库",
+                    "icon": "fa-solid fa-warehouse"
+                }
+            ],
+            "库存管理": [
+                {
+                    "route": "app.inventory.index",
+                    "label": "库存查询",
+                    "icon": "fa-solid fa-boxes-stacked"
+                },
+                {
+                    "route": "app.inventory.transfer",
+                    "label": "库存调拨",
+                    "icon": "fa-solid fa-right-left"
+                },
+                {
+                    "route": "app.inventory.trace",
+                    "label": "批次追溯",
+                    "icon": "fa-solid fa-code-branch"
+                },
+                {
+                    "route": "app.inventory.logistics",
+                    "label": "物流查询",
+                    "icon": "fa-solid fa-truck-fast"
+                }
+            ],
+            "质量管理": [
+                {
+                    "route": "app.quality.inspections.index",
+                    "label": "检验管理",
+                    "icon": "fa-solid fa-clipboard-check"
+                },
+                {
+                    "route": "app.quality.defects.index",
+                    "label": "缺陷管理",
+                    "icon": "fa-solid fa-bug"
+                },
+                {
+                    "route": "app.quality.reports",
+                    "label": "质量报表",
+                    "icon": "fa-solid fa-chart-column"
+                }
+            ],
+            "财务与 CRM": [
+                {
+                    "route": "app.finance.invoices",
+                    "label": "客户发票",
+                    "icon": "fa-solid fa-file-invoice-dollar"
+                },
+                {
+                    "route": "app.finance.bills",
+                    "label": "供应商账单",
+                    "icon": "fa-solid fa-money-bill"
+                },
+                {
+                    "route": "app.finance.payments",
+                    "label": "收付款",
+                    "icon": "fa-solid fa-cash-register"
+                },
+                {
+                    "route": "app.crm.leads",
+                    "label": "销售线索",
+                    "icon": "fa-solid fa-user-plus"
+                },
+                {
+                    "route": "app.crm.pipeline",
+                    "label": "销售漏斗",
+                    "icon": "fa-solid fa-filter"
+                }
+            ],
+            "主数据": [
+                {
+                    "route": "app.masterdata.items.index",
+                    "label": "物料信息",
+                    "icon": "fa-solid fa-box"
+                },
+                {
+                    "route": "app.masterdata.customers.index",
+                    "label": "客户信息",
+                    "icon": "fa-solid fa-users"
+                },
+                {
+                    "route": "app.masterdata.suppliers.index",
+                    "label": "供应商信息",
+                    "icon": "fa-solid fa-truck-field"
+                },
+                {
+                    "route": "app.masterdata.warehouses.index",
+                    "label": "仓库信息",
+                    "icon": "fa-solid fa-warehouse"
+                },
+                {
+                    "route": "app.masterdata.boms.index",
+                    "label": "BOM清单",
+                    "icon": "fa-solid fa-diagram-project"
+                }
+            ],
+            "扩展与报表": [
+                {
+                    "route": "app.hr.employees.index",
+                    "label": "员工档案",
+                    "icon": "fa-solid fa-id-badge"
+                },
+                {
+                    "route": "app.hr.payroll.index",
+                    "label": "薪资工资单",
+                    "icon": "fa-solid fa-money-check-dollar"
+                },
+                {
+                    "route": "app.hr.performances.index",
+                    "label": "绩效评估",
+                    "icon": "fa-solid fa-ranking-star"
+                },
+                {
+                    "route": "app.hr.recruitments.index",
+                    "label": "招聘需求",
+                    "icon": "fa-solid fa-bullhorn"
+                },
+                {
+                    "route": "app.hr.applications.index",
+                    "label": "应聘者",
+                    "icon": "fa-solid fa-users-viewfinder"
+                },
+                {
+                    "route": "app.projects.index",
+                    "label": "项目管理",
+                    "icon": "fa-solid fa-folder-open"
+                },
+                {
+                    "route": "app.tasks.my-tasks",
+                    "label": "我的任务",
+                    "icon": "fa-solid fa-list-check"
+                },
+                {
+                    "route": "app.tasks.my-audit-tasks",
+                    "label": "我的审核任务",
+                    "icon": "fa-solid fa-clipboard-check"
+                },
+                {
+                    "route": "app.assets.index",
+                    "label": "固定资产",
+                    "icon": "fa-solid fa-building-columns"
+                },
+                {
+                    "route": "app.ecommerce.index",
+                    "label": "电商订单",
+                    "icon": "fa-solid fa-shop"
+                },
+                {
+                    "route": "app.reports.index",
+                    "label": "报表中心",
+                    "icon": "fa-solid fa-chart-simple"
+                },
+                {
+                    "route": "app.approvals.my-tasks",
+                    "label": "我的审批待办",
+                    "icon": "fa-solid fa-list-check"
+                }
+            ]
+        },
+        "count": 46
+    },
+    "pm": {
+        "items": [
+            {
+                "route": "dashboard",
+                "label": "首页",
+                "icon": "fa fa-home me-2",
+                "scopes": [
+                    "$currentUser&&$currentUser->avatar"
+                ]
+            },
+            {
+                "route": "ai.settings",
+                "label": "AI设置",
+                "icon": "fa fa-robot me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "ai.chat",
+                "label": "AI智能助手",
+                "icon": "fa fa-robot me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "ai-delegation.index",
+                "label": "AI授权中心@if($pendingAiProposals>0){{$pendingAiProposals}}@endif",
+                "icon": "fa fa-key me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.users",
+                "label": "用户管理",
+                "icon": "fa fa-users me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.departments",
+                "label": "部门管理",
+                "icon": "fa fa-building me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.roles",
+                "label": "角色管理",
+                "icon": "fa fa-key me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.statuses",
+                "label": "状态管理",
+                "icon": "fa fa-toggle-on me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.task-types",
+                "label": "任务类型管理",
+                "icon": "fa fa-list-alt me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.chat-messages",
+                "label": "聊天记录管理",
+                "icon": "fa fa-comments me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.file-repository",
+                "label": "文件仓库",
+                "icon": "fa fa-folder-open me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.trash",
+                "label": "回收站",
+                "icon": "fa fa-trash me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "knowledge.index",
+                "label": "知识库",
+                "icon": "fa fa-book me-2",
+                "scopes": [
+                    "$isAdmin",
+                    "$pendingExtensionCount>0",
+                    "$isProjectManager&&!$isAdmin",
+                    "$myPendingAuditTaskCount>0",
+                    "$myPendingExecutionTaskCount>0",
+                    "$isSupport&&!$isAdmin&&!$isManager&&!$isProjectManager&&!$isDeptManager&&!$isExecutor"
+                ]
+            },
+            {
+                "route": "admin.operation-logs",
+                "label": "操作日志",
+                "icon": "fa fa-file-text me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.send-notification",
+                "label": "发送通知",
+                "icon": "fa fa-bell me-2",
+                "scopes": [
+                    "$isAdmin",
+                    "$isProjectManager&&!$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.services",
+                "label": "后台服务",
+                "icon": "fa fa-server me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "admin.wecom.settings",
+                "label": "企业微信",
+                "icon": "fab fa-weixin me-2",
+                "scopes": [
+                    "$isAdmin"
+                ]
+            },
+            {
+                "route": "project-template.index",
+                "label": "项目模板",
+                "icon": "fa fa-clone me-2",
+                "scopes": [
+                    "$isManager"
+                ]
+            },
+            {
+                "route": "project.create",
+                "label": "创建项目",
+                "icon": "fa fa-plus-circle me-2",
+                "scopes": [
+                    "$isManager"
+                ]
+            },
+            {
+                "route": "project.my-projects",
+                "label": "我的项目列表@if($myProjectCount>0){{$myProjectCount}}@endif",
+                "icon": "fa fa-folder-open me-2",
+                "scopes": [
+                    "$isManager",
+                    "$isDeptManager&&!$isAdmin&&!$isManager&&!$isProjectManager",
+                    "$isExecutor&&!$isAdmin&&!$isManager&&!$isProjectManager&&!$isDeptManager",
+                    "$isExecutor||$isDeptManager"
+                ]
+            },
+            {
+                "route": "extension.index",
+                "label": "审核延期申请@if($pendingExtensionCount>0){{$pendingExtensionCount}}@endif",
+                "icon": "fa fa-calendar me-2",
+                "scopes": [
+                    "$myProjectCount>0",
+                    "$isProjectManager&&!$isAdmin"
+                ]
+            },
+            {
+                "route": "file.resource-files",
+                "label": "资料文件",
+                "icon": "fa fa-file me-2",
+                "scopes": [
+                    "$pendingExtensionCount>0",
+                    "$isProjectManager&&!$isAdmin",
+                    "$myPendingAuditTaskCount>0",
+                    "$myPendingExecutionTaskCount>0"
+                ]
+            },
+            {
+                "route": "notification.index",
+                "label": "通知中心",
+                "icon": "fa fa-bell me-2",
+                "scopes": [
+                    "$pendingExtensionCount>0",
+                    "$isProjectManager&&!$isAdmin",
+                    "$myPendingExecutionTaskCount>0",
+                    "$isSupport&&!$isAdmin&&!$isManager&&!$isProjectManager&&!$isDeptManager&&!$isExecutor",
+                    "$isDeptManager"
+                ]
+            },
+            {
+                "route": "profile.wecom.index",
+                "label": "企业微信绑定",
+                "icon": "fab fa-weixin me-2",
+                "scopes": [
+                    "$pendingExtensionCount>0",
+                    "$isProjectManager&&!$isAdmin",
+                    "$myPendingAuditTaskCount>0",
+                    "$myPendingExecutionTaskCount>0",
+                    "$isSupport&&!$isAdmin&&!$isManager&&!$isProjectManager&&!$isDeptManager&&!$isExecutor",
+                    "$currentUser&&$currentUser->avatar",
+                    "$isDeptManager"
+                ]
+            },
+            {
+                "route": "wecom.file.index",
+                "label": "企微文件收件箱",
+                "icon": "fa fa-inbox me-2",
+                "scopes": [
+                    "$pendingExtensionCount>0",
+                    "$isProjectManager&&!$isAdmin",
+                    "$myPendingAuditTaskCount>0",
+                    "$myPendingExecutionTaskCount>0",
+                    "$isSupport&&!$isAdmin&&!$isManager&&!$isProjectManager&&!$isDeptManager&&!$isExecutor",
+                    "$isDeptManager"
+                ]
+            },
+            {
+                "route": "project.index",
+                "label": "全部项目",
+                "icon": "fa fa-eye me-2",
+                "scopes": [
+                    "$isProjectManager&&!$isAdmin"
+                ]
+            },
+            {
+                "route": "task.my-audit-tasks.pending-audit",
+                "label": "我的待审核任务列表@if($myPendingAuditTaskCount>0){{$myPendingAuditTaskCount}}@endif",
+                "icon": "fa fa-tasks me-2",
+                "scopes": [
+                    "$myProjectCount>0",
+                    "$isDeptManager"
+                ]
+            },
+            {
+                "route": "task.my-tasks.pending-execution",
+                "label": "我的待执行任务列表@if($myPendingExecutionTaskCount>0){{$myPendingExecutionTaskCount}}@endif",
+                "icon": "fa fa-tasks me-2",
+                "scopes": [
+                    "$myProjectCount>0",
+                    "$isExecutor"
+                ]
+            },
+            {
+                "route": "support.index",
+                "label": "支援中心",
+                "icon": "fa fa-life-ring me-2",
+                "scopes": [
+                    "$isSupport&&!$isAdmin&&!$isManager&&!$isProjectManager&&!$isDeptManager&&!$isExecutor"
+                ]
+            },
+            {
+                "route": "file.manage-resource-files",
+                "label": "资料文件管理",
+                "icon": "fa fa-file me-2",
+                "scopes": [
+                    "$isSupport&&!$isAdmin&&!$isManager&&!$isProjectManager&&!$isDeptManager&&!$isExecutor"
+                ]
+            },
+            {
+                "route": "my-trash",
+                "label": "@php$myTrashCount=0;if(auth()->check()){$myTrashCount=\\App\\Services\\TrashService::countForUser(auth()->id());}@endphp{{$myTrashCount}}",
+                "icon": "",
+                "scopes": [
+                    "$currentUser&&!$isAdmin"
+                ]
+            }
+        ],
+        "count": 31,
+        "raw_links": 69
+    },
+    "soho": {
+        "items": [
+            {
+                "key": "dashboard",
+                "label": "首页",
+                "route": "dashboard",
+                "icon": "fa-home",
+                "permission": "dashboard.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin",
+                    "security_admin",
+                    "shop_auth_admin",
+                    "operation_manager",
+                    "platform_operator",
+                    "product_admin",
+                    "product_reviewer",
+                    "pricing_staff",
+                    "order_manager",
+                    "customer_service",
+                    "warehouse_manager",
+                    "picker",
+                    "checker",
+                    "packer",
+                    "logistics_specialist",
+                    "aftersale_manager",
+                    "finance_staff",
+                    "finance_manager",
+                    "procurement_staff",
+                    "data_analyst",
+                    "integration_ops",
+                    "auditor",
+                    "read_only",
+                    "marketing_staff",
+                    "procurement_manager"
+                ],
+                "order": 1
+            },
+            {
+                "key": "sales_report",
+                "label": "销售报表",
+                "route": "sales.report",
+                "icon": "fa-line-chart",
+                "permission": "report.sales",
+                "roles": [
+                    "super_admin",
+                    "operation_manager",
+                    "finance_manager",
+                    "pricing_staff",
+                    "data_analyst",
+                    "auditor",
+                    "read_only",
+                    "marketing_staff"
+                ],
+                "order": 10
+            },
+            {
+                "key": "stock_report",
+                "label": "库存报表",
+                "route": "report.inventory",
+                "icon": "fa-file-text",
+                "permission": "report.stock",
+                "roles": [
+                    "super_admin",
+                    "data_analyst",
+                    "auditor",
+                    "read_only"
+                ],
+                "order": 11
+            },
+            {
+                "key": "product_report",
+                "label": "商品报表",
+                "route": "product.ranking",
+                "icon": "fa-bar-chart",
+                "permission": "report.product",
+                "roles": [
+                    "super_admin",
+                    "operation_manager",
+                    "product_admin",
+                    "product_reviewer",
+                    "platform_operator",
+                    "pricing_staff",
+                    "data_analyst",
+                    "auditor",
+                    "read_only",
+                    "marketing_staff"
+                ],
+                "order": 12
+            },
+            {
+                "key": "profit_report",
+                "label": "利润报表",
+                "route": "report.profit",
+                "icon": "fa-dollar",
+                "permission": "report.profit",
+                "roles": [
+                    "super_admin",
+                    "operation_manager",
+                    "finance_manager",
+                    "pricing_staff",
+                    "data_analyst",
+                    "auditor"
+                ],
+                "order": 13
+            },
+            {
+                "key": "finance_report",
+                "label": "财务报表",
+                "route": "report.profit",
+                "icon": "fa-money",
+                "permission": "report.profit",
+                "roles": [
+                    "super_admin",
+                    "operation_manager",
+                    "finance_manager",
+                    "pricing_staff",
+                    "data_analyst",
+                    "auditor"
+                ],
+                "order": 14
+            },
+            {
+                "key": "user_management",
+                "label": "用户管理",
+                "route": "admin.users.index",
+                "icon": "fa-users",
+                "permission": "user.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 20
+            },
+            {
+                "key": "department_management",
+                "label": "部门管理",
+                "route": "admin.departments.index",
+                "icon": "fa-building",
+                "permission": "department.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 21
+            },
+            {
+                "key": "role_management",
+                "label": "角色管理",
+                "route": "admin.roles.index",
+                "icon": "fa-key",
+                "permission": "role.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 22
+            },
+            {
+                "key": "data_scope_management",
+                "label": "数据权限",
+                "route": "data_scopes.index",
+                "icon": "fa-shield",
+                "permission": "data_scope.manage",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 23
+            },
+            {
+                "key": "system_settings",
+                "label": "系统设置",
+                "route": "system.settings",
+                "icon": "fa-cog",
+                "permission": "system.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin",
+                    "security_admin"
+                ],
+                "order": 30
+            },
+            {
+                "key": "approval_flow_management",
+                "label": "审批流管理",
+                "route": "approval_flows.index",
+                "icon": "fa-check-square",
+                "permission": "approval_flow.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 31
+            },
+            {
+                "key": "approval_instance_management",
+                "label": "审批实例",
+                "route": "approval_instances.index",
+                "icon": "fa-hourglass-half",
+                "permission": "approval.instance.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 32
+            },
+            {
+                "key": "tax_rate_management",
+                "label": "税率管理",
+                "route": "tax-rate.index",
+                "icon": "fa-percent",
+                "permission": "tax_rate.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 33
+            },
+            {
+                "key": "currency_management",
+                "label": "货币管理",
+                "route": "currencies.index",
+                "icon": "fa-dollar",
+                "permission": "currency.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 34
+            },
+            {
+                "key": "export_task_management",
+                "label": "导出任务",
+                "route": "export_tasks.index",
+                "icon": "fa-download",
+                "permission": "export_task.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 35
+            },
+            {
+                "key": "system_parameters",
+                "label": "系统参数",
+                "route": "system.parameters.index",
+                "icon": "fa-sliders",
+                "permission": "system.config",
+                "roles": [
+                    "super_admin"
+                ],
+                "order": 36
+            },
+            {
+                "key": "feature_switch",
+                "label": "功能开关",
+                "route": "system.features.index",
+                "icon": "fa-toggle-on",
+                "permission": "system.config",
+                "roles": [
+                    "super_admin"
+                ],
+                "order": 37
+            },
+            {
+                "key": "notification_templates",
+                "label": "通知模板",
+                "route": "system.notifications.index",
+                "icon": "fa-bell",
+                "permission": "system.config",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 38
+            },
+            {
+                "key": "file_storage",
+                "label": "文件存储",
+                "route": "system.storage.index",
+                "icon": "fa-database",
+                "permission": "system.config",
+                "roles": [
+                    "super_admin"
+                ],
+                "order": 39
+            },
+            {
+                "key": "system_version",
+                "label": "系统版本",
+                "route": "system.version",
+                "icon": "fa-info-circle",
+                "permission": "system.view",
+                "roles": [
+                    "super_admin",
+                    "tenant_admin"
+                ],
+                "order": 40
+            },
+            {
+                "key": "shop_management",
+                "label": "店铺管理",
+                "route": "shop.index",
+                "icon": "fa-shopping-cart",
+                "permission": "shop.view",
+                "roles": [
+                    "super_admin",
+                    "shop_auth_admin",
+                    "operation_manager",
+                    "platform_operator",
+                    "integration_ops",
+                    "marketing_staff"
+                ],
+                "order": 40
+            },
+            {
+                "key": "shop_authorize",
+                "label": "店铺授权",
+                "route": "shop.authorize",
+                "icon": "fa-lock",
+                "permission": "shop.authorize",
+                "roles": [
+                    "shop_auth_admin"
+                ],
+                "order": 41
+            },
+            {
+                "key": "platform_account_management",
+                "label": "平台账号",
+                "route": "platform_accounts.index",
+                "icon": "fa-id-badge",
+                "permission": "platform_account.view",
+                "roles": [
+                    "shop_auth_admin",
+                    "integration_ops"
+                ],
+                "order": 42
+            },
+            {
+                "key": "platform_capability",
+                "label": "平台能力",
+                "route": "platform_capabilities.index",
+                "icon": "fa-cogs",
+                "permission": "platform_account.view",
+                "roles": [
+                    "shop_auth_admin",
+                    "integration_ops"
+                ],
+                "order": 43
+            },
+            {
+                "key": "product_spu",
+                "label": "商品 SPU",
+                "route": "product.index",
+                "icon": "fa-cube",
+                "permission": "product.view",
+                "roles": [
+                    "super_admin",
+                    "product_admin",
+                    "product_reviewer",
+                    "platform_operator",
+                    "operation_manager",
+                    "pricing_staff",
+                    "read_only"
+                ],
+                "order": 50
+            },
+            {
+                "key": "goods_management",
+                "label": "商品管理",
+                "route": "goods.index",
+                "icon": "fa-box",
+                "permission": "product.view",
+                "roles": [
+                    "super_admin",
+                    "product_admin",
+                    "platform_operator",
+                    "operation_manager",
+                    "product_reviewer",
+                    "pricing_staff",
+                    "read_only"
+                ],
+                "order": 51
+            },
+            {
+                "key": "sku_mapping",
+                "label": "SKU 映射",
+                "route": "platform-sku.index",
+                "icon": "fa-exchange",
+                "permission": "sku.view",
+                "roles": [
+                    "super_admin",
+                    "product_admin",
+                    "product_reviewer",
+                    "platform_operator",
+                    "pricing_staff",
+                    "operation_manager",
+                    "read_only"
+                ],
+                "order": 52
+            },
+            {
+                "key": "brand_management",
+                "label": "品牌管理",
+                "route": "brand.index",
+                "icon": "fa-star",
+                "permission": "brand.view",
+                "roles": [
+                    "super_admin",
+                    "product_admin",
+                    "product_reviewer",
+                    "operation_manager",
+                    "platform_operator"
+                ],
+                "order": 53
+            },
+            {
+                "key": "category_management",
+                "label": "分类管理",
+                "route": "category.index",
+                "icon": "fa-folder",
+                "permission": "category.view",
+                "roles": [
+                    "super_admin",
+                    "product_admin",
+                    "product_reviewer",
+                    "platform_operator",
+                    "operation_manager"
+                ],
+                "order": 54
+            },
+            {
+                "key": "product_attribute",
+                "label": "商品属性",
+                "route": "product-attribute.index",
+                "icon": "fa-list",
+                "permission": "product.attribute.view",
+                "roles": [
+                    "super_admin",
+                    "product_admin",
+                    "platform_operator",
+                    "operation_manager"
+                ],
+                "order": 55
+            },
+            {
+                "key": "media_library",
+                "label": "媒体库",
+                "route": "media.index",
+                "icon": "fa-picture",
+                "permission": "media.view",
+                "roles": [
+                    "super_admin",
+                    "product_admin",
+                    "platform_operator",
+                    "operation_manager",
+                    "product_reviewer"
+                ],
+                "order": 56
+            },
+            {
+                "key": "price_query",
+                "label": "价格查询",
+                "route": "price.query",
+                "icon": "fa-search",
+                "permission": "price.view",
+                "roles": [
+                    "super_admin",
+                    "pricing_staff",
+                    "procurement_manager",
+                    "operation_manager"
+                ],
+                "order": 60
+            },
+            {
+                "key": "price_rule",
+                "label": "价格规则",
+                "route": "price.rules.index",
+                "icon": "fa-list-alt",
+                "permission": "price.rule.view",
+                "roles": [
+                    "super_admin",
+                    "pricing_staff"
+                ],
+                "order": 61
+            },
+            {
+                "key": "price_calculate",
+                "label": "价格计算",
+                "route": "price.calculate",
+                "icon": "fa-calculator",
+                "permission": "price.view",
+                "roles": [
+                    "super_admin",
+                    "pricing_staff",
+                    "procurement_manager",
+                    "operation_manager"
+                ],
+                "order": 62
+            },
+            {
+                "key": "price_change_request",
+                "label": "调价申请",
+                "route": "price.change.requests.index",
+                "icon": "fa-edit",
+                "permission": "price.change.request",
+                "roles": [
+                    "super_admin",
+                    "pricing_staff",
+                    "platform_operator"
+                ],
+                "order": 63
+            },
+            {
+                "key": "price_change_task",
+                "label": "调价任务",
+                "route": "price.change.tasks.index",
+                "icon": "fa-tasks",
+                "permission": "price.change.execute",
+                "roles": [
+                    "super_admin",
+                    "pricing_staff"
+                ],
+                "order": 64
+            },
+            {
+                "key": "price_change_history",
+                "label": "调价历史",
+                "route": "price.change.history",
+                "icon": "fa-history",
+                "permission": "price.view",
+                "roles": [
+                    "super_admin",
+                    "pricing_staff",
+                    "procurement_manager",
+                    "operation_manager"
+                ],
+                "order": 65
+            },
+            {
+                "key": "order_all",
+                "label": "全部订单",
+                "route": "order.index",
+                "icon": "fa-shopping-bag",
+                "permission": "order.view",
+                "roles": [
+                    "super_admin",
+                    "order_manager",
+                    "customer_service",
+                    "operation_manager",
+                    "read_only"
+                ],
+                "order": 70
+            },
+            {
+                "key": "order_pending_payment",
+                "label": "待付款",
+                "route": "order.pending-payment",
+                "icon": "fa-money",
+                "permission": "order.view",
+                "roles": [
+                    "super_admin",
+                    "order_manager",
+                    "customer_service",
+                    "operation_manager",
+                    "read_only"
+                ],
+                "order": 71
+            },
+            {
+                "key": "order_pending_ship",
+                "label": "待发货",
+                "route": "order.pending-ship",
+                "icon": "fa-clock",
+                "permission": "order.view",
+                "roles": [
+                    "super_admin",
+                    "order_manager",
+                    "customer_service",
+                    "operation_manager",
+                    "read_only"
+                ],
+                "order": 72
+            },
+            {
+                "key": "order_shipped",
+                "label": "已发货",
+                "route": "order.shipped",
+                "icon": "fa-truck",
+                "permission": "order.view",
+                "roles": [
+                    "super_admin",
+                    "order_manager",
+                    "customer_service",
+                    "operation_manager",
+                    "read_only"
+                ],
+                "order": 73
+            },
+            {
+                "key": "order_completed",
+                "label": "已完成",
+                "route": "order.completed",
+                "icon": "fa-check-circle",
+                "permission": "order.view",
+                "roles": [
+                    "super_admin",
+                    "order_manager",
+                    "customer_service",
+                    "operation_manager",
+                    "read_only"
+                ],
+                "order": 74
+            },
+            {
+                "key": "order_cancelled",
+                "label": "已取消",
+                "route": "order.cancelled",
+                "icon": "fa-ban",
+                "permission": "order.view",
+                "roles": [
+                    "super_admin",
+                    "order_manager",
+                    "customer_service",
+                    "operation_manager",
+                    "read_only"
+                ],
+                "order": 75
+            },
+            {
+                "key": "order_exception",
+                "label": "异常订单",
+                "route": "order.exception",
+                "icon": "fa-exclamation-triangle",
+                "permission": "order.view",
+                "roles": [
+                    "super_admin",
+                    "order_manager",
+                    "customer_service",
+                    "operation_manager",
+                    "read_only"
+                ],
+                "order": 76
+            },
+            {
+                "key": "customer_management",
+                "label": "客户管理",
+                "route": "customer.index",
+                "icon": "fa-user",
+                "permission": "customer.view",
+                "roles": [
+                    "super_admin",
+                    "customer_service",
+                    "operation_manager"
+                ],
+                "order": 80
+            },
+            {
+                "key": "customer_groups",
+                "label": "客户分组",
+                "route": "customer.groups",
+                "icon": "fa-users",
+                "permission": "customer.view",
+                "roles": [
+                    "super_admin",
+                    "customer_service",
+                    "operation_manager"
+                ],
+                "order": 81
+            },
+            {
+                "key": "promotion_management",
+                "label": "促销活动",
+                "route": "promotion.index",
+                "icon": "fa-bullhorn",
+                "permission": "promotion.view",
+                "roles": [
+                    "super_admin",
+                    "marketing_staff",
+                    "operation_manager",
+                    "platform_operator"
+                ],
+                "order": 90
+            },
+            {
+                "key": "coupon_management",
+                "label": "优惠券管理",
+                "route": "coupon.index",
+                "icon": "fa-ticket",
+                "permission": "coupon.view",
+                "roles": [
+                    "super_admin",
+                    "marketing_staff",
+                    "operation_manager",
+                    "platform_operator"
+                ],
+                "order": 91
+            },
+            {
+                "key": "promotion_internal",
+                "label": "内部促销",
+                "route": "promotion.internal",
+                "icon": "fa-tag",
+                "permission": "promotion.view",
+                "roles": [
+                    "marketing_staff"
+                ],
+                "order": 92
+            },
+            {
+                "key": "promotion_analysis",
+                "label": "促销分析",
+                "route": "promotion.analysis",
+                "icon": "fa-bar-chart",
+                "permission": "promotion.view",
+                "roles": [
+                    "marketing_staff"
+                ],
+                "order": 93
+            },
+            {
+                "key": "warehouse_management",
+                "label": "仓库管理",
+                "route": "warehouse.index",
+                "icon": "fa-database",
+                "permission": "warehouse.view",
+                "roles": [
+                    "super_admin",
+                    "warehouse_manager",
+                    "operation_manager",
+                    "order_manager",
+                    "data_analyst",
+                    "read_only"
+                ],
+                "order": 100
+            },
+            {
+                "key": "inventory_management",
+                "label": "库存查询",
+                "route": "inventory.index",
+                "icon": "fa-cubes",
+                "permission": "inventory.view",
+                "roles": [
+                    "super_admin",
+                    "warehouse_manager",
+                    "operation_manager",
+                    "order_manager",
+                    "data_analyst",
+                    "read_only"
+                ],
+                "order": 101
+            },
+            {
+                "key": "inventory_flow",
+                "label": "库存流水",
+                "route": "inventory.flow",
+                "icon": "fa-exchange",
+                "permission": "inventory.view",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 102
+            },
+            {
+                "key": "inventory_in",
+                "label": "入库管理",
+                "route": "inventory.in",
+                "icon": "fa-arrow-down",
+                "permission": "inventory.adjust",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 103
+            },
+            {
+                "key": "inventory_out",
+                "label": "出库管理",
+                "route": "inventory.out",
+                "icon": "fa-arrow-up",
+                "permission": "inventory.adjust",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 104
+            },
+            {
+                "key": "inventory_transfer",
+                "label": "库存调拨",
+                "route": "inventory.transfer",
+                "icon": "fa-random",
+                "permission": "inventory.transfer",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 105
+            },
+            {
+                "key": "inventory_stocktake",
+                "label": "库存盘点",
+                "route": "inventory.stocktake",
+                "icon": "fa-clipboard",
+                "permission": "inventory.stocktake",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 106
+            },
+            {
+                "key": "inventory_batch_management",
+                "label": "库存批次",
+                "route": "inventory.batches",
+                "icon": "fa-layer-group",
+                "permission": "inventory.batch.view",
+                "roles": [
+                    "warehouse_manager",
+                    "procurement_staff"
+                ],
+                "order": 107
+            },
+            {
+                "key": "pick_task_pending",
+                "label": "待拣货任务",
+                "route": "pick.tasks.index",
+                "icon": "fa-list",
+                "permission": "pick.task.view",
+                "roles": [
+                    "picker"
+                ],
+                "order": 110
+            },
+            {
+                "key": "pick_task_scan",
+                "label": "扫码拣货",
+                "route": "pick.tasks.scan",
+                "icon": "fa-qrcode",
+                "permission": "pick.task.view",
+                "roles": [
+                    "picker"
+                ],
+                "order": 111
+            },
+            {
+                "key": "pick_task_exception",
+                "label": "拣货异常",
+                "route": "pick.tasks.exception",
+                "icon": "fa-exclamation-circle",
+                "permission": "pick.task.view",
+                "roles": [
+                    "picker"
+                ],
+                "order": 112
+            },
+            {
+                "key": "check_task_pending",
+                "label": "待复核任务",
+                "route": "check.tasks.index",
+                "icon": "fa-list",
+                "permission": "check.task.view",
+                "roles": [
+                    "checker"
+                ],
+                "order": 113
+            },
+            {
+                "key": "check_task_scan",
+                "label": "扫码复核",
+                "route": "check.tasks.scan",
+                "icon": "fa-qrcode",
+                "permission": "check.task.view",
+                "roles": [
+                    "checker"
+                ],
+                "order": 114
+            },
+            {
+                "key": "pack_task_pending",
+                "label": "待打包任务",
+                "route": "pack.tasks.index",
+                "icon": "fa-list",
+                "permission": "pack.task.view",
+                "roles": [
+                    "packer"
+                ],
+                "order": 115
+            },
+            {
+                "key": "pack_task_scan",
+                "label": "扫码打包",
+                "route": "pack.tasks.scan",
+                "icon": "fa-qrcode",
+                "permission": "pack.task.view",
+                "roles": [
+                    "packer"
+                ],
+                "order": 116
+            },
+            {
+                "key": "shipment_pending",
+                "label": "待发货包裹",
+                "route": "shipment.pending",
+                "icon": "fa-box",
+                "permission": "shipment.view",
+                "roles": [
+                    "order_manager",
+                    "warehouse_manager"
+                ],
+                "order": 117
+            },
+            {
+                "key": "fulfillment_exception",
+                "label": "作业异常",
+                "route": "fulfillment.exception",
+                "icon": "fa-exclamation-triangle",
+                "permission": "fulfillment.view",
+                "roles": [
+                    "order_manager",
+                    "warehouse_manager"
+                ],
+                "order": 118
+            },
+            {
+                "key": "package_management",
+                "label": "包裹管理",
+                "route": "package.index",
+                "icon": "fa-cubes",
+                "permission": "package.view",
+                "roles": [
+                    "logistics_specialist",
+                    "warehouse_manager",
+                    "order_manager",
+                    "packer"
+                ],
+                "order": 120
+            },
+            {
+                "key": "express_management",
+                "label": "快递公司",
+                "route": "express.index",
+                "icon": "fa-truck",
+                "permission": "express.view",
+                "roles": [
+                    "logistics_specialist",
+                    "warehouse_manager",
+                    "order_manager",
+                    "packer"
+                ],
+                "order": 121
+            },
+            {
+                "key": "shipping_method",
+                "label": "配送方式",
+                "route": "shipping-method.index",
+                "icon": "fa-truck",
+                "permission": "shipping.view",
+                "roles": [
+                    "logistics_specialist",
+                    "warehouse_manager",
+                    "packer"
+                ],
+                "order": 122
+            },
+            {
+                "key": "shipping_template",
+                "label": "运费模板",
+                "route": "shipping-templates.index",
+                "icon": "fa-table",
+                "permission": "shipping.view",
+                "roles": [
+                    "logistics_specialist",
+                    "warehouse_manager",
+                    "packer"
+                ],
+                "order": 123
+            },
+            {
+                "key": "waybill_management",
+                "label": "面单管理",
+                "route": "waybill.index",
+                "icon": "fa-file",
+                "permission": "logistics.view",
+                "roles": [
+                    "logistics_specialist"
+                ],
+                "order": 124
+            },
+            {
+                "key": "logistics_tracking",
+                "label": "物流轨迹",
+                "route": "logistics.tracking",
+                "icon": "fa-map-marker",
+                "permission": "logistics.view",
+                "roles": [
+                    "logistics_specialist"
+                ],
+                "order": 125
+            },
+            {
+                "key": "logistics_exception",
+                "label": "异常物流",
+                "route": "logistics.exception",
+                "icon": "fa-exclamation-triangle",
+                "permission": "logistics.view",
+                "roles": [
+                    "logistics_specialist"
+                ],
+                "order": 126
+            },
+            {
+                "key": "aftersale_management",
+                "label": "售后管理",
+                "route": "aftersale.index",
+                "icon": "fa-life-ring",
+                "permission": "after_sale.view",
+                "roles": [
+                    "super_admin",
+                    "customer_service",
+                    "aftersale_manager"
+                ],
+                "order": 130
+            },
+            {
+                "key": "aftersale_pending",
+                "label": "待处理售后",
+                "route": "aftersale.pending",
+                "icon": "fa-hourglass",
+                "permission": "after_sale.approve",
+                "roles": [
+                    "super_admin",
+                    "customer_service",
+                    "aftersale_manager"
+                ],
+                "order": 131
+            },
+            {
+                "key": "refund_records",
+                "label": "退款记录",
+                "route": "aftersale.refunds",
+                "icon": "fa-undo",
+                "permission": "after_sale.refund",
+                "roles": [
+                    "super_admin",
+                    "customer_service",
+                    "aftersale_manager"
+                ],
+                "order": 132
+            },
+            {
+                "key": "refund_approve",
+                "label": "退款审批",
+                "route": "refund.approve",
+                "icon": "fa-check",
+                "permission": "refund.approve",
+                "roles": [
+                    "aftersale_manager"
+                ],
+                "order": 133
+            },
+            {
+                "key": "return_receive",
+                "label": "退货收货",
+                "route": "return.receive",
+                "icon": "fa-inbox",
+                "permission": "return.receive",
+                "roles": [
+                    "aftersale_manager"
+                ],
+                "order": 134
+            },
+            {
+                "key": "return_inspect",
+                "label": "退货质检",
+                "route": "return.inspect",
+                "icon": "fa-search",
+                "permission": "return.inspect",
+                "roles": [
+                    "aftersale_manager"
+                ],
+                "order": 135
+            },
+            {
+                "key": "finance_receive",
+                "label": "收款记录",
+                "route": "finance.receive",
+                "icon": "fa-money",
+                "permission": "finance.view",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 140
+            },
+            {
+                "key": "finance_reconcile",
+                "label": "对账管理",
+                "route": "finance.reconcile",
+                "icon": "fa-balance-scale",
+                "permission": "finance.reconcile",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 141
+            },
+            {
+                "key": "finance_settle",
+                "label": "结算管理",
+                "route": "finance.settle",
+                "icon": "fa-calculator",
+                "permission": "finance.settle",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 142
+            },
+            {
+                "key": "finance_transaction",
+                "label": "财务流水",
+                "route": "finance.transactions",
+                "icon": "fa-exchange",
+                "permission": "finance.view",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 143
+            },
+            {
+                "key": "tax_entity_management",
+                "label": "税务主体",
+                "route": "tax_entities.index",
+                "icon": "fa-file-alt",
+                "permission": "tax_entity.view",
+                "roles": [
+                    "finance_manager"
+                ],
+                "order": 144
+            },
+            {
+                "key": "exchange_rate_management",
+                "label": "汇率管理",
+                "route": "exchange_rates.index",
+                "icon": "fa-exchange-alt",
+                "permission": "exchange_rate.view",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 145
+            },
+            {
+                "key": "procurement_plan",
+                "label": "采购计划",
+                "route": "procurement.plans.index",
+                "icon": "fa-calendar",
+                "permission": "procurement.plan.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 150
+            },
+            {
+                "key": "procurement_request",
+                "label": "采购申请",
+                "route": "procurement.requests.index",
+                "icon": "fa-file",
+                "permission": "procurement.request.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 151
+            },
+            {
+                "key": "procurement_order",
+                "label": "采购订单",
+                "route": "procurement.orders.index",
+                "icon": "fa-file-text",
+                "permission": "procurement.order.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 152
+            },
+            {
+                "key": "supplier_management",
+                "label": "供应商管理",
+                "route": "procurement.suppliers.index",
+                "icon": "fa-users",
+                "permission": "supplier.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 153
+            },
+            {
+                "key": "procurement_arrival",
+                "label": "采购到货",
+                "route": "procurement.arrivals.index",
+                "icon": "fa-download",
+                "permission": "procurement.arrival",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 154
+            },
+            {
+                "key": "procurement_inbound",
+                "label": "采购入库协同",
+                "route": "procurement.inbounds.index",
+                "icon": "fa-warehouse",
+                "permission": "procurement.inbound",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 155
+            },
+            {
+                "key": "procurement_report",
+                "label": "采购报表",
+                "route": "report.procurement",
+                "icon": "fa-bar-chart",
+                "permission": "report.procurement",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 156
+            },
+            {
+                "key": "safe_stock",
+                "label": "安全库存",
+                "route": "procurement.safe-stocks.index",
+                "icon": "fa-shield",
+                "permission": "inventory.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 157
+            },
+            {
+                "key": "sync_task",
+                "label": "同步任务",
+                "route": "sync-task.index",
+                "icon": "fa-tasks",
+                "permission": "sync_task.view",
+                "roles": [
+                    "integration_ops",
+                    "shop_auth_admin"
+                ],
+                "order": 160
+            },
+            {
+                "key": "sync_log",
+                "label": "同步日志",
+                "route": "log.sync-task.index",
+                "icon": "fa-file",
+                "permission": "log.view",
+                "roles": [
+                    "integration_ops",
+                    "shop_auth_admin"
+                ],
+                "order": 161
+            },
+            {
+                "key": "sync_cursor_management",
+                "label": "同步游标",
+                "route": "sync_cursors.index",
+                "icon": "fa-sync",
+                "permission": "sync_cursor.view",
+                "roles": [
+                    "integration_ops"
+                ],
+                "order": 162
+            },
+            {
+                "key": "webhook_log",
+                "label": "Webhook日志",
+                "route": "log.webhook",
+                "icon": "fa-plug",
+                "permission": "log.api",
+                "roles": [
+                    "integration_ops",
+                    "super_admin"
+                ],
+                "order": 163
+            },
+            {
+                "key": "api_log",
+                "label": "API 日志",
+                "route": "log.platform-api.index",
+                "icon": "fa-code",
+                "permission": "log.api",
+                "roles": [
+                    "super_admin",
+                    "security_admin",
+                    "integration_ops"
+                ],
+                "order": 164
+            },
+            {
+                "key": "event_log",
+                "label": "事件日志",
+                "route": "event-log.index",
+                "icon": "fa-random",
+                "permission": "event.view",
+                "roles": [
+                    "super_admin",
+                    "integration_ops"
+                ],
+                "order": 165
+            },
+            {
+                "key": "exception_management",
+                "label": "异常中心",
+                "route": "exceptions.index",
+                "icon": "fa-exclamation-circle",
+                "permission": "exception.view",
+                "roles": [
+                    "super_admin",
+                    "integration_ops"
+                ],
+                "order": 166
+            },
+            {
+                "key": "event_replay",
+                "label": "事件重放",
+                "route": "event.replay",
+                "icon": "fa-redo",
+                "permission": "event.replay",
+                "roles": [
+                    "integration_ops",
+                    "super_admin"
+                ],
+                "order": 167
+            },
+            {
+                "key": "queue_monitor",
+                "label": "队列监控",
+                "route": "queue.monitor",
+                "icon": "fa-list-alt",
+                "permission": "system.view",
+                "roles": [
+                    "super_admin",
+                    "integration_ops"
+                ],
+                "order": 168
+            },
+            {
+                "key": "system_health",
+                "label": "系统健康检查",
+                "route": "system.health",
+                "icon": "fa-heartbeat",
+                "permission": "system.view",
+                "roles": [
+                    "super_admin",
+                    "integration_ops"
+                ],
+                "order": 169
+            },
+            {
+                "key": "system_alerts",
+                "label": "系统告警",
+                "route": "system.alerts.index",
+                "icon": "fa-bell",
+                "permission": "system.view",
+                "roles": [
+                    "super_admin",
+                    "integration_ops"
+                ],
+                "order": 170
+            },
+            {
+                "key": "operation_log",
+                "label": "操作日志",
+                "route": "operation-logs.index",
+                "icon": "fa-file-text-o",
+                "permission": "log.view",
+                "roles": [
+                    "security_admin",
+                    "tenant_admin",
+                    "auditor"
+                ],
+                "order": 170
+            },
+            {
+                "key": "login_log",
+                "label": "登录日志",
+                "route": "log.login",
+                "icon": "fa-sign-in",
+                "permission": "log.audit",
+                "roles": [
+                    "security_admin",
+                    "auditor"
+                ],
+                "order": 171
+            },
+            {
+                "key": "permission_change_log",
+                "label": "权限变更日志",
+                "route": "log.permission-change",
+                "icon": "fa-key",
+                "permission": "log.audit",
+                "roles": [
+                    "security_admin",
+                    "auditor"
+                ],
+                "order": 172
+            },
+            {
+                "key": "sensitive_access_log",
+                "label": "敏感数据访问日志",
+                "route": "log.sensitive-access",
+                "icon": "fa-eye-slash",
+                "permission": "log.audit",
+                "roles": [
+                    "security_admin",
+                    "auditor"
+                ],
+                "order": 173
+            },
+            {
+                "key": "security_event",
+                "label": "安全事件",
+                "route": "security.event",
+                "icon": "fa-shield",
+                "permission": "security.view",
+                "roles": [
+                    "security_admin",
+                    "auditor",
+                    "super_admin"
+                ],
+                "order": 174
+            },
+            {
+                "key": "login_failures",
+                "label": "登录失败记录",
+                "route": "security.login.failures",
+                "icon": "fa-ban",
+                "permission": "security.view",
+                "roles": [
+                    "security_admin"
+                ],
+                "order": 175
+            },
+            {
+                "key": "session_management",
+                "label": "会话管理",
+                "route": "security.sessions",
+                "icon": "fa-user-circle",
+                "permission": "security.view",
+                "roles": [
+                    "security_admin"
+                ],
+                "order": 176
+            },
+            {
+                "key": "device_management",
+                "label": "设备管理",
+                "route": "security.devices",
+                "icon": "fa-laptop",
+                "permission": "security.view",
+                "roles": [
+                    "security_admin"
+                ],
+                "order": 177
+            },
+            {
+                "key": "ip_whitelist",
+                "label": "IP 白名单",
+                "route": "security.ip-whitelist.index",
+                "icon": "fa-map-marker",
+                "permission": "security.ip_whitelist",
+                "roles": [
+                    "security_admin"
+                ],
+                "order": 178
+            },
+            {
+                "key": "mfa_policy",
+                "label": "二次验证策略",
+                "route": "security.mfa",
+                "icon": "fa-key",
+                "permission": "security.config",
+                "roles": [
+                    "security_admin"
+                ],
+                "order": 179
+            },
+            {
+                "key": "password_policy",
+                "label": "密码策略",
+                "route": "security.password-policy",
+                "icon": "fa-lock",
+                "permission": "security.config",
+                "roles": [
+                    "security_admin"
+                ],
+                "order": 180
+            },
+            {
+                "key": "account_lockout",
+                "label": "账号锁定记录",
+                "route": "security.lockouts",
+                "icon": "fa-user-times",
+                "permission": "security.view",
+                "roles": [
+                    "security_admin"
+                ],
+                "order": 181
+            },
+            {
+                "key": "security_audit_report",
+                "label": "审计报告",
+                "route": "audit.reports",
+                "icon": "fa-file-pdf-o",
+                "permission": "log.audit",
+                "roles": [
+                    "security_admin",
+                    "auditor",
+                    "super_admin"
+                ],
+                "order": 182
+            },
+            {
+                "key": "auth_status",
+                "label": "授权状态",
+                "route": "shop.authorization-status.index",
+                "icon": "fa-check-circle",
+                "permission": "shop.authorize",
+                "roles": [
+                    "shop_auth_admin"
+                ],
+                "order": 183
+            },
+            {
+                "key": "token_status",
+                "label": "Token 状态",
+                "route": "shop.token-status",
+                "icon": "fa-key",
+                "permission": "shop.authorize",
+                "roles": [
+                    "shop_auth_admin"
+                ],
+                "order": 184
+            },
+            {
+                "key": "auth_operation_log",
+                "label": "授权操作日志",
+                "route": "shop.authorization-logs.index",
+                "icon": "fa-history",
+                "permission": "shop.authorize",
+                "roles": [
+                    "shop_auth_admin"
+                ],
+                "order": 185
+            },
+            {
+                "key": "auth_failure_log",
+                "label": "授权失败记录",
+                "route": "shop.authorization-failures.index",
+                "icon": "fa-times",
+                "permission": "shop.authorize",
+                "roles": [
+                    "shop_auth_admin"
+                ],
+                "order": 186
+            },
+            {
+                "key": "token_refresh_log",
+                "label": "Token 刷新记录",
+                "route": "shop.token-refresh-logs.index",
+                "icon": "fa-refresh",
+                "permission": "shop.authorize",
+                "roles": [
+                    "shop_auth_admin"
+                ],
+                "order": 187
+            },
+            {
+                "key": "auth_exception",
+                "label": "授权异常",
+                "route": "shop.authorization-exceptions.index",
+                "icon": "fa-exclamation-triangle",
+                "permission": "shop.authorize",
+                "roles": [
+                    "shop_auth_admin"
+                ],
+                "order": 188
+            },
+            {
+                "key": "shop_connection_status",
+                "label": "店铺连接状态",
+                "route": "integration.connection.status",
+                "icon": "fa-plug",
+                "permission": "sync_task.view",
+                "roles": [
+                    "integration_ops"
+                ],
+                "order": 189
+            },
+            {
+                "key": "api_health_check",
+                "label": "API 健康检查",
+                "route": "integration.api.health",
+                "icon": "fa-heartbeat",
+                "permission": "system.view",
+                "roles": [
+                    "integration_ops"
+                ],
+                "order": 190
+            },
+            {
+                "key": "sync_failed_tasks",
+                "label": "失败任务",
+                "route": "sync-task.failed",
+                "icon": "fa-times-circle",
+                "permission": "sync_task.execute",
+                "roles": [
+                    "integration_ops"
+                ],
+                "order": 191
+            },
+            {
+                "key": "sync_task_retry",
+                "label": "任务重试",
+                "route": "sync-task.retry",
+                "icon": "fa-repeat",
+                "permission": "sync_task.execute",
+                "roles": [
+                    "integration_ops"
+                ],
+                "order": 192
+            },
+            {
+                "key": "webhook_failures",
+                "label": "Webhook 失败记录",
+                "route": "log.webhook.failures",
+                "icon": "fa-exclamation-circle",
+                "permission": "log.api",
+                "roles": [
+                    "integration_ops",
+                    "super_admin"
+                ],
+                "order": 193
+            },
+            {
+                "key": "rate_limit_monitor",
+                "label": "限流监控",
+                "route": "integration.rate-limit",
+                "icon": "fa-tachometer",
+                "permission": "system.view",
+                "roles": [
+                    "integration_ops",
+                    "super_admin"
+                ],
+                "order": 194
+            },
+            {
+                "key": "audit_export_log",
+                "label": "导出日志",
+                "route": "audit.export-log",
+                "icon": "fa-file-excel-o",
+                "permission": "log.audit",
+                "roles": [
+                    "super_admin",
+                    "security_admin",
+                    "auditor"
+                ],
+                "order": 195
+            },
+            {
+                "key": "approval_flow_record",
+                "label": "审批流记录",
+                "route": "audit.approval-flow",
+                "icon": "fa-check-square-o",
+                "permission": "approval_flow.view",
+                "roles": [
+                    "super_admin",
+                    "auditor"
+                ],
+                "order": 196
+            },
+            {
+                "key": "product_change_log",
+                "label": "商品变更记录",
+                "route": "audit.product-change",
+                "icon": "fa-history",
+                "permission": "product.view",
+                "roles": [
+                    "super_admin",
+                    "auditor",
+                    "operation_manager"
+                ],
+                "order": 197
+            },
+            {
+                "key": "order_status_log",
+                "label": "订单状态记录",
+                "route": "audit.order-status",
+                "icon": "fa-history",
+                "permission": "order.view",
+                "roles": [
+                    "super_admin",
+                    "auditor",
+                    "operation_manager"
+                ],
+                "order": 198
+            },
+            {
+                "key": "reconciliation_diff_log",
+                "label": "对账差异记录",
+                "route": "audit.reconciliation-diff",
+                "icon": "fa-columns",
+                "permission": "finance.reconcile",
+                "roles": [
+                    "super_admin",
+                    "auditor",
+                    "operation_manager"
+                ],
+                "order": 199
+            },
+            {
+                "key": "sales_report_dashboard",
+                "label": "经营看板",
+                "route": "operation.dashboard",
+                "icon": "fa-dashboard",
+                "permission": "report.sales",
+                "roles": [
+                    "operation_manager"
+                ],
+                "order": 200
+            },
+            {
+                "key": "aftersale_report",
+                "label": "售后报表",
+                "route": "report.aftersale",
+                "icon": "fa-life-ring",
+                "permission": "report.aftersale",
+                "roles": [
+                    "operation_manager",
+                    "data_analyst"
+                ],
+                "order": 201
+            },
+            {
+                "key": "product_publish_approval",
+                "label": "商品发布审批",
+                "route": "approval.product-publish.index",
+                "icon": "fa-check",
+                "permission": "product.approve",
+                "roles": [
+                    "operation_manager",
+                    "product_admin",
+                    "product_reviewer",
+                    "super_admin"
+                ],
+                "order": 202
+            },
+            {
+                "key": "price_change_approval",
+                "label": "调价审批",
+                "route": "price.change.approvals.index",
+                "icon": "fa-dollar",
+                "permission": "price.change.approve",
+                "roles": [
+                    "super_admin",
+                    "operation_manager",
+                    "procurement_manager"
+                ],
+                "order": 203
+            },
+            {
+                "key": "order_cancel_approval",
+                "label": "订单取消审批",
+                "route": "approval.order-cancel.index",
+                "icon": "fa-ban",
+                "permission": "order.approve",
+                "roles": [
+                    "operation_manager",
+                    "order_manager",
+                    "super_admin"
+                ],
+                "order": 204
+            },
+            {
+                "key": "inventory_adjust_approval",
+                "label": "库存调整审批",
+                "route": "approval.inventory-adjust.index",
+                "icon": "fa-exchange",
+                "permission": "inventory.approve",
+                "roles": [
+                    "operation_manager",
+                    "warehouse_manager",
+                    "super_admin"
+                ],
+                "order": 205
+            },
+            {
+                "key": "refund_approval_page",
+                "label": "售后退款审批",
+                "route": "approval.refund.index",
+                "icon": "fa-undo",
+                "permission": "refund.approve",
+                "roles": [
+                    "operation_manager",
+                    "aftersale_manager",
+                    "super_admin"
+                ],
+                "order": 206
+            },
+            {
+                "key": "shop_overview",
+                "label": "店铺经营概览",
+                "route": "operation.shop.overview",
+                "icon": "fa-store",
+                "permission": "shop.view",
+                "roles": [
+                    "operation_manager"
+                ],
+                "order": 207
+            },
+            {
+                "key": "inventory_warning",
+                "label": "库存预警",
+                "route": "operation.inventory.warning",
+                "icon": "fa-exclamation-triangle",
+                "permission": "inventory.view",
+                "roles": [
+                    "operation_manager"
+                ],
+                "order": 208
+            },
+            {
+                "key": "ship_on_time_rate",
+                "label": "发货及时率",
+                "route": "operation.ship.on-time",
+                "icon": "fa-clock",
+                "permission": "order.view",
+                "roles": [
+                    "operation_manager"
+                ],
+                "order": 209
+            },
+            {
+                "key": "aftersale_rate_analysis",
+                "label": "售后率分析",
+                "route": "operation.aftersale.rate",
+                "icon": "fa-chart-line",
+                "permission": "report.aftersale",
+                "roles": [
+                    "operation_manager"
+                ],
+                "order": 210
+            },
+            {
+                "key": "exception_order_overview",
+                "label": "异常订单概览",
+                "route": "operation.order.exception",
+                "icon": "fa-exclamation-circle",
+                "permission": "order.view",
+                "roles": [
+                    "operation_manager"
+                ],
+                "order": 211
+            },
+            {
+                "key": "listing_management",
+                "label": "Listing 管理",
+                "route": "platform.listing",
+                "icon": "fa-list",
+                "permission": "product.view",
+                "roles": [
+                    "platform_operator"
+                ],
+                "order": 212
+            },
+            {
+                "key": "platform_product_publish",
+                "label": "平台商品发布",
+                "route": "platform.product.publish",
+                "icon": "fa-upload",
+                "permission": "product.create",
+                "roles": [
+                    "platform_operator"
+                ],
+                "order": 213
+            },
+            {
+                "key": "publish_task",
+                "label": "商品发布任务",
+                "route": "platform.publish.task",
+                "icon": "fa-tasks",
+                "permission": "product.view",
+                "roles": [
+                    "platform_operator"
+                ],
+                "order": 214
+            },
+            {
+                "key": "platform_category_mapping",
+                "label": "分类映射",
+                "route": "platform.category.mapping",
+                "icon": "fa-map",
+                "permission": "category.view",
+                "roles": [
+                    "platform_operator"
+                ],
+                "order": 215
+            },
+            {
+                "key": "platform_attribute",
+                "label": "平台属性",
+                "route": "platform.attribute",
+                "icon": "fa-sliders",
+                "permission": "product.attribute.view",
+                "roles": [
+                    "platform_operator"
+                ],
+                "order": 216
+            },
+            {
+                "key": "sku_management",
+                "label": "SKU 管理",
+                "route": "product.sku",
+                "icon": "fa-cubes",
+                "permission": "sku.view",
+                "roles": [
+                    "product_admin",
+                    "product_reviewer"
+                ],
+                "order": 217
+            },
+            {
+                "key": "product_version",
+                "label": "商品版本",
+                "route": "product.versions",
+                "icon": "fa-code-fork",
+                "permission": "product.view",
+                "roles": [
+                    "product_admin",
+                    "product_reviewer"
+                ],
+                "order": 218
+            },
+            {
+                "key": "product_import",
+                "label": "商品导入",
+                "route": "product.import",
+                "icon": "fa-upload",
+                "permission": "product.create",
+                "roles": [
+                    "product_admin"
+                ],
+                "order": 219
+            },
+            {
+                "key": "product_task_pending_edit",
+                "label": "待修改商品",
+                "route": "product.tasks.pending-edit",
+                "icon": "fa-pencil",
+                "permission": "product.view",
+                "roles": [
+                    "product_admin"
+                ],
+                "order": 220
+            },
+            {
+                "key": "product_task_returned",
+                "label": "退回商品",
+                "route": "product.tasks.returned",
+                "icon": "fa-undo",
+                "permission": "product.view",
+                "roles": [
+                    "product_admin"
+                ],
+                "order": 221
+            },
+            {
+                "key": "product_task_exception",
+                "label": "商品资料异常",
+                "route": "product.tasks.exception",
+                "icon": "fa-exclamation",
+                "permission": "product.view",
+                "roles": [
+                    "product_admin"
+                ],
+                "order": 222
+            },
+            {
+                "key": "product_review_pending",
+                "label": "待审核商品",
+                "route": "product.review.pending",
+                "icon": "fa-hourglass",
+                "permission": "product.review",
+                "roles": [
+                    "product_reviewer"
+                ],
+                "order": 223
+            },
+            {
+                "key": "product_review_record",
+                "label": "商品审核记录",
+                "route": "product.review.record",
+                "icon": "fa-history",
+                "permission": "product.view",
+                "roles": [
+                    "product_reviewer"
+                ],
+                "order": 224
+            },
+            {
+                "key": "product_change_review",
+                "label": "商品变更审核",
+                "route": "product.review.change",
+                "icon": "fa-edit",
+                "permission": "product.review",
+                "roles": [
+                    "product_reviewer"
+                ],
+                "order": 225
+            },
+            {
+                "key": "product_spu_detail",
+                "label": "SPU 详情",
+                "route": "product.spu.detail",
+                "icon": "fa-info-circle",
+                "permission": "product.view",
+                "roles": [
+                    "product_reviewer"
+                ],
+                "order": 226
+            },
+            {
+                "key": "order_pending_fulfill",
+                "label": "待履约",
+                "route": "order.pending-fulfill",
+                "icon": "fa-hourglass-half",
+                "permission": "order.view",
+                "roles": [
+                    "order_manager"
+                ],
+                "order": 227
+            },
+            {
+                "key": "order_split",
+                "label": "订单拆分",
+                "route": "order.split",
+                "icon": "fa-code-fork",
+                "permission": "order.edit",
+                "roles": [
+                    "order_manager"
+                ],
+                "order": 228
+            },
+            {
+                "key": "order_merge",
+                "label": "订单合并",
+                "route": "order.merge",
+                "icon": "fa-code-merge",
+                "permission": "order.edit",
+                "roles": [
+                    "order_manager"
+                ],
+                "order": 229
+            },
+            {
+                "key": "order_export",
+                "label": "订单导出",
+                "route": "order.export",
+                "icon": "fa-download",
+                "permission": "order.view",
+                "roles": [
+                    "order_manager"
+                ],
+                "order": 230
+            },
+            {
+                "key": "warehouse_assignment",
+                "label": "分仓管理",
+                "route": "order.warehouse.assign",
+                "icon": "fa-building",
+                "permission": "order.edit",
+                "roles": [
+                    "order_manager"
+                ],
+                "order": 231
+            },
+            {
+                "key": "fulfillment_order",
+                "label": "履约单",
+                "route": "order.fulfillment",
+                "icon": "fa-file-text",
+                "permission": "order.view",
+                "roles": [
+                    "order_manager"
+                ],
+                "order": 232
+            },
+            {
+                "key": "order_stock_shortage",
+                "label": "缺货订单",
+                "route": "order.stock-shortage",
+                "icon": "fa-exclamation-triangle",
+                "permission": "order.view",
+                "roles": [
+                    "order_manager"
+                ],
+                "order": 233
+            },
+            {
+                "key": "customer_tag",
+                "label": "客户标签",
+                "route": "customer.tags",
+                "icon": "fa-tags",
+                "permission": "customer.view",
+                "roles": [
+                    "customer_service"
+                ],
+                "order": 234
+            },
+            {
+                "key": "customer_privacy_request",
+                "label": "客户隐私请求",
+                "route": "customer.privacy",
+                "icon": "fa-user-secret",
+                "permission": "customer.view",
+                "roles": [
+                    "customer_service"
+                ],
+                "order": 235
+            },
+            {
+                "key": "aftersale_apply",
+                "label": "售后申请",
+                "route": "aftersale.apply",
+                "icon": "fa-life-ring",
+                "permission": "after_sale.view",
+                "roles": [
+                    "customer_service"
+                ],
+                "order": 236
+            },
+            {
+                "key": "aftersale_supplement",
+                "label": "待补充资料",
+                "route": "aftersale.supplement",
+                "icon": "fa-paperclip",
+                "permission": "after_sale.view",
+                "roles": [
+                    "customer_service"
+                ],
+                "order": 237
+            },
+            {
+                "key": "aftersale_progress",
+                "label": "售后进度",
+                "route": "aftersale.progress",
+                "icon": "fa-tasks",
+                "permission": "after_sale.view",
+                "roles": [
+                    "customer_service"
+                ],
+                "order": 238
+            },
+            {
+                "key": "aftersale_communication",
+                "label": "售后沟通记录",
+                "route": "aftersale.communication",
+                "icon": "fa-comments",
+                "permission": "after_sale.view",
+                "roles": [
+                    "customer_service"
+                ],
+                "order": 239
+            },
+            {
+                "key": "warehouse_zone",
+                "label": "库区管理",
+                "route": "warehouse.zones",
+                "icon": "fa-th-large",
+                "permission": "warehouse.view",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 240
+            },
+            {
+                "key": "warehouse_location",
+                "label": "库位管理",
+                "route": "warehouse.locations",
+                "icon": "fa-map",
+                "permission": "warehouse.view",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 241
+            },
+            {
+                "key": "warehouse_stock_warning",
+                "label": "库存预警",
+                "route": "warehouse.stock-warning",
+                "icon": "fa-exclamation-triangle",
+                "permission": "inventory.view",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 242
+            },
+            {
+                "key": "warehouse_inbound_order",
+                "label": "入库单",
+                "route": "warehouse.inbound",
+                "icon": "fa-arrow-down",
+                "permission": "inventory.adjust",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 243
+            },
+            {
+                "key": "warehouse_outbound_order",
+                "label": "出库单",
+                "route": "warehouse.outbound",
+                "icon": "fa-arrow-up",
+                "permission": "inventory.adjust",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 244
+            },
+            {
+                "key": "warehouse_stocktake_order",
+                "label": "盘点单",
+                "route": "warehouse.stocktake",
+                "icon": "fa-clipboard",
+                "permission": "inventory.stocktake",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 245
+            },
+            {
+                "key": "warehouse_stock_adjust",
+                "label": "库存调整申请",
+                "route": "warehouse.stock-adjust",
+                "icon": "fa-exchange",
+                "permission": "inventory.adjust",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 246
+            },
+            {
+                "key": "warehouse_inventory_doc",
+                "label": "库存单据",
+                "route": "warehouse.inventory-doc",
+                "icon": "fa-file",
+                "permission": "inventory.view",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 247
+            },
+            {
+                "key": "warehouse_return_receive",
+                "label": "待收货退货",
+                "route": "warehouse.return.receive",
+                "icon": "fa-inbox",
+                "permission": "return.receive",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 248
+            },
+            {
+                "key": "warehouse_return_inspect",
+                "label": "待质检退货",
+                "route": "warehouse.return.inspect",
+                "icon": "fa-search",
+                "permission": "return.inspect",
+                "roles": [
+                    "warehouse_manager"
+                ],
+                "order": 249
+            },
+            {
+                "key": "warehouse_inventory_turnover",
+                "label": "库存周转",
+                "route": "warehouse.inventory.turnover",
+                "icon": "fa-sync",
+                "permission": "report.stock",
+                "roles": [
+                    "warehouse_manager",
+                    "data_analyst"
+                ],
+                "order": 250
+            },
+            {
+                "key": "warehouse_stock_age",
+                "label": "库龄分析",
+                "route": "warehouse.stock.age",
+                "icon": "fa-hourglass",
+                "permission": "report.stock",
+                "roles": [
+                    "warehouse_manager",
+                    "data_analyst"
+                ],
+                "order": 251
+            },
+            {
+                "key": "fulfillment_assignment_pending",
+                "label": "待分配作业",
+                "route": "fulfillment.assignments.index",
+                "icon": "fa-list",
+                "permission": "fulfillment.view",
+                "roles": [
+                    "warehouse_manager",
+                    "order_manager"
+                ],
+                "order": 252
+            },
+            {
+                "key": "pick_task_progress",
+                "label": "执行中任务",
+                "route": "pick.tasks.progress",
+                "icon": "fa-play-circle",
+                "permission": "pick.task.view",
+                "roles": [
+                    "picker"
+                ],
+                "order": 253
+            },
+            {
+                "key": "pick_task_completed",
+                "label": "已完成任务",
+                "route": "pick.tasks.completed",
+                "icon": "fa-check-circle",
+                "permission": "pick.task.view",
+                "roles": [
+                    "picker"
+                ],
+                "order": 254
+            },
+            {
+                "key": "check_exception",
+                "label": "复核异常",
+                "route": "check.tasks.exception",
+                "icon": "fa-exclamation-triangle",
+                "permission": "check.task.view",
+                "roles": [
+                    "checker"
+                ],
+                "order": 255
+            },
+            {
+                "key": "check_completed",
+                "label": "已完成复核",
+                "route": "check.tasks.completed",
+                "icon": "fa-check-circle",
+                "permission": "check.task.view",
+                "roles": [
+                    "checker"
+                ],
+                "order": 256
+            },
+            {
+                "key": "check_record",
+                "label": "复核记录",
+                "route": "check.tasks.record",
+                "icon": "fa-history",
+                "permission": "check.task.view",
+                "roles": [
+                    "checker"
+                ],
+                "order": 257
+            },
+            {
+                "key": "pack_material_select",
+                "label": "包材选择",
+                "route": "pack.tasks.material",
+                "icon": "fa-cubes",
+                "permission": "pack.task.view",
+                "roles": [
+                    "packer"
+                ],
+                "order": 258
+            },
+            {
+                "key": "pack_weight_input",
+                "label": "称重录入",
+                "route": "pack.tasks.weight",
+                "icon": "fa-balance-scale",
+                "permission": "pack.task.view",
+                "roles": [
+                    "packer"
+                ],
+                "order": 259
+            },
+            {
+                "key": "pack_parcel_generate",
+                "label": "包裹生成",
+                "route": "pack.tasks.parcel",
+                "icon": "fa-box",
+                "permission": "pack.task.view",
+                "roles": [
+                    "packer"
+                ],
+                "order": 260
+            },
+            {
+                "key": "pack_exception",
+                "label": "打包异常",
+                "route": "pack.tasks.exception",
+                "icon": "fa-exclamation-triangle",
+                "permission": "pack.task.view",
+                "roles": [
+                    "packer"
+                ],
+                "order": 261
+            },
+            {
+                "key": "pack_completed",
+                "label": "已完成打包",
+                "route": "pack.tasks.completed",
+                "icon": "fa-check-circle",
+                "permission": "pack.task.view",
+                "roles": [
+                    "packer"
+                ],
+                "order": 262
+            },
+            {
+                "key": "logistics_bill",
+                "label": "物流账单",
+                "route": "logistics.bill",
+                "icon": "fa-file-text",
+                "permission": "logistics.bill.view",
+                "roles": [
+                    "logistics_specialist"
+                ],
+                "order": 263
+            },
+            {
+                "key": "logistics_ship_callback",
+                "label": "发货回传",
+                "route": "logistics.ship.callback",
+                "icon": "fa-paper-plane",
+                "permission": "logistics.callback",
+                "roles": [
+                    "logistics_specialist"
+                ],
+                "order": 264
+            },
+            {
+                "key": "logistics_batch_callback",
+                "label": "批量回传",
+                "route": "logistics.batch.callback",
+                "icon": "fa-upload",
+                "permission": "logistics.callback",
+                "roles": [
+                    "logistics_specialist"
+                ],
+                "order": 265
+            },
+            {
+                "key": "logistics_on_time",
+                "label": "发货及时率",
+                "route": "logistics.on-time",
+                "icon": "fa-clock",
+                "permission": "logistics.view",
+                "roles": [
+                    "logistics_specialist"
+                ],
+                "order": 266
+            },
+            {
+                "key": "logistics_lead_time",
+                "label": "物流时效",
+                "route": "logistics.lead-time",
+                "icon": "fa-hourglass-half",
+                "permission": "logistics.view",
+                "roles": [
+                    "logistics_specialist"
+                ],
+                "order": 267
+            },
+            {
+                "key": "aftersale_exchange_resend",
+                "label": "换货与补发",
+                "route": "aftersale.exchange",
+                "icon": "fa-exchange",
+                "permission": "after_sale.handle",
+                "roles": [
+                    "aftersale_manager"
+                ],
+                "order": 268
+            },
+            {
+                "key": "aftersale_dispute",
+                "label": "售后争议",
+                "route": "aftersale.dispute",
+                "icon": "fa-gavel",
+                "permission": "after_sale.handle",
+                "roles": [
+                    "aftersale_manager"
+                ],
+                "order": 269
+            },
+            {
+                "key": "aftersale_operation_log",
+                "label": "售后操作记录",
+                "route": "aftersale.operation.log",
+                "icon": "fa-history",
+                "permission": "after_sale.view",
+                "roles": [
+                    "aftersale_manager"
+                ],
+                "order": 270
+            },
+            {
+                "key": "finance_refund_flow",
+                "label": "退款流水",
+                "route": "finance.refund.flow",
+                "icon": "fa-list",
+                "permission": "finance.view",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 271
+            },
+            {
+                "key": "finance_platform_settlement",
+                "label": "平台结算",
+                "route": "finance.platform.settlement",
+                "icon": "fa-money",
+                "permission": "finance.settle",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 272
+            },
+            {
+                "key": "finance_settlement_detail",
+                "label": "结算明细",
+                "route": "finance.settlement.detail",
+                "icon": "fa-list-alt",
+                "permission": "finance.view",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 273
+            },
+            {
+                "key": "finance_cost_allocation",
+                "label": "费用分摊",
+                "route": "finance.cost.allocation",
+                "icon": "fa-percent",
+                "permission": "finance.view",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 274
+            },
+            {
+                "key": "finance_reconcile_task",
+                "label": "对账任务",
+                "route": "finance.reconcile.task",
+                "icon": "fa-tasks",
+                "permission": "finance.reconcile",
+                "roles": [
+                    "finance_staff",
+                    "finance_manager"
+                ],
+                "order": 275
+            },
+            {
+                "key": "finance_settlement_audit",
+                "label": "结算审核",
+                "route": "finance.settlement.audit",
+                "icon": "fa-check-circle",
+                "permission": "finance.settle",
+                "roles": [
+                    "finance_manager"
+                ],
+                "order": 276
+            },
+            {
+                "key": "finance_cost_audit",
+                "label": "费用分摊审核",
+                "route": "finance.cost.audit",
+                "icon": "fa-check",
+                "permission": "finance.view",
+                "roles": [
+                    "finance_manager"
+                ],
+                "order": 277
+            },
+            {
+                "key": "finance_big_diff_approval",
+                "label": "大额差异审批",
+                "route": "finance.diff.approval",
+                "icon": "fa-exclamation-triangle",
+                "permission": "finance.reconcile",
+                "roles": [
+                    "finance_manager"
+                ],
+                "order": 278
+            },
+            {
+                "key": "procurement_order_detail",
+                "label": "采购订单明细",
+                "route": "procurement.orders.index",
+                "icon": "fa-list",
+                "permission": "procurement.order.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 279
+            },
+            {
+                "key": "procurement_safe_stock",
+                "label": "安全库存",
+                "route": "procurement.safe-stocks.index",
+                "icon": "fa-shield",
+                "permission": "inventory.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 280
+            },
+            {
+                "key": "procurement_in_transit",
+                "label": "在途库存",
+                "route": "procurement.arrivals.index",
+                "icon": "fa-truck",
+                "permission": "procurement.arrival",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 281
+            },
+            {
+                "key": "procurement_approval",
+                "label": "采购审批",
+                "route": "procurement.approvals.index",
+                "icon": "fa-check",
+                "permission": "procurement.approval",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 282
+            },
+            {
+                "key": "procurement_supplier_eval",
+                "label": "供应商评估",
+                "route": "procurement.suppliers.index",
+                "icon": "fa-star",
+                "permission": "supplier.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 283
+            },
+            {
+                "key": "procurement_safe_stock_config",
+                "label": "安全库存配置",
+                "route": "procurement.safe-stocks.index",
+                "icon": "fa-cog",
+                "permission": "inventory.view",
+                "roles": [
+                    "procurement_staff",
+                    "procurement_manager"
+                ],
+                "order": 284
+            },
+            {
+                "key": "report_order",
+                "label": "订单报表",
+                "route": "report.order",
+                "icon": "fa-shopping-cart",
+                "permission": "report.sales",
+                "roles": [
+                    "data_analyst"
+                ],
+                "order": 285
+            },
+            {
+                "key": "report_aftersale",
+                "label": "售后报表",
+                "route": "report.aftersale",
+                "icon": "fa-life-ring",
+                "permission": "report.aftersale",
+                "roles": [
+                    "operation_manager",
+                    "data_analyst"
+                ],
+                "order": 286
+            },
+            {
+                "key": "report_shop_analysis",
+                "label": "店铺分析",
+                "route": "report.shop.analysis",
+                "icon": "fa-store",
+                "permission": "report.sales",
+                "roles": [
+                    "data_analyst"
+                ],
+                "order": 287
+            },
+            {
+                "key": "report_sku_analysis",
+                "label": "SKU 分析",
+                "route": "report.sku.analysis",
+                "icon": "fa-cubes",
+                "permission": "report.sales",
+                "roles": [
+                    "data_analyst"
+                ],
+                "order": 288
+            },
+            {
+                "key": "report_inventory_turnover",
+                "label": "库存周转",
+                "route": "report.inventory.turnover",
+                "icon": "fa-sync",
+                "permission": "report.stock",
+                "roles": [
+                    "data_analyst"
+                ],
+                "order": 289
+            },
+            {
+                "key": "report_metrics_definition",
+                "label": "指标口径",
+                "route": "report.metrics.definition",
+                "icon": "fa-calculator",
+                "permission": "report.sales",
+                "roles": [
+                    "data_analyst"
+                ],
+                "order": 290
+            },
+            {
+                "key": "readonly_order_report",
+                "label": "订单报表",
+                "route": "readonly.order.report",
+                "icon": "fa-shopping-cart",
+                "permission": "report.sales",
+                "roles": [
+                    "read_only"
+                ],
+                "order": 291
+            },
+            {
+                "key": "readonly_listing_view",
+                "label": "Listing 查看",
+                "route": "readonly.listing.view",
+                "icon": "fa-list",
+                "permission": "product.view",
+                "roles": [
+                    "read_only"
+                ],
+                "order": 292
+            },
+            {
+                "key": "readonly_inventory_warning",
+                "label": "库存预警",
+                "route": "readonly.inventory.warning",
+                "icon": "fa-exclamation-triangle",
+                "permission": "inventory.view",
+                "roles": [
+                    "read_only"
+                ],
+                "order": 293
+            },
+            {
+                "key": "marketing_campaign_join",
+                "label": "活动报名",
+                "route": "marketing.campaign.join",
+                "icon": "fa-sign-in",
+                "permission": "promotion.edit",
+                "roles": [
+                    "marketing_staff"
+                ],
+                "order": 294
+            },
+            {
+                "key": "marketing_campaign_rule",
+                "label": "活动规则",
+                "route": "marketing.campaign.rule",
+                "icon": "fa-list-alt",
+                "permission": "promotion.edit",
+                "roles": [
+                    "marketing_staff"
+                ],
+                "order": 295
+            }
+        ],
+        "count": 232
+    }
+}

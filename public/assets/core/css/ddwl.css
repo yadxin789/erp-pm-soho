@@ -94,3 +94,34 @@ dialog::backdrop{background:rgba(15,23,42,.42);overflow:hidden;overscroll-behavi
 
 /* 屏幕阅读器专用 live region */
 .dw-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* ============ 统一侧边栏菜单（TC-08） ============ */
+.core-menu{display:flex;flex-direction:column;gap:4px}
+.core-menu-group{margin:14px 0 6px;font-size:12px;font-weight:700;color:var(--dw-muted);letter-spacing:.04em}
+.core-menu-group:first-child{margin-top:0}
+.core-menu-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.core-menu-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;color:var(--dw-ink);font-size:13px;line-height:1.35}
+.core-menu-item i{width:16px;text-align:center;color:#8791a5;flex:0 0 16px}
+.core-menu-item:hover{background:#f2f5fd;color:var(--dw-brand)}
+.core-menu-item.active{background:#eef3ff;color:var(--dw-brand);font-weight:600}
+.core-menu-item.active i{color:var(--dw-brand)}
+.core-menu-item.is-pending{opacity:.55;cursor:default;color:var(--dw-muted)}
+
+/* 预览页零散组件 */
+.dw-page{padding:2px 0 0}
+.dw-page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.dw-eyebrow{font-size:12px;font-weight:700;color:var(--dw-muted);margin:0 0 4px;letter-spacing:.04em;text-transform:uppercase}
+.dw-page-desc{color:var(--dw-muted);font-size:13px;margin:6px 0 0}
+.dw-page-actions{display:flex;gap:8px}
+.dw-btn{display:inline-flex;align-items:center;padding:6px 14px;border-radius:8px;border:1px solid var(--dw-line);background:#fff;color:var(--dw-ink);font-size:13px;font-weight:600}
+.dw-btn:hover{border-color:var(--dw-brand);color:var(--dw-brand)}
+.dw-btn.is-current{border-color:var(--dw-brand);background:#eef3ff;color:var(--dw-brand)}
+.dw-alert{border-left:3px solid var(--dw-warn);margin-bottom:18px}
+.dw-alert-ok{border-left-color:var(--dw-ok)}
+.dw-hint{color:var(--dw-muted);font-size:12px}
+.dw-plain-list{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.dw-plain-list li{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dw-plain-list code{background:#f4f5f9;border-radius:6px;padding:1px 6px;font-size:12px;color:#4b5262}
+.dw-card-subtitle{font-weight:700;font-size:14px;margin:0 0 6px}
+.dw-grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.dw-card-flat{background:#fbfcfe}
+.dw-badge-soft{background:#f1f2f6;color:#5b6270;font-weight:600}
