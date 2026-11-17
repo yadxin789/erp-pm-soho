@@ -157,8 +157,13 @@ class VoiceController extends Controller
     private function resolveModule(Request $request, User $user): string
     {
         $module = $request->query('module') ?? $request->input('module') ?? session('active_module') ?? 'core';
+        $allowed = $user->resolveModules();
+        if (! in_array($module, $allowed, true)) {
+            $module = $allowed[0] ?? 'core';
+            session()->flash('warning', '当前账号未开通所请求模块的语音会议，已切换到你有权进入的模块。');
+            $request->query->set('module', $module);
+        }
         $this->voice->ensureModule($module);
-        abort_unless(in_array($module, $user->resolveModules(), true), 403, '当前账号无权进入该模块的语音会议');
 
         return $module;
     }

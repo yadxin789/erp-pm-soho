@@ -84,7 +84,7 @@
             <div class="dw-chat-project"><i class="fas fa-users" aria-hidden="true"></i>{{ strtoupper($module) }} · 协作</div>
             <a class="dw-chat-room-item {{ $roomType === 'group' ? 'active' : '' }}"
                href="{{ route('core.chat.index', ['module' => $module, 'room' => 'group']) }}">
-                <span class="dot"><i class="fas fa-comment-dots" aria-hidden="true"></i></span>
+                <span class="dot"><i class="fas fa-comments" aria-hidden="true"></i></span>
                 <span>模块群聊<small>全体成员</small></span>
             </a>
             @if ($roomType === 'project')

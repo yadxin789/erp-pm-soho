@@ -17,10 +17,6 @@ Route::middleware(['web', 'auth', 'module:erp', 'module.access:erp'])
     ->name('erp.')
     ->group(function () {
 
-        Route::get('/', fn () => response()->json([
-            'module'  => 'erp',
-            'context' => \App\Core\Support\ModuleContext::current(),
-            'status'  => '骨架就绪，业务路由待迁入',
-        ]))->name('home');
+        Route::get('/', function () { return redirect()->route('core.home')->with('warning', 'ERP 模块业务菜单正在迁入（B-02/B-04），先回到统一门户。'); })->name('home');
 
     });
