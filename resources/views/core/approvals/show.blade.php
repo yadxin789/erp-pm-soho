@@ -4,28 +4,31 @@
 
 @section('content')
 <div class="dw-page">
-    <header class="dw-page-head">
-        <div>
-            <p class="dw-eyebrow">{{ strtoupper($instance->module) }} · {{ $instance->flow?->name }}</p>
-            <h1 class="dw-page-title">{{ $instance->title }}</h1>
-            <p class="dw-page-desc">
-                单据 <code>{{ $instance->document_type }}#{{ $instance->document_id }}</code>
-                · 发起人 {{ $instance->applicant?->displayName() }}
-                · 提交于 {{ $instance->submitted_at?->format('Y-m-d H:i') }}
-                · <span class="dw-badge dw-badge--{{ $instance->statusTone() }}">{{ $instance->statusLabel() }}</span>
-            </p>
+    <div class="dw-panel">
+        <div class="dw-panel-head">
+            <div class="left">
+                <span class="ic"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                <h2>{{ $instance->title }}
+                    <span class="sub">{{ strtoupper($instance->module) }} · {{ $instance->flow?->name }} · 单据 {{ $instance->document_type }}#{{ $instance->document_id }}</span>
+                </h2>
+                <span class="dw-badge dw-badge--{{ $instance->statusTone() }}">{{ $instance->statusLabel() }}</span>
+            </div>
+            <div class="tools">
+                <a class="dw-btn" href="{{ route('core.approvals.index') }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> 返回列表</a>
+                @if ($canCancel)
+                    <form method="POST" action="{{ route('core.approvals.cancel', $instance->id) }}" class="dw-inline-form"
+                          onsubmit="return confirm('撤销后这张单据需要重新提交审批，确定撤销？');">
+                        @csrf
+                        <button type="submit" class="dw-btn dw-btn-danger"><i class="fas fa-ban" aria-hidden="true"></i> 撤销审批</button>
+                    </form>
+                @endif
+            </div>
         </div>
-        <div class="dw-page-actions">
-            <a class="dw-btn" href="{{ route('core.approvals.index') }}">返回列表</a>
-            @if ($canCancel)
-                <form method="POST" action="{{ route('core.approvals.cancel', $instance->id) }}"
-                      onsubmit="return confirm('撤销后这张单据需要重新提交审批，确定撤销？');">
-                    @csrf
-                    <button type="submit" class="dw-btn dw-btn-danger">撤销审批</button>
-                </form>
-            @endif
+        <div class="dw-panel-body" style="padding:10px 18px;color:var(--dw-muted);font-size:13px">
+            发起人 {{ $instance->applicant?->displayName() }} · 提交于 {{ $instance->submitted_at?->format('Y-m-d H:i') }}
+            @if ($instance->finished_at) · 结束于 {{ $instance->finished_at->format('Y-m-d H:i') }} @endif
         </div>
-    </header>
+    </div>
 
     @if (session('success'))
         <section class="dw-card dw-alert dw-alert-ok" role="status"><p class="dw-hint">{{ session('success') }}</p></section>
@@ -34,8 +37,9 @@
         <section class="dw-card dw-alert" role="alert"><p class="dw-hint">{{ session('error') }}</p></section>
     @endif
 
-    <section class="dw-card">
-        <h2 class="dw-card-title">审批进度</h2>
+    <div class="dw-panel">
+        <div class="dw-panel-head"><div class="left"><span class="ic"><i class="fas fa-list-alt" aria-hidden="true"></i></span><h2>审批进度</h2></div></div>
+        <div class="dw-panel-body">
         <ul class="dw-plain-list">
             @foreach ($instance->flow->steps as $step)
                 @php
@@ -69,11 +73,13 @@
                 </li>
             @endforeach
         </ul>
-    </section>
+        </div>
+    </div>
 
     @if ($myTask)
-        <section class="dw-card" style="margin-top:18px">
-            <h2 class="dw-card-title">轮到我处理：{{ $myTask->step_name }}</h2>
+        <div class="dw-panel">
+            <div class="dw-panel-head"><div class="left"><span class="ic"><i class="fas fa-check-circle" aria-hidden="true"></i></span><h2>轮到我处理：{{ $myTask->step_name }}</h2></div></div>
+            <div class="dw-panel-body">
             <form method="POST" action="{{ route('core.approvals.approve', ['approval' => $instance->id, 'task' => $myTask->id]) }}">
                 @csrf
                 <div class="dw-field">
@@ -82,29 +88,28 @@
                               placeholder="例如：价格与合同一致，同意。"></textarea>
                 </div>
                 <div class="dw-page-actions">
-                    <button type="submit" class="dw-btn">同意</button>
+                    <button type="submit" class="dw-btn dw-btn-primary"><i class="fas fa-check" aria-hidden="true"></i> 同意</button>
                     <button type="submit" class="dw-btn dw-btn-danger"
                             formaction="{{ route('core.approvals.reject', ['approval' => $instance->id, 'task' => $myTask->id]) }}">
-                        驳回
+                        <i class="fas fa-times" aria-hidden="true"></i> 驳回
                     </button>
                 </div>
             </form>
-        </section>
+            </div>
+        </div>
     @elseif ($instance->isPending())
-        <section class="dw-card dw-card-flat" style="margin-top:18px">
-            <p class="dw-hint">这条审批正在第 {{ $instance->current_step }} 步，你当前没有待处理的节点。</p>
-        </section>
+        <div class="dw-panel"><div class="dw-panel-body"><p class="dw-hint mb-0">这条审批正在第 {{ $instance->current_step }} 步，你当前没有待处理的节点。</p></div></div>
     @endif
 
     @if (! empty($instance->payload))
-        <section class="dw-card" style="margin-top:18px">
-            <h2 class="dw-card-title">单据摘要</h2>
-            <ul class="dw-plain-list">
+        <div class="dw-panel">
+            <div class="dw-panel-head"><div class="left"><span class="ic"><i class="fas fa-file-alt" aria-hidden="true"></i></span><h2>单据摘要</h2></div></div>
+            <div class="dw-panel-body"><ul class="dw-plain-list">
                 @foreach ($instance->payload as $key => $value)
                     <li><code>{{ $key }}</code><span>{{ is_scalar($value) ? $value : json_encode($value, JSON_UNESCAPED_UNICODE) }}</span></li>
                 @endforeach
-            </ul>
-        </section>
+            </ul></div>
+        </div>
     @endif
 </div>
 @endsection

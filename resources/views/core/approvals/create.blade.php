@@ -4,18 +4,17 @@
 
 @section('content')
 <div class="dw-page">
-    <header class="dw-page-head">
-        <div>
-            <p class="dw-eyebrow">{{ strtoupper($module) }} · 按单据类型匹配审批流</p>
-            <h1 class="dw-page-title">发起审批</h1>
-            <p class="dw-page-desc">
-                选一条本模块启用的审批流，填单据号与标题；流程按步骤定义的顺序推进，同一步任一人同意即前进。
-            </p>
+    <div class="dw-panel">
+        <div class="dw-panel-head">
+            <div class="left">
+                <span class="ic"><i class="fas fa-plus" aria-hidden="true"></i></span>
+                <h2>发起审批 <span class="sub">{{ strtoupper($module) }} · 按单据类型匹配审批流</span></h2>
+            </div>
+            <div class="tools">
+                <a class="dw-btn" href="{{ route('core.approvals.index') }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> 返回审批中心</a>
+            </div>
         </div>
-        <div class="dw-page-actions">
-            <a class="dw-btn" href="{{ route('core.approvals.index') }}">返回审批中心</a>
-        </div>
-    </header>
+        <div class="dw-panel-body">
 
     @if ($errors->any())
         <section class="dw-card dw-alert" role="alert">
@@ -29,12 +28,13 @@
     @endif
 
     @if ($flows->isEmpty())
-        <section class="dw-card dw-empty">
-            <p class="title">当前模块还没有启用的审批流</p>
-            <p>等模块迁入后，审批流会随业务一起导入；也可以让管理员在后台新增。</p>
-        </section>
+            <div class="dw-empty-panel">
+                <i class="far fa-file-alt" aria-hidden="true"></i>
+                <p class="t">当前模块还没有启用的审批流</p>
+                <p class="mb-0">等模块迁入后，审批流会随业务一起导入；也可以让管理员在后台新增。</p>
+            </div>
     @else
-        <section class="dw-card">
+        <div>
             <form method="POST" action="{{ route('core.approvals.store') }}">
                 @csrf
                 <div class="dw-field">
@@ -72,7 +72,9 @@
                     <button type="submit" class="dw-btn">提交审批</button>
                 </div>
             </form>
-        </section>
+        </div>
     @endif
+        </div>
+    </div>
 </div>
 @endsection

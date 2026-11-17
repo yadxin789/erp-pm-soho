@@ -13,8 +13,17 @@
 @endpush
 
 @section('content')
-<h1 class="dw-page-title">个人中心</h1>
-<p class="dw-page-sub">三模块共用一套账号资料；修改后立即对 ERP / PM / SOHO 同时生效。</p>
+<div class="dw-panel">
+    <div class="dw-panel-head">
+        <div class="left">
+            <span class="ic"><i class="fas fa-id-card" aria-hidden="true"></i></span>
+            <h2>个人中心 <span class="sub">三模块共用一套账号资料；修改后立即对 ERP / PM / SOHO 同时生效</span></h2>
+        </div>
+        <div class="tools">
+            <span class="dw-badge dw-badge--muted">{{ strtoupper(auth()->user()->module ?? 'core') }}</span>
+        </div>
+    </div>
+</div>
 
 @if (session('status'))
     <div class="alert alert-success" role="status">{{ session('status') }}</div>

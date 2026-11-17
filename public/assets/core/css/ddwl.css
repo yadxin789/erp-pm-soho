@@ -207,3 +207,31 @@ dialog::backdrop{background:rgba(15,23,42,.42);overflow:hidden;overscroll-behavi
 .dw-login-demo summary{cursor:pointer;color:#5f6ce0}
 .dw-login-links{display:flex;justify-content:center;gap:18px;margin-top:18px;font-size:13px}
 .dw-login-links a{color:#5f6ce0}
+/* ===== 统一面板补充样式（对齐参考 panel/表格/筛选条） ===== */
+.dw-panel-head .ic{width:26px;height:26px;border-radius:6px;display:grid;place-items:center;background:#eef3ff;color:var(--dw-brand);font-size:13px}
+.dw-panel-head .left{display:flex;align-items:center;gap:10px;min-width:0}
+.dw-panel-head .sub{color:var(--dw-muted);font-size:12px;font-weight:400}
+.dw-panel-head .tools{display:flex;align-items:center;gap:8px}
+.dw-panel-foot{padding:12px 18px;border-top:1px solid var(--dw-line);background:#fbfbfe}
+.dw-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border:1px solid var(--dw-line);border-radius:999px;
+  background:#fff;color:var(--dw-ink);font-size:13px;text-decoration:none}
+.dw-chip:hover{background:#f6f7fc;color:var(--dw-ink)}
+.dw-chip.is-current{background:var(--dw-brand);border-color:var(--dw-brand);color:#fff}
+.dw-chip .n{padding:0 6px;border-radius:999px;background:rgba(0,0,0,.06);font-size:12px}
+.dw-chip.is-current .n{background:rgba(255,255,255,.22)}
+.dw-panel .dw-table{width:100%}
+.dw-panel .dw-table thead th{background:#f7f8fc}
+.dw-table-flush{margin:0}
+.dw-notice-ico{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:14px;flex:0 0 34px}
+.dw-notice-ico.core{background:#eef0f8;color:#5b6270}
+.dw-notice-ico.is-unread{box-shadow:inset 0 0 0 1px rgba(79,116,255,.28)}
+.dw-empty-panel{padding:46px 18px;text-align:center;color:var(--dw-muted)}
+.dw-empty-panel i{font-size:34px;color:#cdd3e4;display:block;margin-bottom:12px}
+.dw-empty-panel .t{font-weight:700;color:var(--dw-ink);margin-bottom:4px}
+.dw-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dw-inline-form{display:inline}/* 面板内的通知行：去掉独立卡片外框，改为通栏分隔线 */
+.dw-panel .dw-notice{border:0;border-bottom:1px solid #f0f1f5;border-radius:0;padding:14px 18px;background:#fff}
+.dw-panel .dw-notice.is-unread{border-left:3px solid var(--dw-brand);background:#fcfdff}
+.dw-panel .dw-notice:last-child{border-bottom:0}
+.dw-notice-main{min-width:0;flex:1}.dw-notice-head time{margin-left:auto;white-space:nowrap}
+.dw-panel-head h2{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}

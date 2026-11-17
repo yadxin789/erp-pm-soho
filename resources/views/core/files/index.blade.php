@@ -4,20 +4,20 @@
 
 @section('content')
 <div class="dw-page">
-    <header class="dw-page-head">
-        <div>
-            <p class="dw-eyebrow">三模块共用 · 一份文件库</p>
-            <h1 class="dw-page-title">文件中心</h1>
-            <p class="dw-page-desc">
-                当前模块 {{ strtoupper($module) }} · 在用 {{ $items->count() }} 个 · 回收站 {{ $trash->count() }} 个
-                · 单文件 ≤ {{ $maxKb / 1024 }} MB
-            </p>
+    <div class="dw-panel">
+        <div class="dw-panel-head">
+            <div class="left">
+                <span class="ic"><i class="fas fa-folder-open" aria-hidden="true"></i></span>
+                <h2>文件中心
+                    <span class="sub">当前模块 {{ strtoupper($module) }} · 在用 {{ $items->count() }} 个 · 回收站 {{ $trash->count() }} 个 · 单文件 ≤ {{ $maxKb / 1024 }} MB</span>
+                </h2>
+            </div>
+            <div class="tools">
+                <a class="dw-chip {{ $tab === 'active' ? 'is-current' : '' }}" href="{{ route('core.files.index') }}">在用文件</a>
+                <a class="dw-chip {{ $tab === 'trash' ? 'is-current' : '' }}" href="{{ route('core.files.index', ['tab' => 'trash']) }}">回收站</a>
+            </div>
         </div>
-        <div class="dw-page-actions">
-            <a class="dw-btn {{ $tab === 'active' ? 'is-current' : '' }}" href="{{ route('core.files.index') }}">在用文件</a>
-            <a class="dw-btn {{ $tab === 'trash' ? 'is-current' : '' }}" href="{{ route('core.files.index', ['tab' => 'trash']) }}">回收站</a>
-        </div>
-    </header>
+    </div>
 
     @if (session('success'))
         <section class="dw-card dw-alert dw-alert-ok" role="status"><p class="dw-hint">{{ session('success') }}</p></section>
@@ -27,8 +27,9 @@
     @endif
 
     @if ($tab === 'active')
-        <section class="dw-card">
-            <h2 class="dw-card-title">上传文件</h2>
+        <div class="dw-panel">
+            <div class="dw-panel-head"><div class="left"><span class="ic"><i class="fas fa-upload" aria-hidden="true"></i></span><h2>上传文件 <span class="sub">最多 5 个 · 单文件 ≤ {{ $maxKb / 1024 }} MB</span></h2></div></div>
+            <div class="dw-panel-body">
             <form method="POST" action="{{ route('core.files.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="dw-field">
@@ -53,22 +54,28 @@
                     <button type="submit" class="dw-btn">上传</button>
                 </div>
             </form>
-        </section>
+            </div>
+        </div>
 
-        <section class="dw-card" style="margin-top:18px">
-            <div class="dw-page-head" style="margin-bottom:10px">
-                <h2 class="dw-card-title" style="margin:0">文件列表</h2>
-                <form method="GET" action="{{ route('core.files.index') }}" class="dw-filter">
-                    <div class="dw-field">
-                        <label for="q" class="dw-sr">搜索文件名</label>
-                        <input class="dw-input" id="q" name="q" type="search" value="{{ $keyword }}" placeholder="搜文件名…">
-                    </div>
-                    <button type="submit" class="dw-btn">搜索</button>
+        <div class="dw-panel">
+            <div class="dw-panel-head">
+                <div class="left">
+                    <span class="ic"><i class="fas fa-list" aria-hidden="true"></i></span>
+                    <h2>文件列表 <span class="sub">共 {{ $items->count() }} 个</span></h2>
+                </div>
+                <form method="GET" action="{{ route('core.files.index') }}" class="dw-toolbar" style="margin:0">
+                    <label for="q" class="dw-sr">搜索文件名</label>
+                    <input class="dw-input" id="q" name="q" type="search" value="{{ $keyword }}" placeholder="搜文件名…" style="width:200px">
+                    <button type="submit" class="dw-btn"><i class="fas fa-search" aria-hidden="true"></i> 搜索</button>
                 </form>
             </div>
 
             @if ($items->isEmpty())
-                <p class="dw-hint">这个模块还没有文件，先在上面传一个。</p>
+                <div class="dw-empty-panel">
+                    <i class="far fa-folder-open" aria-hidden="true"></i>
+                    <p class="t">这个模块还没有文件</p>
+                    <p class="mb-0">先在上方传一个。</p>
+                </div>
             @else
                 <div class="table-wrapper">
                 <table class="dw-table">
@@ -151,12 +158,16 @@
                 </table>
                 </div>
             @endif
-        </section>
+        </div>
     @else
-        <section class="dw-card">
-            <h2 class="dw-card-title">回收站</h2>
+        <div class="dw-panel">
+            <div class="dw-panel-head"><div class="left"><span class="ic"><i class="fas fa-trash" aria-hidden="true"></i></span><h2>回收站 <span class="sub">{{ $trash->count() }} 个</span></h2></div></div>
             @if ($trash->isEmpty())
-                <p class="dw-hint">回收站是空的。</p>
+                <div class="dw-empty-panel">
+                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                    <p class="t">回收站是空的</p>
+                    <p class="mb-0">删除的文件会先放这里，可恢复。</p>
+                </div>
             @else
                 <ul class="dw-notice-list">
                     @foreach ($trash as $file)
@@ -191,7 +202,7 @@
                     @endforeach
                 </ul>
             @endif
-        </section>
+        </div>
     @endif
 </div>
 @endsection

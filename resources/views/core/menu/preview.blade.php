@@ -8,21 +8,21 @@
 
 @section('content')
 <div class="dw-page">
-    <header class="dw-page-head">
-        <div>
-            <p class="dw-eyebrow">菜单迁移预览</p>
-            <h1 class="dw-page-title">{{ strtoupper($module) }} 模块菜单</h1>
-            <p class="dw-page-desc">
-                基线 {{ $total }} 项 · 当前角色可见 {{ $visibleCount }} 项 · 因权限隐藏 {{ $hiddenCount }} 项 ·
-                路由未迁入 {{ count($pending) }} 项
-            </p>
+    <div class="dw-panel">
+        <div class="dw-panel-head">
+            <div class="left">
+                <span class="ic"><i class="fas fa-bars" aria-hidden="true"></i></span>
+                <h2>{{ strtoupper($module) }} 模块菜单
+                    <span class="sub">基线 {{ $total }} 项 · 当前角色可见 {{ $visibleCount }} 项 · 因权限隐藏 {{ $hiddenCount }} 项 · 路由未迁入 {{ count($pending) }} 项</span>
+                </h2>
+            </div>
+            <div class="tools">
+                @foreach (['erp','pm','soho'] as $m)
+                    <a class="dw-chip {{ $m === $module ? 'is-current' : '' }}" href="{{ url('/core/menu/'.$m) }}">{{ strtoupper($m) }}</a>
+                @endforeach
+            </div>
         </div>
-        <nav class="dw-page-actions" aria-label="模块切换">
-            @foreach (['erp','pm','soho'] as $m)
-                <a class="dw-btn dw-btn-ghost {{ $m === $module ? 'is-current' : '' }}" href="{{ url('/core/menu/'.$m) }}">{{ strtoupper($m) }}</a>
-            @endforeach
-        </nav>
-    </header>
+    </div>
 
     @if (count($pending) > 0)
         <section class="dw-card dw-alert" role="status">

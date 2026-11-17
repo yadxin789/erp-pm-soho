@@ -20,19 +20,19 @@
 
 @section('content')
 <div class="dw-page">
-    <header class="dw-page-head">
-        <div>
-            <p class="dw-eyebrow">三模块共用 · 浏览器内置 WebRTC</p>
-            <h1 class="dw-page-title">语音会议</h1>
-            <p class="dw-page-desc">
-                房间 {{ $room->name }}（#{{ $room->id }}）· 模块 {{ $module }} · 状态
-                <span id="room-status">{{ $room->status }}</span> · 开始 {{ $room->started_at?->format('Y-m-d H:i') ?? '—' }}
-            </p>
+    <div class="dw-panel">
+        <div class="dw-panel-head">
+            <div class="left">
+                <span class="ic"><i class="fas fa-phone" aria-hidden="true"></i></span>
+                <h2>语音会议
+                    <span class="sub">房间 {{ $room->name }}（#{{ $room->id }}）· 模块 {{ $module }} · 状态 <span id="room-status">{{ $room->status }}</span> · 开始 {{ $room->started_at?->format('Y-m-d H:i') ?? '—' }}</span>
+                </h2>
+            </div>
+            <div class="tools">
+                <a class="dw-btn" href="{{ route('core.chat.index', ['module' => $module]) }}"><i class="fas fa-comments" aria-hidden="true"></i> 回聊天</a>
+            </div>
         </div>
-        <div class="dw-page-actions">
-            <a class="dw-btn" href="{{ route('core.chat.index', ['module' => $module]) }}">← 回聊天</a>
-        </div>
-    </header>
+    </div>
 
     @if (session('status'))
         <section class="dw-card dw-alert dw-alert-ok" role="status"><p class="dw-hint">{{ session('status') }}</p></section>
