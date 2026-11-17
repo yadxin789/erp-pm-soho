@@ -1,2 +1,2 @@
 @php $tone = ['ok' => 'ok', 'success' => 'ok', 'warn' => 'warn', 'warning' => 'warn', 'danger' => 'danger', 'error' => 'danger', 'info' => 'info'][$type ?? 'muted'] ?? 'muted'; @endphp
-<span class="dw-badge dw-badge--{{ $tone }}">@isset($icon)<i class="fa-solid {{ $icon }}" aria-hidden="true"></i>@endisset{{ $text ?? '' }}</span>
+<span class="dw-badge dw-badge--{{ $tone }}">@isset($icon)<i class="fas {{ $icon }}" aria-hidden="true"></i>@endisset{{ $text ?? '' }}</span>

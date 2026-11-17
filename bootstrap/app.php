@@ -21,6 +21,11 @@ return Application::configure(basePath: dirname(__DIR__))
         // 统一登录入口：未登录访客一律回 /login（默认会去找名为 login 的路由，本项目为 core.login）
         $middleware->redirectGuestsTo(fn () => route('core.login'));
 
+        // TC-12：OnlyOffice 保存回调来自文档服务器，没有会话与 CSRF token，靠 document key 校验
+        $middleware->validateCsrfTokens(except: [
+            'files/onlyoffice/callback/*',
+        ]);
+
         // T0-04：模块上下文中间件（路由组用 module:erp / module:pm / module:soho）
         $middleware->alias([
             'module'        => \App\Core\Http\Middleware\SetModuleContext::class,

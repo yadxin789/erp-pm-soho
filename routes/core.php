@@ -99,8 +99,7 @@ Route::middleware('web')->group(function () {
     // TC-11 审批引擎：ERP 订单审批 + SOHO 8 条 FLOW-* 共用一套流/步骤/实例/待办
     Route::middleware('auth')->group(function () {
         Route::get('/approvals', [\App\Core\Http\Controllers\ApprovalController::class, 'index'])
-            ->name('core.approvals.index');
-        Route::get('/approvals/create', [\App\Core\Http\Controllers\ApprovalController::class, 'create'])
+            ->name('core.approvals.index');        Route::get('/approvals/create', [\App\Core\Http\Controllers\ApprovalController::class, 'create'])
             ->name('core.approvals.create');
         Route::post('/approvals', [\App\Core\Http\Controllers\ApprovalController::class, 'store'])
             ->name('core.approvals.store');
@@ -117,4 +116,30 @@ Route::middleware('web')->group(function () {
             ->whereNumber('approval')
             ->name('core.approvals.cancel');
     });
+
+    // TC-12 文件中心：上传 / 下载 / 版本 / 回收站 + OnlyOffice 打开与保存回调
+    Route::middleware('auth')->group(function () {
+        Route::get('/files', [\App\Core\Http\Controllers\FileController::class, 'index'])->name('core.files.index');
+        Route::post('/files', [\App\Core\Http\Controllers\FileController::class, 'store'])->name('core.files.store');
+        Route::get('/files/{file}/download', [\App\Core\Http\Controllers\FileController::class, 'download'])
+            ->whereNumber('file')->name('core.files.download');
+        Route::get('/files/{file}/preview', [\App\Core\Http\Controllers\FileController::class, 'preview'])
+            ->whereNumber('file')->name('core.files.preview');
+        Route::get('/files/{file}/office', [\App\Core\Http\Controllers\FileController::class, 'office'])
+            ->whereNumber('file')->name('core.files.office');
+        Route::post('/files/{file}/versions', [\App\Core\Http\Controllers\FileController::class, 'newVersion'])
+            ->whereNumber('file')->name('core.files.versions.store');
+        Route::delete('/files/{file}', [\App\Core\Http\Controllers\FileController::class, 'destroy'])
+            ->whereNumber('file')->name('core.files.destroy');
+        Route::post('/files/trash/{id}/restore', [\App\Core\Http\Controllers\FileController::class, 'restore'])
+            ->whereNumber('id')->name('core.files.restore');
+        Route::delete('/files/trash/{id}', [\App\Core\Http\Controllers\FileController::class, 'purge'])
+            ->whereNumber('id')->name('core.files.purge');
+    });
+
+    // OnlyOffice 服务器侧接口：都靠签名 URL / document key 校验，不走登录态
+    Route::get('/files/{file}/raw', [\App\Core\Http\Controllers\FileController::class, 'raw'])
+        ->whereNumber('file')->name('core.files.raw');
+    Route::post('/files/onlyoffice/callback/{file}', [\App\Core\Http\Controllers\FileController::class, 'callback'])
+        ->whereNumber('file')->name('core.files.callback');
 });

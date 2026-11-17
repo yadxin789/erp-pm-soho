@@ -80,4 +80,9 @@ return [
         ],
     ],
 
+    // TC-12：OnlyOffice 文档服务（留空则文件中心只保留上传/下载/版本/预览）
+    'onlyoffice' => [
+        'url' => env('ONLYOFFICE_URL'),
+    ],
+
 ];

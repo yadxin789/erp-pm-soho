@@ -131,7 +131,7 @@
                                                 </a>
                                             @else
                                                 <a href="{{ route('core.chat.file', ['id' => $message->id, 'index' => $i]) }}" target="_blank" rel="noopener">
-                                                    <i class="fa-solid fa-paperclip"></i> {{ $file['name'] }}
+                                                    <i class="fas fa-paperclip"></i> {{ $file['name'] }}
                                                 </a>
                                             @endif
                                         @endforeach
