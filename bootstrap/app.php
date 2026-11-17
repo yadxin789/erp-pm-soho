@@ -25,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'module'        => \App\Core\Http\Middleware\SetModuleContext::class,
             'module.access' => \App\Core\Http\Middleware\EnsureModuleAccess::class,
+            'permission'    => \App\Core\Http\Middleware\CheckPermission::class,
         ]);
 
         // 注意：erp 的 EnsureRoleScope、soho 的 LogUserActivity 一律不得全局 append，
