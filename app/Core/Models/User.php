@@ -88,6 +88,15 @@ class User extends Authenticatable
         return $this->avatar ?: null;
     }
 
+    /** 展示用名称：真实姓名 → name → username → 邮箱前缀（三源字段各不相同，视图统一调这个） */
+    public function displayName(): string
+    {
+        return $this->real_name
+            ?: ($this->name
+            ?: ($this->username
+            ?: (strstr((string) $this->email, '@', true) ?: '用户')));
+    }
+
     /**
      * 解析该用户可进入的模块清单（D15 准入链）。
      *

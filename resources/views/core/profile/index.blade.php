@@ -13,6 +13,7 @@
 @endpush
 
 @section('content')
+@include('core::partials.topbar')
 <h1 class="dw-page-title">个人中心</h1>
 <p class="dw-page-sub">三模块共用一套账号资料；修改后立即对 ERP / PM / SOHO 同时生效。</p>
 
@@ -159,7 +160,7 @@
                     @if ($user->wecom_userid)
                         已绑定企业微信账号：{{ $user->wecom_userid }}（绑定时间 {{ $user->wecom_bound_at?->format('Y-m-d') }}）
                     @else
-                        当前账号未绑定企业微信，绑定入口沿用 PM 原功能（TC-13 后统一到此处）。
+                        当前账号未绑定企业微信，绑定入口沿用 PM 原功能，后续统一到此处。
                     @endif
                 </p>
 
@@ -227,7 +228,7 @@
                 <h2 class="dw-card-title">AI 能力设置（待迁入）</h2>
                 <p class="text-muted mb-2">
                     这里将收纳 ERP 的 AI 设置页（模型 / API Key / 工具开关）与 PM 的 AI 工作台偏好。
-                    当前 erp 的 `ai-settings/*` 与 pm 的 AI 工作台仍在各自模块内运行，TC-13「AI 能力收口」时统一迁到此处，功能不删。
+                    当前 erp 的 `ai-settings/*` 与 pm 的 AI 工作台仍在各自模块内运行，后续 AI 能力收口时统一迁到此处，功能不删。
                 </p>
                 <p class="text-muted mb-0">在此之前，请分别前往 ERP「AI 设置」与 PM「AI 工作台」调整。</p>
             </div>

@@ -55,4 +55,20 @@ Route::middleware('web')->group(function () {
     Route::get('/core/menu/{module?}', [\App\Core\Http\Controllers\MenuPreviewController::class, 'show'])
         ->middleware('auth')
         ->name('core.menu');
+
+    // TC-09 站内通知中心（三源合并为一份，模块内入口统一跳这里）
+    Route::middleware('auth')->group(function () {
+        Route::get('/notifications', [\App\Core\Http\Controllers\NotificationController::class, 'index'])
+            ->name('core.notifications.index');
+        Route::get('/notifications/unread-count', [\App\Core\Http\Controllers\NotificationController::class, 'unreadCount'])
+            ->name('core.notifications.unread-count');
+        Route::post('/notifications/read-all', [\App\Core\Http\Controllers\NotificationController::class, 'readAll'])
+            ->name('core.notifications.read-all');
+        Route::post('/notifications/{id}/read', [\App\Core\Http\Controllers\NotificationController::class, 'read'])
+            ->whereNumber('id')
+            ->name('core.notifications.read');
+        Route::delete('/notifications/{id}', [\App\Core\Http\Controllers\NotificationController::class, 'destroy'])
+            ->whereNumber('id')
+            ->name('core.notifications.destroy');
+    });
 });

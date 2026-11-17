@@ -125,3 +125,32 @@ dialog::backdrop{background:rgba(15,23,42,.42);overflow:hidden;overscroll-behavi
 .dw-grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
 .dw-card-flat{background:#fbfcfe}
 .dw-badge-soft{background:#f1f2f6;color:#5b6270;font-weight:600}
+/* ============ 顶栏（TC-09） ============ */
+.dw-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 18px;margin-bottom:16px;
+  background:#fff;border:1px solid var(--dw-line);border-radius:var(--dw-radius)}
+.dw-topbar-brand a{font-weight:700;color:var(--dw-ink);display:inline-flex;align-items:center;gap:8px}
+.dw-topbar-actions{display:flex;align-items:center;gap:14px}
+.dw-topbar-bell{position:relative;display:inline-flex;align-items:center;color:var(--dw-ink);font-size:16px}
+.dw-topbar-bell:hover{color:var(--dw-brand)}
+.dw-topbar-badge{position:absolute;top:-8px;right:-12px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;
+  background:var(--dw-danger);color:#fff;font-size:11px;font-weight:700;line-height:18px;text-align:center}
+.dw-topbar-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--dw-ink);background:none;border:0;padding:0;cursor:pointer}
+.dw-topbar-link:hover{color:var(--dw-brand)}
+.dw-topbar-form{margin:0}
+
+/* ============ 通知列表（TC-09） ============ */
+.dw-tabs{flex-wrap:wrap;align-items:center;margin-bottom:14px;gap:8px}
+.dw-tabs-sep{width:1px;height:20px;background:var(--dw-line);margin:0 4px}
+.dw-notice-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.dw-notice{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:14px 18px;
+  background:#fff;border:1px solid var(--dw-line);border-radius:var(--dw-radius)}
+.dw-notice.is-unread{border-left:3px solid var(--dw-brand)}
+.dw-notice.is-read{opacity:.82}
+.dw-notice-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dw-notice-dot{width:7px;height:7px;border-radius:50%;background:var(--dw-brand);flex:0 0 7px}
+.dw-notice.is-read .dw-notice-dot{background:#c9cede}
+.dw-notice-body{margin:8px 0 0;font-size:13px;color:#3b4252}
+.dw-notice-actions{display:flex;gap:8px;flex:none}
+.dw-notice-actions form{margin:0}
+.dw-btn-danger{border-color:#f2c2c8;color:var(--dw-danger)}
+.dw-btn-danger:hover{border-color:var(--dw-danger);color:var(--dw-danger)}

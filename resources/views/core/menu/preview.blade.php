@@ -10,7 +10,7 @@
 <div class="dw-page">
     <header class="dw-page-head">
         <div>
-            <p class="dw-eyebrow">TC-08 菜单系统</p>
+            <p class="dw-eyebrow">菜单迁移预览</p>
             <h1 class="dw-page-title">{{ strtoupper($module) }} 模块菜单</h1>
             <p class="dw-page-desc">
                 基线 {{ $total }} 项 · 当前角色可见 {{ $visibleCount }} 项 · 因权限隐藏 {{ $hiddenCount }} 项 ·
