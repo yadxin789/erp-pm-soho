@@ -10,6 +10,13 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
+    // T0-06：模块命令目录注册（Laravel 12 只自动发现 app/Console/Commands）
+    ->withCommands([
+        __DIR__.'/../app/Core/Console/Commands',
+        __DIR__.'/../app/Erp/Console/Commands',
+        __DIR__.'/../app/Pm/Console/Commands',
+        __DIR__.'/../app/Soho/Console/Commands',
+    ])
     ->withMiddleware(function (Middleware $middleware): void {
         // T0-04：模块上下文中间件（路由组用 module:erp / module:pm / module:soho）
         $middleware->alias([

@@ -23,6 +23,7 @@ return [
             'table_prefix' => '',            // Core 表无前缀
             'view'         => 'core',
             'permission'   => 'core.',
+            'assets'       => 'assets/core',
             'enabled'      => true,
         ],
 
@@ -33,6 +34,7 @@ return [
             'table_prefix' => 'erp_',
             'view'         => 'erp',
             'permission'   => 'erp.',
+            'assets'       => 'assets/erp',
             'provider'     => App\Erp\Providers\ErpServiceProvider::class,
             'enabled'      => true,
         ],
@@ -44,6 +46,7 @@ return [
             'table_prefix' => 'pm_',
             'view'         => 'pm',
             'permission'   => 'pm.',
+            'assets'       => 'assets/pm',
             'provider'     => App\Pm\Providers\PmServiceProvider::class,
             'enabled'      => true,
         ],
@@ -55,6 +58,7 @@ return [
             'table_prefix' => 'soho_',
             'view'         => 'soho',
             'permission'   => 'soho.',
+            'assets'       => 'assets/soho',
             'provider'     => App\Soho\Providers\SohoServiceProvider::class,
             'enabled'      => true,
         ],

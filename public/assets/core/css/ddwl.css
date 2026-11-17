@@ -1,0 +1,96 @@
+/* DDWL 共享前端基座（T0-10）
+   原则：Bootstrap 管样式骨架，本文件只管"三板块共用的品牌变量与通用组件"；
+   模块原有布局/配色仍由各模块自己的 CSS 负责，不在此覆盖。 */
+:root{
+  --dw-brand:#2f6fed; --dw-brand-2:#667eea;
+  --dw-ok:#28a745; --dw-danger:#dc3545; --dw-warn:#ffc107; --dw-info:#17a2b8;
+  --dw-ink:#1f2430; --dw-muted:#6b7280; --dw-line:#e6e8ee; --dw-bg:#f7f8fb;
+  --dw-radius:12px;
+  --dw-font:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+body{margin:0;background:var(--dw-bg);color:var(--dw-ink);font-family:var(--dw-font);font-size:14px;line-height:1.6}
+a{color:var(--dw-brand);text-decoration:none}
+:focus-visible{outline:2px solid var(--dw-brand);outline-offset:2px}
+.dw-shell{display:flex;min-height:100vh}
+.dw-sidebar{width:220px;flex:0 0 220px;background:#fff;border-right:1px solid var(--dw-line);padding:18px 14px}
+.dw-main{flex:1;min-width:0;padding:20px 24px 40px}
+.dw-page-title{font-size:20px;font-weight:700;margin:0 0 4px}
+.dw-page-sub{color:var(--dw-muted);font-size:13px;margin:0 0 18px}
+.dw-card{background:#fff;border:1px solid var(--dw-line);border-radius:var(--dw-radius);padding:18px 20px}
+.dw-card-title{font-weight:700;font-size:15px;margin:0 0 12px}
+
+/* 数据表：语义表格 + 粘性表头 + 容器查询下的堆叠布局 */
+.table-wrapper{container-type:inline-size;overflow:auto;border:1px solid var(--dw-line);border-radius:var(--dw-radius);background:#fff}
+.table-wrapper:focus-visible{outline:2px solid var(--dw-brand);outline-offset:2px}
+table.dw-table{width:100%;border-collapse:collapse;font-size:13px}
+.dw-table caption{caption-side:top;text-align:left;padding:14px 16px 10px;font-weight:700}
+.dw-table thead th{position:sticky;top:0;z-index:1;background:#f9fafc;border-bottom:1px solid var(--dw-line);
+  text-align:left;padding:10px 14px;white-space:nowrap;font-weight:600}
+.dw-table tbody th,.dw-table tbody td{padding:10px 14px;border-bottom:1px solid #f0f1f5;vertical-align:middle}
+.dw-table tbody th{text-align:left;font-weight:600}
+.dw-table tbody tr:hover{background:#fafbff}
+.dw-table tbody tr:last-child th,.dw-table tbody tr:last-child td{border-bottom:0}
+@container (max-width:640px){
+  .dw-table thead{display:none}
+  .dw-table tbody tr{display:grid;grid-template-columns:1fr;gap:8px;padding:14px 16px;border-bottom:1px solid var(--dw-line)}
+  .dw-table tbody th,.dw-table tbody td{border:0;padding:0;display:grid;grid-template-columns:7.5em 1fr;gap:8px}
+  .dw-table tbody th::before,.dw-table tbody td::before{content:attr(data-label);color:var(--dw-muted);font-weight:600}
+}
+
+/* 筛选栏 */
+.dw-filter{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.dw-filter .dw-field{min-width:180px;margin-bottom:0}
+
+/* 表单字段：视觉态 :user-invalid，无障碍态由 ddwl.js 桥接 aria-invalid */
+.dw-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.dw-field label{font-weight:600;font-size:13px}
+.dw-field label .req{color:var(--dw-danger);margin-left:2px}
+.dw-field .dw-help{color:var(--dw-muted);font-size:12px}
+.dw-input,.dw-select,.dw-textarea{border:1px solid var(--dw-line);border-radius:8px;padding:8px 12px;
+  font:inherit;color:inherit;background:#fff;width:100%}
+.dw-input:focus-visible,.dw-select:focus-visible,.dw-textarea:focus-visible{border-color:var(--dw-brand)}
+.dw-input:user-invalid,.dw-textarea:user-invalid,.dw-select:user-invalid{border-color:var(--dw-danger)}
+.dw-error{color:var(--dw-danger);font-size:12px;display:none}
+.dw-input:user-invalid ~ .dw-error,.dw-textarea:user-invalid ~ .dw-error{display:block}
+
+/* 状态徽标 */
+.dw-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600}
+.dw-badge--ok{background:#e8f6ee;color:#1c7c46}
+.dw-badge--warn{background:#fff6e0;color:#8a6100}
+.dw-badge--danger{background:#fdecef;color:#a11227}
+.dw-badge--info{background:#e6f6fa;color:#0f6b7d}
+.dw-badge--muted{background:#f1f2f6;color:#5b6270}
+
+/* 统计卡 */
+.dw-stat{display:flex;gap:14px;align-items:flex-start}
+.dw-stat .icon{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:#eef3ff;color:var(--dw-brand);flex:0 0 40px}
+.dw-stat .label{color:var(--dw-muted);font-size:13px}
+.dw-stat .value{font-size:24px;font-weight:700;line-height:1.25}
+.dw-stat .delta{font-size:12px}
+.dw-stat .delta.up{color:var(--dw-ok)} .dw-stat .delta.down{color:var(--dw-danger)}
+
+/* 图表（纯 SVG，无第三方库） */
+.dw-chart{width:100%;display:block}
+.dw-chart text{font-size:11px;fill:var(--dw-muted)}
+
+/* 空状态 */
+.dw-empty{text-align:center;padding:36px 16px;color:var(--dw-muted)}
+.dw-empty .icon{font-size:26px;margin-bottom:10px;color:#c6cbd8}
+.dw-empty .title{font-weight:600;color:var(--dw-ink);margin-bottom:4px}
+
+/* 分页 */
+.dw-pagination{display:flex;gap:6px;align-items:center;justify-content:flex-end;padding:12px 4px;font-size:13px;flex-wrap:wrap}
+.dw-pagination a,.dw-pagination span{padding:4px 10px;border:1px solid var(--dw-line);border-radius:8px;background:#fff;color:var(--dw-ink)}
+.dw-pagination .active{border-color:var(--dw-brand);color:var(--dw-brand);font-weight:700}
+.dw-pagination .disabled{opacity:.5;pointer-events:none}
+
+/* 弹窗：原生 dialog（不写 role/aria-modal，浏览器已提供） */
+dialog{border:0;border-radius:var(--dw-radius);padding:0;width:min(560px,92vw);box-shadow:0 18px 40px rgba(15,23,42,.18)}
+dialog:modal{overscroll-behavior:contain}
+dialog::backdrop{background:rgba(15,23,42,.42);overflow:hidden;overscroll-behavior:contain}
+.dw-dialog-head{padding:16px 20px;border-bottom:1px solid var(--dw-line);font-weight:700}
+.dw-dialog-body{padding:18px 20px}
+.dw-dialog-foot{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid var(--dw-line)}
+
+/* 屏幕阅读器专用 live region */
+.dw-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

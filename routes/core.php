@@ -23,4 +23,7 @@ Route::middleware('web')->group(function () {
         'module'  => ModuleContext::current() ?? 'core',
         'modules' => ModuleContext::all(),
     ]))->name('core.ping');
+
+    // T0-10 组件示例页（前端基座自检）
+    Route::get('/core/ui', fn () => view('core::ui'))->name('core.ui');
 });

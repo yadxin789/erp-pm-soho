@@ -1,0 +1,11 @@
+Composer detected issues in your platform:
+
+Your Composer dependencies require a PHP version ">= 8.4.1". You are running 8.3.36.
+
+PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.4.1". You are running 8.3.36. in E:\ddwl-soho\vendor\composer\platform_check.php:26
+Stack trace:
+#0 E:\ddwl-soho\vendor\composer\autoload_real.php(25): require()
+#1 E:\ddwl-soho\vendor\autoload.php(22): ComposerAutoloaderInit7a24710f7f6a5c2310df5b1cff9a771a::getLoader()
+#2 E:\ddwl-soho\artisan(10): require('...')
+#3 {main}
+  thrown in E:\ddwl-soho\vendor\composer\platform_check.php on line 26
