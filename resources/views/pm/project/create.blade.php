@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
     deptOrder.forEach(deptId => {
         if (!deptId) return;
 
-        fetch(`/project/get-designers/${deptId}`)
+        fetch(`/pm/project/get-designers/${deptId}`)
             .then(res => res.json())
             .then(data => {
                 document.querySelectorAll(`.executor-select[data-dept-id="${deptId}"]`).forEach(select => {
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(() => checkAllLoaded());
 
-        fetch(`/project/get-managers/${deptId}`)
+        fetch(`/pm/project/get-managers/${deptId}`)
             .then(res => res.json())
             .then(data => {
                 document.querySelectorAll(`.auditor-select[data-dept-id="${deptId}"]`).forEach(select => {
@@ -450,7 +450,7 @@ function loadTemplate() {
         return;
     }
 
-    fetch(`/project/get-template/${templateId}`)
+    fetch(`/pm/project/get-template/${templateId}`)
         .then(res => res.json())
         .then(data => {
             // 1. 恢复部门选择

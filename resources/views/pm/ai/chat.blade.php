@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const fd = new FormData();
                 fd.append('_method', 'PATCH');
                 fd.append('model_id', this.value);
-                fetch(@json(url('/ai/conversations')) + '/' + conversationId, {
+                fetch(@json(url('/pm/ai/conversations')) + '/' + conversationId, {
                     method: 'POST',
                     body: fd,
                     headers: { 'X-CSRF-TOKEN': csrf, 'X-Requested-With': 'XMLHttpRequest' }
@@ -433,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function () {
             '<ul class="dropdown-menu dropdown-menu-end">' +
             '<li><a class="dropdown-item" href="#" data-toggle-rename="' + id + '" data-current="' + escapeHtml(title) + '">' +
             '<i class="fa fa-pencil me-1"></i>重命名</a></li>' +
-            '<li><a class="dropdown-item" href="' + @json(url('/ai/conversations')) + '/' + id + '/export">' +
+            '<li><a class="dropdown-item" href="' + @json(url('/pm/ai/conversations')) + '/' + id + '/export">' +
             '<i class="fa fa-download me-1"></i>导出 Markdown</a></li>' +
             '<li><hr class="dropdown-divider"></li>' +
             '<li><a class="dropdown-item text-danger" href="#" data-delete-conv="' + id + '">' +
@@ -476,7 +476,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const fd = new FormData();
                 fd.append('_method', 'PATCH');
                 fd.append('title', String(title).trim());
-                fetch(@json(url('/ai/conversations')) + '/' + id, {
+                fetch(@json(url('/pm/ai/conversations')) + '/' + id, {
                     method: 'POST',
                     body: fd,
                     headers: { 'X-CSRF-TOKEN': csrf, 'X-Requested-With': 'XMLHttpRequest' }
@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
                 if (!confirm('确定删除该会话及其全部附件吗？此操作不可恢复。')) return;
                 const id = this.dataset.deleteConv;
-                fetch(@json(url('/ai/conversations')) + '/' + id, {
+                fetch(@json(url('/pm/ai/conversations')) + '/' + id, {
                     method: 'DELETE',
                     headers: { 'X-CSRF-TOKEN': csrf, 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
                 }).then(function (res) {

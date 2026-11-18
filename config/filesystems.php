@@ -65,6 +65,22 @@ return [
             'report' => false,
         ],
 
+        // 协同办公文档仓库（PM 项目内协作文档）
+        'file_repository' => [
+            'driver' => 'local',
+            'root' => storage_path('app/file-repository'),
+            'throw' => false,
+            'report' => false,
+        ],
+
+        // 企业微信文件
+        'wecom_files' => [
+            'driver' => 'local',
+            'root' => storage_path('app/wecom-files'),
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

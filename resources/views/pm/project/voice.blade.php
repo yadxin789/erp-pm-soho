@@ -111,7 +111,7 @@ const rtcConfig = { iceServers: [] };
 
 // ---------- 1. 信令 ----------
 async function connectSignal() {
-    const r = await fetch(`/project/${VOICE_STATE.projectId}/voice/token`).then(r => r.json());
+    const r = await fetch(`/pm/project/${VOICE_STATE.projectId}/voice/token`).then(r => r.json());
     window._voiceConf = r;
     const url = `${r.signal_ws}?token=${encodeURIComponent(r.token)}`;
     ws = new WebSocket(url);
@@ -234,7 +234,7 @@ async function handleIce(msg) {
 // ---------- 4. 成员列表 ----------
 async function loadAllMembers() {
     try {
-        const r = await fetch(`/project/${VOICE_STATE.projectId}/voice/members`).then(r => r.json());
+        const r = await fetch(`/pm/project/${VOICE_STATE.projectId}/voice/members`).then(r => r.json());
         allMembers = r.members || [];
         renderMembers();
     } catch (e) { console.error(e); }
@@ -308,7 +308,7 @@ async function loadDoc(docId) {
     }
     currentDocId = docId;
     const editMode = $('edit-mode').checked ? 1 : 0;
-    const r = await fetch(`/project/${VOICE_STATE.projectId}/voice/doc-config/${docId}?edit=${editMode}`).then(r => r.json());
+    const r = await fetch(`/pm/project/${VOICE_STATE.projectId}/voice/doc-config/${docId}?edit=${editMode}`).then(r => r.json());
     $('doc-empty-tip').style.display = 'none';
     $('doc-frame').style.display = '';
     if (docEditor) { docEditor.destroy(); docEditor = null; }
@@ -361,7 +361,7 @@ $('file-upload').addEventListener('change', async (e) => {
     const fd = new FormData();
     fd.append('file', file);
     try {
-        const r = await fetch(`/project/${VOICE_STATE.projectId}/voice/upload-demo`, {
+        const r = await fetch(`/pm/project/${VOICE_STATE.projectId}/voice/upload-demo`, {
             method: 'POST',
             body: fd,
             headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content }

@@ -512,7 +512,7 @@ class MenuConfig
                 'icon' => 'fa-database',
                 'route' => 'warehouse.index',
                 'permission' => 'warehouse.view',
-                'roles' => ['super_admin', 'warehouse_manager', 'operation_manager', 'order_manager', 
+                'roles' => ['warehouse_manager', 'operation_manager', 'order_manager',
                            'data_analyst', 'read_only'],
                 'order' => 100,
             ],

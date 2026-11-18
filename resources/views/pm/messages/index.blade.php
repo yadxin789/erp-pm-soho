@@ -428,7 +428,7 @@ function renderMemberList(members) {
 // ==================== 打开私聊页面 ====================
 function openPrivateChat(targetId) {
     // 跳转到独立的私聊页面
-    window.location.href = `/project/${PROJECT_ID}/chat/${targetId}`;
+    window.location.href = `/pm/project/${PROJECT_ID}/chat/${targetId}`;
 }
 
 // ==================== 群聊文件上传 ====================

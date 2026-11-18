@@ -113,7 +113,7 @@ class CollabOfficeService
      */
     public function downloadUrl(CollabDocument $doc): string
     {
-        return $this->pmInternalUrl() . '/collab/download/' . $doc->id . '?k=' . urlencode($doc->doc_key);
+        return $this->pmInternalUrl() . $this->routePath('pm.collab.download', $doc) . '?k=' . urlencode($doc->doc_key);
     }
 
     /**
@@ -121,7 +121,17 @@ class CollabOfficeService
      */
     public function callbackUrl(CollabDocument $doc): string
     {
-        return $this->pmInternalUrl() . '/collab/callback/' . $doc->id . '?k=' . urlencode($doc->doc_key);
+        return $this->pmInternalUrl() . $this->routePath('pm.collab.callback', $doc) . '?k=' . urlencode($doc->doc_key);
+    }
+
+    /**
+     * 取路由的真实路径（合并站模块前缀为 /pm，不能硬编码根路径）
+     */
+    private function routePath(string $name, CollabDocument $doc): string
+    {
+        $path = parse_url(route($name, ['doc' => $doc]), PHP_URL_PATH);
+
+        return is_string($path) && $path !== '' ? $path : '/pm/collab/' . explode('.', $name)[1] . '/' . $doc->id;
     }
 
     /* ---------------- 内置模板 ---------------- */
