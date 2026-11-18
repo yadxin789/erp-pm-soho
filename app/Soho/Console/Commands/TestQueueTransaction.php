@@ -6,7 +6,7 @@ use App\Soho\Models\ExpressCompany;
 use App\Soho\Models\PlatformOrder;
 use App\Soho\Models\Shop;
 use App\Soho\Models\SystemShipRecord;
-use App\Core\Models\User;
+use App\Soho\Models\User;
 use App\Soho\Jobs\PushShipmentJob;
 use App\Soho\Jobs\TestTransactionRollbackJob;
 use Illuminate\Console\Command;
@@ -23,7 +23,7 @@ class TestQueueTransaction extends Command
      * 命令名称
      * @var string
      */
-    protected $signature = 'soho:test-queue-transaction 
+    protected $signature = 'test:queue-transaction 
                             {--fail : 模拟失败场景，测试事务回滚}
                             {--transaction : 专门测试事务回滚机制}';
 

@@ -21,6 +21,8 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use HasRoles;
+
+    protected $guard_name = 'web';
     use Notifiable;
     use SoftDeletes;
 

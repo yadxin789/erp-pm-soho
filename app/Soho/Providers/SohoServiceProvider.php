@@ -8,7 +8,13 @@ class SohoServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //
+        $this->app->extend('view', function ($factory) {
+            return new \App\Soho\Support\SohoViewFactory(
+                $factory->getEngineResolver(),
+                $factory->getFinder(),
+                $factory->getDispatcher()
+            );
+        });
     }
 
     public function boot(): void

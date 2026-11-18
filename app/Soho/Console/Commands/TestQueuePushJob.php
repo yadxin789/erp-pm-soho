@@ -4,7 +4,7 @@ namespace App\Soho\Console\Commands;
 
 use App\Soho\Models\PlatformOrder;
 use App\Soho\Models\Shop;
-use App\Core\Models\User;
+use App\Soho\Models\User;
 use App\Soho\Jobs\TestTransactionRollbackJob;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +20,7 @@ class TestQueuePushJob extends Command
      * 命令名称
      * @var string
      */
-    protected $signature = 'soho:test-queue-push {--sync : 使用同步队列执行}';
+    protected $signature = 'test:queue-push {--sync : 使用同步队列执行}';
 
     /**
      * 命令描述
