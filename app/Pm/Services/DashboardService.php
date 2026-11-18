@@ -15,9 +15,10 @@ class DashboardService
     public function getAdminDashboard(): array
     {
         return [
-            'userCount' => User::count(),
-            'deptCount' => \App\Pm\Models\Department::count(),
-            'roleCount' => \App\Pm\Models\Role::count(),
+            // 合并站共用一张 users/roles/departments 表，管理员看板按 PM 模块口径统计
+            'userCount' => User::where('module', 'pm')->count(),
+            'deptCount' => \App\Pm\Models\Department::where('module', 'pm')->count(),
+            'roleCount' => \App\Pm\Models\Role::where('name', 'like', 'pm.%')->count(),
             'taskCount' => Task::count(),
             'projectCount' => Project::count(),
             'notificationCount' => \App\Pm\Models\Notification::count(),

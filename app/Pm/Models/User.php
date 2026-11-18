@@ -96,34 +96,52 @@ class User extends Authenticatable
      * 使用 Spatie HasRoles trait 的角色检查方法（推荐）
      * 同时也保留原有方法以保持向后兼容
      */
+    /*
+     * 合并站的角色名统一加模块前缀（pm.admin / pm.project_creator ...），
+     * 这里做名称映射，保持与参考项目 hasRole('admin') 等调用一致。
+     */
+    private const PM_ROLE_ALIASES = [
+        'admin' => 'pm.admin',
+        'project_creator' => 'pm.project_creator',
+        'project_manager' => 'pm.project_manager',
+        'task_executor' => 'pm.task_executor',
+        'task_auditor' => 'pm.task_auditor',
+        'support' => 'pm.support',
+    ];
+
+    private function hasPmRole(string $name): bool
+    {
+        return $this->hasRole(self::PM_ROLE_ALIASES[$name] ?? $name);
+    }
+
     public function isAdmin()
     {
-        return $this->hasRole('admin');
+        return $this->hasPmRole('admin');
     }
 
     public function isProjectCreator()
     {
-        return $this->hasRole('project_creator');
+        return $this->hasPmRole('project_creator');
     }
 
     public function isProjectManager()
     {
-        return $this->hasRole('project_manager');
+        return $this->hasPmRole('project_manager');
     }
 
     public function isTaskExecutor()
     {
-        return $this->hasRole('task_executor');
+        return $this->hasPmRole('task_executor');
     }
 
     public function isTaskAuditor()
     {
-        return $this->hasRole('task_auditor');
+        return $this->hasPmRole('task_auditor');
     }
 
     public function isSupport()
     {
-        return $this->hasRole('support');
+        return $this->hasPmRole('support');
     }
 
     /**
