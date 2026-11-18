@@ -33,9 +33,13 @@ class ExpressController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
-            'code' => 'required|string|max:50|unique:express_company',
+            'code' => 'required|string|max:50|unique:soho_express_company',
             'website' => 'nullable|string|max:200',
             'phone' => 'nullable|string|max:30',
+              'taobao_code' => 'nullable|string|max:50',
+              'jd_code' => 'nullable|string|max:50',
+              'pdd_code' => 'nullable|string|max:50',
+              'amazon_code' => 'nullable|string|max:50',
             'sort_order' => 'integer|min:0',
             'status' => 'integer|in:0,1',
         ]);
@@ -43,7 +47,7 @@ class ExpressController extends Controller
         $validated['status'] = $validated['status'] ?? 1;
         ExpressCompany::create($validated);
 
-        return redirect()->route('express.index')->with('success', '快递公司创建成功');
+        return redirect()->route('soho.express.index')->with('success', '快递公司创建成功');
     }
 
     public function edit(ExpressCompany $express)
@@ -58,18 +62,22 @@ class ExpressController extends Controller
             'code' => ['required', 'string', 'max:50', Rule::unique('express_company')->ignore($express->id)],
             'website' => 'nullable|string|max:200',
             'phone' => 'nullable|string|max:30',
+              'taobao_code' => 'nullable|string|max:50',
+              'jd_code' => 'nullable|string|max:50',
+              'pdd_code' => 'nullable|string|max:50',
+              'amazon_code' => 'nullable|string|max:50',
             'sort_order' => 'integer|min:0',
             'status' => 'integer|in:0,1',
         ]);
 
         $express->update($validated);
 
-        return redirect()->route('express.index')->with('success', '快递公司更新成功');
+        return redirect()->route('soho.express.index')->with('success', '快递公司更新成功');
     }
 
     public function destroy(ExpressCompany $express)
     {
         $express->delete();
-        return redirect()->route('express.index')->with('success', '快递公司删除成功');
+        return redirect()->route('soho.express.index')->with('success', '快递公司删除成功');
     }
 }

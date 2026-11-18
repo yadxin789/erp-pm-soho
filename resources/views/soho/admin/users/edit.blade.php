@@ -50,6 +50,8 @@
                 </div>
             </div>
 
+            <div class="mb-3"><label class="form-label">部门</label><select name="department_id" class="form-select"><option value="">未分配</option>@foreach($departments ?? [] as $dept)<option value="{{ $dept->id }}" {{ old('department_id', $user->department_id) == $dept->id ? 'selected' : '' }}>{{ $dept->name }}</option>@endforeach</select></div>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">

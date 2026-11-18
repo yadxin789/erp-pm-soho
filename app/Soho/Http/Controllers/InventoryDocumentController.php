@@ -55,6 +55,6 @@ class InventoryDocumentController extends Controller
 
         InventoryDocument::create($validated);
 
-        return redirect()->route('inventory.documents')->with('success', '库存单据创建成功');
+        return redirect()->route('soho.inventory.documents')->with('success', '库存单据创建成功');
     }
 }

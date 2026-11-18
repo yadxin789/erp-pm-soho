@@ -60,7 +60,7 @@ class CurrencyController extends Controller
 
         Currency::create($validated);
 
-        return redirect()->route('currency.index')->with('success', '货币创建成功');
+        return redirect()->route('soho.currencies.index')->with('success', '货币创建成功');
     }
 
     /**
@@ -92,7 +92,7 @@ class CurrencyController extends Controller
 
         $currency->update($validated);
 
-        return redirect()->route('currency.index')->with('success', '货币更新成功');
+        return redirect()->route('soho.currencies.index')->with('success', '货币更新成功');
     }
 
     /**
@@ -106,7 +106,7 @@ class CurrencyController extends Controller
 
         $currency->delete();
 
-        return redirect()->route('currency.index')->with('success', '货币删除成功');
+        return redirect()->route('soho.currencies.index')->with('success', '货币删除成功');
     }
 
     /**
@@ -119,6 +119,6 @@ class CurrencyController extends Controller
         $currency->is_default = true;
         $currency->save();
 
-        return redirect()->route('currency.index')->with('success', "已将 {$currency->code} 设为默认货币");
+        return redirect()->route('soho.currencies.index')->with('success', "已将 {$currency->code} 设为默认货币");
     }
 }

@@ -81,7 +81,7 @@ class ProductAttributeController extends Controller
             }
         }
 
-        return redirect()->route('product-attribute.index')->with('success', '商品属性创建成功');
+        return redirect()->route('soho.product-attribute.index')->with('success', '商品属性创建成功');
     }
 
     /**
@@ -134,7 +134,7 @@ class ProductAttributeController extends Controller
             }
         }
 
-        return redirect()->route('product-attribute.index')->with('success', '商品属性更新成功');
+        return redirect()->route('soho.product-attribute.index')->with('success', '商品属性更新成功');
     }
 
     /**
@@ -146,6 +146,6 @@ class ProductAttributeController extends Controller
         $productAttribute->values()->delete();
         $productAttribute->delete();
 
-        return redirect()->route('product-attribute.index')->with('success', '商品属性删除成功');
+        return redirect()->route('soho.product-attribute.index')->with('success', '商品属性删除成功');
     }
 }

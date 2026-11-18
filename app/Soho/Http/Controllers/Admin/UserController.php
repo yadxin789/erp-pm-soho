@@ -25,7 +25,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.users.create');
+        $departments = \App\Core\Models\Department::orderBy('name')->get();
+        return view('admin.users.create', compact('departments'));
     }
 
     public function store(Request $request)

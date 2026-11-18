@@ -64,7 +64,7 @@ class PlatformSkuController extends Controller
 
         PlatformSku::create($validated);
 
-        return redirect()->route('platform-sku.index')->with('success', 'SKU 映射创建成功');
+        return redirect()->route('soho.platform-sku.index')->with('success', 'SKU 映射创建成功');
     }
 
     /**
@@ -96,7 +96,7 @@ class PlatformSkuController extends Controller
 
         $platformSku->update($validated);
 
-        return redirect()->route('platform-sku.index')->with('success', 'SKU 映射更新成功');
+        return redirect()->route('soho.platform-sku.index')->with('success', 'SKU 映射更新成功');
     }
 
     /**
@@ -105,7 +105,7 @@ class PlatformSkuController extends Controller
     public function destroy(PlatformSku $platformSku)
     {
         $platformSku->delete();
-        return redirect()->route('platform-sku.index')->with('success', 'SKU 映射删除成功');
+        return redirect()->route('soho.platform-sku.index')->with('success', 'SKU 映射删除成功');
     }
 
     /**

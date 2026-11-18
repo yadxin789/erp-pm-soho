@@ -79,7 +79,7 @@ class ShopController extends Controller
             ]);
         }
 
-        return redirect()->route('shop.index')->with('success', '店铺创建成功');
+        return redirect()->route('soho.shop.index')->with('success', '店铺创建成功');
     }
 
     /**
@@ -122,7 +122,7 @@ class ShopController extends Controller
 
         $shop->update($validated);
 
-        return redirect()->route('shop.index')->with('success', '店铺更新成功');
+        return redirect()->route('soho.shop.index')->with('success', '店铺更新成功');
     }
 
     /**
@@ -135,7 +135,7 @@ class ShopController extends Controller
         }
 
         $shop->delete();
-        return redirect()->route('shop.index')->with('success', '店铺删除成功');
+        return redirect()->route('soho.shop.index')->with('success', '店铺删除成功');
     }
 
     /**

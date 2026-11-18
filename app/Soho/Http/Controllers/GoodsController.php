@@ -51,7 +51,7 @@ class GoodsController extends Controller
     {
         $validated = $request->validate([
             'goods_name' => 'required|string|max:300',
-            'system_sku' => 'required|string|max:100|unique:system_goods',
+            'system_sku' => 'required|string|max:100|unique:soho_system_goods',
             'barcode' => 'nullable|string|max:100',
             'cost_price' => 'nullable|numeric|min:0',
             'selling_price' => 'nullable|numeric|min:0',
@@ -66,7 +66,7 @@ class GoodsController extends Controller
         
         SystemGoods::create($validated);
 
-        return redirect()->route('goods.index')->with('success', '商品创建成功');
+        return redirect()->route('soho.goods.index')->with('success', '商品创建成功');
     }
 
     /**
@@ -97,7 +97,7 @@ class GoodsController extends Controller
 
         $goods->update($validated);
 
-        return redirect()->route('goods.index')->with('success', '商品更新成功');
+        return redirect()->route('soho.goods.index')->with('success', '商品更新成功');
     }
 
     /**
@@ -110,7 +110,7 @@ class GoodsController extends Controller
         }
 
         $goods->delete();
-        return redirect()->route('goods.index')->with('success', '商品删除成功');
+        return redirect()->route('soho.goods.index')->with('success', '商品删除成功');
     }
 
     /**

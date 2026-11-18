@@ -142,7 +142,7 @@ class AuthorizationFailureController extends Controller
             'resolution_note' => $request->input('resolution_note'),
         ]);
 
-        return redirect()->route('shop.authorization-failures.show', $failure)
+        return redirect()->route('soho.shop.authorization-failures.show', $failure)
             ->with('success', '授权失败记录已标记为已解决');
     }
 

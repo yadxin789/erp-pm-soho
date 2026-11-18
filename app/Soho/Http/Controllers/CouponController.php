@@ -74,7 +74,7 @@ class CouponController extends Controller
 
         Coupon::create($validated);
 
-        return redirect()->route('coupon.index')->with('success', '优惠券创建成功');
+        return redirect()->route('soho.coupon.index')->with('success', '优惠券创建成功');
     }
 
     /**
@@ -105,7 +105,7 @@ class CouponController extends Controller
 
         $coupon->update($validated);
 
-        return redirect()->route('coupon.index')->with('success', '优惠券更新成功');
+        return redirect()->route('soho.coupon.index')->with('success', '优惠券更新成功');
     }
 
     /**
@@ -119,7 +119,7 @@ class CouponController extends Controller
 
         $coupon->delete();
 
-        return redirect()->route('coupon.index')->with('success', '优惠券删除成功');
+        return redirect()->route('soho.coupon.index')->with('success', '优惠券删除成功');
     }
 
     /**
@@ -166,7 +166,7 @@ class CouponController extends Controller
 
         Coupon::insert($coupons);
 
-        return redirect()->route('coupon.index')->with('success', "成功生成 {$validated['count']} 张优惠券");
+        return redirect()->route('soho.coupon.index')->with('success', "成功生成 {$validated['count']} 张优惠券");
     }
 
     /**

@@ -57,7 +57,7 @@ class ExportTaskController extends Controller
             'expires_at' => now()->addDays(7),
         ]);
 
-        return redirect()->route('export_tasks.index')->with('success', '导出任务已创建');
+        return redirect()->route('soho.export_tasks.index')->with('success', '导出任务已创建');
     }
 
     /**

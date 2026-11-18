@@ -72,6 +72,8 @@
                 </div>
             </div>
 
+            <div class="mb-3"><label class="form-label">部门</label><select name="department_id" class="form-select"><option value="">未分配</option>@foreach($departments ?? [] as $dept)<option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>{{ $dept->name }}</option>@endforeach</select></div>
+
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">创建用户</button>
                 <a href="{{ route('soho.admin.users.index') }}" class="btn btn-secondary">返回</a>

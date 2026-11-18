@@ -178,7 +178,7 @@ class ChatController extends Controller
             ]);
         }
 
-        return redirect()->route('chat.index')->with('success', '已清空你的群聊留言板');
+        return redirect()->route('soho.chat.index')->with('success', '已清空你的群聊留言板');
     }
 
     /**

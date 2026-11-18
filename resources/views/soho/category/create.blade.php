@@ -6,8 +6,9 @@
         <form method="POST" action="{{ route('soho.category.store') }}">@csrf
             <div class="mb-3"><label class="form-label">名称 <span class="text-danger">*</span></label><input type="text" name="name" class="form-control" value="{{ old('name') }}" required></div>
             <div class="mb-3"><label class="form-label">上级分类</label><select name="parent_id" class="form-select"><option value="">无</option>@foreach($categories as $c)<option value="{{ $c->id }}">{{ $c->name }}</option>@endforeach</select></div>
-            <div class="mb-3"><label class="form-label">排序</label><input type="number" name="sort" class="form-control" value="{{ old('sort', 0) }}"></div>
-            <div class="mb-3"><div class="form-check"><input type="checkbox" name="status" class="form-check-input" value="1" {{ old('status', true) ? 'checked' : '' }}><label class="form-check-label">启用</label></div></div>
+            <div class="mb-3"><label class="form-label">别名</label><input type="text" name="slug" class="form-control" value="{{ old('slug') }}"></div>
+              <div class="mb-3"><label class="form-label">排序</label><input type="number" name="sort_order" class="form-control" value="{{ old('sort_order', 0) }}"></div>
+            <div class="mb-3"><div class="form-check"><input type="checkbox" name="is_active" class="form-check-input" value="1" {{ old('is_active', true) ? 'checked' : '' }}><label class="form-check-label">启用</label></div></div>
             <button type="submit" class="btn btn-primary">创建</button><a href="{{ route('soho.category.index') }}" class="btn btn-secondary">返回</a>
         </form>
     </div>

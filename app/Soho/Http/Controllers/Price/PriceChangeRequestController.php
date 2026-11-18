@@ -121,7 +121,7 @@ class PriceChangeRequestController extends Controller
 
         PriceChangeRequest::create($validated);
 
-        return redirect()->route('price-change-requests.index')->with('success', '调价申请创建成功');
+        return redirect()->route('soho.price.change.requests.index')->with('success', '调价申请创建成功');
     }
 
     /**
@@ -163,7 +163,7 @@ class PriceChangeRequestController extends Controller
         }
 
         if (!$priceChangeRequest->isPending()) {
-            return redirect()->route('price-change-requests.show', $priceChangeRequest)
+            return redirect()->route('soho.price.change.requests.show', $priceChangeRequest)
                 ->with('error', '仅待审批状态的申请可以编辑');
         }
 
@@ -216,7 +216,7 @@ class PriceChangeRequestController extends Controller
 
         $priceChangeRequest->update($validated);
 
-        return redirect()->route('price-change-requests.show', $priceChangeRequest)
+        return redirect()->route('soho.price.change.requests.show', $priceChangeRequest)
             ->with('success', '调价申请更新成功');
     }
 
@@ -239,6 +239,6 @@ class PriceChangeRequestController extends Controller
 
         $priceChangeRequest->update(['status' => 'cancelled']);
 
-        return redirect()->route('price-change-requests.index')->with('success', '调价申请已取消');
+        return redirect()->route('soho.price.change.requests.index')->with('success', '调价申请已取消');
     }
 }

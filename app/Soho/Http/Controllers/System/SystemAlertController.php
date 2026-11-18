@@ -156,7 +156,7 @@ class SystemAlertController extends Controller
         $alert->delete();
 
         return redirect()
-            ->route('system.alerts.index')
+            ->route('soho.system.alerts.index')
             ->with('success', '告警已删除');
     }
 }

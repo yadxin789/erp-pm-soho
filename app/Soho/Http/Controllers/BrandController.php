@@ -31,13 +31,14 @@ class BrandController extends Controller
             'code' => 'nullable|string|max:50',
             'logo' => 'nullable|string',
             'description' => 'nullable|string',
+              'sort' => 'nullable|integer|min:0',
             'status' => 'in:active,inactive',
         ]);
 
         $validated['status'] = $validated['status'] ?? 'active';
         Brand::create($validated);
 
-        return redirect()->route('brand.index')->with('success', '品牌创建成功');
+        return redirect()->route('soho.brand.index')->with('success', '品牌创建成功');
     }
 
     public function edit(Brand $brand)
@@ -52,12 +53,13 @@ class BrandController extends Controller
             'code' => ['nullable', 'string', 'max:50'],
             'logo' => 'nullable|string',
             'description' => 'nullable|string',
+              'sort' => 'nullable|integer|min:0',
             'status' => 'in:active,inactive',
         ]);
 
         $brand->update($validated);
 
-        return redirect()->route('brand.index')->with('success', '品牌更新成功');
+        return redirect()->route('soho.brand.index')->with('success', '品牌更新成功');
     }
 
     public function destroy(Brand $brand)
@@ -67,6 +69,6 @@ class BrandController extends Controller
         }
 
         $brand->delete();
-        return redirect()->route('brand.index')->with('success', '品牌删除成功');
+        return redirect()->route('soho.brand.index')->with('success', '品牌删除成功');
     }
 }

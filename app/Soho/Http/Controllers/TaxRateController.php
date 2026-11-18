@@ -61,7 +61,7 @@ class TaxRateController extends Controller
 
         TaxRate::create($validated);
 
-        return redirect()->route('tax-rate.index')->with('success', '税率创建成功');
+        return redirect()->route('soho.tax-rate.index')->with('success', '税率创建成功');
     }
 
     /**
@@ -90,7 +90,7 @@ class TaxRateController extends Controller
 
         $taxRate->update($validated);
 
-        return redirect()->route('tax-rate.index')->with('success', '税率更新成功');
+        return redirect()->route('soho.tax-rate.index')->with('success', '税率更新成功');
     }
 
     /**
@@ -100,6 +100,6 @@ class TaxRateController extends Controller
     {
         $taxRate->delete();
 
-        return redirect()->route('tax-rate.index')->with('success', '税率删除成功');
+        return redirect()->route('soho.tax-rate.index')->with('success', '税率删除成功');
     }
 }

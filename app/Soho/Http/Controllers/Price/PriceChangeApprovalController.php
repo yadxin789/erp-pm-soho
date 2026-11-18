@@ -118,7 +118,7 @@ class PriceChangeApprovalController extends Controller
             'approved_at' => now(),
         ]);
 
-        return redirect()->route('price-change-approvals.index')
+        return redirect()->route('soho.price.change.approvals.index')
             ->with('success', '调价申请已批准');
     }
 
@@ -154,7 +154,7 @@ class PriceChangeApprovalController extends Controller
             'approved_at' => now(),
         ]);
 
-        return redirect()->route('price-change-approvals.index')
+        return redirect()->route('soho.price.change.approvals.index')
             ->with('success', '调价申请已驳回');
     }
 

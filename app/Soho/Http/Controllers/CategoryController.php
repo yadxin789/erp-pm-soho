@@ -30,7 +30,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:100|unique:product_categories',
+            'name' => 'required|string|max:100|unique:soho_product_categories',
+              'slug' => 'nullable|string|max:100',
             'parent_id' => 'nullable|exists:soho_product_categories,id',
             'sort_order' => 'integer|min:0',
             'is_active' => 'boolean',
@@ -39,7 +40,7 @@ class CategoryController extends Controller
         $validated['is_active'] = $validated['is_active'] ?? true;
         ProductCategory::create($validated);
 
-        return redirect()->route('category.index')->with('success', '分类创建成功');
+        return redirect()->route('soho.category.index')->with('success', '分类创建成功');
     }
 
     public function edit(ProductCategory $category)
@@ -55,6 +56,7 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:100', Rule::unique('soho_product_categories')->ignore($category->id)],
+            'slug' => 'nullable|string|max:100',
             'parent_id' => 'nullable|exists:soho_product_categories,id',
             'sort_order' => 'integer|min:0',
             'is_active' => 'boolean',
@@ -62,7 +64,7 @@ class CategoryController extends Controller
 
         $category->update($validated);
 
-        return redirect()->route('category.index')->with('success', '分类更新成功');
+        return redirect()->route('soho.category.index')->with('success', '分类更新成功');
     }
 
     public function destroy(ProductCategory $category)
@@ -76,6 +78,6 @@ class CategoryController extends Controller
         }
 
         $category->delete();
-        return redirect()->route('category.index')->with('success', '分类删除成功');
+        return redirect()->route('soho.category.index')->with('success', '分类删除成功');
     }
 }

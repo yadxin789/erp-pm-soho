@@ -85,7 +85,7 @@ class SystemParameterController extends Controller
         SystemParameter::create($validated);
 
         return redirect()
-            ->route('system.parameters.index')
+            ->route('soho.system.parameters.index')
             ->with('success', "系统参数「{$validated['param_name']}」创建成功");
     }
 
@@ -128,7 +128,7 @@ class SystemParameterController extends Controller
         $parameter->save();
 
         return redirect()
-            ->route('system.parameters.index')
+            ->route('soho.system.parameters.index')
             ->with('success', "系统参数「{$validated['param_name']}」更新成功");
     }
 
@@ -141,7 +141,7 @@ class SystemParameterController extends Controller
         $parameter->delete();
 
         return redirect()
-            ->route('system.parameters.index')
+            ->route('soho.system.parameters.index')
             ->with('success', "系统参数「{$paramName}」已删除");
     }
 

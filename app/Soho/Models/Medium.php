@@ -85,6 +85,6 @@ class Medium extends Model
      */
     public function getDownloadUrlAttribute(): string
     {
-        return route('media.download', $this);
+        return route('soho.media.download', $this);
     }
 }

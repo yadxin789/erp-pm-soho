@@ -35,7 +35,7 @@ class WarehouseController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
-            'code' => 'required|string|max:50|unique:warehouses',
+            'code' => 'required|string|max:50|unique:soho_warehouses',
             'type' => 'required|string|max:30',
             'country_code' => 'nullable|string|max:10',
             'address' => 'nullable|string|max:500',
@@ -48,7 +48,7 @@ class WarehouseController extends Controller
         $validated['status'] = $validated['status'] ?? 'active';
         Warehouse::create($validated);
 
-        return redirect()->route('warehouse.index')->with('success', '仓库创建成功');
+        return redirect()->route('soho.warehouse.index')->with('success', '仓库创建成功');
     }
 
     public function edit(Warehouse $warehouse)
@@ -72,7 +72,7 @@ class WarehouseController extends Controller
 
         $warehouse->update($validated);
 
-        return redirect()->route('warehouse.index')->with('success', '仓库更新成功');
+        return redirect()->route('soho.warehouse.index')->with('success', '仓库更新成功');
     }
 
     public function destroy(Warehouse $warehouse)
@@ -82,6 +82,6 @@ class WarehouseController extends Controller
         }
 
         $warehouse->delete();
-        return redirect()->route('warehouse.index')->with('success', '仓库删除成功');
+        return redirect()->route('soho.warehouse.index')->with('success', '仓库删除成功');
     }
 }

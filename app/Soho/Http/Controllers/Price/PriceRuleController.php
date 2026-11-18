@@ -100,7 +100,7 @@ class PriceRuleController extends Controller
 
         PriceRule::create($validated);
 
-        return redirect()->route('price-rules.index')->with('success', '价格规则创建成功');
+        return redirect()->route('soho.price.rules.index')->with('success', '价格规则创建成功');
     }
 
     /**
@@ -158,7 +158,7 @@ class PriceRuleController extends Controller
 
         $priceRule->update($validated);
 
-        return redirect()->route('price-rules.index')->with('success', '价格规则更新成功');
+        return redirect()->route('soho.price.rules.index')->with('success', '价格规则更新成功');
     }
 
     /**
@@ -176,6 +176,6 @@ class PriceRuleController extends Controller
 
         $priceRule->delete();
 
-        return redirect()->route('price-rules.index')->with('success', '价格规则删除成功');
+        return redirect()->route('soho.price.rules.index')->with('success', '价格规则删除成功');
     }
 }

@@ -53,7 +53,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'product_code' => 'required|string|max:100|unique:products',
+            'product_code' => 'required|string|max:100|unique:soho_products',
             'subtitle' => 'nullable|string|max:255',
             'category_id' => 'nullable|exists:soho_product_categories,id',
             'brand_id' => 'nullable|exists:soho_brands,id',
@@ -90,7 +90,7 @@ class ProductController extends Controller
             }
         });
 
-        return redirect()->route('product.index')->with('success', '商品创建成功');
+        return redirect()->route('soho.product.index')->with('success', '商品创建成功');
     }
 
     /**
@@ -181,7 +181,7 @@ class ProductController extends Controller
             ProductSku::whereIn('id', $toDelete)->delete();
         });
 
-        return redirect()->route('product.index')->with('success', '商品更新成功');
+        return redirect()->route('soho.product.index')->with('success', '商品更新成功');
     }
 
     /**
@@ -195,6 +195,6 @@ class ProductController extends Controller
         }
 
         $product->delete();
-        return redirect()->route('product.index')->with('success', '商品删除成功');
+        return redirect()->route('soho.product.index')->with('success', '商品删除成功');
     }
 }

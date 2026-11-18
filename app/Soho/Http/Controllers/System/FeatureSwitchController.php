@@ -86,7 +86,7 @@ class FeatureSwitchController extends Controller
         FeatureSwitch::create($validated);
 
         return redirect()
-            ->route('system.features.index')
+            ->route('soho.system.features.index')
             ->with('success', "功能开关「{$validated['feature_name']}」创建成功");
     }
 
@@ -136,7 +136,7 @@ class FeatureSwitchController extends Controller
         $feature->update($validated);
 
         return redirect()
-            ->route('system.features.index')
+            ->route('soho.system.features.index')
             ->with('success', "功能开关「{$validated['feature_name']}」更新成功");
     }
 
@@ -149,7 +149,7 @@ class FeatureSwitchController extends Controller
         $feature->delete();
 
         return redirect()
-            ->route('system.features.index')
+            ->route('soho.system.features.index')
             ->with('success', "功能开关「{$featureName}」已删除");
     }
 

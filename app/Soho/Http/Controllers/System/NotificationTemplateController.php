@@ -84,7 +84,7 @@ class NotificationTemplateController extends Controller
         NotificationTemplate::create($validated);
 
         return redirect()
-            ->route('system.notifications.index')
+            ->route('soho.system.notifications.index')
             ->with('success', "通知模板「{$validated['template_name']}」创建成功");
     }
 
@@ -127,7 +127,7 @@ class NotificationTemplateController extends Controller
         $notification->update($validated);
 
         return redirect()
-            ->route('system.notifications.index')
+            ->route('soho.system.notifications.index')
             ->with('success', "通知模板「{$validated['template_name']}」更新成功");
     }
 
@@ -140,7 +140,7 @@ class NotificationTemplateController extends Controller
         $notification->delete();
 
         return redirect()
-            ->route('system.notifications.index')
+            ->route('soho.system.notifications.index')
             ->with('success', "通知模板「{$name}」已删除");
     }
 

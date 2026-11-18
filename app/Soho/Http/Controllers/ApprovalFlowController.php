@@ -61,7 +61,7 @@ class ApprovalFlowController extends Controller
 
         ApprovalFlow::create($validated);
 
-        return redirect()->route('approval_flows.index')->with('success', '审批流创建成功');
+        return redirect()->route('soho.approval_flows.index')->with('success', '审批流创建成功');
     }
 
     /**
@@ -89,6 +89,6 @@ class ApprovalFlowController extends Controller
 
         $approvalFlow->update($validated);
 
-        return redirect()->route('approval_flows.index')->with('success', '审批流更新成功');
+        return redirect()->route('soho.approval_flows.index')->with('success', '审批流更新成功');
     }
 }

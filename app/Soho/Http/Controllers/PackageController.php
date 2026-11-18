@@ -82,7 +82,7 @@ class PackageController extends Controller
             ]);
         }
 
-        return redirect()->route('package.index')->with('success', '包裹创建成功');
+        return redirect()->route('soho.package.index')->with('success', '包裹创建成功');
     }
 
     /**
@@ -112,6 +112,6 @@ class PackageController extends Controller
             'express_company_id', 'tracking_number', 'weight', 'status', 'remark'
         ]));
 
-        return redirect()->route('package.index')->with('success', '包裹信息已更新');
+        return redirect()->route('soho.package.index')->with('success', '包裹信息已更新');
     }
 }

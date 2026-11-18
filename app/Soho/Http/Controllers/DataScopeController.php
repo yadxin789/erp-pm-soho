@@ -56,7 +56,7 @@ class DataScopeController extends Controller
 
         UserDataScope::create($validated);
 
-        return redirect()->route('data_scopes.index')->with('success', '数据权限创建成功');
+        return redirect()->route('soho.data_scopes.index')->with('success', '数据权限创建成功');
     }
 
     /**
@@ -83,6 +83,6 @@ class DataScopeController extends Controller
 
         $dataScope->update($validated);
 
-        return redirect()->route('data_scopes.index')->with('success', '数据权限更新成功');
+        return redirect()->route('soho.data_scopes.index')->with('success', '数据权限更新成功');
     }
 }

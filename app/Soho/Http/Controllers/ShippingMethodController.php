@@ -65,7 +65,7 @@ class ShippingMethodController extends Controller
 
         ShippingMethod::create($validated);
 
-        return redirect()->route('shipping-method.index')->with('success', '配送方式创建成功');
+        return redirect()->route('soho.shipping-method.index')->with('success', '配送方式创建成功');
     }
 
     /**
@@ -91,7 +91,7 @@ class ShippingMethodController extends Controller
 
         $shippingMethod->update($validated);
 
-        return redirect()->route('shipping-method.index')->with('success', '配送方式更新成功');
+        return redirect()->route('soho.shipping-method.index')->with('success', '配送方式更新成功');
     }
 
     /**
@@ -101,6 +101,6 @@ class ShippingMethodController extends Controller
     {
         $shippingMethod->delete();
 
-        return redirect()->route('shipping-method.index')->with('success', '配送方式删除成功');
+        return redirect()->route('soho.shipping-method.index')->with('success', '配送方式删除成功');
     }
 }

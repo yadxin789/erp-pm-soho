@@ -153,7 +153,7 @@ class PriceChangeTaskController extends Controller
             }
         }
 
-        return redirect()->route('price-change-tasks.index')->with('success', '调价任务创建成功');
+        return redirect()->route('soho.price.change.tasks.index')->with('success', '调价任务创建成功');
     }
 
     /**
@@ -224,7 +224,7 @@ class PriceChangeTaskController extends Controller
                 }
             }
 
-            return redirect()->route('price-change-tasks.show', $priceChangeTask)
+            return redirect()->route('soho.price.change.tasks.show', $priceChangeTask)
                 ->with('success', '调价任务执行成功');
         } else {
             $priceChangeTask->update([
@@ -233,7 +233,7 @@ class PriceChangeTaskController extends Controller
                 'result_data' => $executionResult['data'] ?? null,
             ]);
 
-            return redirect()->route('price-change-tasks.show', $priceChangeTask)
+            return redirect()->route('soho.price.change.tasks.show', $priceChangeTask)
                 ->with('error', '调价任务执行失败：' . $executionResult['message']);
         }
     }
@@ -264,7 +264,7 @@ class PriceChangeTaskController extends Controller
             }
         }
 
-        return redirect()->route('price-change-tasks.index')->with('success', '调价任务已取消');
+        return redirect()->route('soho.price.change.tasks.index')->with('success', '调价任务已取消');
     }
 
     /**

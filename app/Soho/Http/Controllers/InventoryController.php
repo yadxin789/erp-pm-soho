@@ -144,7 +144,7 @@ class InventoryController extends Controller
         $inventory->increment('actual_quantity', $request->quantity);
         $inventory->increment('available_quantity', $request->quantity);
 
-        return redirect()->route('inventory.in')->with('success', '入库成功');
+        return redirect()->route('soho.inventory.in')->with('success', '入库成功');
     }
 
     /**
@@ -203,7 +203,7 @@ class InventoryController extends Controller
         $inventory->decrement('actual_quantity', $request->quantity);
         $inventory->decrement('available_quantity', $request->quantity);
 
-        return redirect()->route('inventory.out')->with('success', '出库成功');
+        return redirect()->route('soho.inventory.out')->with('success', '出库成功');
     }
 
     /**
@@ -270,7 +270,7 @@ class InventoryController extends Controller
             'remark' => $request->remark,
         ]);
 
-        return redirect()->route('inventory.transfer')->with('success', '调拨成功');
+        return redirect()->route('soho.inventory.transfer')->with('success', '调拨成功');
     }
 
     /**
@@ -335,6 +335,6 @@ class InventoryController extends Controller
             }
         }
 
-        return redirect()->route('inventory.stocktake')->with('success', '盘点完成');
+        return redirect()->route('soho.inventory.stocktake')->with('success', '盘点完成');
     }
 }

@@ -54,7 +54,7 @@ class TaxEntityController extends Controller
 
         TaxEntity::create($validated);
 
-        return redirect()->route('tax_entities.index')->with('success', '税务主体创建成功');
+        return redirect()->route('soho.tax_entities.index')->with('success', '税务主体创建成功');
     }
 
     /**
@@ -80,6 +80,6 @@ class TaxEntityController extends Controller
 
         $taxEntity->update($validated);
 
-        return redirect()->route('tax_entities.index')->with('success', '税务主体更新成功');
+        return redirect()->route('soho.tax_entities.index')->with('success', '税务主体更新成功');
     }
 }

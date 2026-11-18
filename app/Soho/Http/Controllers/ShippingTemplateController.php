@@ -57,7 +57,7 @@ class ShippingTemplateController extends Controller
 
         ShippingTemplate::create($validated);
 
-        return redirect()->route('shipping-templates.index')->with('success', '运费模板创建成功');
+        return redirect()->route('soho.shipping-templates.index')->with('success', '运费模板创建成功');
     }
 
     /**
@@ -86,7 +86,7 @@ class ShippingTemplateController extends Controller
 
         $shippingTemplate->update($validated);
 
-        return redirect()->route('shipping-templates.index')->with('success', '运费模板更新成功');
+        return redirect()->route('soho.shipping-templates.index')->with('success', '运费模板更新成功');
     }
 
     /**
@@ -96,7 +96,7 @@ class ShippingTemplateController extends Controller
     {
         $shippingTemplate->delete();
 
-        return redirect()->route('shipping-templates.index')->with('success', '运费模板删除成功');
+        return redirect()->route('soho.shipping-templates.index')->with('success', '运费模板删除成功');
     }
 
     /**

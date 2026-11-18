@@ -87,7 +87,7 @@ class FinanceController extends Controller
             'remark' => $request->remark,
         ]);
 
-        return redirect()->route('finance.reconcile')->with('success', '对账记录已创建');
+        return redirect()->route('soho.finance.reconcile')->with('success', '对账记录已创建');
     }
 
     /**
@@ -132,7 +132,7 @@ class FinanceController extends Controller
             'remark' => $request->remark,
         ]);
 
-        return redirect()->route('finance.settle')->with('success', '结算记录已创建');
+        return redirect()->route('soho.finance.settle')->with('success', '结算记录已创建');
     }
 
     /**

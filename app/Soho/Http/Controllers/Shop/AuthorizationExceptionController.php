@@ -188,7 +188,7 @@ class AuthorizationExceptionController extends Controller
             'handle_note' => $request->input('handle_note'),
         ]);
 
-        return redirect()->route('shop.authorization-exceptions.show', $authorizationException)
+        return redirect()->route('soho.shop.authorization-exceptions.show', $authorizationException)
             ->with('success', '授权异常已标记为已处理');
     }
 

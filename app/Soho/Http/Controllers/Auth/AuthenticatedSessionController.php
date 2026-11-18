@@ -38,7 +38,7 @@ class AuthenticatedSessionController extends Controller
                 'last_login_ip' => $request->ip(),
             ]);
 
-            return redirect()->intended(route('dashboard'))->with('success', '登录成功！');
+            return redirect()->intended(route('soho.dashboard'))->with('success', '登录成功！');
         }
 
         throw ValidationException::withMessages([

@@ -72,7 +72,7 @@ class PlatformAccountController extends Controller
 
         PlatformAccount::create($validated);
 
-        return redirect()->route('platform_accounts.index')->with('success', '平台账号创建成功');
+        return redirect()->route('soho.platform_accounts.index')->with('success', '平台账号创建成功');
     }
 
     /**
@@ -112,7 +112,7 @@ class PlatformAccountController extends Controller
 
         $platformAccount->update($validated);
 
-        return redirect()->route('platform_accounts.index')->with('success', '平台账号更新成功');
+        return redirect()->route('soho.platform_accounts.index')->with('success', '平台账号更新成功');
     }
 
     /**

@@ -97,7 +97,7 @@ class FileStorageController extends Controller
         ]);
 
         return redirect()
-            ->route('system.storage.index')
+            ->route('soho.system.storage.index')
             ->with('success', "文件存储「{$validated['name']}」创建成功");
     }
 
@@ -156,7 +156,7 @@ class FileStorageController extends Controller
         ]);
 
         return redirect()
-            ->route('system.storage.index')
+            ->route('soho.system.storage.index')
             ->with('success', "文件存储「{$validated['name']}」更新成功");
     }
 
@@ -169,7 +169,7 @@ class FileStorageController extends Controller
         $storage->delete();
 
         return redirect()
-            ->route('system.storage.index')
+            ->route('soho.system.storage.index')
             ->with('success', "文件存储「{$name}」已删除");
     }
 

@@ -69,7 +69,7 @@ class IpWhitelistController extends Controller
         IpWhitelist::create($validated);
 
         return redirect()
-            ->route('security.ip-whitelist')
+            ->route('soho.security.ip-whitelist.index')
             ->with('success', "IP 规则「{$validated['ip_address']}」添加成功");
     }
 
@@ -102,7 +102,7 @@ class IpWhitelistController extends Controller
         $ipWhitelist->update($validated);
 
         return redirect()
-            ->route('security.ip-whitelist')
+            ->route('soho.security.ip-whitelist.index')
             ->with('success', "IP 规则「{$validated['ip_address']}」更新成功");
     }
 

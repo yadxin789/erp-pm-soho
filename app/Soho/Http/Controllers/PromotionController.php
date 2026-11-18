@@ -66,7 +66,7 @@ class PromotionController extends Controller
 
         Promotion::create($validated);
 
-        return redirect()->route('promotion.index')->with('success', '促销活动创建成功');
+        return redirect()->route('soho.promotion.index')->with('success', '促销活动创建成功');
     }
 
     /**
@@ -95,7 +95,7 @@ class PromotionController extends Controller
 
         $promotion->update($validated);
 
-        return redirect()->route('promotion.index')->with('success', '促销活动更新成功');
+        return redirect()->route('soho.promotion.index')->with('success', '促销活动更新成功');
     }
 
     /**
@@ -105,7 +105,7 @@ class PromotionController extends Controller
     {
         $promotion->delete();
 
-        return redirect()->route('promotion.index')->with('success', '促销活动删除成功');
+        return redirect()->route('soho.promotion.index')->with('success', '促销活动删除成功');
     }
 
     /**

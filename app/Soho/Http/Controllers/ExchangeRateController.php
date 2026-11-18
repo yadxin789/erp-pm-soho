@@ -46,6 +46,6 @@ class ExchangeRateController extends Controller
             $validated
         );
 
-        return redirect()->route('exchange_rates.index')->with('success', '汇率更新成功');
+        return redirect()->route('soho.exchange_rates.index')->with('success', '汇率更新成功');
     }
 }

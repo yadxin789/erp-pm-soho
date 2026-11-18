@@ -107,7 +107,7 @@ class CustomerController extends Controller
         $customer = Customer::create($validated);
 
         return redirect()
-            ->route('customer.show', $customer)
+            ->route('soho.customer.show', $customer)
             ->with('success', '客户创建成功');
     }
 
@@ -184,7 +184,7 @@ class CustomerController extends Controller
         $customer->update($validated);
 
         return redirect()
-            ->route('customer.show', $customer)
+            ->route('soho.customer.show', $customer)
             ->with('success', '客户信息更新成功');
     }
 
@@ -206,7 +206,7 @@ class CustomerController extends Controller
         $customer->delete();
 
         return redirect()
-            ->route('customer.index')
+            ->route('soho.customer.index')
             ->with('success', '客户已删除');
     }
 
@@ -273,7 +273,7 @@ class CustomerController extends Controller
         CustomerGroup::create($validated);
 
         return redirect()
-            ->route('customer.groups')
+            ->route('soho.customer.groups')
             ->with('success', '分组创建成功');
     }
 
@@ -297,7 +297,7 @@ class CustomerController extends Controller
         $group->update($validated);
 
         return redirect()
-            ->route('customer.groups')
+            ->route('soho.customer.groups')
             ->with('success', '分组更新成功');
     }
 
@@ -315,7 +315,7 @@ class CustomerController extends Controller
         $group->delete();
 
         return redirect()
-            ->route('customer.groups')
+            ->route('soho.customer.groups')
             ->with('success', '分组删除成功');
     }
 }
