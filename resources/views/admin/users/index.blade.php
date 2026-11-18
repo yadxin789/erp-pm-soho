@@ -33,7 +33,7 @@
                                         <span class="badge border bg-light text-secondary-emphasis border-secondary-subtle">
                                             {{ \App\Erp\Support\RoleCatalog::label($user->roles->first()) }}
                                         </span>
-                                        <span class="font-monospace small text-muted ms-1">{{ $user->roles->first()->name }}</span>
+                                        <span class="font-monospace small text-muted ms-1">{{ \App\Erp\Support\RoleCatalog::key($user->roles->first()) }}</span>
                                     @else
                                         -
                                     @endif

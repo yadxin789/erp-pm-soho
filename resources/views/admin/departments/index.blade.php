@@ -37,7 +37,7 @@
                                 <td class="text-center">{{ $dept->sort_order }}</td>
                                 <td class="text-center">
                                     <span class="badge border {{ $dept->active ? 'bg-success-subtle text-success-emphasis border-success-subtle' : 'bg-secondary-subtle text-secondary-emphasis border-secondary-subtle' }}">
-                                        {{ $dept->active ? '启用' : '停用' }}
+                                        {{ ($dept->status ?? 1) == 1 ? '启用' : '停用' }}
                                     </span>
                                 </td>
                                 <td class="text-end">

@@ -12,7 +12,13 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::with('permissions')->paginate(20);
+        $roles = Role::where('name', 'like', 'erp.%')->with('permissions')->paginate(20);
+
+        // 按岗位字典顺序展示（与参考目录一致：admin → sales → purchase → production → warehouse → quality → accountant → viewer → hr → project → asset → ecommerce）
+        $order = array_flip(array_keys(RoleCatalog::CATALOG));
+        $roles->setCollection(
+            $roles->getCollection()->sortBy(fn ($role) => $order[RoleCatalog::key($role)] ?? 999)->values()
+        );
 
         return view('admin.roles.index', [
             'roles' => $roles,
@@ -22,7 +28,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        $permissions = Permission::orderBy('group')->orderBy('name')->get();
+        $permissions = Permission::where('group', 'erp')->orderBy('name')->get();
 
         return view('admin.roles.create', [
             'permissions' => $permissions,
@@ -55,7 +61,7 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        $permissions = Permission::orderBy('group')->orderBy('name')->get();
+        $permissions = Permission::where('group', 'erp')->orderBy('name')->get();
 
         return view('admin.roles.edit', [
             'role' => $role,

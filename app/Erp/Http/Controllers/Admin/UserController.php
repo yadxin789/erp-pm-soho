@@ -11,13 +11,19 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->paginate(20);
+        // 模块口径：ERP 后台只列出 ERP 模块账号（跨模块测试账号 @demo.local 不计入）
+        $users = User::where('module', 'erp')
+            ->where('email', 'not like', '%@demo.local')
+            ->with('roles')
+            ->paginate(20);
+
         return view('admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::where('name', 'like', 'erp.%')->get();
+
         return view('admin.users.create', compact('roles'));
     }
 
@@ -34,6 +40,7 @@ class UserController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
+            'module' => 'erp',
         ]);
 
         $user->assignRole($validated['role']);
@@ -43,7 +50,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $roles = Role::all();
+        $roles = Role::where('name', 'like', 'erp.%')->get();
         return view('admin.users.edit', compact('user', 'roles'));
     }
 

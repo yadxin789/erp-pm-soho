@@ -38,7 +38,8 @@ class EnsureRoleScope
         }
 
         if (! $request->isMethod('GET')) {
-            abort(403, $message);
+            // 口径：不出现 403 页，写操作同样回落到业务首页并提示
+            return redirect()->to(RoleScope::home($user))->with('warning', $message);
         }
 
         return redirect()->to(RoleScope::home($user))->with('warning', $message);

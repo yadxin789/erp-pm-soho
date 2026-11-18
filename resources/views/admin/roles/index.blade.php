@@ -26,10 +26,10 @@
                     </thead>
                     <tbody>
                         @forelse($roles as $role)
-                            @php $meta = $catalog[$role->name] ?? null; @endphp
+                            @php $meta = $catalog[\App\Erp\Support\RoleCatalog::key($role)] ?? null; @endphp
                             <tr>
                                 <td class="fw-semibold">{{ \App\Erp\Support\RoleCatalog::label($role) }}</td>
-                                <td class="font-monospace small text-muted">{{ $role->name }}</td>
+                                <td class="font-monospace small text-muted">{{ \App\Erp\Support\RoleCatalog::key($role) }}</td>
                                 <td>{{ $meta['department'] ?? '—' }}</td>
                                 <td class="d-none d-lg-table-cell small text-muted">{{ $meta['desc'] ?? '—' }}</td>
                                 <td class="text-end">{{ $role->permissions->count() }}</td>

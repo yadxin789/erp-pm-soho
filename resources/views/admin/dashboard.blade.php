@@ -15,7 +15,7 @@
             <div class="card border-primary-subtle h-100">
                 <div class="card-body">
                     <div class="text-muted small">用户总数</div>
-                    <div class="fs-3 fw-bold text-primary">{{ \App\Core\Models\User::count() }}</div>
+                    <div class="fs-3 fw-bold text-primary">{{ \App\Core\Models\User::where('module', 'erp')->where('email', 'not like', '%@demo.local')->count() }}</div>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="card border-success-subtle h-100">
                 <div class="card-body">
                     <div class="text-muted small">角色总数</div>
-                    <div class="fs-3 fw-bold text-success">{{ \Spatie\Permission\Models\Role::whereRaw("name NOT LIKE '%.%'")->count() }}</div>
+                    <div class="fs-3 fw-bold text-success">{{ \Spatie\Permission\Models\Role::where('name', 'like', 'erp.%')->count() }}</div>
                 </div>
             </div>
         </div>

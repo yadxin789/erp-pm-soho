@@ -84,7 +84,7 @@ class RoleCatalog
      */
     public static function label($role): string
     {
-        $name = $role instanceof Role ? $role->name : (string) $role;
+        $name = self::key($role);
 
         if ($role instanceof Role) {
             $custom = $role->getAttribute('display_name');
@@ -97,11 +97,19 @@ class RoleCatalog
     }
 
     /**
-     * 角色 key（兼容传入 Role 对象 / 字符串）
+     * 角色 key（兼容传入 Role 对象 / 字符串；去掉模块前缀 erp./pm./soho./core.）
      */
     public static function key($role): string
     {
-        return $role instanceof Role ? $role->name : (string) $role;
+        $name = $role instanceof Role ? $role->name : (string) $role;
+
+        foreach (['erp.', 'pm.', 'soho.', 'core.'] as $prefix) {
+            if (str_starts_with($name, $prefix)) {
+                return substr($name, strlen($prefix));
+            }
+        }
+
+        return $name;
     }
 
     /**

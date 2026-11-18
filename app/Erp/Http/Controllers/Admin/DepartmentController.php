@@ -16,7 +16,9 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        $departments = Department::with('parent')
+        // 模块口径：ERP 后台只维护 ERP 模块部门
+        $departments = Department::where('module', 'erp')
+            ->with('parent')
             ->withCount('children')
             ->orderBy('sort_order')
             ->orderBy('code')
@@ -27,7 +29,7 @@ class DepartmentController extends Controller
 
     public function create()
     {
-        $parents = Department::orderBy('sort_order')->orderBy('code')->get();
+        $parents = Department::where('module', 'erp')->orderBy('sort_order')->orderBy('code')->get();
 
         return view('admin.departments.create', compact('parents'));
     }
@@ -49,6 +51,7 @@ class DepartmentController extends Controller
         ]);
 
         $data['active'] = $request->boolean('active');
+        $data['module'] = 'erp';
         $data['sort_order'] = $data['sort_order'] ?? 0;
         $data['created_by'] = auth()->id();
         $data['updated_by'] = auth()->id();
@@ -61,6 +64,7 @@ class DepartmentController extends Controller
     public function edit(Department $department)
     {
         $parents = Department::where('id', '!=', $department->id)
+            ->where('module', 'erp')
             ->orderBy('sort_order')->orderBy('code')->get();
 
         return view('admin.departments.edit', compact('department', 'parents'));
