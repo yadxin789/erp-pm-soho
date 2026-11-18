@@ -13,7 +13,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-cogs me-2"></i>价格规则</h4>
-    <a href="{{ route('price.price-rules.create') }}" class="btn btn-primary">
+    <a href="{{ route('soho.price.rules.create') }}" class="btn btn-primary">
         <i class="fa fa-plus me-1"></i>新建规则
     </a>
 </div>
@@ -21,7 +21,7 @@
 {{-- 筛选表单 --}}
 <div class="card mb-3">
     <div class="card-body">
-        <form method="GET" action="{{ route('price.price-rules.index') }}" class="row g-3">
+        <form method="GET" action="{{ route('soho.price.rules.index') }}" class="row g-3">
             <div class="col-md-3">
                 <label class="form-label">规则名称</label>
                 <input type="text" class="form-control" name="search" value="{{ request('search') }}" placeholder="输入规则名称">
@@ -47,7 +47,7 @@
                 <button type="submit" class="btn btn-primary me-1">
                     <i class="fa fa-search"></i> 筛选
                 </button>
-                <a href="{{ route('price.price-rules.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('soho.price.rules.index') }}" class="btn btn-outline-secondary">
                     <i class="fa fa-times"></i>
                 </a>
             </div>
@@ -111,16 +111,16 @@
                             <td class="small">{{ $rule->creator->name ?? '-' }}</td>
                             <td class="small">{{ $rule->created_at?->format('Y-m-d H:i') }}</td>
                             <td>
-                                <a href="{{ route('price.price-rules.edit', $rule) }}" class="btn btn-sm btn-outline-primary" title="编辑">
+                                <a href="{{ route('soho.price.rules.edit', $rule) }}" class="btn btn-sm btn-outline-primary" title="编辑">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <form method="POST" action="{{ route('price.price-rules.toggle', $rule) }}" class="d-inline">
+                                <form method="POST" action="{{ route('soho.price.rules.toggle', $rule) }}" class="d-inline">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-outline-{{ $rule->status === 'enabled' ? 'warning' : 'success' }}" title="{{ $rule->status === 'enabled' ? '禁用' : '启用' }}">
                                         <i class="fa {{ $rule->status === 'enabled' ? 'fa-ban' : 'fa-check' }}"></i>
                                     </button>
                                 </form>
-                                <form method="POST" action="{{ route('price.price-rules.destroy', $rule) }}" class="d-inline" onsubmit="return confirm('确定删除此规则？')">
+                                <form method="POST" action="{{ route('soho.price.rules.destroy', $rule) }}" class="d-inline" onsubmit="return confirm('确定删除此规则？')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="删除">
                                         <i class="fa fa-trash"></i>

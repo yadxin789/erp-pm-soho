@@ -13,7 +13,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-tasks me-2"></i>调价任务</h4>
-    <a href="{{ route('price.price-change-tasks.create') }}" class="btn btn-primary">
+    <a href="{{ route('soho.price.change.tasks.create') }}" class="btn btn-primary">
         <i class="fa fa-plus me-1"></i>新建任务
     </a>
 </div>
@@ -21,7 +21,7 @@
 {{-- 筛选表单 --}}
 <div class="card mb-3">
     <div class="card-body">
-        <form method="GET" action="{{ route('price.price-change-tasks.index') }}" class="row g-3">
+        <form method="GET" action="{{ route('soho.price.change.tasks.index') }}" class="row g-3">
             <div class="col-md-3">
                 <label class="form-label">任务类型</label>
                 <select class="form-select" name="type">
@@ -52,7 +52,7 @@
                 <button type="submit" class="btn btn-primary me-1">
                     <i class="fa fa-search"></i> 筛选
                 </button>
-                <a href="{{ route('price.price-change-tasks.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('soho.price.change.tasks.index') }}" class="btn btn-outline-secondary">
                     <i class="fa fa-times"></i>
                 </a>
             </div>
@@ -113,17 +113,17 @@
                             </td>
                             <td class="small">{{ $task->executor->name ?? '-' }}</td>
                             <td>
-                                <a href="{{ route('price.price-change-tasks.show', $task) }}" class="btn btn-sm btn-outline-primary" title="查看详情">
+                                <a href="{{ route('soho.price.change.tasks.show', $task) }}" class="btn btn-sm btn-outline-primary" title="查看详情">
                                     <i class="fa fa-eye"></i>
                                 </a>
                                 @if($task->status === 'pending')
-                                    <form method="POST" action="{{ route('price.price-change-tasks.execute', $task) }}" class="d-inline" onsubmit="return confirm('确定立即执行此任务？')">
+                                    <form method="POST" action="{{ route('soho.price.change.tasks.execute', $task) }}" class="d-inline" onsubmit="return confirm('确定立即执行此任务？')">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-outline-success" title="立即执行">
                                             <i class="fa fa-play"></i>
                                         </button>
                                     </form>
-                                    <form method="POST" action="{{ route('price.price-change-tasks.cancel', $task) }}" class="d-inline" onsubmit="return confirm('确定取消此任务？')">
+                                    <form method="POST" action="{{ route('soho.price.change.tasks.cancel', $task) }}" class="d-inline" onsubmit="return confirm('确定取消此任务？')">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-outline-danger" title="取消">
                                             <i class="fa fa-times"></i>

@@ -26,7 +26,7 @@ class LogisticsTrackingController extends Controller
         $tenantId = Auth::user()->tenant_id;
 
         // 构建物流轨迹查询
-        $query = DB::table('logistics_trackings')
+        $query = DB::table('soho_logistics_trackings')
             ->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId));
 
         // 关键字搜索：运单号、跟踪号、订单号
@@ -60,13 +60,13 @@ class LogisticsTrackingController extends Controller
         // 统计各轨迹状态数量
         $stats = [
             // 总包裹数
-            'total' => DB::table('logistics_trackings')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId))->count(),
+            'total' => DB::table('soho_logistics_trackings')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId))->count(),
             // 运输中包裹数
-            'in_transit' => DB::table('logistics_trackings')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId))->where('tracking_status', 'in_transit')->count(),
+            'in_transit' => DB::table('soho_logistics_trackings')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId))->where('tracking_status', 'in_transit')->count(),
             // 已签收包裹数
-            'delivered' => DB::table('logistics_trackings')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId))->where('tracking_status', 'delivered')->count(),
+            'delivered' => DB::table('soho_logistics_trackings')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId))->where('tracking_status', 'delivered')->count(),
             // 异常件数
-            'exception' => DB::table('logistics_trackings')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId))->where('tracking_status', 'exception')->count(),
+            'exception' => DB::table('soho_logistics_trackings')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId))->where('tracking_status', 'exception')->count(),
         ];
 
         // 轨迹状态选项

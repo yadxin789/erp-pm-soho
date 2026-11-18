@@ -6,14 +6,14 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('price.price-change-requests.index') }}">调价申请</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.price.change.requests.index') }}">调价申请</a></li>
         <li class="breadcrumb-item active">新建申请</li>
     </ol>
 </nav>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-plus-circle me-2"></i>新建调价申请</h4>
-    <a href="{{ route('price.price-change-requests.index') }}" class="btn btn-outline-secondary btn-sm">
+    <a href="{{ route('soho.price.change.requests.index') }}" class="btn btn-outline-secondary btn-sm">
         <i class="fa fa-arrow-left me-1"></i>返回列表
     </a>
 </div>
@@ -22,7 +22,7 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('price.price-change-requests.store') }}">
+                <form method="POST" action="{{ route('soho.price.change.requests.store') }}">
                     @csrf
 
                     <div class="mb-3">
@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end gap-2">
-                        <a href="{{ route('price.price-change-requests.index') }}" class="btn btn-outline-secondary">
+                        <a href="{{ route('soho.price.change.requests.index') }}" class="btn btn-outline-secondary">
                             <i class="fa fa-times me-1"></i>取消
                         </a>
                         <button type="submit" class="btn btn-primary">

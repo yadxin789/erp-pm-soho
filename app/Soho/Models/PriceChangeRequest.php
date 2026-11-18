@@ -150,4 +150,9 @@ class PriceChangeRequest extends Model
         return abs($this->change_percentage) >= $threshold
             || abs($this->change_amount) >= $threshold;
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(PriceChangeTask::class, 'price_change_request_id');
+    }
 }

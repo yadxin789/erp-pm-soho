@@ -13,7 +13,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-exchange me-2"></i>调价申请</h4>
-    <a href="{{ route('price.price-change-requests.create') }}" class="btn btn-primary">
+    <a href="{{ route('soho.price.change.requests.create') }}" class="btn btn-primary">
         <i class="fa fa-plus me-1"></i>新建申请
     </a>
 </div>
@@ -21,7 +21,7 @@
 {{-- 筛选表单 --}}
 <div class="card mb-3">
     <div class="card-body">
-        <form method="GET" action="{{ route('price.price-change-requests.index') }}" class="row g-3">
+        <form method="GET" action="{{ route('soho.price.change.requests.index') }}" class="row g-3">
             <div class="col-md-3">
                 <label class="form-label">商品</label>
                 <input type="text" class="form-control" name="search" value="{{ request('search') }}" placeholder="商品名称/SKU">
@@ -47,7 +47,7 @@
                 <button type="submit" class="btn btn-primary me-1">
                     <i class="fa fa-search"></i> 筛选
                 </button>
-                <a href="{{ route('price.price-change-requests.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('soho.price.change.requests.index') }}" class="btn btn-outline-secondary">
                     <i class="fa fa-times"></i>
                 </a>
             </div>
@@ -117,14 +117,14 @@
                             </td>
                             <td class="small">{{ $request->created_at?->format('Y-m-d H:i') }}</td>
                             <td>
-                                <a href="{{ route('price.price-change-requests.show', $request) }}" class="btn btn-sm btn-outline-primary" title="查看详情">
+                                <a href="{{ route('soho.price.change.requests.show', $request) }}" class="btn btn-sm btn-outline-primary" title="查看详情">
                                     <i class="fa fa-eye"></i>
                                 </a>
                                 @if($request->status === 'pending')
-                                    <a href="{{ route('price.price-change-requests.edit', $request) }}" class="btn btn-sm btn-outline-warning" title="编辑">
+                                    <a href="{{ route('soho.price.change.requests.edit', $request) }}" class="btn btn-sm btn-outline-warning" title="编辑">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form method="POST" action="{{ route('price.price-change-requests.cancel', $request) }}" class="d-inline" onsubmit="return confirm('确定取消此申请？')">
+                                    <form method="POST" action="{{ route('soho.price.change.requests.cancel', $request) }}" class="d-inline" onsubmit="return confirm('确定取消此申请？')">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-outline-danger" title="取消">
                                             <i class="fa fa-times"></i>

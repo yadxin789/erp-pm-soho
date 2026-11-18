@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('soho.home') }}">首页</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('logistics.exceptions.index') }}">物流管理</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('soho.logistics.exception.index') }}">物流管理</a></li>
                     <li class="breadcrumb-item active">异常物流</li>
                 </ol>
             </nav>
@@ -21,7 +21,7 @@
     {{-- 搜索/筛选表单 --}}
     <div class="card mb-3">
         <div class="card-body">
-            <form method="GET" action="{{ route('logistics.exceptions.index') }}">
+            <form method="GET" action="{{ route('soho.logistics.exception.index') }}">
                 <div class="row g-2 align-items-end">
                     {{-- 运单号搜索 --}}
                     <div class="col-md-2">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-md-1">
                         <button type="submit" class="btn btn-primary w-100"><i class="fa fa-search"></i></button>
-                        <a href="{{ route('logistics.exceptions.index') }}" class="btn btn-outline-secondary w-100 mt-1">重置</a>
+                        <a href="{{ route('soho.logistics.exception.index') }}" class="btn btn-outline-secondary w-100 mt-1">重置</a>
                     </div>
                 </div>
             </form>

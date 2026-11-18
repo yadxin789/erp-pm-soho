@@ -42,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($approvals as $index => $approval)
+                    @forelse($approvals ?? collect() as $index => $approval)
                         @php
                             $changePercent = $approval->current_price > 0 ? (($approval->requested_price - $approval->current_price) / $approval->current_price) * 100 : 0;
                         @endphp
@@ -67,16 +67,16 @@
                             <td class="small text-muted">{{ Str::limit($approval->reason ?? '-', 30) }}</td>
                             <td class="small">{{ $approval->created_at?->format('Y-m-d H:i') }}</td>
                             <td>
-                                <a href="{{ route('price.price-change-approvals.show', $approval) }}" class="btn btn-sm btn-outline-primary" title="查看详情">
+                                <a href="{{ route('soho.price.change.approvals.show', $approval) }}" class="btn btn-sm btn-outline-primary" title="查看详情">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <form method="POST" action="{{ route('price.price-change-approvals.approve', $approval) }}" class="d-inline" onsubmit="return confirm('确认批准此调价申请？')">
+                                <form method="POST" action="{{ route('soho.price.change.approvals.approve', $approval) }}" class="d-inline" onsubmit="return confirm('确认批准此调价申请？')">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-outline-success" title="批准">
                                         <i class="fa fa-check"></i>
                                     </button>
                                 </form>
-                                <form method="POST" action="{{ route('price.price-change-approvals.reject', $approval) }}" class="d-inline" onsubmit="return confirm('确认驳回此调价申请？')">
+                                <form method="POST" action="{{ route('soho.price.change.approvals.reject', $approval) }}" class="d-inline" onsubmit="return confirm('确认驳回此调价申请？')">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="驳回">
                                         <i class="fa fa-times"></i>

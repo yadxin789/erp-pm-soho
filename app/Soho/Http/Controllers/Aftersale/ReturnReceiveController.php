@@ -23,7 +23,7 @@ class ReturnReceiveController extends Controller
         $tenantId = Auth::user()->tenant_id;
 
         // 查询退货收货单，限定当前租户
-        $query = DB::table('return_orders')
+        $query = DB::table('soho_return_orders')
             ->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId));
 
         // 关键词搜索：支持按退货单号、订单号模糊匹配
@@ -50,7 +50,7 @@ class ReturnReceiveController extends Controller
         $returns = $query->orderByDesc('created_at')->paginate(20);
 
         // 统计数据：基于当前租户的退货单总数及各状态数量
-        $baseQuery = DB::table('return_orders')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId));
+        $baseQuery = DB::table('soho_return_orders')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId));
         $stats = [
             'total'      => (clone $baseQuery)->count(),
             'pending'    => (clone $baseQuery)->where('status', 'pending')->count(),

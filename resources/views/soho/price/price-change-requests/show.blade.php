@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('price.price-change-requests.index') }}">调价申请</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.price.change.requests.index') }}">调价申请</a></li>
         <li class="breadcrumb-item active">申请详情</li>
     </ol>
 </nav>
@@ -17,11 +17,11 @@
             <h4 class="mb-0"><i class="fa fa-file-text me-2"></i>调价申请详情</h4>
             <div>
                 @if($request->status === 'pending')
-                    <a href="{{ route('price.price-change-requests.edit', $request) }}" class="btn btn-sm btn-outline-primary">
+                    <a href="{{ route('soho.price.change.requests.edit', $request) }}" class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-edit me-1"></i>编辑
                     </a>
                 @endif
-                <a href="{{ route('price.price-change-requests.index') }}" class="btn btn-sm btn-outline-secondary">
+                <a href="{{ route('soho.price.change.requests.index') }}" class="btn btn-sm btn-outline-secondary">
                     <i class="fa fa-arrow-left me-1"></i>返回列表
                 </a>
             </div>
@@ -147,7 +147,7 @@
         @if($request->status === 'pending')
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('price.price-change-requests.cancel', $request) }}" class="d-inline" onsubmit="return confirm('确定取消此申请？')">
+                <form method="POST" action="{{ route('soho.price.change.requests.cancel', $request) }}" class="d-inline" onsubmit="return confirm('确定取消此申请？')">
                     @csrf
                     <button type="submit" class="btn btn-outline-danger">
                         <i class="fa fa-times me-1"></i>取消申请

@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('price.price-change-tasks.index') }}">调价任务</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.price.change.tasks.index') }}">调价任务</a></li>
         <li class="breadcrumb-item active">任务详情</li>
     </ol>
 </nav>
@@ -17,20 +17,20 @@
             <h4 class="mb-0"><i class="fa fa-tasks me-2"></i>任务详情</h4>
             <div>
                 @if($task->status === 'pending')
-                    <form method="POST" action="{{ route('price.price-change-tasks.execute', $task) }}" class="d-inline" onsubmit="return confirm('确定立即执行此任务？')">
+                    <form method="POST" action="{{ route('soho.price.change.tasks.execute', $task) }}" class="d-inline" onsubmit="return confirm('确定立即执行此任务？')">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="fa fa-play me-1"></i>立即执行
                         </button>
                     </form>
-                    <form method="POST" action="{{ route('price.price-change-tasks.cancel', $task) }}" class="d-inline" onsubmit="return confirm('确定取消此任务？')">
+                    <form method="POST" action="{{ route('soho.price.change.tasks.cancel', $task) }}" class="d-inline" onsubmit="return confirm('确定取消此任务？')">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-outline-danger">
                             <i class="fa fa-times me-1"></i>取消任务
                         </button>
                     </form>
                 @endif
-                <a href="{{ route('price.price-change-tasks.index') }}" class="btn btn-sm btn-outline-secondary">
+                <a href="{{ route('soho.price.change.tasks.index') }}" class="btn btn-sm btn-outline-secondary">
                     <i class="fa fa-arrow-left me-1"></i>返回列表
                 </a>
             </div>
@@ -62,7 +62,7 @@
                         <table class="table table-borderless">
                             <tr><th width="140">关联申请</th><td>
                                 @if($task->request_id)
-                                    <a href="{{ route('price.price-change-requests.show', $task->request) }}">#{{ $task->request_id }}</a>
+                                    <a href="{{ route('soho.price.change.requests.show', $task->request) }}">#{{ $task->request_id }}</a>
                                 @else
                                     <span class="text-muted">无</span>
                                 @endif
@@ -126,7 +126,7 @@
                     {{ $task->error_message ?? '未知错误' }}
                 </div>
                 <div class="mt-3">
-                    <form method="POST" action="{{ route('price.price-change-tasks.retry', $task) }}" class="d-inline">
+                    <form method="POST" action="{{ route('soho.price.change.tasks.retry', $task) }}" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-warning">
                             <i class="fa fa-refresh me-1"></i>重试任务

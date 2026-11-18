@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('price.price-change-approvals.index') }}">调价审批</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.price.change.approvals.index') }}">调价审批</a></li>
         <li class="breadcrumb-item active">审批详情</li>
     </ol>
 </nav>
@@ -15,7 +15,7 @@
     <div class="col-lg-10">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="mb-0"><i class="fa fa-gavel me-2"></i>审批详情</h4>
-            <a href="{{ route('price.price-change-approvals.index') }}" class="btn btn-sm btn-outline-secondary">
+            <a href="{{ route('soho.price.change.approvals.index') }}" class="btn btn-sm btn-outline-secondary">
                 <i class="fa fa-arrow-left me-1"></i>返回列表
             </a>
         </div>
@@ -75,7 +75,7 @@
                         请仔细审核以上信息，确认无误后通过审批。如信息有误可驳回申请。
                     </div>
 
-                    <form method="POST" action="{{ route('price.price-change-approvals.approve', $approval) }}" class="mb-3">
+                    <form method="POST" action="{{ route('soho.price.change.approvals.approve', $approval) }}" class="mb-3">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">审批备注（可选）</label>
@@ -88,7 +88,7 @@
 
                     <hr>
 
-                    <form method="POST" action="{{ route('price.price-change-approvals.reject', $approval) }}" onsubmit="return confirm('确认驳回此申请？驳回后需要申请人重新提交。')">
+                    <form method="POST" action="{{ route('soho.price.change.approvals.reject', $approval) }}" onsubmit="return confirm('确认驳回此申请？驳回后需要申请人重新提交。')">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">驳回原因 <span class="text-danger">*</span></label>

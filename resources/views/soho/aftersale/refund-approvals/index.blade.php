@@ -20,7 +20,7 @@
     {{-- 搜索/筛选表单 --}}
     <div class="card mb-3">
         <div class="card-body">
-            <form method="GET" action="{{ route('aftersale.refund-approvals.index') }}">
+            <form method="GET" action="{{ route('soho.approval.refund.index') }}">
                 <div class="row g-2 align-items-end">
                     <div class="col-md-3">
                         <label class="form-label small">关键词</label>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-3">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
-                        <a href="{{ route('aftersale.refund-approvals.index') }}" class="btn btn-outline-secondary">重置</a>
+                        <a href="{{ route('soho.approval.refund.index') }}" class="btn btn-outline-secondary">重置</a>
                     </div>
                 </div>
             </form>

@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end gap-2">
-                        <a href="{{ route('security.ip-whitelist') }}" class="btn btn-outline-secondary">取消</a>
+                        <a href="{{ route('soho.security.ip-whitelist.index') }}" class="btn btn-outline-secondary">取消</a>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-save me-1"></i>保存</button>
                     </div>
                 </form>

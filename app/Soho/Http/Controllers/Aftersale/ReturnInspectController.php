@@ -23,7 +23,7 @@ class ReturnInspectController extends Controller
         $tenantId = Auth::user()->tenant_id;
 
         // 查询退货质检单，限定当前租户
-        $query = DB::table('return_inspections')
+        $query = DB::table('soho_return_inspections')
             ->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId));
 
         // 关键词搜索：支持按退货单号模糊匹配
@@ -50,7 +50,7 @@ class ReturnInspectController extends Controller
         $inspections = $query->orderByDesc('created_at')->paginate(20);
 
         // 统计数据：基于当前租户的质检单总数及各状态数量
-        $baseQuery = DB::table('return_inspections')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId));
+        $baseQuery = DB::table('soho_return_inspections')->when($tenantId, fn($q) => $q->where('tenant_id', $tenantId));
         $stats = [
             'total'      => (clone $baseQuery)->count(),
             'pending'    => (clone $baseQuery)->where('status', 'pending')->count(),

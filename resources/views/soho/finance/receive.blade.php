@@ -8,7 +8,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="text-uppercase mb-1">总收款金额</h6>
-                        <h3 class="mb-0">¥{{ number_format($totalAmount, 2) }}</h3>
+                        <h3 class="mb-0">¥{{ number_format($totalAmount ?? 0, 2) }}</h3>
                     </div>
                     <div class="fa fa-money fa-3x opacity-50"></div>
                 </div>
