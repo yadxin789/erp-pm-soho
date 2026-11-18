@@ -54,6 +54,9 @@ class ShopController extends Controller
             'app_secret' => 'nullable|string',
             'access_token' => 'nullable|string',
             'refresh_token' => 'nullable|string',
+            'shop_url' => 'nullable|string|max:255',
+            'sync_enabled' => 'boolean',
+            'remark' => 'nullable|string',
             'status' => 'boolean',
         ]);
 
@@ -104,6 +107,9 @@ class ShopController extends Controller
             'app_secret' => 'nullable|string',
             'access_token' => 'nullable|string',
             'refresh_token' => 'nullable|string',
+            'shop_url' => 'nullable|string|max:255',
+            'sync_enabled' => 'boolean',
+            'remark' => 'nullable|string',
             'status' => 'boolean',
         ]);
 

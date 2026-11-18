@@ -17,6 +17,8 @@
                     <tr><th width="120">状态</th><td><span class="badge bg-{{ $aftersale->status == 'pending' ? 'warning' : 'success' }}">{{ $aftersale->status }}</span></td></tr>
                     <tr><th>申请时间</th><td>{{ $aftersale->created_at }}</td></tr>
                     <tr><th>处理时间</th><td>{{ $aftersale->handle_time ?? '-' }}</td></tr>
+                <tr><th>问题描述</th><td>{{ $aftersale->description ?? '-' }}</td></tr>
+                <tr><th>处理结果</th><td>{{ $aftersale->handle_result ?? '-' }}</td></tr>
                 </table>
             </div>
         </div>

@@ -59,10 +59,17 @@ class ProductController extends Controller
             'brand_id' => 'nullable|exists:soho_brands,id',
             'cost_price' => 'nullable|numeric|min:0',
             'retail_price' => 'nullable|numeric|min:0',
+            'weight' => 'nullable|numeric|min:0',
+            'attributes' => 'nullable',
             'description' => 'nullable|string',
             'status' => 'required|in:draft,pending,active,inactive,archived,error',
             'skus' => 'nullable|array',
         ]);
+
+        if (! empty($validated['attributes']) && is_string($validated['attributes'])) {
+            $decoded = json_decode($validated['attributes'], true);
+            $validated['attributes'] = is_array($decoded) ? $decoded : null;
+        }
 
         $skus = $validated['skus'] ?? [];
         unset($validated['skus']);
@@ -126,10 +133,17 @@ class ProductController extends Controller
             'brand_id' => 'nullable|exists:soho_brands,id',
             'cost_price' => 'nullable|numeric|min:0',
             'retail_price' => 'nullable|numeric|min:0',
+            'weight' => 'nullable|numeric|min:0',
+            'attributes' => 'nullable',
             'description' => 'nullable|string',
             'status' => 'required|in:draft,pending,active,inactive,archived,error',
             'skus' => 'nullable|array',
         ]);
+
+        if (! empty($validated['attributes']) && is_string($validated['attributes'])) {
+            $decoded = json_decode($validated['attributes'], true);
+            $validated['attributes'] = is_array($decoded) ? $decoded : null;
+        }
 
         $skus = $validated['skus'] ?? [];
         unset($validated['skus']);

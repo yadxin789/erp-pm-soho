@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead><tr><th>商品</th><th>SKU</th><th>仓库</th><th>库存</th><th>预警值</th><th>状态</th></tr></thead>
+                <thead><tr><th>商品</th><th>SKU</th><th>仓库</th><th>库存</th><th>锁定</th><th>在途</th><th>入库中</th><th>预警值</th><th>状态</th></tr></thead>
                 <tbody>
                     @forelse($inventories as $inv)
                     <tr>
@@ -17,7 +17,10 @@
                         <td>{{ $inv->sku->sku_code ?? '-' }}</td>
                         <td>{{ $inv->warehouse->name ?? '-' }}</td>
                         <td><span class="badge bg-{{ $inv->actual_quantity <= $inv->safety_quantity && $inv->safety_quantity > 0 ? 'danger' : 'success' }}">{{ $inv->actual_quantity }}</span></td>
-                        <td>{{ $inv->safety_quantity }}</td>
+                        <td>{{ $inv->locked_quantity ?? 0 }}</td>
+                    <td>{{ $inv->inbound_quantity ?? 0 }}</td>
+                    <td>{{ $inv->in_transit_quantity ?? 0 }}</td>
+                    <td>{{ $inv->safety_quantity }}</td>
                         <td>{{ $inv->safety_quantity > 0 && $inv->actual_quantity <= $inv->safety_quantity ? '库存不足' : '正常' }}</td>
                     </tr>
                     @empty<tr><td colspan="6" class="text-center text-muted">暂无数据</td></tr>

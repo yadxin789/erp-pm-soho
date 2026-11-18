@@ -49,6 +49,15 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
+        // 参考站表单用 name/sku/retail_price/category_id/brand_id，控制器按数据库字段名取值，
+        // 这里做一次入参归一，避免新建/编辑货品因字段名不一致而无提示失败。
+        $request->merge([
+            'goods_name' => $request->input('goods_name', $request->input('name')),
+            'system_sku' => $request->input('system_sku', $request->input('sku')),
+            'selling_price' => $request->input('selling_price', $request->input('retail_price')),
+            'category' => $request->input('category', optional(\App\Soho\Models\ProductCategory::find($request->input('category_id')))->name),
+            'brand' => $request->input('brand', optional(\App\Soho\Models\Brand::find($request->input('brand_id')))->name),
+        ]);
         $validated = $request->validate([
             'goods_name' => 'required|string|max:300',
             'system_sku' => 'required|string|max:100|unique:soho_system_goods',
@@ -56,13 +65,13 @@ class GoodsController extends Controller
             'cost_price' => 'nullable|numeric|min:0',
             'selling_price' => 'nullable|numeric|min:0',
             'description' => 'nullable|string',
-            'status' => 'boolean',
+            'status' => 'nullable',
             'category' => 'nullable|string|max:100',
             'brand' => 'nullable|string|max:100',
             'unit' => 'nullable|string|max:20',
         ]);
 
-        $validated['status'] = $validated['status'] ?? true;
+        $validated['status'] = in_array((string)($validated['status'] ?? '1'), ['1','active','on','true'], true) ? 1 : 0;
         
         SystemGoods::create($validated);
 
@@ -82,6 +91,15 @@ class GoodsController extends Controller
      */
     public function update(Request $request, SystemGoods $goods)
     {
+        // 参考站表单用 name/sku/retail_price/category_id/brand_id，控制器按数据库字段名取值，
+        // 这里做一次入参归一，避免新建/编辑货品因字段名不一致而无提示失败。
+        $request->merge([
+            'goods_name' => $request->input('goods_name', $request->input('name')),
+            'system_sku' => $request->input('system_sku', $request->input('sku')),
+            'selling_price' => $request->input('selling_price', $request->input('retail_price')),
+            'category' => $request->input('category', optional(\App\Soho\Models\ProductCategory::find($request->input('category_id')))->name),
+            'brand' => $request->input('brand', optional(\App\Soho\Models\Brand::find($request->input('brand_id')))->name),
+        ]);
         $validated = $request->validate([
             'goods_name' => 'required|string|max:300',
             'system_sku' => 'required|string|max:100|unique:soho_system_goods,system_sku,' . $goods->id,
@@ -89,12 +107,13 @@ class GoodsController extends Controller
             'cost_price' => 'nullable|numeric|min:0',
             'selling_price' => 'nullable|numeric|min:0',
             'description' => 'nullable|string',
-            'status' => 'boolean',
+            'status' => 'nullable',
             'category' => 'nullable|string|max:100',
             'brand' => 'nullable|string|max:100',
             'unit' => 'nullable|string|max:20',
         ]);
 
+        $validated['status'] = in_array((string) ($validated['status'] ?? '1'), ['1', 'active', 'on', 'true'], true) ? 1 : 0;
         $goods->update($validated);
 
         return redirect()->route('soho.goods.index')->with('success', '商品更新成功');

@@ -52,7 +52,7 @@ class ShopCredential extends Model
      */
     public function getClientSecretAttribute(): ?string
     {
-        return $this->client_secret_encrypted ? Crypt::decryptString($this->client_secret_encrypted) : null;
+        return $this->safeDecrypt($this->client_secret_encrypted);
     }
 
     /**
@@ -68,7 +68,7 @@ class ShopCredential extends Model
      */
     public function getAccessTokenAttribute(): ?string
     {
-        return $this->access_token_encrypted ? Crypt::decryptString($this->access_token_encrypted) : null;
+        return $this->safeDecrypt($this->access_token_encrypted);
     }
 
     /**
@@ -84,6 +84,23 @@ class ShopCredential extends Model
      */
     public function getRefreshTokenAttribute(): ?string
     {
-        return $this->refresh_token_encrypted ? Crypt::decryptString($this->refresh_token_encrypted) : null;
+        return $this->safeDecrypt($this->refresh_token_encrypted);
+    }
+
+
+    /**
+     * 迁入数据的密文来自参考项目（APP_KEY 不同），解密失败时返回 null，不让详情页 500。
+     */
+    protected function safeDecrypt(?string $cipher): ?string
+    {
+        if (! $cipher) {
+            return null;
+        }
+
+        try {
+            return Crypt::decryptString($cipher);
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 }

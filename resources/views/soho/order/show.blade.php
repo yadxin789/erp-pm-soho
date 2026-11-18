@@ -34,6 +34,9 @@
             <div class="col-md-6">
                 <table class="table table-bordered">
                     <tr><th width="120">订单号</th><td>{{ $order->order_number }}</td></tr>
+                <tr><th>平台订单号</th><td>{{ $order->platform_order_no ?? '-' }}</td></tr>
+                <tr><th>系统订单号</th><td>{{ $order->system_order_no ?? '-' }}</td></tr>
+                <tr><th>支付状态</th><td>{{ $order->pay_status ?? '-' }}</td></tr>
                     <tr><th>店铺</th><td>{{ $order->shop->name ?? '-' }}</td></tr>
                     <tr><th>平台</th><td>{{ $order->platform_label }}</td></tr>
                     <tr><th>买家昵称</th><td>{{ $order->buyer_nickname ?? '-' }}</td></tr>
@@ -46,6 +49,10 @@
                 <table class="table table-bordered">
                     <tr><th width="120">订单金额</th><td>¥{{ number_format($order->total_amount, 2) }}</td></tr>
                     <tr><th>实付金额</th><td>¥{{ number_format($order->pay_amount, 2) }}</td></tr>
+                <tr><th>优惠金额</th><td>¥{{ number_format($order->discount_amount ?? 0, 2) }}</td></tr>
+                <tr><th>运费</th><td>¥{{ number_format($order->freight_amount ?? 0, 2) }}</td></tr>
+                <tr><th>币种</th><td>{{ $order->currency ?? 'CNY' }}</td></tr>
+                <tr><th>买家留言</th><td>{{ $order->buyer_message ?? '-' }}</td></tr>
                     <tr><th>订单状态</th><td>
                         <span class="badge bg-{{ $order->status == 'completed' ? 'success' : ($order->status == 'frozen' ? 'danger' : ($order->status == 'shipped' ? 'info' : 'warning')) }}">
                             {{ $order->order_status_label }}

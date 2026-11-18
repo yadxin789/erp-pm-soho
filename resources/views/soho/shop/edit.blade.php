@@ -44,6 +44,20 @@
                 <small class="text-muted">用于自动刷新 Access Token</small>
             </div>
             <div class="mb-3">
+                <div class="mb-3">
+                    <label class="form-label">店铺地址</label>
+                    <input type="text" name="shop_url" class="form-control" value="{{ old('shop_url', $shop->shop_url) }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">备注</label>
+                    <textarea name="remark" class="form-control">{{ old('remark', $shop->remark) }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" name="sync_enabled" class="form-check-input" value="1" @checked(old('sync_enabled', $shop->sync_enabled))>
+                        <label class="form-check-label">开启库存同步</label>
+                    </div>
+                </div>
                 <div class="form-check">
                     <input type="checkbox" name="status" class="form-check-input" value="1" @checked(old('status', $shop->status))>
                     <label class="form-check-label">启用</label>

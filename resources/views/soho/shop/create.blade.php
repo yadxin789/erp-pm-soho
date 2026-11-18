@@ -43,6 +43,20 @@
                 <input type="text" name="refresh_token" class="form-control" value="{{ old('refresh_token') }}">
             </div>
             <div class="mb-3">
+                <div class="mb-3">
+                    <label class="form-label">店铺地址</label>
+                    <input type="text" name="shop_url" class="form-control" value="{{ old('shop_url') }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">备注</label>
+                    <textarea name="remark" class="form-control">{{ old('remark') }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" name="sync_enabled" class="form-check-input" value="1" @checked(old('sync_enabled', true))>
+                        <label class="form-check-label">开启库存同步</label>
+                    </div>
+                </div>
                 <div class="form-check">
                     <input type="checkbox" name="status" class="form-check-input" value="1" @checked(old('status', true))>
                     <label class="form-check-label">启用</label>

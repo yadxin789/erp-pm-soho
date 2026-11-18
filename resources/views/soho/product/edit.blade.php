@@ -59,6 +59,7 @@
                 </div>
             </div>
             <div class="mb-3">
+                <div class="row"><div class="col-md-6"><div class="mb-3"><label class="form-label">重量(kg)</label><input type="number" step="0.001" name="weight" class="form-control" value="{{ old('weight', $product->weight) }}"></div></div><div class="col-md-6"><div class="mb-3"><label class="form-label">属性(JSON)</label><input type="text" name="attributes" class="form-control" value="{{ old('attributes', is_array($product->attributes) ? json_encode($product->attributes, JSON_UNESCAPED_UNICODE) : $product->attributes) }}"></div></div></div>
                 <label class="form-label">商品描述</label>
                 <textarea name="description" class="form-control" rows="3">{{ old('description', $product->description) }}</textarea>
             </div>

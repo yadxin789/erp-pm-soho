@@ -65,7 +65,7 @@ class PlatformOrder extends Model
      */
     public function orderItems(): HasMany
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class, 'order_id');
     }
 
     /**
@@ -81,7 +81,7 @@ class PlatformOrder extends Model
      */
     public function statusLogs(): HasMany
     {
-        return $this->hasMany(OrderStatusLog::class);
+        return $this->hasMany(OrderStatusLog::class, 'order_id');
     }
 
     /**
