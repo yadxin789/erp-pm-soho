@@ -5,6 +5,8 @@ namespace App\Soho\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 /**
  * 权限变更日志模型

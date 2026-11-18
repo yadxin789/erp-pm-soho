@@ -86,13 +86,7 @@
                             <a href="{{ route('soho.package.edit', $package) }}" class="btn btn-sm btn-outline-success">
                                 <i class="fa fa-edit"></i> 编辑
                             </a>
-                            <form method="POST" action="{{ route('package.destroy', $package) }}" class="d-inline" onsubmit="return confirm('确定删除此包裹？')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">
-                                    <i class="fa fa-trash"></i> 删除
-                                </button>
-                            </form>
+                            {{-- 参考项目 PackageController 未提供 destroy，故不展示删除入口 --}}
                         </td>
                     </tr>
                     @empty

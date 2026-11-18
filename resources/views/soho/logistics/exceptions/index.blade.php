@@ -149,8 +149,8 @@
                                         'other'         => 'fa-circle-info',
                                     ];
                                 @endphp
-                                <i class="fa {{ $typeIcons[$exception->type] ?? 'fa-circle-info' }} me-1"></i>
-                                {{ ($typeOptions[$exception->type] ?? $exception->type) ?? '-' }}
+                                <i class="fa {{ $typeIcons[data_get($exception, "type")] ?? 'fa-circle-info' }} me-1"></i>
+                                {{ ($typeOptions[data_get($exception, "type")] ?? data_get($exception, "type")) ?? '-' }}
                             </td>
                             <td>
                                 @php
@@ -162,8 +162,8 @@
                                         'urgent' => 'danger',
                                     ];
                                 @endphp
-                                <span class="badge bg-{{ $levelColors[$exception->level] ?? 'secondary' }}">
-                                    {{ ($levelOptions[$exception->level] ?? $exception->level) ?? '-' }}
+                                <span class="badge bg-{{ $levelColors[data_get($exception, "level")] ?? 'secondary' }}">
+                                    {{ ($levelOptions[data_get($exception, "level")] ?? data_get($exception, "level")) ?? '-' }}
                                 </span>
                             </td>
                             <td>
@@ -176,11 +176,11 @@
                                         'closed'     => 'secondary',
                                     ];
                                 @endphp
-                                <span class="badge bg-{{ $statusColors[$exception->status] ?? 'secondary' }}">
-                                    {{ ($statusOptions[$exception->status] ?? $exception->status) ?? '-' }}
+                                <span class="badge bg-{{ $statusColors[data_get($exception, "status")] ?? 'secondary' }}">
+                                    {{ ($statusOptions[data_get($exception, "status")] ?? data_get($exception, "status")) ?? '-' }}
                                 </span>
                             </td>
-                            <td class="small">{{ optional($exception->occurred_at ?? $exception->created_at)->format('Y-m-d H:i') }}</td>
+                            <td class="small">{{ optional($exception->occurred_at ?? data_get($exception, "created_at"))->format('Y-m-d H:i') }}</td>
                         </tr>
                     @empty
                         <tr>

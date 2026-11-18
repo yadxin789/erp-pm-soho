@@ -59,7 +59,10 @@ class PortalController extends Controller
                 'cta'       => $copy['cta'],
                 'href'      => '/'.$module,
                 // 未登录不判定权限（登录后由 module.access 兜底 403）
-                'allowed'   => $user ? $user->canEnterModule($module) : true,
+                // 超级管理员门户始终展示三个模块卡片，便于统一入口演示与切换
+                'allowed'   => $user
+                    ? ($user->hasRole('super_admin') || $user->canEnterModule($module))
+                    : true,
                 'is_last'   => $user && $lastModule === $module,
             ];
         }

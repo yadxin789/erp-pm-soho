@@ -46,6 +46,11 @@ class PlatformAccount extends Model
     {
         return $this->belongsTo(Tenant::class);
     }
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
 
     public function creator(): BelongsTo
     {
