@@ -11,7 +11,7 @@ use App\Soho\Http\Controllers\DashboardController;
 | 源 E:\_tmp_soho_baseline\routes\web.php（348 条），URL 加 /soho，路由名加 soho.。
 */
 
-Route::middleware(['web','auth','module:soho','module.access:soho'])->prefix('soho')->name('soho.')->group(function () {
+Route::middleware(['web','auth','module:soho','module.access:soho','log.activity'])->prefix('soho')->name('soho.')->group(function () {
 
 
 /*
