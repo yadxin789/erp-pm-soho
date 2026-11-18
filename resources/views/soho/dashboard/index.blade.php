@@ -317,10 +317,20 @@
             trigger: 'item',
             formatter: '{b}: {c} ({d}%)'
         },
+        legend: {
+            bottom: 0,
+            type: 'plain',
+            textStyle: { fontSize: 10 },
+            itemGap: 8,
+        },
         series: [
             {
                 type: 'pie',
-                radius: ['40%', '70%'],
+                radius: ['40%', '62%'],
+                center: ['50%', '44%'],
+                avoidLabelOverlap: true,
+                label: { show: false },
+                labelLine: { show: false },
                 data: platformData.map(function(item, index) {
                     return { value: item.count, name: item.platform };
                 })

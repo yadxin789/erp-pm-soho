@@ -28,7 +28,7 @@ class DashboardController extends Controller
             'total_shops' => Shop::count(),
             'total_orders' => PlatformOrder::count(),
             'total_products' => Product::count(),
-            'total_users' => User::count(),
+            'total_users' => User::where('module', 'soho')->count(),
             'low_stock_count' => Inventory::whereColumn('actual_quantity', '<=', 'safety_quantity')->where('safety_quantity', '>', 0)->count(),
             'pending_aftersale' => \App\Soho\Models\OrderAfterSale::where('status', 'pending')->count(),
         ];
@@ -56,7 +56,12 @@ class DashboardController extends Controller
         // 各平台订单分布
         $platformOrderStats = PlatformOrder::select('platform', DB::raw('count(*) as count'), DB::raw('sum(total_amount) as amount'))
             ->groupBy('platform')
-            ->get();
+            ->get()
+            ->map(function ($row) {
+                $row->platform = (new PlatformOrder(['platform' => $row->platform]))->platform_label;
+
+                return $row;
+            });
 
         // 库存预警
         $lowStockItems = Inventory::with(['sku', 'warehouse'])
