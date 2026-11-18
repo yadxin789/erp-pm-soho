@@ -114,11 +114,18 @@ class PlatformSkuController extends Controller
     public function import(Request $request)
     {
         $request->validate([
-            'import_file' => 'required|file|mimes:csv,txt',
+            'import_file' => 'nullable|file|mimes:csv,txt',
+            'import_content' => 'nullable|string',
         ]);
 
-        $filePath = $request->file('import_file')->getRealPath();
-        $content = file_get_contents($filePath);
+        // 参考基线的批量导入支持"上传文件"与"粘贴文本"两种方式，二者取其一。
+        if ($request->hasFile('import_file')) {
+            $content = file_get_contents($request->file('import_file')->getRealPath());
+        } elseif ($request->filled('import_content')) {
+            $content = $request->input('import_content');
+        } else {
+            return back()->withErrors(['import_file' => '请上传文件或粘贴导入内容']);
+        }
         $content = ltrim($content, "\xEF\xBB\xBF");
         $lines = array_filter(explode("\n", str_replace("\r\n", "\n", $content)));
 

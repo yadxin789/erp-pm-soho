@@ -6,9 +6,14 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">平台 SKU 映射列表</h5>
-        <a href="{{ route('soho.platform-sku.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus me-1"></i> 添加映射
-        </a>
+        <div class="d-flex gap-2">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#skuImportModal">
+                <i class="fa fa-upload me-1"></i> 批量导入
+            </button>
+            <a href="{{ route('soho.platform-sku.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus me-1"></i> 添加映射
+            </a>
+        </div>
     </div>
     <div class="card-body">
         <form method="GET" class="mb-3">
@@ -82,6 +87,34 @@
             </table>
         </div>
         {{ $skuMappings->links() }}
+    </div>
+</div>
+<div class="modal fade" id="skuImportModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('soho.platform-sku.import') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">批量导入平台 SKU</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">上传 CSV/TXT 文件</label>
+                        <input type="file" name="import_file" class="form-control" accept=".csv,.txt">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">或粘贴导入内容</label>
+                        <textarea name="import_content" class="form-control" rows="6" placeholder="每行一条：店铺ID,系统商品ID,平台SKU编码,平台价格,平台库存"></textarea>
+                        <small class="text-muted">列顺序：店铺ID, 系统商品ID, 平台SKU编码, 平台价格, 平台库存；以 # 开头的行会被忽略。</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">开始导入</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 @endsection
