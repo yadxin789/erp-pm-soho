@@ -19,7 +19,32 @@ class MenuConfig
      * 获取所有菜单定义
      * 每个菜单绑定角色和权限
      */
+    /**
+     * 菜单路由名解析：参考项目菜单写的是短名（dashboard / order.index …），
+     * 合并后真实路由统一带 soho. 前缀。这里只做运行时映射，参考菜单原文保持不变。
+     */
     public static function getMenus(): array
+    {
+        $menus = self::getMenusRaw();
+        $router = app()->bound('router') ? app('router')->getRoutes() : null;
+
+        if (! $router) {
+            return $menus;
+        }
+
+        foreach ($menus as $key => $menu) {
+            $route = $menu['route'] ?? null;
+            if (is_string($route) && $route !== '' && $route[0] !== '#' && ! str_contains($route, '://')) {
+                if (! $router->getByName($route) && $router->getByName('soho.'.$route)) {
+                    $menus[$key]['route'] = 'soho.'.$route;
+                }
+            }
+        }
+
+        return $menus;
+    }
+
+    public static function getMenusRaw(): array
     {
         // 所有角色列表（V3.1 - 26个角色）
         $allRoles = [
