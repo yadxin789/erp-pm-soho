@@ -147,7 +147,7 @@
         @if($request->status === 'pending')
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('soho.price.change.requests.cancel', $request) }}" class="d-inline" onsubmit="return confirm('确定取消此申请？')">
+                <form method="POST" action="{{ route('soho.price.change.requests.index', $request) }}" class="d-inline" onsubmit="return confirm('确定取消此申请？')">
                     @csrf
                     <button type="submit" class="btn btn-outline-danger">
                         <i class="fa fa-times me-1"></i>取消申请

@@ -174,7 +174,7 @@
                             <button type="button" class="btn btn-sm btn-primary" onclick="assignSingle({{ $item->id }})">
                                 <i class="fa fa-user-plus"></i> 分配
                             </button>
-                            <a href="{{ route('fulfillment.assignments.show', $item) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.fulfillment.assignments.index', $item) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                         </td>

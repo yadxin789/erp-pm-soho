@@ -1,4 +1,5 @@
 @extends('soho::layouts.app')
+@php $approvals = $approvals ?? collect(); @endphp
 
 @section('title', '调价审批')
 

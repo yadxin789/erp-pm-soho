@@ -1,4 +1,6 @@
 @extends('soho::layouts.app')
+@php $orderCount = $orderCount ?? 0; @endphp
+@php $totalAmount = $totalAmount ?? 0; @endphp
 @section('title', '收款记录')
 @section('content')
 <div class="row mb-3">

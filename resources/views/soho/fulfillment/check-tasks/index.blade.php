@@ -16,13 +16,13 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-clipboard-check me-2"></i>待复核任务列表</h4>
     <div>
-        <a href="{{ route('fulfillment.check-tasks.completed') }}" class="btn btn-outline-success btn-sm me-2">
+        <a href="{{ route('soho.check.tasks.completed') }}" class="btn btn-outline-success btn-sm me-2">
             <i class="fa fa-check-circle me-1"></i>已完成复核
         </a>
-        <a href="{{ route('fulfillment.check-tasks.record') }}" class="btn btn-outline-info btn-sm me-2">
+        <a href="{{ route('soho.check.tasks.record') }}" class="btn btn-outline-info btn-sm me-2">
             <i class="fa fa-history me-1"></i>复核记录
         </a>
-        <a href="{{ route('fulfillment.check-tasks.exception') }}" class="btn btn-outline-warning btn-sm">
+        <a href="{{ route('soho.check.tasks.exception') }}" class="btn btn-outline-warning btn-sm">
             <i class="fa fa-exclamation-triangle me-1"></i>复核异常
         </a>
     </div>
@@ -71,7 +71,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.check-tasks.index') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.check.tasks.index') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -114,10 +114,10 @@
                         </td>
                         <td>{{ optional($task->created_at)->format('Y-m-d H:i:s') }}</td>
                         <td>
-                            <a href="{{ route('fulfillment.check-tasks.scan', $task) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('soho.check.tasks.scan', $task) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-barcode"></i> 扫码复核
                             </a>
-                            <a href="{{ route('fulfillment.check-tasks.show', $task) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.check.tasks.index', $task) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                         </td>

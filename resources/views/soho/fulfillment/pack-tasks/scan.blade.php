@@ -7,7 +7,7 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('fulfillment.pack-tasks.index') }}">待打包任务</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.pack.tasks.index') }}">待打包任务</a></li>
         <li class="breadcrumb-item active">扫码打包</li>
     </ol>
 </nav>
@@ -77,7 +77,7 @@
                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="clearScan()">
                         <i class="fa fa-times me-1"></i>清空
                     </button>
-                    <a href="{{ route('fulfillment.pack-tasks.material', $task) }}" class="btn btn-outline-primary btn-sm">
+                    <a href="{{ route('soho.pack.tasks.material', $task) }}" class="btn btn-outline-primary btn-sm">
                         <i class="fa fa-box me-1"></i>选择包材
                     </a>
                     <button type="button" class="btn btn-success btn-sm ms-auto" onclick="goToWeight()">

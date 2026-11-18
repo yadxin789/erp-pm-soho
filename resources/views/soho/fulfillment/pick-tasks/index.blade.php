@@ -16,13 +16,13 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-barcode me-2"></i>待拣货任务列表</h4>
     <div>
-        <a href="{{ route('fulfillment.pick-tasks.progress') }}" class="btn btn-outline-primary btn-sm me-2">
+        <a href="{{ route('soho.pick.tasks.progress') }}" class="btn btn-outline-primary btn-sm me-2">
             <i class="fa fa-play-circle me-1"></i>执行中任务
         </a>
-        <a href="{{ route('fulfillment.pick-tasks.completed') }}" class="btn btn-outline-success btn-sm me-2">
+        <a href="{{ route('soho.pick.tasks.completed') }}" class="btn btn-outline-success btn-sm me-2">
             <i class="fa fa-check-circle me-1"></i>已完成任务
         </a>
-        <a href="{{ route('fulfillment.pick-tasks.exception') }}" class="btn btn-outline-warning btn-sm">
+        <a href="{{ route('soho.pick.tasks.exception') }}" class="btn btn-outline-warning btn-sm">
             <i class="fa fa-exclamation-triangle me-1"></i>拣货异常
         </a>
     </div>
@@ -72,7 +72,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.pick-tasks.index') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.pick.tasks.index') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -115,10 +115,10 @@
                         </td>
                         <td>{{ optional($task->created_at)->format('Y-m-d H:i:s') }}</td>
                         <td>
-                            <a href="{{ route('fulfillment.pick-tasks.scan', $task) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('soho.pick.tasks.scan', $task) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-barcode"></i> 扫码拣货
                             </a>
-                            <a href="{{ route('fulfillment.pick-tasks.show', $task) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.pick.tasks.index', $task) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                         </td>
@@ -157,7 +157,7 @@ document.getElementById('batchPickBtn')?.addEventListener('click', function() {
     }
     if (confirm('确认对选中的任务进行批量拣货操作？')) {
         const ids = Array.from(selected).map(cb => cb.value);
-        window.location.href = '{{ route("fulfillment.pick-tasks.scan") }}?ids=' + ids.join(',');
+        window.location.href = '{{ route("soho.pick.tasks.scan") }}?ids=' + ids.join(',');
     }
 });
 </script>

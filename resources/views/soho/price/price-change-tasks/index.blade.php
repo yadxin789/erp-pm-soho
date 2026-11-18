@@ -123,7 +123,7 @@
                                             <i class="fa fa-play"></i>
                                         </button>
                                     </form>
-                                    <form method="POST" action="{{ route('soho.price.change.tasks.cancel', $task) }}" class="d-inline" onsubmit="return confirm('确定取消此任务？')">
+                                    <form method="POST" action="{{ route('soho.price.change.tasks.destroy', $task) }}" class="d-inline" onsubmit="return confirm('确定取消此任务？')">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-outline-danger" title="取消">
                                             <i class="fa fa-times"></i>

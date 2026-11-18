@@ -16,7 +16,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-sign-in me-2"></i>发货回传</h4>
     <div>
-        <a href="{{ route('fulfillment.shipments.batch-callback') }}" class="btn btn-outline-primary btn-sm">
+        <a href="{{ route('soho.logistics.batch.callback') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-list me-1"></i>批量回传
         </a>
     </div>

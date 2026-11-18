@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
         <li class="breadcrumb-item"><a href="#">履约管理</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('fulfillment.check-tasks.index') }}">待复核任务</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.check.tasks.index') }}">待复核任务</a></li>
         <li class="breadcrumb-item active">复核异常</li>
     </ol>
 </nav>
@@ -16,7 +16,7 @@
 {{-- 页面标题 --}}
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-exclamation-triangle me-2"></i>复核异常列表</h4>
-    <a href="{{ route('fulfillment.check-tasks.index') }}" class="btn btn-outline-secondary btn-sm">
+    <a href="{{ route('soho.check.tasks.index') }}" class="btn btn-outline-secondary btn-sm">
         <i class="fa fa-arrow-left me-1"></i>返回待复核
     </a>
 </div>
@@ -91,7 +91,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.check-tasks.exception') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.check.tasks.exception') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -148,7 +148,7 @@
                         </td>
                         <td>{{ optional($exception->created_at)->format('Y-m-d H:i:s') }}</td>
                         <td>
-                            <a href="{{ route('fulfillment.check-tasks.exception.show', $exception) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.exceptions.show', $exception) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                             <button type="button" class="btn btn-sm btn-outline-success" onclick="handleException({{ $exception->id }})">

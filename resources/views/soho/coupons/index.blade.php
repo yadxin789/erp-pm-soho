@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">优惠券列表</h5>
-        <a href="{{ route('coupons.create') }}" class="btn btn-primary">
+        <a href="{{ route('soho.coupon.create') }}" class="btn btn-primary">
             <i class="fa fa-plus"></i> 创建优惠券
         </a>
     </div>
@@ -37,7 +37,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i> 筛选
                     </button>
-                    <a href="{{ route('coupons.index') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.coupon.index') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -107,10 +107,10 @@
                             <span class="badge bg-{{ $statusInfo['class'] }}">{{ $statusInfo['label'] }}</span>
                         </td>
                         <td>
-                            <a href="{{ route('coupons.edit', $coupon) }}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('soho.coupon.edit', $coupon) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-edit"></i> 编辑
                             </a>
-                            <form method="POST" action="{{ route('coupons.destroy', $coupon) }}" class="d-inline" onsubmit="return confirm('确定删除此优惠券？')">
+                            <form method="POST" action="{{ route('soho.coupon.destroy', $coupon) }}" class="d-inline" onsubmit="return confirm('确定删除此优惠券？')">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     <i class="fa fa-trash"></i> 删除

@@ -16,13 +16,13 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-truck me-2"></i>待发货包裹列表</h4>
     <div>
-        <a href="{{ route('fulfillment.shipments.push-pending') }}" class="btn btn-outline-warning btn-sm me-2">
+        <a href="{{ route('soho.shipment.push.pending') }}" class="btn btn-outline-warning btn-sm me-2">
             <i class="fa fa-sync me-1"></i>待推送发货
         </a>
-        <a href="{{ route('fulfillment.shipments.push-failed') }}" class="btn btn-outline-danger btn-sm me-2">
+        <a href="{{ route('soho.shipment.push.failed') }}" class="btn btn-outline-danger btn-sm me-2">
             <i class="fa fa-exclamation-circle me-1"></i>推送失败
         </a>
-        <a href="{{ route('fulfillment.shipments.callback') }}" class="btn btn-outline-info btn-sm">
+        <a href="{{ route('soho.logistics.ship.callback') }}" class="btn btn-outline-info btn-sm">
             <i class="fa fa-sign-in me-1"></i>发货回传
         </a>
     </div>
@@ -108,7 +108,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.shipments.pending') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.shipment.pending') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -143,7 +143,7 @@
                         </td>
                         <td>{{ optional($parcel->created_at)->format('Y-m-d H:i:s') }}</td>
                         <td>
-                            <a href="{{ route('fulfillment.shipments.show', $parcel) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.shipment.pending', $parcel) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                             <button type="button" class="btn btn-sm btn-success" onclick="shipParcel({{ $parcel->id }})">

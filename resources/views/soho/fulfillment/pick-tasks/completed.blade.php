@@ -16,7 +16,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-check-circle me-2"></i>已完成拣货任务</h4>
     <div>
-        <a href="{{ route('fulfillment.pick-tasks.index') }}" class="btn btn-outline-primary btn-sm">
+        <a href="{{ route('soho.pick.tasks.index') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-clock me-1"></i>待拣货任务
         </a>
         <button type="button" class="btn btn-success btn-sm" onclick="exportData()">
@@ -104,7 +104,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.pick-tasks.completed') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.pick.tasks.completed') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -142,7 +142,7 @@
                         </td>
                         <td>{{ optional($task->completed_at)->format('Y-m-d H:i:s') }}</td>
                         <td>
-                            <a href="{{ route('fulfillment.pick-tasks.show', $task) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.pick.tasks.index', $task) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                         </td>

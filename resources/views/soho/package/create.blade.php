@@ -10,7 +10,7 @@
                 <label class="form-label">选择订单 <span class="text-danger">*</span></label>
                 <select name="order_id" class="form-select" required>
                     <option value="">请选择订单</option>
-                    @foreach(\App\Soho\Models\Order::orderBy('created_at', 'desc')->limit(100)->get() as $order)
+                    @foreach(\App\Soho\Models\PlatformOrder::orderBy('created_at', 'desc')->limit(100)->get() as $order)
                     <option value="{{ $order->id }}" @selected(old('order_id') == $order->id)>{{ $order->order_number }}</option>
                     @endforeach
                 </select>

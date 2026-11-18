@@ -7,7 +7,7 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('fulfillment.pick-tasks.index') }}">待拣货任务</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.pick.tasks.index') }}">待拣货任务</a></li>
         <li class="breadcrumb-item active">扫码拣货</li>
     </ol>
 </nav>

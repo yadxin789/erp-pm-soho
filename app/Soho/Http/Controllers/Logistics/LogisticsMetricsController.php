@@ -109,12 +109,12 @@ class LogisticsMetricsController extends Controller
         $carrierMetrics = $baseQuery()
             ->whereNotNull('delivered_at')
             ->select(
-                'soho_express_company',
+                'express_company',
                 DB::raw('COUNT(*) as total'),
                 DB::raw('SUM(CASE WHEN TIMESTAMPDIFF(HOUR, shipped_at, delivered_at) <= 72 THEN 1 ELSE 0 END) as on_time_count'),
                 DB::raw('ROUND(AVG(TIMESTAMPDIFF(HOUR, shipped_at, delivered_at)), 2) as avg_hours')
             )
-            ->groupBy('soho_express_company')
+            ->groupBy('express_company')
             ->get()
             ->map(function ($item) {
                 // 计算各快递公司72小时内签收率

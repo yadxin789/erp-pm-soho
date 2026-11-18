@@ -7,7 +7,7 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('fulfillment.pack-tasks.index') }}">待打包任务</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.pack.tasks.index') }}">待打包任务</a></li>
         <li class="breadcrumb-item active">包裹生成</li>
     </ol>
 </nav>
@@ -174,7 +174,7 @@
 
                     {{-- 操作按钮 --}}
                     <div class="d-flex gap-2">
-                        <a href="{{ route('fulfillment.pack-tasks.weight', $task) }}" class="btn btn-outline-secondary">
+                        <a href="{{ route('soho.pack.tasks.weight', $task) }}" class="btn btn-outline-secondary">
                             <i class="fa fa-arrow-left me-1"></i>返回称重
                         </a>
                         <button type="button" class="btn btn-outline-warning" onclick="saveDraft()">

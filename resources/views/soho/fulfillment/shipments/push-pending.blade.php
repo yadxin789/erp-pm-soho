@@ -16,7 +16,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-sync me-2"></i>待推送发货列表</h4>
     <div>
-        <a href="{{ route('fulfillment.shipments.pending') }}" class="btn btn-outline-primary btn-sm">
+        <a href="{{ route('soho.shipment.pending') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-clock me-1"></i>待发货包裹
         </a>
         <button type="button" class="btn btn-success btn-sm" onclick="pushAll()">
@@ -73,7 +73,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.shipments.push-pending') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.shipment.push.pending') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>

@@ -124,7 +124,7 @@
                                     <a href="{{ route('soho.price.change.requests.edit', $request) }}" class="btn btn-sm btn-outline-warning" title="编辑">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form method="POST" action="{{ route('soho.price.change.requests.cancel', $request) }}" class="d-inline" onsubmit="return confirm('确定取消此申请？')">
+                                    <form method="POST" action="{{ route('soho.price.change.requests.index', $request) }}" class="d-inline" onsubmit="return confirm('确定取消此申请？')">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-outline-danger" title="取消">
                                             <i class="fa fa-times"></i>

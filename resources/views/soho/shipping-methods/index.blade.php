@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">配送方式列表</h5>
-        <a href="{{ route('shipping-methods.create') }}" class="btn btn-primary">
+        <a href="{{ route('soho.shipping-method.create') }}" class="btn btn-primary">
             <i class="fa fa-plus"></i> 添加配送方式
         </a>
     </div>
@@ -28,7 +28,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i> 筛选
                     </button>
-                    <a href="{{ route('shipping-methods.index') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.shipping-method.index') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -87,10 +87,10 @@
                             </span>
                         </td>
                         <td>
-                            <a href="{{ route('shipping-methods.edit', $method) }}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('soho.shipping-method.edit', $method) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-edit"></i> 编辑
                             </a>
-                            <form method="POST" action="{{ route('shipping-methods.destroy', $method) }}" class="d-inline" onsubmit="return confirm('确定删除此配送方式？删除后相关订单的配送信息将受影响。')">
+                            <form method="POST" action="{{ route('soho.shipping-method.destroy', $method) }}" class="d-inline" onsubmit="return confirm('确定删除此配送方式？删除后相关订单的配送信息将受影响。')">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     <i class="fa fa-trash"></i> 删除

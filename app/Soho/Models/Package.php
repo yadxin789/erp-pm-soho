@@ -19,7 +19,7 @@ class Package extends Model
         'weight' => 'decimal:2'
     ];
     
-    public function order() { return $this->belongsTo(PlatformOrder::class); }
+    public function order() { return $this->belongsTo(PlatformOrder::class, 'order_id'); }
     public function expressCompany() { return $this->belongsTo(ExpressCompany::class); }
     public function operator() { return $this->belongsTo(User::class, 'operator_id'); }
 }

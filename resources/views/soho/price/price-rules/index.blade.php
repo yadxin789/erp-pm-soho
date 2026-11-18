@@ -114,7 +114,7 @@
                                 <a href="{{ route('soho.price.rules.edit', $rule) }}" class="btn btn-sm btn-outline-primary" title="编辑">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <form method="POST" action="{{ route('soho.price.rules.toggle', $rule) }}" class="d-inline">
+                                <form method="POST" action="{{ route('soho.price.rules.index', $rule) }}" class="d-inline">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-outline-{{ $rule->status === 'enabled' ? 'warning' : 'success' }}" title="{{ $rule->status === 'enabled' ? '禁用' : '启用' }}">
                                         <i class="fa {{ $rule->status === 'enabled' ? 'fa-ban' : 'fa-check' }}"></i>

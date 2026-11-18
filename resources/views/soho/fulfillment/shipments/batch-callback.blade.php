@@ -16,7 +16,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-list me-2"></i>批量回传</h4>
     <div>
-        <a href="{{ route('fulfillment.shipments.callback') }}" class="btn btn-outline-primary btn-sm">
+        <a href="{{ route('soho.logistics.ship.callback') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-arrow-left me-1"></i>单个回传
         </a>
     </div>

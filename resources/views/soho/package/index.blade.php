@@ -80,7 +80,7 @@
                         </td>
                         <td>{{ $package->created_at?->format('Y-m-d H:i') }}</td>
                         <td>
-                            <a href="{{ route('package.show', $package) }}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('soho.package.index', $package) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                             <a href="{{ route('soho.package.edit', $package) }}" class="btn btn-sm btn-outline-success">

@@ -397,7 +397,7 @@
                     <a class="nav-link" href="#overview">系统概览</a>
                     <a class="nav-link" href="#features">核心功能</a>
                     <a class="nav-link" href="#platforms">支持平台</a>
-                    <a class="nav-link" href="{{ route('login') }}">
+                    <a class="nav-link" href="{{ route('soho.log.login') }}">
                         <i class="fa fa-sign-in me-1"></i>登录
                     </a>
                 </div>
@@ -420,7 +420,7 @@
                         <a href="#overview" class="btn btn-primary-custom">
                             <i class="fa fa-dashboard me-2"></i>了解更多
                         </a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg" style="border-color: rgba(255,255,255,0.5);">
+                        <a href="{{ route('soho.log.login') }}" class="btn btn-outline-light btn-lg" style="border-color: rgba(255,255,255,0.5);">
                             <i class="fa fa-user-circle me-2"></i>登录
                         </a>
                     </div>
@@ -725,10 +725,10 @@
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">开始您的电商统一管理之旅</h2>
                     <p class="text-gray-600 mb-6">立即注册，体验多平台店铺统一管理的便捷与高效</p>
                     <div class="flex-wrap justify-center gap-3">
-                        <a href="{{ route('login') }}" class="btn btn-primary-custom">
+                        <a href="{{ route('soho.log.login') }}" class="btn btn-primary-custom">
                             <i class="fa fa-user-plus me-2"></i>免费注册
                         </a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-primary btn-lg">
+                        <a href="{{ route('soho.log.login') }}" class="btn btn-outline-primary btn-lg">
                             <i class="fa fa-sign-in me-2"></i>登录系统
                         </a>
                     </div>

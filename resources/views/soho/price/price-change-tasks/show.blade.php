@@ -23,7 +23,7 @@
                             <i class="fa fa-play me-1"></i>立即执行
                         </button>
                     </form>
-                    <form method="POST" action="{{ route('soho.price.change.tasks.cancel', $task) }}" class="d-inline" onsubmit="return confirm('确定取消此任务？')">
+                    <form method="POST" action="{{ route('soho.price.change.tasks.destroy', $task) }}" class="d-inline" onsubmit="return confirm('确定取消此任务？')">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-outline-danger">
                             <i class="fa fa-times me-1"></i>取消任务
@@ -126,7 +126,7 @@
                     {{ $task->error_message ?? '未知错误' }}
                 </div>
                 <div class="mt-3">
-                    <form method="POST" action="{{ route('soho.price.change.tasks.retry', $task) }}" class="d-inline">
+                    <form method="POST" action="{{ route('soho.price.change.tasks.execute', $task) }}" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-warning">
                             <i class="fa fa-refresh me-1"></i>重试任务

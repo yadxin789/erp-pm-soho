@@ -7,7 +7,7 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('fulfillment.check-tasks.index') }}">待复核任务</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.check.tasks.index') }}">待复核任务</a></li>
         <li class="breadcrumb-item active">扫码复核</li>
     </ol>
 </nav>

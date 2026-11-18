@@ -16,10 +16,10 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-box me-2"></i>待打包任务列表</h4>
     <div>
-        <a href="{{ route('fulfillment.pack-tasks.completed') }}" class="btn btn-outline-success btn-sm me-2">
+        <a href="{{ route('soho.pack.tasks.completed') }}" class="btn btn-outline-success btn-sm me-2">
             <i class="fa fa-check-circle me-1"></i>已完成打包
         </a>
-        <a href="{{ route('fulfillment.pack-tasks.exception') }}" class="btn btn-outline-warning btn-sm">
+        <a href="{{ route('soho.pack.tasks.exception') }}" class="btn btn-outline-warning btn-sm">
             <i class="fa fa-exclamation-triangle me-1"></i>打包异常
         </a>
     </div>
@@ -66,7 +66,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.pack-tasks.index') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.pack.tasks.index') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -109,10 +109,10 @@
                         </td>
                         <td>{{ optional($task->created_at)->format('Y-m-d H:i:s') }}</td>
                         <td>
-                            <a href="{{ route('fulfillment.pack-tasks.scan', $task) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('soho.pack.tasks.scan', $task) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-barcode"></i> 扫码打包
                             </a>
-                            <a href="{{ route('fulfillment.pack-tasks.show', $task) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.pack.tasks.index', $task) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                         </td>

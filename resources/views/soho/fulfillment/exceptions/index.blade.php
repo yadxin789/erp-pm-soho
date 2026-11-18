@@ -100,7 +100,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.exceptions.index') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.exceptions.index') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -163,7 +163,7 @@
                         </td>
                         <td>{{ optional($exception->created_at)->format('Y-m-d H:i:s') }}</td>
                         <td>
-                            <a href="{{ route('fulfillment.exceptions.show', $exception) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.exceptions.show', $exception) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                             <button type="button" class="btn btn-sm btn-outline-success" onclick="handleException({{ $exception->id }})">

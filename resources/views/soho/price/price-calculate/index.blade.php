@@ -22,7 +22,7 @@
         <div class="card mb-3">
             <div class="card-header"><h6 class="mb-0"><i class="fa fa-box me-2"></i>选择商品</h6></div>
             <div class="card-body">
-                <form method="GET" action="{{ route('soho.price.calculate.index') }}" class="row g-3">
+                <form method="GET" action="{{ route('soho.price.calculate') }}" class="row g-3">
                     <div class="col-md-8">
                         <label class="form-label">商品</label>
                         <select class="form-select" name="product_id" id="productSelect">

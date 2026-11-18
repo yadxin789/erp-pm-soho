@@ -1,4 +1,5 @@
 @extends('soho::layouts.app')
+@php $returnInspects = $returnInspects ?? collect(); @endphp
 
 {{-- 退货质检列表视图 --}}
 @section('title', '退货质检')
@@ -20,7 +21,7 @@
     {{-- 搜索/筛选表单 --}}
     <div class="card mb-3">
         <div class="card-body">
-            <form method="GET" action="{{ route('aftersale.return-inspects.index') }}">
+            <form method="GET" action="{{ route('soho.return.inspect') }}">
                 <div class="row g-2 align-items-end">
                     <div class="col-md-3">
                         <label class="form-label small">关键词</label>
@@ -45,7 +46,7 @@
                     </div>
                     <div class="col-md-3">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
-                        <a href="{{ route('aftersale.return-inspects.index') }}" class="btn btn-outline-secondary">重置</a>
+                        <a href="{{ route('soho.return.inspect') }}" class="btn btn-outline-secondary">重置</a>
                     </div>
                 </div>
             </form>
@@ -141,7 +142,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($returnInspects->hasPages())
+        @if(method_exists($returnInspects,'hasPages') && $returnInspects->hasPages())
             <div class="card-footer">{{ $returnInspects->links() }}</div>
         @endif
     </div>

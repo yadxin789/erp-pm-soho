@@ -56,7 +56,7 @@ class ShopOverviewController extends Controller
                 DB::raw('COUNT(DISTINCT a.id) as refund_count'),
                 DB::raw('COALESCE(SUM(a.refund_amount), 0) as refund_amount'),
                 DB::raw('SUM(CASE WHEN o.ship_time IS NOT NULL AND o.order_created_at IS NOT NULL THEN 1 ELSE 0 END) as shipped_count'),
-                DB::raw('SUM(CASE WHEN o.ship_time IS NOT NULL AND o.order_created_at IS NOT NULL AND julianday(o.ship_time) - julianday(o.order_created_at) <= 1 THEN 1 ELSE 0 END) as on_time_count')
+                DB::raw('SUM(CASE WHEN o.ship_time IS NOT NULL AND o.order_created_at IS NOT NULL AND DATEDIFF(o.ship_time, o.order_created_at) <= 1 THEN 1 ELSE 0 END) as on_time_count')
             )
             ->groupBy('s.id', 's.shop_name', 's.platform')
             ->orderByDesc('sales_amount')

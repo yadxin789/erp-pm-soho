@@ -16,10 +16,10 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-play-circle me-2"></i>执行中拣货任务</h4>
     <div>
-        <a href="{{ route('fulfillment.pick-tasks.index') }}" class="btn btn-outline-primary btn-sm">
+        <a href="{{ route('soho.pick.tasks.index') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-clock me-1"></i>待拣货任务
         </a>
-        <a href="{{ route('fulfillment.pick-tasks.completed') }}" class="btn btn-outline-success btn-sm">
+        <a href="{{ route('soho.pick.tasks.completed') }}" class="btn btn-outline-success btn-sm">
             <i class="fa fa-check-circle me-1"></i>已完成任务
         </a>
     </div>
@@ -71,7 +71,7 @@
                             <span class="badge bg-warning text-dark">拣货中</span>
                         </td>
                         <td>
-                            <a href="{{ route('fulfillment.pick-tasks.scan', $task) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('soho.pick.tasks.scan', $task) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-barcode"></i> 继续拣货
                             </a>
                             <button type="button" class="btn btn-sm btn-outline-danger" onclick="pauseTask({{ $task->id }})">

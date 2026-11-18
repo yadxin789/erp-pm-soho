@@ -16,7 +16,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="fa fa-exclamation-circle me-2"></i>推送失败发货列表</h4>
     <div>
-        <a href="{{ route('fulfillment.shipments.pending') }}" class="btn btn-outline-primary btn-sm">
+        <a href="{{ route('soho.shipment.pending') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-clock me-1"></i>待发货包裹
         </a>
         <button type="button" class="btn btn-danger btn-sm" onclick="retryAll()">
@@ -96,7 +96,7 @@
                     <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search me-1"></i>筛选
                     </button>
-                    <a href="{{ route('fulfillment.shipments.push-failed') }}" class="btn btn-outline-secondary">重置</a>
+                    <a href="{{ route('soho.shipment.push.failed') }}" class="btn btn-outline-secondary">重置</a>
                 </div>
             </div>
         </form>
@@ -158,7 +158,7 @@
                             <button type="button" class="btn btn-sm btn-success" onclick="retryPush({{ $parcel->id }})">
                                 <i class="fa fa-redo"></i> 重试
                             </button>
-                            <a href="{{ route('fulfillment.shipments.show', $parcel) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('soho.shipment.pending', $parcel) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i> 详情
                             </a>
                         </td>

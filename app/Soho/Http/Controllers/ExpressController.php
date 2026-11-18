@@ -55,7 +55,7 @@ class ExpressController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
-            'code' => ['required', 'string', 'max:50', Rule::unique('soho_express_company')->ignore($express->id)],
+            'code' => ['required', 'string', 'max:50', Rule::unique('express_company')->ignore($express->id)],
             'website' => 'nullable|string|max:200',
             'phone' => 'nullable|string|max:30',
             'sort_order' => 'integer|min:0',

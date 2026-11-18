@@ -10,7 +10,7 @@ class ExpressCompany extends Model
     use \App\Soho\Models\Concerns\HasSohoTable;
 
     use LogsActivity;
-    protected $table = 'soho_express_company';
+    protected $table = 'express_company';
 
     protected $fillable = [
         'name', 'code', 'taobao_code', 'jd_code', 'pdd_code', 'amazon_code',

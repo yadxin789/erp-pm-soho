@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('soho.home') }}">首页</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('logistics.metrics.index') }}">物流管理</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('soho.logistics.on-time') }}">物流管理</a></li>
                     <li class="breadcrumb-item active">物流时效统计</li>
                 </ol>
             </nav>
@@ -21,7 +21,7 @@
     {{-- 时间范围筛选表单 --}}
     <div class="card mb-3">
         <div class="card-body">
-            <form method="GET" action="{{ route('logistics.metrics.index') }}">
+            <form method="GET" action="{{ route('soho.logistics.on-time') }}">
                 <div class="row g-2 align-items-end">
                     {{-- 时间范围选择 --}}
                     <div class="col-md-3">

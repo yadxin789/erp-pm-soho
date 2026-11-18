@@ -73,7 +73,7 @@ class PlatformOrder extends Model
      */
     public function packages(): HasMany
     {
-        return $this->hasMany(OrderPackage::class);
+        return $this->hasMany(OrderPackage::class, 'order_id');
     }
 
     /**

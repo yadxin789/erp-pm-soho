@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-header"><h5 class="mb-0">创建促销活动</h5></div>
     <div class="card-body">
-        <form method="POST" action="{{ route('promotions.store') }}">
+        <form method="POST" action="{{ route('soho.promotion.store') }}">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -127,7 +127,7 @@
                 <textarea name="description" class="form-control" rows="3" placeholder="请输入活动描述说明">{{ old('description') }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">创建</button>
-            <a href="{{ route('promotions.index') }}" class="btn btn-secondary">返回</a>
+            <a href="{{ route('soho.promotion.index') }}" class="btn btn-secondary">返回</a>
         </form>
     </div>
 </div>

@@ -97,7 +97,7 @@
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
 
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('soho.log.login') }}">
                 @csrf
 
                 <div class="form-group">
@@ -125,7 +125,7 @@
                         <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label for="remember" style="margin-bottom: 0;">记住我</label>
                         @if(Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="forgot-link">忘记密码？</a>
+                        <a href="{{ route('core.profile.password') }}" class="forgot-link">忘记密码？</a>
                         @endif
                     </div>
                 </div>

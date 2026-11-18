@@ -20,7 +20,7 @@
     {{-- 搜索/筛选表单 --}}
     <div class="card mb-3">
         <div class="card-body">
-            <form method="GET" action="{{ route('aftersale.disputes.index') }}">
+            <form method="GET" action="{{ route('soho.aftersale.dispute') }}">
                 <div class="row g-2 align-items-end">
                     <div class="col-md-3">
                         <label class="form-label small">关键词</label>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="row g-2 mt-2">
                     <div class="col-md-12">
-                        <a href="{{ route('aftersale.disputes.index') }}" class="btn btn-outline-secondary btn-sm">重置筛选</a>
+                        <a href="{{ route('soho.aftersale.dispute') }}" class="btn btn-outline-secondary btn-sm">重置筛选</a>
                     </div>
                 </div>
             </form>

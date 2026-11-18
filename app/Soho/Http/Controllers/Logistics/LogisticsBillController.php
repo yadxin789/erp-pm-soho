@@ -37,8 +37,8 @@ class LogisticsBillController extends Controller
             });
         }
         // 快递公司筛选
-        if ($expressCompany = $request->input('soho_express_company')) {
-            $query->where('soho_express_company', $expressCompany);
+        if ($expressCompany = $request->input('express_company')) {
+            $query->where('express_company', $expressCompany);
         }
         // 对账状态筛选
         if ($status = $request->input('status')) {

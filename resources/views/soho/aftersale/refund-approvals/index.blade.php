@@ -1,4 +1,5 @@
 @extends('soho::layouts.app')
+@php $refundApprovals = $refundApprovals ?? collect(); @endphp
 
 {{-- 退款审批列表视图 --}}
 @section('title', '退款审批')
@@ -140,7 +141,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($refundApprovals->hasPages())
+        @if(method_exists($refundApprovals,'hasPages') && $refundApprovals->hasPages())
             <div class="card-footer">{{ $refundApprovals->links() }}</div>
         @endif
     </div>

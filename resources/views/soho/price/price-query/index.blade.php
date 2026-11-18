@@ -54,7 +54,7 @@
 {{-- 搜索/筛选表单 --}}
 <div class="card mb-3">
     <div class="card-body">
-        <form method="GET" action="{{ route('soho.price.query.index') }}" class="row g-3">
+        <form method="GET" action="{{ route('soho.price.query') }}" class="row g-3">
             <div class="col-md-3">
                 <label class="form-label">商品名称/SKU</label>
                 <input type="text" class="form-control" name="search" value="{{ request('search') }}" placeholder="输入商品名称或SKU编码">
@@ -89,7 +89,7 @@
                 <button type="submit" class="btn btn-primary me-1">
                     <i class="fa fa-search"></i>
                 </button>
-                <a href="{{ route('soho.price.query.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('soho.price.query') }}" class="btn btn-outline-secondary">
                     <i class="fa fa-times"></i>
                 </a>
             </div>
@@ -169,7 +169,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('soho.price.queryshow', $product) }}" class="btn btn-sm btn-outline-primary" title="查看详情">
+                                <a href="{{ route('soho.price.query', $product) }}" class="btn btn-sm btn-outline-primary" title="查看详情">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </td>

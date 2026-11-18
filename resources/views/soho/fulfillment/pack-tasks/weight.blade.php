@@ -7,8 +7,8 @@
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('soho.dashboard') }}">首页</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('fulfillment.pack-tasks.index') }}">待打包任务</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('fulfillment.pack-tasks.scan', $task) }}">扫码打包</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.pack.tasks.index') }}">待打包任务</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('soho.pack.tasks.scan', $task) }}">扫码打包</a></li>
         <li class="breadcrumb-item active">称重录入</li>
     </ol>
 </nav>
@@ -142,7 +142,7 @@
 
                     {{-- 操作按钮 --}}
                     <div class="d-flex gap-2">
-                        <a href="{{ route('fulfillment.pack-tasks.material', $task) }}" class="btn btn-outline-secondary">
+                        <a href="{{ route('soho.pack.tasks.material', $task) }}" class="btn btn-outline-secondary">
                             <i class="fa fa-arrow-left me-1"></i>返回选包材
                         </a>
                         <button type="button" class="btn btn-outline-warning" onclick="tareWeight()">
@@ -151,7 +151,7 @@
                         <button type="submit" class="btn btn-success ms-auto">
                             <i class="fa fa-check me-1"></i>确认称重
                         </button>
-                        <a href="{{ route('fulfillment.pack-tasks.parcel', $task) }}" class="btn btn-primary">
+                        <a href="{{ route('soho.pack.tasks.parcel', $task) }}" class="btn btn-primary">
                             <i class="fa fa-box me-1"></i>生成包裹
                         </a>
                     </div>
