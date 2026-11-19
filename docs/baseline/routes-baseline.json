@@ -1171,8 +1171,16 @@
         "module": "erp",
         "uri": "erp\/app\/quality\/defects",
         "name": "app.quality.defects.index",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Quality\\DefectRecordController",
+        "action": "index",
+        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:erp,App\\Core\\Http\\Middleware\\EnsureModuleAccess:erp,App\\Erp\\Http\\Middleware\\EnsureRoleScope,App\\Core\\Http\\Middleware\\CheckRole:admin|quality_manager|accountant|viewer"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/quality\/defects\/create",
+        "name": "app.quality.defects.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Quality\\DefectRecordController",
+        "action": "create",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:erp,App\\Core\\Http\\Middleware\\EnsureModuleAccess:erp,App\\Erp\\Http\\Middleware\\EnsureRoleScope,App\\Core\\Http\\Middleware\\CheckRole:admin|quality_manager|accountant|viewer"
     },
     {
@@ -2043,16 +2051,16 @@
         "module": "soho",
         "uri": "soho\/aftersale\/apply",
         "name": "soho.aftersale.apply",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\AfterSaleBoardController",
+        "action": "apply",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:customer_service,App\\Core\\Http\\Middleware\\CheckPermission:after_sale.view"
     },
     {
         "module": "soho",
         "uri": "soho\/aftersale\/communication",
         "name": "soho.aftersale.communication",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\AfterSaleBoardController",
+        "action": "communication",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:customer_service,App\\Core\\Http\\Middleware\\CheckPermission:after_sale.view"
     },
     {
@@ -2075,8 +2083,8 @@
         "module": "soho",
         "uri": "soho\/aftersale\/operation-log",
         "name": "soho.aftersale.operation.log",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\AfterSaleBoardController",
+        "action": "operationLog",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:aftersale_manager,App\\Core\\Http\\Middleware\\CheckPermission:after_sale.view"
     },
     {
@@ -2091,8 +2099,8 @@
         "module": "soho",
         "uri": "soho\/aftersale\/progress",
         "name": "soho.aftersale.progress",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\AfterSaleBoardController",
+        "action": "progress",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:customer_service,App\\Core\\Http\\Middleware\\CheckPermission:after_sale.view"
     },
     {
@@ -2107,8 +2115,8 @@
         "module": "soho",
         "uri": "soho\/aftersale\/supplement",
         "name": "soho.aftersale.supplement",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\AfterSaleBoardController",
+        "action": "supplement",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:customer_service,App\\Core\\Http\\Middleware\\CheckPermission:after_sale.view"
     },
     {
@@ -2475,16 +2483,16 @@
         "module": "soho",
         "uri": "soho\/customer\/privacy",
         "name": "soho.customer.privacy",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Customer\\CustomerPrivacyController",
+        "action": "index",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:customer_service,App\\Core\\Http\\Middleware\\CheckPermission:customer.view"
     },
     {
         "module": "soho",
         "uri": "soho\/customer\/tags",
         "name": "soho.customer.tags",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Customer\\CustomerTagController",
+        "action": "index",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:customer_service,App\\Core\\Http\\Middleware\\CheckPermission:customer.view"
     },
     {
@@ -2526,14 +2534,6 @@
         "controller": "App\\Soho\\Http\\Controllers\\EventLogController",
         "action": "index",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:super_admin|integration_ops,App\\Core\\Http\\Middleware\\CheckPermission:event.view"
-    },
-    {
-        "module": "soho",
-        "uri": "soho\/event\/replay",
-        "name": "soho.event.replay",
-        "controller": "Closure",
-        "action": "",
-        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:integration_ops|super_admin,App\\Core\\Http\\Middleware\\CheckPermission:event.replay"
     },
     {
         "module": "soho",
@@ -2579,32 +2579,32 @@
         "module": "soho",
         "uri": "soho\/finance\/cost-allocation",
         "name": "soho.finance.cost.allocation",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Finance\\FinanceBoardController",
+        "action": "costAllocation",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:finance_staff|finance_manager,App\\Core\\Http\\Middleware\\CheckPermission:finance.view"
     },
     {
         "module": "soho",
         "uri": "soho\/finance\/cost-audit",
         "name": "soho.finance.cost.audit",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Finance\\FinanceBoardController",
+        "action": "costAudit",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:finance_manager,App\\Core\\Http\\Middleware\\CheckPermission:finance.view"
     },
     {
         "module": "soho",
         "uri": "soho\/finance\/diff-approval",
         "name": "soho.finance.diff.approval",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Finance\\FinanceBoardController",
+        "action": "diffApproval",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:finance_manager,App\\Core\\Http\\Middleware\\CheckPermission:finance.reconcile"
     },
     {
         "module": "soho",
         "uri": "soho\/finance\/platform-settlement",
         "name": "soho.finance.platform.settlement",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Finance\\FinanceBoardController",
+        "action": "platformSettlement",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:finance_staff|finance_manager,App\\Core\\Http\\Middleware\\CheckPermission:finance.settle"
     },
     {
@@ -2627,16 +2627,16 @@
         "module": "soho",
         "uri": "soho\/finance\/reconcile-task",
         "name": "soho.finance.reconcile.task",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Finance\\FinanceBoardController",
+        "action": "reconcileTask",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:finance_staff|finance_manager,App\\Core\\Http\\Middleware\\CheckPermission:finance.reconcile"
     },
     {
         "module": "soho",
         "uri": "soho\/finance\/refund-flow",
         "name": "soho.finance.refund.flow",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Finance\\FinanceBoardController",
+        "action": "refundFlow",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:finance_staff|finance_manager,App\\Core\\Http\\Middleware\\CheckPermission:finance.view"
     },
     {
@@ -2659,16 +2659,16 @@
         "module": "soho",
         "uri": "soho\/finance\/settlement-audit",
         "name": "soho.finance.settlement.audit",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Finance\\FinanceBoardController",
+        "action": "settlementAudit",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:finance_manager,App\\Core\\Http\\Middleware\\CheckPermission:finance.settle"
     },
     {
         "module": "soho",
         "uri": "soho\/finance\/settlement-detail",
         "name": "soho.finance.settlement.detail",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Finance\\FinanceBoardController",
+        "action": "settlementDetail",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:finance_staff|finance_manager,App\\Core\\Http\\Middleware\\CheckPermission:finance.view"
     },
     {
@@ -2715,24 +2715,24 @@
         "module": "soho",
         "uri": "soho\/integration\/api\/health",
         "name": "soho.integration.api.health",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Integration\\IntegrationBoardController",
+        "action": "apiHealth",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:integration_ops,App\\Core\\Http\\Middleware\\CheckPermission:system.view"
     },
     {
         "module": "soho",
         "uri": "soho\/integration\/connection\/status",
         "name": "soho.integration.connection.status",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Integration\\IntegrationBoardController",
+        "action": "connectionStatus",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:integration_ops,App\\Core\\Http\\Middleware\\CheckPermission:sync_task.view"
     },
     {
         "module": "soho",
         "uri": "soho\/integration\/rate-limit",
         "name": "soho.integration.rate-limit",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Integration\\IntegrationBoardController",
+        "action": "rateLimit",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:integration_ops|super_admin,App\\Core\\Http\\Middleware\\CheckPermission:system.view"
     },
     {
@@ -2875,16 +2875,16 @@
         "module": "soho",
         "uri": "soho\/log\/webhook",
         "name": "soho.log.webhook",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Log\\WebhookLogController",
+        "action": "index",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:integration_ops|super_admin,App\\Core\\Http\\Middleware\\CheckPermission:log.api"
     },
     {
         "module": "soho",
         "uri": "soho\/log\/webhook\/failures",
         "name": "soho.log.webhook.failures",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Log\\WebhookLogController",
+        "action": "failures",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:integration_ops|super_admin,App\\Core\\Http\\Middleware\\CheckPermission:log.api"
     },
     {
@@ -2942,22 +2942,6 @@
         "controller": "App\\Soho\\Http\\Controllers\\Logistics\\LogisticsTrackingController",
         "action": "index",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:logistics_specialist,App\\Core\\Http\\Middleware\\CheckPermission:logistics.view"
-    },
-    {
-        "module": "soho",
-        "uri": "soho\/marketing\/campaign-join",
-        "name": "soho.marketing.campaign.join",
-        "controller": "Closure",
-        "action": "",
-        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:marketing_staff,App\\Core\\Http\\Middleware\\CheckPermission:promotion.edit"
-    },
-    {
-        "module": "soho",
-        "uri": "soho\/marketing\/campaign-rule",
-        "name": "soho.marketing.campaign.rule",
-        "controller": "Closure",
-        "action": "",
-        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:marketing_staff,App\\Core\\Http\\Middleware\\CheckPermission:promotion.edit"
     },
     {
         "module": "soho",
@@ -3099,32 +3083,32 @@
         "module": "soho",
         "uri": "soho\/order\/export",
         "name": "soho.order.export",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Order\\OrderOperationController",
+        "action": "export",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:order_manager,App\\Core\\Http\\Middleware\\CheckPermission:order.view"
     },
     {
         "module": "soho",
         "uri": "soho\/order\/fulfillment",
         "name": "soho.order.fulfillment",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Order\\OrderOperationController",
+        "action": "fulfillments",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:order_manager,App\\Core\\Http\\Middleware\\CheckPermission:order.view"
     },
     {
         "module": "soho",
         "uri": "soho\/order\/merge",
         "name": "soho.order.merge",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Order\\OrderOperationController",
+        "action": "merge",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:order_manager,App\\Core\\Http\\Middleware\\CheckPermission:order.edit"
     },
     {
         "module": "soho",
         "uri": "soho\/order\/pending-fulfill",
         "name": "soho.order.pending-fulfill",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Order\\OrderOperationController",
+        "action": "pendingFulfill",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:order_manager,App\\Core\\Http\\Middleware\\CheckPermission:order.view"
     },
     {
@@ -3155,24 +3139,24 @@
         "module": "soho",
         "uri": "soho\/order\/split",
         "name": "soho.order.split",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Order\\OrderOperationController",
+        "action": "split",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:order_manager,App\\Core\\Http\\Middleware\\CheckPermission:order.edit"
     },
     {
         "module": "soho",
         "uri": "soho\/order\/stock-shortage",
         "name": "soho.order.stock-shortage",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Order\\OrderOperationController",
+        "action": "shortage",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:order_manager,App\\Core\\Http\\Middleware\\CheckPermission:order.view"
     },
     {
         "module": "soho",
         "uri": "soho\/order\/warehouse-assign",
         "name": "soho.order.warehouse.assign",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Order\\OrderOperationController",
+        "action": "warehouseAssign",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:order_manager,App\\Core\\Http\\Middleware\\CheckPermission:order.edit"
     },
     {
@@ -3331,40 +3315,32 @@
         "module": "soho",
         "uri": "soho\/platform\/attribute",
         "name": "soho.platform.attribute",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Platform\\PlatformBoardController",
+        "action": "attribute",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:platform_operator,App\\Core\\Http\\Middleware\\CheckPermission:product.attribute.view"
     },
     {
         "module": "soho",
         "uri": "soho\/platform\/category-mapping",
         "name": "soho.platform.category.mapping",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Platform\\PlatformBoardController",
+        "action": "categoryMapping",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:platform_operator,App\\Core\\Http\\Middleware\\CheckPermission:category.view"
     },
     {
         "module": "soho",
         "uri": "soho\/platform\/listing",
         "name": "soho.platform.listing",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Platform\\PlatformBoardController",
+        "action": "listing",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:platform_operator,App\\Core\\Http\\Middleware\\CheckPermission:product.view"
-    },
-    {
-        "module": "soho",
-        "uri": "soho\/platform\/product-publish",
-        "name": "soho.platform.product.publish",
-        "controller": "Closure",
-        "action": "",
-        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:platform_operator,App\\Core\\Http\\Middleware\\CheckPermission:product.create"
     },
     {
         "module": "soho",
         "uri": "soho\/platform\/publish-task",
         "name": "soho.platform.publish.task",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Platform\\PlatformBoardController",
+        "action": "publishTask",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:platform_operator,App\\Core\\Http\\Middleware\\CheckPermission:product.view"
     },
     {
@@ -3387,8 +3363,8 @@
         "module": "soho",
         "uri": "soho\/price\/change\/history",
         "name": "soho.price.change.history",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceReportController",
+        "action": "priceChangeHistory",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:pricing_staff|operation_manager|procurement_manager|platform_operator,App\\Core\\Http\\Middleware\\CheckPermission:price.view"
     },
     {
@@ -3545,10 +3521,10 @@
     },
     {
         "module": "soho",
-        "uri": "soho\/product\/import",
-        "name": "soho.product.import",
-        "controller": "Closure",
-        "action": "",
+        "uri": "soho\/product\/import\/template",
+        "name": "soho.product.import.template",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductBoardController",
+        "action": "importTemplate",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_admin,App\\Core\\Http\\Middleware\\CheckPermission:product.create"
     },
     {
@@ -3563,72 +3539,72 @@
         "module": "soho",
         "uri": "soho\/product\/review\/change",
         "name": "soho.product.review.change",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductBoardController",
+        "action": "reviewChange",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_reviewer,App\\Core\\Http\\Middleware\\CheckPermission:product.review"
     },
     {
         "module": "soho",
         "uri": "soho\/product\/review\/pending",
         "name": "soho.product.review.pending",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductBoardController",
+        "action": "reviewPending",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_reviewer,App\\Core\\Http\\Middleware\\CheckPermission:product.review"
     },
     {
         "module": "soho",
         "uri": "soho\/product\/review\/record",
         "name": "soho.product.review.record",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductBoardController",
+        "action": "reviewRecord",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_reviewer,App\\Core\\Http\\Middleware\\CheckPermission:product.view"
     },
     {
         "module": "soho",
         "uri": "soho\/product\/sku",
         "name": "soho.product.sku",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\SkuController",
+        "action": "index",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_admin|product_reviewer,App\\Core\\Http\\Middleware\\CheckPermission:sku.view"
     },
     {
         "module": "soho",
         "uri": "soho\/product\/spu\/detail",
         "name": "soho.product.spu.detail",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductBoardController",
+        "action": "spuDetail",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_reviewer,App\\Core\\Http\\Middleware\\CheckPermission:product.view"
     },
     {
         "module": "soho",
         "uri": "soho\/product\/tasks\/exception",
         "name": "soho.product.tasks.exception",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductBoardController",
+        "action": "tasksException",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_admin,App\\Core\\Http\\Middleware\\CheckPermission:product.view"
     },
     {
         "module": "soho",
         "uri": "soho\/product\/tasks\/pending-edit",
         "name": "soho.product.tasks.pending-edit",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductBoardController",
+        "action": "tasksPendingEdit",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_admin,App\\Core\\Http\\Middleware\\CheckPermission:product.view"
     },
     {
         "module": "soho",
         "uri": "soho\/product\/tasks\/returned",
         "name": "soho.product.tasks.returned",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductBoardController",
+        "action": "tasksReturned",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_admin,App\\Core\\Http\\Middleware\\CheckPermission:product.view"
     },
     {
         "module": "soho",
         "uri": "soho\/product\/versions",
         "name": "soho.product.versions",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Product\\ProductVersionController",
+        "action": "index",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:product_admin|product_reviewer,App\\Core\\Http\\Middleware\\CheckPermission:product.view"
     },
     {
@@ -3651,8 +3627,8 @@
         "module": "soho",
         "uri": "soho\/promotion\/analysis",
         "name": "soho.promotion.analysis",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Promotion\\PromotionBoardController",
+        "action": "analysis",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:marketing_staff,App\\Core\\Http\\Middleware\\CheckPermission:promotion.view"
     },
     {
@@ -3667,8 +3643,8 @@
         "module": "soho",
         "uri": "soho\/promotion\/internal",
         "name": "soho.promotion.internal",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Promotion\\PromotionBoardController",
+        "action": "internal",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:marketing_staff,App\\Core\\Http\\Middleware\\CheckPermission:promotion.view"
     },
     {
@@ -3710,6 +3686,14 @@
         "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\RefundApprovalController",
         "action": "index",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:aftersale_manager,App\\Core\\Http\\Middleware\\CheckPermission:refund.approve"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/refund\/records",
+        "name": "soho.refund.records",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\RefundFlowController",
+        "action": "index",
+        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:aftersale_manager|finance_manager|finance_staff|super_admin|tenant_admin,App\\Core\\Http\\Middleware\\CheckPermission:after_sale.refund"
     },
     {
         "module": "soho",
@@ -3795,8 +3779,8 @@
         "module": "soho",
         "uri": "soho\/report\/procurement",
         "name": "soho.report.procurement",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceReportController",
+        "action": "procurementReport",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:procurement_staff|procurement_manager,App\\Core\\Http\\Middleware\\CheckPermission:report.procurement"
     },
     {
@@ -4115,16 +4099,8 @@
         "module": "soho",
         "uri": "soho\/sync-task\/failed",
         "name": "soho.sync-task.failed",
-        "controller": "Closure",
-        "action": "",
-        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:integration_ops,App\\Core\\Http\\Middleware\\CheckPermission:sync_task.execute"
-    },
-    {
-        "module": "soho",
-        "uri": "soho\/sync-task\/retry",
-        "name": "soho.sync-task.retry",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Integration\\IntegrationBoardController",
+        "action": "syncFailed",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:integration_ops,App\\Core\\Http\\Middleware\\CheckPermission:sync_task.execute"
     },
     {
@@ -4273,6 +4249,14 @@
     },
     {
         "module": "soho",
+        "uri": "soho\/warehouse\/adjust\/create",
+        "name": "soho.warehouse.adjust.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\InventoryDocumentFlowController",
+        "action": "createAdjust",
+        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:inventory.adjust"
+    },
+    {
+        "module": "soho",
         "uri": "soho\/warehouse\/create",
         "name": "soho.warehouse.create",
         "controller": "App\\Soho\\Http\\Controllers\\WarehouseController",
@@ -4283,96 +4267,104 @@
         "module": "soho",
         "uri": "soho\/warehouse\/inbound",
         "name": "soho.warehouse.inbound",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "inbound",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:inventory.adjust"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/inventory-doc",
         "name": "soho.warehouse.inventory-doc",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "inventoryDoc",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:inventory.view"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/inventory-doc\/create",
+        "name": "soho.warehouse.inventory-doc.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\InventoryDocumentFlowController",
+        "action": "create",
+        "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:inventory.document.create"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/inventory-turnover",
         "name": "soho.warehouse.inventory.turnover",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "inventoryTurnover",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager|data_analyst,App\\Core\\Http\\Middleware\\CheckPermission:report.stock"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/locations",
         "name": "soho.warehouse.locations",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "locations",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:warehouse.view"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/outbound",
         "name": "soho.warehouse.outbound",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "outboundDocs",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:inventory.adjust"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/return-inspect",
         "name": "soho.warehouse.return.inspect",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "returnInspect",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:return.inspect"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/return-receive",
         "name": "soho.warehouse.return.receive",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "returnReceive",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:return.receive"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/stock-adjust",
         "name": "soho.warehouse.stock-adjust",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "adjustDocs",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:inventory.adjust"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/stock-age",
         "name": "soho.warehouse.stock.age",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "stockAge",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager|data_analyst,App\\Core\\Http\\Middleware\\CheckPermission:report.stock"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/stock-warning",
         "name": "soho.warehouse.stock-warning",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "stockWarning",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:inventory.view"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/stocktake",
         "name": "soho.warehouse.stocktake",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "stocktakeDocs",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:inventory.stocktake"
     },
     {
         "module": "soho",
         "uri": "soho\/warehouse\/zones",
         "name": "soho.warehouse.zones",
-        "controller": "Closure",
-        "action": "",
+        "controller": "App\\Soho\\Http\\Controllers\\Warehouse\\WarehouseBoardController",
+        "action": "zones",
         "middleware": "web,Illuminate\\Auth\\Middleware\\Authenticate,App\\Core\\Http\\Middleware\\SetModuleContext:soho,App\\Core\\Http\\Middleware\\EnsureModuleAccess:soho,App\\Soho\\Http\\Middleware\\LogUserActivity,App\\Soho\\Http\\Middleware\\SohoRoleMiddleware:warehouse_manager,App\\Core\\Http\\Middleware\\CheckPermission:warehouse.view"
     },
     {

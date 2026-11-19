@@ -83,3 +83,28 @@ cd E:\_tmp_soho_baseline
 2. **SOHO `/platform-accounts` 对超级管理员返回 403**（`USER DOES NOT HAVE THE RIGHT ROLES.`）——说明该菜单的权限点比 `super_admin` 角色更细，迁移权限时是重点核对项。
 3. **PM 无 `/projects` 路由**，列表页是 `/project`（单数）；早期静态清单里猜的 `/projects` 会 404。
 4. SOHO 首页标题是「超级管理员操作页面」，非固定品牌名（按角色动态），G3 视觉比对时不能用标题做断言。
+## 7. 合并站基线（当前唯一验收口径，2026-11-19 重跑）
+
+以上 §1~§6 为 **T0-12 参考目录采集记录**，仅作历史证据保留。合并站 `E:\erp-pm-soho` 自 2026-11-19 起以本节为准：
+
+| 文件 | 生成方式 | 当前数值 |
+|---|---|---|
+| `routes-baseline.{csv,json}` | `php artisan route:list --json` → `_tmp_baseline_routes.php` | 547 条 GET 无参路由（core 17 / erp 158 / pm 73 / soho 299） |
+| `status-baseline.{csv,json}` | 分模块账号真实 HTTP 探测（`_tmp_baseline_probe.php`） | core 15·2 / erp 156·2 / pm 68·5 / soho 286·13；**500=0、404=0、403=0** |
+| `功能基线清单.md` | `_tmp_baseline_doc.php` | 547 页清单，缺口 0 |
+
+复现命令（合并站，PHP 8.3）：
+
+```powershell
+cd E:\erp-pm-soho
+& "C:\tools\php83\php.exe" artisan route:clear
+& "C:\tools\php83\php.exe" artisan route:list --json | Set-Content "E:\_tmp_routes_merged.json" -Encoding UTF8
+& "C:\tools\php83\php.exe" E:\_tmp_baseline_routes.php
+& "C:\tools\php83\php.exe" artisan cache:clear
+& "C:\tools\php83\php.exe" E:\_tmp_baseline_probe.php      # 全量约 5~6 分钟
+& "C:\tools\php83\php.exe" E:\_tmp_baseline_doc.php
+```
+
+探测账号（合并站）：erp `admin@erp.demo` / `sales@demo.com`、pm `admin@admin.com`、soho+core `admin@ddwl-soho.com`。
+
+> 增量截图基线（P1-5 PM 电话会议、P1-6 新建单据 / 盘点实盘录入 / 调整申请 共 4 页）尚未落入 `docs\screenshots-visual\`：这些页面要求 `warehouse_manager` 或 `super_admin` 登录态，当前浏览器会话为 `tenant_admin`，需人工登录后补拍。
