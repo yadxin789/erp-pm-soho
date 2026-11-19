@@ -1082,21 +1082,11 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 平台运营扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:platform_operator')->group(function () {
-        Route::middleware('permission:product.view')->get('platform/listing', function () {
-            return view('placeholder', ['title' => 'Listing 管理', 'feature' => 'Listing 优化管理', 'status' => '开发中']);
-        })->name('platform.listing');
-        Route::middleware('permission:product.create')->get('platform/product-publish', function () {
-            return view('placeholder', ['title' => '平台商品发布', 'feature' => '商品发布到各平台', 'status' => '开发中']);
-        })->name('platform.product.publish');
-        Route::middleware('permission:product.view')->get('platform/publish-task', function () {
-            return view('placeholder', ['title' => '商品发布任务', 'feature' => '批量发布任务管理', 'status' => '开发中']);
-        })->name('platform.publish.task');
-        Route::middleware('permission:category.view')->get('platform/category-mapping', function () {
-            return view('placeholder', ['title' => '分类映射', 'feature' => '平台分类映射', 'status' => '开发中']);
-        })->name('platform.category.mapping');
-        Route::middleware('permission:product.attribute.view')->get('platform/attribute', function () {
-            return view('placeholder', ['title' => '平台属性', 'feature' => '平台属性管理', 'status' => '开发中']);
-        })->name('platform.attribute');
+        Route::middleware('permission:product.view')->get('platform/listing', [\App\Soho\Http\Controllers\Platform\PlatformBoardController::class, 'listing'])->name('platform.listing');
+        Route::middleware('permission:product.create')->match(['get', 'post'], 'platform/product-publish', [\App\Soho\Http\Controllers\Platform\PlatformBoardController::class, 'productPublish'])->name('platform.product.publish');
+        Route::middleware('permission:product.view')->get('platform/publish-task', [\App\Soho\Http\Controllers\Platform\PlatformBoardController::class, 'publishTask'])->name('platform.publish.task');
+        Route::middleware('permission:category.view')->get('platform/category-mapping', [\App\Soho\Http\Controllers\Platform\PlatformBoardController::class, 'categoryMapping'])->name('platform.category.mapping');
+        Route::middleware('permission:product.attribute.view')->get('platform/attribute', [\App\Soho\Http\Controllers\Platform\PlatformBoardController::class, 'attribute'])->name('platform.attribute');
     });
 
     // ==================== 商品管理员扩展路由（V3.1补全） ====================
