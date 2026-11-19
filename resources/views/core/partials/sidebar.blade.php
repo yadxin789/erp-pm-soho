@@ -5,6 +5,7 @@
             ['route' => 'core.home', 'label' => '首页', 'icon' => 'fa-home', 'match' => 'core.home'],
         ]],
         ['group' => '协作', 'items' => [
+            ['route' => 'core.todos.index', 'label' => '我的待办', 'icon' => 'fa-list-check', 'match' => 'core.todos.*'],
             ['route' => 'core.approvals.index', 'label' => '审批', 'icon' => 'fa-check-circle', 'match' => 'core.approvals.*'],
             ['route' => 'core.files.index', 'label' => '文件', 'icon' => 'fa-folder-open', 'match' => 'core.files.*'],
             ['route' => 'core.chat.index', 'label' => '聊天', 'icon' => 'fa-comments', 'match' => 'core.chat.*'],

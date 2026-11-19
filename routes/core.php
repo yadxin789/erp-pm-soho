@@ -98,6 +98,9 @@ Route::middleware('web')->group(function () {
 
     // TC-11 审批引擎：ERP 订单审批 + SOHO 8 条 FLOW-* 共用一套流/步骤/实例/待办
     Route::middleware('auth')->group(function () {
+        // P2-2 我的待办：跨模块聚合（core/erp/pm/soho），只读
+        Route::get('/todos', [\App\Core\Http\Controllers\TodoController::class, 'index'])
+            ->name('core.todos.index');
         Route::get('/approvals', [\App\Core\Http\Controllers\ApprovalController::class, 'index'])
             ->name('core.approvals.index');        Route::get('/approvals/create', [\App\Core\Http\Controllers\ApprovalController::class, 'create'])
             ->name('core.approvals.create');

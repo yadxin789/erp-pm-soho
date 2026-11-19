@@ -2,38 +2,49 @@
 
 namespace App\Soho\Http\Controllers;
 
-use App\Soho\Models\Notification;
+use App\Core\Models\Notification;
 use Illuminate\Http\Request;
 
+/**
+ * SOHO 通知消息列表（P2-2 统一）。
+ *
+ * 数据源统一到 Core `notifications`（TC-09 三源并集），不再读写 `soho_notifications`。
+ * 页面 URL（`/soho/notifications`）、视图、JSON 契约保持不变，只把底层表换成 Core 一份，
+ * 模块过滤取 `module in (soho, core)`，因此 SOHO 侧也能看到站内全局通知。
+ */
 class NotificationController extends Controller
 {
-    /**
-     * 通知列表
-     * 获取当前用户的所有通知，支持类型筛选和已读状态筛选
-     */
-    public function index(Request $request)
+    /** 当前模块可见的通知来源 */
+    private const VISIBLE_MODULES = ['soho', 'core'];
+
+    private function baseQuery()
     {
         $user = auth()->user();
 
-        $query = Notification::query()
-            ->where('user_type', get_class($user))
-            ->where('user_id', $user->id);
+        return Notification::query()
+            ->where('user_id', $user->id)
+            ->whereIn('module', self::VISIBLE_MODULES);
+    }
 
-        // 类型筛选
+    /**
+     * 通知列表：支持类型筛选、已读状态筛选、关键词搜索。
+     */
+    public function index(Request $request)
+    {
+        $query = $this->baseQuery();
+
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
 
-        // 已读状态筛选
         if ($request->filled('is_read')) {
             if ($request->is_read == '0') {
-                $query->whereNull('read_at');
+                $query->where('is_read', false);
             } else {
-                $query->whereNotNull('read_at');
+                $query->where('is_read', true);
             }
         }
 
-        // 搜索
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('title', 'like', "%{$request->search}%")
@@ -41,26 +52,15 @@ class NotificationController extends Controller
             });
         }
 
-        $notifications = $query->orderByRaw('read_at IS NULL DESC, created_at DESC')
-            ->paginate(20);
+        $notifications = $query->orderByRaw('is_read ASC, created_at DESC')
+            ->paginate(20)
+            ->withQueryString();
 
-        // 统计数据
         $stats = [
-            'total' => Notification::where('user_type', get_class($user))
-                ->where('user_id', $user->id)
-                ->count(),
-            'unread' => Notification::where('user_type', get_class($user))
-                ->where('user_id', $user->id)
-                ->whereNull('read_at')
-                ->count(),
-            'system' => Notification::where('user_type', get_class($user))
-                ->where('user_id', $user->id)
-                ->where('type', 'system')
-                ->count(),
-            'order' => Notification::where('user_type', get_class($user))
-                ->where('user_id', $user->id)
-                ->where('type', 'order')
-                ->count(),
+            'total' => $this->baseQuery()->count(),
+            'unread' => $this->baseQuery()->where('is_read', false)->count(),
+            'system' => $this->baseQuery()->where('type', 'system')->count(),
+            'order' => $this->baseQuery()->where('type', 'order')->count(),
         ];
 
         $unreadCount = $stats['unread'];
@@ -69,123 +69,83 @@ class NotificationController extends Controller
     }
 
     /**
-     * 标记单条通知为已读
+     * 未读数（顶栏角标轮询）。
+     */
+    public function unreadCount()
+    {
+        return response()->json(['count' => $this->baseQuery()->where('is_read', false)->count()]);
+    }
+
+    /**
+     * 标记单条已读。
      */
     public function markAsRead(Notification $notification)
     {
-        // 权限检查：确保通知属于当前用户
         $user = auth()->user();
-        if ($notification->user_type !== get_class($user) || $notification->user_id !== $user->id) {
-            abort(403, '无权操作此通知');
+        if ((int) $notification->user_id !== (int) $user->id) {
+            return response()->json(['success' => false, 'message' => '无权操作此通知'], 403);
         }
 
         $notification->markAsRead();
 
-        return response()->json([
-            'success' => true,
-            'message' => '通知已标记为已读',
-        ]);
+        return response()->json(['success' => true, 'message' => '通知已标记为已读']);
     }
 
     /**
-     * 标记所有通知为已读
+     * 全部标记已读。
      */
     public function markAllAsRead()
     {
-        $user = auth()->user();
+        $this->baseQuery()->where('is_read', false)->update(['is_read' => true, 'read_at' => now()]);
 
-        Notification::where('user_type', get_class($user))
-            ->where('user_id', $user->id)
-            ->whereNull('read_at')
-            ->update(['read_at' => now()]);
-
-        return response()->json([
-            'success' => true,
-            'message' => '所有通知已标记为已读',
-        ]);
+        return response()->json(['success' => true, 'message' => '所有通知已标记为已读']);
     }
 
     /**
-     * 删除已读通知
+     * 删除全部已读。
      */
     public function deleteRead()
     {
-        $user = auth()->user();
-
-        Notification::where('user_type', get_class($user))
-            ->where('user_id', $user->id)
-            ->whereNotNull('read_at')
-            ->delete();
+        $this->baseQuery()->where('is_read', true)->delete();
 
         return redirect()->route('soho.notifications.index')->with('success', '已删除所有已读通知');
     }
 
     /**
-     * 批量操作
+     * 批量操作：标记已读 / 删除。
      */
     public function batchAction(Request $request)
     {
-        $user = auth()->user();
-        $ids = $request->input('ids', []);
+        $ids = (array) $request->input('ids', []);
         $action = $request->input('action');
 
-        if (empty($ids)) {
-            return redirect()->back()->with('error', '请先选择要操作的通知');
-        }
-
-        $query = Notification::where('user_type', get_class($user))
-            ->where('user_id', $user->id)
-            ->whereIn('id', $ids);
+        $query = $this->baseQuery()->whereIn('id', $ids);
 
         if ($action === 'read') {
-            $query->update(['read_at' => now()]);
-            $message = '已将选中通知标记为已读';
+            $query->update(['is_read' => true, 'read_at' => now()]);
+            $message = '已标记所选通知为已读';
         } elseif ($action === 'delete') {
             $query->delete();
-            $message = '已删除选中通知';
+            $message = '已删除所选通知';
         } else {
-            return redirect()->back()->with('error', '无效的操作');
+            return response()->json(['success' => false, 'message' => '未知操作'], 422);
         }
 
-        return redirect()->route('soho.notifications.index')->with('success', $message);
+        return response()->json(['success' => true, 'message' => $message]);
     }
 
     /**
-     * 删除通知
+     * 删除单条通知。
      */
     public function destroy(Notification $notification)
     {
-        // 权限检查：确保通知属于当前用户
         $user = auth()->user();
-        if ($notification->user_type !== get_class($user) || $notification->user_id !== $user->id) {
-            abort(403, '无权操作此通知');
+        if ((int) $notification->user_id !== (int) $user->id) {
+            return redirect()->route('soho.notifications.index')->with('error', '无权操作此通知');
         }
 
         $notification->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => '通知已删除',
-        ]);
-    }
-
-    /**
-     * 获取未读通知数量（用于顶部角标显示）
-     */
-    public function unreadCount()
-    {
-        $user = auth()->user();
-
-        $count = Notification::where('user_type', get_class($user))
-            ->where('user_id', $user->id)
-            ->whereNull('read_at')
-            ->count();
-
-        return response()->json([
-            'success' => true,
-            'data' => [
-                'unread_count' => $count,
-            ],
-        ]);
+        return redirect()->route('soho.notifications.index')->with('success', '通知已删除');
     }
 }
