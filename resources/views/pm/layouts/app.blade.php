@@ -774,5 +774,6 @@
         })();
     </script>
     @yield('scripts')
+@include('layouts.partials.form-guard')
 </body>
 </html>

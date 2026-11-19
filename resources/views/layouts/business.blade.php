@@ -50,5 +50,6 @@
 
     <script src="{{ asset('assets/erp/js/bootstrap.bundle.min.js') }}"></script>
     @stack('scripts')
+@include('layouts.partials.form-guard')
 </body>
 </html>

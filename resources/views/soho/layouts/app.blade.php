@@ -379,6 +379,12 @@
                     @if(session('error'))
                         <div class="alert alert-danger mt-3" id="error-alert">{{ session('error') }}</div>
                     @endif
+                    @if(session('warning'))
+                        <div class="alert alert-warning mt-3" id="warning-alert">{{ session('warning') }}</div>
+                    @endif
+                    @if(session('info'))
+                        <div class="alert alert-info mt-3" id="info-alert">{{ session('info') }}</div>
+                    @endif
                     @if($errors->any())
                         <div class="alert alert-danger mt-3">
                             <ul class="mb-0">
@@ -497,5 +503,6 @@
         });
     </script>
     @yield('scripts')
+@include('layouts.partials.form-guard')
 </body>
 </html>
