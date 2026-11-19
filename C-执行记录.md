@@ -318,3 +318,24 @@ P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有�
 - 写入口自检：`OperationLog::create(model_type/model_id/changes)` → `operation_logs` 525→526，落库 `module=soho / target_type=App\Soho\Models\Product / target_id=999 / payload={"a":1} / user_name=admin`；同一行在视图 `soho_operation_logs` 可见；模型读回 `model_type/model_id/changes` 与写入一致；自检行已清理。
 - 页面：`/soho/audit/reports` 200、`/soho/aftersale/operation-log` 200（数据来自视图/新表）。
 - 全量回归与 P2-1/P2-2 一致：SOHO 305（200=301/302=4）、ERP 159（200=53/302=106）、PM 73（200=49/302=3/404=21），**0×500 / 0×403**。
+
+## 三十二、P2-4 遗留清理（ERP 审批流归一 + PM 语音死代码下线）
+
+### 32.1 ERP 审批流配置归一到 Core
+
+- 现状：`erp_approval_flows`(2) / `erp_approval_flow_steps`(4) 是 ERP 管理页写的那一份，而 Core `approval_flows`(10，其中 `module='erp'` 的两条就是同一批数据的早期导入) 才是审批引擎实际读取的那一份——两套并存，ERP 管理页改了 Core 引擎不生效。
+- 改法（模型层对齐，控制器与视图零改动）：
+  - `App\Erp\Models\System\ApprovalFlow` → 表 `approval_flows`，全局作用域 `module='erp'`，`creating` 自动补 `module`/`created_by`。
+  - `App\Erp\Models\System\ApprovalFlowStep` → 表 `approval_steps`，外键改回 `approval_flow_id`。
+  - `Admin\ApprovalFlowController`（列表/新建）与视图不动，写入选中的就是 Core 表。
+- 数据核对：Core `approval_steps` 已有 flow#1/#2 各 2 步，内容与 ERP 旧表一致（差异仅在角色名已规范为 `erp.sales_manager`/`erp.purchase_manager`/`erp.admin` 前缀形式，属早期归一的有意结果，保留 Core 版本）。旧表保留为历史副本，不再写入。
+- 验收：`admin@erp.demo` → `GET /erp/admin/approval-flows` 200，页面含「销售订单审批流」与步骤「销售经理审批」；`/erp/app/approvals/my-tasks` 200。
+
+### 32.2 PM 语音死代码下线
+
+- 删除 `app\Pm\Models\VoiceRoom.php`、`VoiceSession.php`、`VoiceParticipant.php`、`app\Pm\Services\VoiceTokenService.php`（全仓 grep 无任何引用，P1-5 已把项目内会议改走 `Core\Services\VoiceService`）。
+- 验收：`_tmp_v_e2e.php` 20 项断言仍全 PASS（入会 / 轮询信令 / 成员 / 结束会议 / 再入自动重开 / 数据回滚）。
+
+### 32.3 回归
+
+- SOHO 305（200=301/302=4）、ERP 159（200=53/302=106）、PM 73（200=49/302=3/404=21），**0×500 / 0×403**，与 P2-1/P2-2/P2-3 基线一致。
