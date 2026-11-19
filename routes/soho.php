@@ -1140,12 +1140,10 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:order.view')->get('order/pending-fulfill', function () {
             return view('placeholder', ['title' => '待履约', 'feature' => '待履约订单列表', 'status' => '开发中']);
         })->name('order.pending-fulfill');
-        Route::middleware('permission:order.edit')->get('order/split', function () {
-            return view('placeholder', ['title' => '订单拆分', 'feature' => '订单拆分操作', 'status' => '开发中']);
-        })->name('order.split');
-        Route::middleware('permission:order.edit')->get('order/merge', function () {
-            return view('placeholder', ['title' => '订单合并', 'feature' => '订单合并操作', 'status' => '开发中']);
-        })->name('order.merge');
+        Route::middleware('permission:order.edit')->get('order/split', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'split'])->name('order.split');
+        Route::middleware('permission:order.edit')->post('order/split/apply', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'applySplit'])->name('order.split.apply');
+        Route::middleware('permission:order.edit')->get('order/merge', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'merge'])->name('order.merge');
+        Route::middleware('permission:order.edit')->post('order/merge/apply', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'applyMerge'])->name('order.merge.apply');
         Route::middleware('permission:order.view')->get('order/export', function () {
             return view('placeholder', ['title' => '订单导出', 'feature' => '订单数据导出', 'status' => '开发中']);
         })->name('order.export');
@@ -1155,9 +1153,7 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:order.view')->get('order/fulfillment', function () {
             return view('placeholder', ['title' => '履约单', 'feature' => '履约单管理', 'status' => '开发中']);
         })->name('order.fulfillment');
-        Route::middleware('permission:order.view')->get('order/stock-shortage', function () {
-            return view('placeholder', ['title' => '缺货订单', 'feature' => '缺货订单列表', 'status' => '开发中']);
-        })->name('order.stock-shortage');
+        Route::middleware('permission:order.view')->get('order/stock-shortage', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'shortage'])->name('order.stock-shortage');
     });
 
     // ==================== 客服扩展路由（V3.1补全） ====================
