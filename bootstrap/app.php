@@ -34,6 +34,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission'    => \App\Core\Http\Middleware\CheckPermission::class,
         'soho_role'     => \App\Soho\Http\Middleware\SohoRoleMiddleware::class,
             'log.activity'  => \App\Soho\Http\Middleware\LogUserActivity::class,
+        'write.guard'   => \App\Soho\Http\Middleware\EnsureWritePermission::class,
             // ERP 原路由组使用 Spatie 的 role:xxx / role_or_permission:xxx
             // 口径：不做 403 页，无权限直接访问 URL 时回模块首页并提示（App\Core\Http\Middleware\CheckRole）
             'role'               => \App\Core\Http\Middleware\CheckRole::class,
@@ -100,3 +101,4 @@ return Application::configure(basePath: dirname(__DIR__))
             return redirect()->to($home)->with('warning', '当前账号没有该功能权限，已返回工作台。');
         });
     })->create();
+

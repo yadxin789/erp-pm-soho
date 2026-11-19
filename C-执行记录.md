@@ -252,3 +252,25 @@ P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有�
 - **D22**：`soho.super_admin` 不提升为租户内全域管理，仍按权限点判定（租户管理员看不到仓库菜单属预期，不出 403、只隐藏入口）。
 - **D23**：新增页面的增量截图（PM 电话会议、SOHO 新建单据 / 盘点实盘录入 / 调整申请提交）**待部署后一次性补拍**，本期以状态基线为准。
 - **提交**：`391eb2c`（docs/baseline 重跑 + README 口径）。
+## 二十九、P2-1 权限收口（角色 × 页面 × 写操作）
+
+### 29.1 查出的三类真实缺陷
+
+1. **角色白名单比权限模型更窄**：路由上 `soho_role:warehouse_manager` 之类白名单与权限点重复裁决，导致「权限已授予、角色不在白名单」时被 302（picker 进不去库存、finance_manager 进不去审计报表、procurement_manager 进不去审批页、auditor 进不去日志页等 8 处）。
+2. **两套角色命名并存但只认裸名**：库中同时存在 `warehouse_manager` 与 `soho.warehouse_manager`（权限点也分裸名/前缀名两套），中间件只比对裸名，前缀角色永远进不去。
+3. **写接口只受 `*.view` 守卫**：228 条 SOHO 写路由里 158 条沿用了「整组 view 权限」，只读账号 `read_only` 可直接打开新建表单并 POST 提交（实测 `/soho/product/create` 200、`/soho/brand` POST 成功）。35 条写路由完全无权限守卫。
+4. **8 个权限点无任何角色持有**（历史上只建未授）：`pick.task.view`、`pack.task.view`、`check.task.view`、`shipment.view`、`shipment.push`、`procurement.approval`、`dispute.handle`、`replacement.create`（另 `tax_rate.view` 仅超管），对应页面只有超管能进。
+
+### 29.2 修法
+
+- `SohoRoleMiddleware`：角色名同时接受裸名与 `soho.*` 前缀名；若目标路由已挂权限点校验，则以权限点为唯一裁决，角色白名单不再二次拦截（保留「只有角色门、没有权限门」路由的原行为）。
+- 新增 `App\Soho\Http\Middleware\EnsureWritePermission`（别名 `write.guard`，挂在 SOHO 路由组）：按「控制器动作方法名 + 路由域」反推操作级权限（`store→create`、`update→edit`、`destroy→delete`、`approve/reject→approve`、`execute/push/import/export/reset` 对应后缀），命中库中真实存在的 `{域}.{操作}` 或 `soho.{域}.{操作}` 即要求持有；权限点不存在则放行（不臆造权限）。GET 仅对 `create`/`edit` 表单页生效，避免把只读角色放进表单。无权限仍 302 回工作台，不出 403。
+- 迁移 `2026_11_19_230000_grant_orphan_permissions_to_roles`：按岗位语义补授 9 个权限点，裸名与前缀名角色同步，幂等可回滚；补授后**孤立权限点归零**。
+
+### 29.3 验收
+
+- 逐角色（15 个岗位真实账号）域内页面全部 200：picker（拣货/复核/库存）、packer（打包/包裹/快递）、checker（复核/扫码/流水）、logistics（运费单/时效/快递）、finance_manager（审计报表/对账/币种）、aftersale_manager（售后/纠纷/换货）、procurement_manager（批次/调价审批/审批实例）、product_admin（商品/品牌）、order_manager（订单/履约/快递）、security_admin（审计日志/登录日志）、shop_auth_admin（平台账号/店铺连通/回调日志）、marketing_staff（优惠券/活动规则/运营看板）、integration_ops（接口健康/异常/事件）、auditor（审计/日志/事件）、read_only（库存/订单/售后）。
+- 越权回归：`read_only` 打开 `/soho/product/create`、`/soho/brand/create` 均 302；`POST /soho/brand` 302（此前 200/写入成功）。
+- 写权限不影响正常角色：`product_admin` 新建页 200；`warehouse_manager` 库存单据与新建单据 200。
+- 全量回归：SOHO 305（200=301/302=4）、ERP 159（200=53/302=106）、PM 73（200=49/302=3/404=21，管理员页权限兜底），**0×500 / 0×403**；`_tmp_s_e2e.php` 34 项断言仍 PASS。
+- 权限矩阵落盘：`docs/权限矩阵-SOHO.md`（26 个角色 × 380 个 SOHO 页面 × 权限点覆盖，孤立权限点 0）。
