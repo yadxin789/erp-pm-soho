@@ -1007,18 +1007,10 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 集成运维扩展（V3.1遗漏补全） ====================
     Route::middleware('soho_role:integration_ops')->group(function () {
-        Route::middleware('permission:sync_task.view')->get('integration/connection/status', function () {
-            return view('placeholder', ['title' => '店铺连接状态', 'feature' => '平台店铺连接状态监控', 'status' => '开发中']);
-        })->name('integration.connection.status');
-        Route::middleware('permission:system.view')->get('integration/api/health', function () {
-            return view('placeholder', ['title' => 'API 健康检查', 'feature' => '平台 API 健康状态检查', 'status' => '开发中']);
-        })->name('integration.api.health');
-        Route::middleware('permission:sync_task.execute')->get('sync-task/failed', function () {
-            return view('placeholder', ['title' => '失败任务', 'feature' => '同步失败任务列表', 'status' => '开发中']);
-        })->name('sync-task.failed');
-        Route::middleware('permission:sync_task.execute')->get('sync-task/retry', function () {
-            return view('placeholder', ['title' => '任务重试', 'feature' => '同步任务批量重试', 'status' => '开发中']);
-        })->name('sync-task.retry');
+        Route::middleware('permission:sync_task.view')->get('integration/connection/status', [\App\Soho\Http\Controllers\Integration\IntegrationBoardController::class, 'connectionStatus'])->name('integration.connection.status');
+        Route::middleware('permission:system.view')->get('integration/api/health', [\App\Soho\Http\Controllers\Integration\IntegrationBoardController::class, 'apiHealth'])->name('integration.api.health');
+        Route::middleware('permission:sync_task.execute')->get('sync-task/failed', [\App\Soho\Http\Controllers\Integration\IntegrationBoardController::class, 'syncFailed'])->name('sync-task.failed');
+        Route::middleware('permission:sync_task.execute')->match(['get', 'post'], 'sync-task/retry', [\App\Soho\Http\Controllers\Integration\IntegrationBoardController::class, 'syncRetry'])->name('sync-task.retry');
     });
 
     // ==================== Webhook失败记录（集成运维 + 超级管理员） ====================
@@ -1027,9 +1019,7 @@ Route::middleware(['auth'])->group(function () {
             return view('placeholder', ['title' => 'Webhook 失败记录', 'feature' => 'Webhook 接收失败记录', 'status' => '开发中']);
         })->name('log.webhook.failures');
         // 限流监控：菜单 roles 为 ['integration_ops', 'super_admin']，路由中间件需保持一致
-        Route::middleware('permission:system.view')->get('integration/rate-limit', function () {
-            return view('placeholder', ['title' => '限流监控', 'feature' => '平台 API 限流监控', 'status' => '开发中']);
-        })->name('integration.rate-limit');
+        Route::middleware('permission:system.view')->get('integration/rate-limit', [\App\Soho\Http\Controllers\Integration\IntegrationBoardController::class, 'rateLimit'])->name('integration.rate-limit');
     });
 
     // ==================== 审计追溯中心（V3.1遗漏补全 + super_admin 修复） ====================
