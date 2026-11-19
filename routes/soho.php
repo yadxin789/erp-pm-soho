@@ -1172,44 +1172,20 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 仓库主管扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:warehouse_manager')->group(function () {
-        Route::middleware('permission:warehouse.view')->get('warehouse/zones', function () {
-            return view('placeholder', ['title' => '库区管理', 'feature' => '库区管理', 'status' => '开发中']);
-        })->name('warehouse.zones');
-        Route::middleware('permission:warehouse.view')->get('warehouse/locations', function () {
-            return view('placeholder', ['title' => '库位管理', 'feature' => '库位管理', 'status' => '开发中']);
-        })->name('warehouse.locations');
-        Route::middleware('permission:inventory.view')->get('warehouse/stock-warning', function () {
-            return view('placeholder', ['title' => '库存预警', 'feature' => '库存预警管理', 'status' => '开发中']);
-        })->name('warehouse.stock-warning');
-        Route::middleware('permission:inventory.adjust')->get('warehouse/inbound', function () {
-            return view('placeholder', ['title' => '入库单', 'feature' => '入库单管理', 'status' => '开发中']);
-        })->name('warehouse.inbound');
-        Route::middleware('permission:inventory.adjust')->get('warehouse/outbound', function () {
-            return view('placeholder', ['title' => '出库单', 'feature' => '出库单管理', 'status' => '开发中']);
-        })->name('warehouse.outbound');
-        Route::middleware('permission:inventory.stocktake')->get('warehouse/stocktake', function () {
-            return view('placeholder', ['title' => '盘点单', 'feature' => '盘点单管理', 'status' => '开发中']);
-        })->name('warehouse.stocktake');
-        Route::middleware('permission:inventory.adjust')->get('warehouse/stock-adjust', function () {
-            return view('placeholder', ['title' => '库存调整申请', 'feature' => '库存调整申请', 'status' => '开发中']);
-        })->name('warehouse.stock-adjust');
-        Route::middleware('permission:inventory.view')->get('warehouse/inventory-doc', function () {
-            return view('placeholder', ['title' => '库存单据', 'feature' => '库存单据管理', 'status' => '开发中']);
-        })->name('warehouse.inventory-doc');
-        Route::middleware('permission:return.receive')->get('warehouse/return-receive', function () {
-            return view('placeholder', ['title' => '待收货退货', 'feature' => '待收货退货处理', 'status' => '开发中']);
-        })->name('warehouse.return.receive');
-        Route::middleware('permission:return.inspect')->get('warehouse/return-inspect', function () {
-            return view('placeholder', ['title' => '待质检退货', 'feature' => '待质检退货处理', 'status' => '开发中']);
-        })->name('warehouse.return.inspect');
+        Route::middleware('permission:warehouse.view')->get('warehouse/zones', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'zones'])->name('warehouse.zones');
+        Route::middleware('permission:warehouse.view')->get('warehouse/locations', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'locations'])->name('warehouse.locations');
+        Route::middleware('permission:inventory.view')->get('warehouse/stock-warning', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'stockWarning'])->name('warehouse.stock-warning');
+        Route::middleware('permission:inventory.adjust')->get('warehouse/inbound', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'inbound'])->name('warehouse.inbound');
+        Route::middleware('permission:inventory.adjust')->get('warehouse/outbound', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'outboundDocs'])->name('warehouse.outbound');
+        Route::middleware('permission:inventory.stocktake')->get('warehouse/stocktake', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'stocktakeDocs'])->name('warehouse.stocktake');
+        Route::middleware('permission:inventory.adjust')->get('warehouse/stock-adjust', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'adjustDocs'])->name('warehouse.stock-adjust');
+        Route::middleware('permission:inventory.view')->get('warehouse/inventory-doc', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'inventoryDoc'])->name('warehouse.inventory-doc');
+        Route::middleware('permission:return.receive')->get('warehouse/return-receive', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'returnReceive'])->name('warehouse.return.receive');
+        Route::middleware('permission:return.inspect')->get('warehouse/return-inspect', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'returnInspect'])->name('warehouse.return.inspect');
     });
     Route::middleware('soho_role:warehouse_manager|data_analyst')->group(function () {
-        Route::middleware('permission:report.stock')->get('warehouse/inventory-turnover', function () {
-            return view('placeholder', ['title' => '库存周转', 'feature' => '库存周转分析', 'status' => '开发中']);
-        })->name('warehouse.inventory.turnover');
-        Route::middleware('permission:report.stock')->get('warehouse/stock-age', function () {
-            return view('placeholder', ['title' => '库龄分析', 'feature' => '库龄分析报表', 'status' => '开发中']);
-        })->name('warehouse.stock.age');
+        Route::middleware('permission:report.stock')->get('warehouse/inventory-turnover', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'inventoryTurnover'])->name('warehouse.inventory.turnover');
+        Route::middleware('permission:report.stock')->get('warehouse/stock-age', [\App\Soho\Http\Controllers\Warehouse\WarehouseBoardController::class, 'stockAge'])->name('warehouse.stock.age');
     });
     Route::middleware('soho_role:warehouse_manager|order_manager')->group(function () {
         // 待分配作业
