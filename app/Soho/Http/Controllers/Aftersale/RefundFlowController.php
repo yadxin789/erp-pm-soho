@@ -249,13 +249,14 @@ class RefundFlowController extends Controller
                 }
             }
 
-            // 留痕
-            DB::table('soho_operation_logs')->insert([
+            // 留痕（P2-3：统一写 Core operation_logs，module=soho）
+            DB::table('operation_logs')->insert([
+                'module' => 'soho',
                 'tenant_id' => $r->tenant_id,
                 'user_id' => Auth::id(),
                 'action' => 'execute',
-                'model_type' => 'Refund',
-                'model_id' => $r->id,
+                'target_type' => 'Refund',
+                'target_id' => $r->id,
                 'description' => '退款执行完成：'.$r->refund_no.' / '.$platformNo,
                 'created_at' => $now,
                 'updated_at' => $now,

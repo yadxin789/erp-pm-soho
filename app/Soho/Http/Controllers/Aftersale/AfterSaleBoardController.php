@@ -267,12 +267,14 @@ class AfterSaleBoardController extends Controller
 
     private function log(?int $tenantId, string $action, int $modelId, string $description): void
     {
-        DB::table('soho_operation_logs')->insert([
+        // P2-3：日志统一写 Core operation_logs（module=soho）
+        DB::table('operation_logs')->insert([
+            'module' => 'soho',
             'tenant_id' => $tenantId,
             'user_id' => Auth::id(),
             'action' => $action,
-            'model_type' => self::LOG_MODEL,
-            'model_id' => $modelId,
+            'target_type' => self::LOG_MODEL,
+            'target_id' => $modelId,
             'description' => $description,
             'ip_address' => request()->ip(),
             'user_agent' => mb_substr((string) request()->userAgent(), 0, 200),

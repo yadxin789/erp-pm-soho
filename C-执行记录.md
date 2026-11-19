@@ -298,3 +298,23 @@ P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有�
 - 侧栏：`/todos` 页导航含「我的待办」（`/todos`）、审批、文件、聊天、语音会议、通知、个人中心。
 - 三模块全量回归与 P2-1 一致、无新增缺口：SOHO 305（200=301/302=4）、ERP 159（200=53/302=106）、PM 73（200=49/302=3/404=21），**0×500 / 0×403**。
 - **提交**：`8985926`。
+
+## 三十一、P2-3 日志归一（soho_operation_logs → Core operation_logs）
+
+### 31.1 现状
+
+- Core `operation_logs`（144 行，全部 `module='soho'`，字段 `module/user_id/user_name/action/target_type/target_id/old_values/new_values/payload/description/ip_address/user_agent/tenant_id`）。
+- SOHO `soho_operation_logs`（532 行，字段 `tenant_id/user_id/action/model_type/model_id/description/changes/ip_address/user_agent`），SOHO 审计/日志页与模型都读它，日志被切成两套。
+
+### 31.2 改法（不动页面与读 SQL）
+
+1. **写入口唯一**：`App\Soho\Models\OperationLog` 物理表改为 `operation_logs`，固定 `module='soho'`（全局作用域 + `creating` 钩子自动补 `module` 与 `user_name`），并对外保留旧字段名映射——`model_type→target_type`、`model_id→target_id`、`changes→payload`（`setAttribute/getAttribute` 双向映射，`changes` 读取时优先 `payload`，否则由 `old_values/new_values` 还原）。因此 `LogsActivity` trait、5 个监听器、`LogUserActivity` 中间件等全部调用点**零改动**即写入 Core 表。
+2. **两处裸 SQL 插入**改为 `DB::table('operation_logs')` 并补 `module='soho'`、`target_type/target_id`：`AfterSaleBoardController::log()`、`RefundFlowController::execute()` 留痕。
+3. **历史数据迁移**：`database\migrations\2026_11_19_240000_unify_soho_operation_logs.php` 把 532 行按字段映射导入 `operation_logs`，按 `(module,user_id,action,target_id,created_at,description)` 去重（幂等）；导入 381 行，跳过 151 行（其中 144 行为 Core 已有同签名行、7 行为旧表内重复行）。迁移后 `operation_logs` 中 `module='soho'` 共 525 行（= 去重后的唯一行数）。
+4. **旧表改为只读视图**：`soho_operation_logs` 由物理表改为 `SELECT … target_type AS model_type, target_id AS model_id, payload AS changes … WHERE module='soho'` 的视图，因此 7 处历史读 SQL（售后看板 3 处、审计报表 2 处、退款/审计页）**无需改写**即可看到新日志；回滚脚本可还原为物理表并回灌数据。
+
+### 31.3 验收
+
+- 写入口自检：`OperationLog::create(model_type/model_id/changes)` → `operation_logs` 525→526，落库 `module=soho / target_type=App\Soho\Models\Product / target_id=999 / payload={"a":1} / user_name=admin`；同一行在视图 `soho_operation_logs` 可见；模型读回 `model_type/model_id/changes` 与写入一致；自检行已清理。
+- 页面：`/soho/audit/reports` 200、`/soho/aftersale/operation-log` 200（数据来自视图/新表）。
+- 全量回归与 P2-1/P2-2 一致：SOHO 305（200=301/302=4）、ERP 159（200=53/302=106）、PM 73（200=49/302=3/404=21），**0×500 / 0×403**。
