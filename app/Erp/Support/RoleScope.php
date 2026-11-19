@@ -110,7 +110,7 @@ class RoleScope
         }
 
         // 项目协作模块：只要参与了项目（创建人 / 负责人 / 任务执行人或审核人）即可进入
-        if (in_array($module, self::PM_MODULES, true) && ! $user->hasRole('admin')) {
+        if (in_array($module, self::PM_MODULES, true) && ! self::isAdmin($user)) {
             return self::participatesInProjects($user);
         }
 
@@ -125,6 +125,8 @@ class RoleScope
 
     public static function roleAllows(string $role, string $module): bool
     {
+        $role = self::stripModulePrefix($role);
+
         if ($role === 'admin') {
             return $module === 'admin';
         }
@@ -136,6 +138,28 @@ class RoleScope
 
         return in_array($module, self::SHARED, true)
             || in_array($module, self::SCOPES[$role] ?? [], true);
+    }
+
+    /** 角色名统一去掉模块前缀（erp./pm./soho./core.），与岗位字典一致 */
+    public static function stripModulePrefix(?string $role): string
+    {
+        return preg_replace('/^(erp|pm|soho|core)\./', '', (string) $role) ?: '';
+    }
+
+    /** 是否 ERP 管理员（兼容带模块前缀的角色名） */
+    public static function isAdmin(?User $user): bool
+    {
+        if (! $user) {
+            return false;
+        }
+
+        foreach ($user->roles as $role) {
+            if (self::stripModulePrefix($role->name) === 'admin') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** 参与关系缓存（同一次请求内只查一次库） */
@@ -172,7 +196,7 @@ class RoleScope
      */
     public static function home(?User $user): string
     {
-        if ($user && $user->hasRole('admin')) {
+        if ($user && self::isAdmin($user)) {
             return route('admin.dashboard');
         }
 
@@ -190,11 +214,12 @@ class RoleScope
 
         $modules = [self::PUBLIC];
         foreach ($user->roles as $role) {
-            if ($role->name === 'admin') {
+            $name = self::stripModulePrefix($role->name);
+            if ($name === 'admin') {
                 $modules[] = 'admin';
                 continue;
             }
-            $modules = array_merge($modules, self::SHARED, self::SCOPES[$role->name] ?? []);
+            $modules = array_merge($modules, self::SHARED, self::SCOPES[$name] ?? []);
         }
 
         return array_values(array_unique($modules));

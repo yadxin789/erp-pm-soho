@@ -37,6 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
             // ERP 原路由组使用 Spatie 的 role:xxx / role_or_permission:xxx
             // 口径：不做 403 页，无权限直接访问 URL 时回模块首页并提示（App\Core\Http\Middleware\CheckRole）
             'role'               => \App\Core\Http\Middleware\CheckRole::class,
+        'role_scope'         => \App\Erp\Http\Middleware\EnsureRoleScope::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
 

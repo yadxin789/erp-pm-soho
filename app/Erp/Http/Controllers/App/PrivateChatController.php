@@ -39,6 +39,7 @@ class PrivateChatController extends Controller
             ->update(['read_at' => now()]);
 
         $contacts = User::where('id', '!=', $user->id)
+            ->where('module', 'erp')
             ->orderBy('name')
             ->get()
             ->map(function ($u) use ($user) {
@@ -146,6 +147,7 @@ class PrivateChatController extends Controller
         $user = $request->user();
 
         $members = User::where('id', '!=', $user->id)
+            ->where('module', 'erp')
             ->orderBy('name')
             ->get()
             ->map(fn ($u) => [

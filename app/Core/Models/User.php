@@ -90,6 +90,12 @@ class User extends Authenticatable
         return $this->avatar ?: null;
     }
 
+    /** 姓名首字（私聊/群聊头像占位，与 ERP 参考实现一致） */
+    public function getInitialAttribute(): string
+    {
+        return mb_strtoupper(mb_substr((string) $this->name, 0, 1)) ?: 'U';
+    }
+
     /** 展示用名称：真实姓名 → name → username → 邮箱前缀（三源字段各不相同，视图统一调这个） */
     public function displayName(): string
     {

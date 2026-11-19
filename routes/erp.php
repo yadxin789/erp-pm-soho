@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | 说明：路由名跨模块重名风险由 B-02 TE-05 统一加前缀阶段处理。
 */
 
-Route::middleware(['web', 'auth', 'module:erp', 'module.access:erp'])
+Route::middleware(['web', 'auth', 'module:erp', 'module.access:erp', 'role_scope'])
     ->prefix('erp')
     ->group(function () {
 
