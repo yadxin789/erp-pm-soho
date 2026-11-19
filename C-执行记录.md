@@ -103,3 +103,46 @@
 ### 22.6 下一步
 
 P1 业务深化：SOHO 高价值页补深度闭环（履约执行、退款闭环、调拨审批链）；ERP 只读模块补写操作；PM 项目内电话会议去除 Janus 外部依赖。
+
+---
+
+## §二十三 P1 业务深化：SOHO 履约与退款闭环（2026-11-19）
+
+### 23.1 P1-1 履约单执行闭环（`463a39a`）
+
+状态机 `pending → picked → packed → shipped`，任意未发货状态可 `cancelled`。
+
+| 动作 | 路由 | 权限 |
+| --- | --- | --- |
+| 详情 | `GET soho/order/fulfillment/{id}` | order.view |
+| 指派拣货人 | `POST .../assign` | order.edit |
+| 拣货完成 | `POST .../pick` | order.edit |
+| 打包（生成包裹） | `POST .../pack` | order.edit |
+| 发货（扣库存） | `POST .../ship` | order.edit |
+| 取消（释放预留） | `POST .../cancel` | order.edit |
+
+发货在一个事务内完成：订单 `order_status=shipped` + `ship_time/waybill_no/express_company`；明细 `fulfillment_status=shipped`；包裹 `status=shipped/tracking_number`；`soho_inventories.actual_quantity` 扣减（`version+1`）、`soho_inventory_batches` 按 `COALESCE(expiry_date,production_date)` FIFO 扣 `available_quantity`、写 `soho_inventory_transactions(outbound)` 与 `soho_inventory_flows(out)`；写 `soho_order_status_logs`。
+
+E2E（订单 18 / 仓 1）：21 项断言全 PASS，含库存逐批次数量 `836→834 / 404→400` 与 6 项回滚校验（订单状态、批次、库存主表、事务/流水/日志/包裹计数全部还原）。
+
+### 23.2 P1-2 退款执行闭环（`6f9e822`）
+
+状态机 `pending → processing → completed`，`pending/processing → failed`。
+
+- 台账 `GET soho/refund/records`（`after_sale.refund`）：统计 5 档 + 已退款金额、按状态/类型/关键词筛选、由售后单生成退款单（`refund.request`，自动识别 `return` → `return_refund`）。
+- 详情 `GET soho/refund/records/{id}`：售后明细、订单/支付、退款流水、三步进度条。
+- 审核 `refund.approve`、驳回/标记失败（必填原因）、执行 `refund.execute`。
+- 执行退款写入 `soho_refund_flows(approved)` + 平台退款单号回写 + 售后单 `completed`（`handle_time/handle_result`）+ 售后明细 `refund_status=completed` + 订单明细 `refund_amount` 分摊累计 + `soho_operation_logs` 留痕（`model_type=Refund`）。
+- 幂等保护：同一售后单仅可生成一张退款单；同一退款单仅可执行一次（流水存在即拦截）。
+
+E2E：19 项断言 PASS，覆盖生成→重复生成拦截→审核→执行→重复执行拦截→明细/流水/日志回写，测试夹具与副作用全部清理；`soho_refund_records/refund_flows/operation_logs` 与订单明细退款额均还原。
+
+### 23.3 回归
+
+`soho` 全模块 303 条路由：200=299 / 302=4 / 0×500 / 0×404 / 0×403。
+
+### 23.4 下一步候选
+
+1. SOHO 库存调拨 / 盘点审批链（`soho_inventory_documents` + `soho_inventory_adjust_approvals` 目前只读）。
+2. ERP 只读模块补写操作（采购/生产/质检审批链）。
+3. PM 项目内电话会议去除 Janus 外部依赖（本地 WebRTC 或录音纪要降级）。
