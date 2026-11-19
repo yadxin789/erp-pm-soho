@@ -274,3 +274,27 @@ P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有�
 - 写权限不影响正常角色：`product_admin` 新建页 200；`warehouse_manager` 库存单据与新建单据 200。
 - 全量回归：SOHO 305（200=301/302=4）、ERP 159（200=53/302=106）、PM 73（200=49/302=3/404=21，管理员页权限兜底），**0×500 / 0×403**；`_tmp_s_e2e.php` 34 项断言仍 PASS。
 - 权限矩阵落盘：`docs/权限矩阵-SOHO.md`（26 个角色 × 380 个 SOHO 页面 × 权限点覆盖，孤立权限点 0）。
+## 三十、P2-2 审批与通知统一
+
+### 30.1 通知：SOHO 改读 Core 单一数据源
+
+- 现状：`notifications`（Core，47 行）与 `soho_notifications`（0 行）两套并存，SOHO 页读自己的表，看不到站内全局通知。
+- 改法（只改 SOHO 控制器，视图与 URL 不动）：`app\Soho\Http\Controllers\NotificationController.php` 整文件改为读写 `App\Core\Models\Notification`，`baseQuery()` 统一 `user_id` + `module in (soho, core)`；`index/unreadCount/markAsRead/markAllAsRead/deleteRead/batchAction/destroy` 全部按 Core 字段（`is_read`/`read_at`）；JSON 契约（`{success,message}` / `{count}`）保持原样。`soho_notifications` 表保留但已不再是数据源。
+- 验收：`admin@soho.demo`/`123456`（core `notifications` 2 条、未读 1）→ `GET /soho/notifications` 200，页面显示「共 2 条数据，未读 1」；`GET /soho/notifications/unread-count` 返回 `{"count":1}`。`admin@ddwl-soho.com`（0 条）200，显示 0 条。
+
+### 30.2 我的待办：Core 跨模块只读聚合
+
+- 新增 `app\Core\Services\TodoCenterService.php`：按模块分组聚合四源（`core` 审批任务/我发起、`erp` 审批任务、`pm` 我执行/我审核任务、`soho` 审批实例 + 6 张域内审批队列表），每条约 50 条上限，单条统一 `{module,category,title,meta,url,at}`。
+- 新增 `app\Core\Http\Controllers\TodoController.php` + 视图 `resources\views\core\todos\index.blade.php`（沿用 `dw-page/dw-panel/dw-chip/dw-table/dw-empty`），路由 `GET /todos -> core.todos.index`（`routes\core.php` 的 `auth` 组），Core 侧栏「协作」组新增「我的待办」。
+- **入口收敛（关键）**：模块分组按 D15 准入链（`users.module → module_access → department.module`，超管全放行）决定是否出现——用户进不去的模块连分组都不出现；每条「前往」链接再按目标路由上挂的权限中间件（`permission:` / `CheckPermission:`）判定一次可达性，不可达的队列整队不出。因此不会出现「看得到点不进去」的 302/403。
+- 回归中修掉的两处偏差：初版把 SOHO 8 条审批队列无差别展示给所有登录用户（ERP 管理员、PM 管理员也能看到），已按上述两层收敛；采购审批队列对无 `procurement.approval` 的账号整队隐藏。
+
+### 30.3 验收
+
+- `admin@soho.demo`：`/todos` 200，「全部 9 / SOHO 8」，条目链接 `/approvals/6`、`/soho/approval-instances`、`/soho/approval/finance-diff`、`/soho/approval/refund` 逐个实测 200；`?module=soho`、`?module=core` 均 200。
+- `procurement_mgr@ddwl-soho.com`：待办含 `/soho/procurement/approvals`（有权限），实测该页 200。
+- `viewer@ddwl-soho.com`（read_only）：`/todos` 200 且为空态，无任何越权链接，**0×403**。
+- `admin@erp.demo`（module=erp）、`admin@admin.com`（module 空、pm.admin）：`/todos` 200 空态，仅出现各自可进入的模块分组。
+- 侧栏：`/todos` 页导航含「我的待办」（`/todos`）、审批、文件、聊天、语音会议、通知、个人中心。
+- 三模块全量回归与 P2-1 一致、无新增缺口：SOHO 305（200=301/302=4）、ERP 159（200=53/302=106）、PM 73（200=49/302=3/404=21），**0×500 / 0×403**。
+- **提交**：`8985926`。
