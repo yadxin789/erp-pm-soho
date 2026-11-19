@@ -13,6 +13,7 @@
         @endif
     </div>
 
+    @if ($isLengthAware && $paginator->lastPage() > 1)
     <nav aria-label="分页">
         <ul class="pagination pagination-sm mb-0">
             @if ($paginator->onFirstPage())
@@ -44,4 +45,5 @@
             @endif
         </ul>
     </nav>
+    @endif
 </div>

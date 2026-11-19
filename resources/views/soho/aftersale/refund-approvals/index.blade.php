@@ -141,7 +141,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if(method_exists($refundApprovals,'hasPages') && $refundApprovals->hasPages())
+        @if(method_exists($refundApprovals,'total') && $refundApprovals->total() > 0)
             <div class="card-footer">{{ $refundApprovals->links() }}</div>
         @endif
     </div>

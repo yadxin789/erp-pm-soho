@@ -6,70 +6,72 @@ use App\Soho\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * 商品版本控制器
- * 用于管理商品版本历史的列表展示与筛选
+ * 展示商品版本历史，支持按版本号、状态、日期区间筛选
  */
 class ProductVersionController extends Controller
 {
-    /**
-     * 商品版本列表
-     * 支持按商品名称、版本号、操作类型筛选
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
-     */
     public function index(Request $request)
     {
         // 获取当前登录用户的租户ID，用于数据隔离
         $tenantId = Auth::user()->tenant_id;
 
-        // 商品版本列表查询：使用 when 条件查询实现动态筛选
-        $versions = DB::table('soho_product_versions')
-            ->when($tenantId, function ($query) use ($tenantId) {
-                $query->where('tenant_id', $tenantId);
+        $table = 'soho_product_versions';
+        $hasProductName = Schema::hasTable('soho_products') && Schema::hasColumn('soho_products', 'name');
+
+        $query = DB::table($table)
+            ->when($tenantId, function ($q) use ($tenantId, $table) {
+                $q->where($table.'.tenant_id', $tenantId);
             })
-            ->when($search = $request->input('search'), function ($query) use ($search) {
-                // 关键字搜索：商品名称、商品编码
-                $query->where(function ($q) use ($search) {
-                    $q->where('product_name', 'like', "%{$search}%")
-                      ->orWhere('product_code', 'like', "%{$search}%");
+            ->when($search = $request->input('search'), function ($q) use ($search, $table) {
+                $q->where(function ($sub) use ($search, $table) {
+                    $sub->where($table.'.version_no', 'like', "%{$search}%")
+                        ->orWhere($table.'.title', 'like', "%{$search}%")
+                        ->orWhere($table.'.description', 'like', "%{$search}%");
                 });
             })
-            ->when($versionNo = $request->input('version_no'), function ($query) use ($versionNo) {
-                $query->where('version_no', 'like', "%{$versionNo}%");
+            ->when($versionNo = $request->input('version_no'), function ($q) use ($versionNo, $table) {
+                $q->where($table.'.version_no', 'like', "%{$versionNo}%");
             })
-            ->when($changeType = $request->input('change_type'), function ($query) use ($changeType) {
-                $query->where('change_type', $changeType);
+            ->when($status = $request->input('status'), function ($q) use ($status, $table) {
+                $q->where($table.'.status', $status);
             })
-            ->when($dateFrom = $request->input('date_from'), function ($query) use ($dateFrom) {
-                $query->where('created_at', '>=', $dateFrom . ' 00:00:00');
+            ->when($dateFrom = $request->input('date_from'), function ($q) use ($dateFrom, $table) {
+                $q->where($table.'.created_at', '>=', $dateFrom.' 00:00:00');
             })
-            ->when($dateTo = $request->input('date_to'), function ($query) use ($dateTo) {
-                $query->where('created_at', '<=', $dateTo . ' 23:59:59');
-            })
-            ->orderByDesc('created_at')
-            ->paginate(20);
+            ->when($dateTo = $request->input('date_to'), function ($q) use ($dateTo, $table) {
+                $q->where($table.'.created_at', '<=', $dateTo.' 23:59:59');
+            });
 
-        // 变更类型字典
+        if ($hasProductName) {
+            $query->leftJoin('soho_products', 'soho_products.id', '=', $table.'.product_id')
+                ->addSelect($table.'.*', 'soho_products.name as product_name', 'soho_products.product_code as product_code');
+        } else {
+            $query->addSelect($table.'.*', DB::raw('null as product_name'), DB::raw('null as product_code'));
+        }
+
+        $versions = $query->orderByDesc($table.'.created_at')->paginate(20)->withQueryString();
+
+        // 状态字典
         $changeTypeOptions = [
-            'create' => '创建',
-            'update' => '更新',
-            'publish' => '发布',
-            'offline' => '下架',
+            'draft' => '草稿',
+            'published' => '已发布',
+            'offline' => '已下架',
         ];
 
         // 统计卡片数据
         $stats = [
-            'total' => DB::table('soho_product_versions')->when($tenantId, function ($query) use ($tenantId) {
-                $query->where('tenant_id', $tenantId);
+            'total' => DB::table($table)->when($tenantId, function ($q) use ($tenantId) {
+                $q->where('tenant_id', $tenantId);
             })->count(),
-            'today' => DB::table('soho_product_versions')->when($tenantId, function ($query) use ($tenantId) {
-                $query->where('tenant_id', $tenantId);
+            'today' => DB::table($table)->when($tenantId, function ($q) use ($tenantId) {
+                $q->where('tenant_id', $tenantId);
             })->whereDate('created_at', now()->toDateString())->count(),
         ];
 
-        return view('product.versions.index', compact('versions', 'changeTypeOptions', 'stats'));
+        return view('soho.product.versions.index', compact('versions', 'changeTypeOptions', 'stats'));
     }
 }

@@ -146,7 +146,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($productChanges->hasPages())
+        @if($productChanges->total() > 0)
             <div class="card-footer">{{ $productChanges->links() }}</div>
         @endif
     </div>

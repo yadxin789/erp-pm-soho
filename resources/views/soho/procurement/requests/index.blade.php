@@ -106,7 +106,7 @@
                 </tbody>
             </table>
         </div>
-        @if($requests->hasPages())
+        @if($requests->total() > 0)
             <div class="card-footer">{{ $requests->links() }}</div>
         @endif
     </div>

@@ -110,7 +110,7 @@
                 </tbody>
             </table>
         </div>
-        @if($products->hasPages())
+        @if($products->total() > 0)
             <div class="d-flex justify-content-center mt-3">
                 {{ $products->links() }}
             </div>

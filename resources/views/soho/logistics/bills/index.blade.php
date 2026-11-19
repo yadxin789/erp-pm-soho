@@ -169,9 +169,9 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if(isset($bills) && $bills->hasPages())
+        @if(isset($bills) && $bills->total() > 0)
             <div class="card-footer">{{ $bills->links() }}</div>
-        @elseif(isset($items) && $items->hasPages())
+        @elseif(isset($items) && $items->total() > 0)
             <div class="card-footer">{{ $items->links() }}</div>
         @endif
     </div>

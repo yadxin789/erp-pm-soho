@@ -142,7 +142,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if(method_exists($returnReceives,'hasPages') && $returnReceives->hasPages())
+        @if(method_exists($returnReceives,'total') && $returnReceives->total() > 0)
             <div class="card-footer">{{ $returnReceives->links() }}</div>
         @endif
     </div>

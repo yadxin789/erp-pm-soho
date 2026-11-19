@@ -194,9 +194,9 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if(isset($exceptions) && $exceptions->hasPages())
+        @if(isset($exceptions) && $exceptions->total() > 0)
             <div class="card-footer">{{ $exceptions->links() }}</div>
-        @elseif(isset($items) && $items->hasPages())
+        @elseif(isset($items) && $items->total() > 0)
             <div class="card-footer">{{ $items->links() }}</div>
         @endif
     </div>

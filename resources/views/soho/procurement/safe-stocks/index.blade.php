@@ -115,7 +115,7 @@
                 </tbody>
             </table>
         </div>
-        @if($safeStocks->hasPages())
+        @if($safeStocks->total() > 0)
             <div class="card-footer">{{ $safeStocks->links() }}</div>
         @endif
     </div>

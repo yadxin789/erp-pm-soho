@@ -173,7 +173,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($disputes->hasPages())
+        @if($disputes->total() > 0)
             <div class="card-footer">{{ $disputes->links() }}</div>
         @endif
     </div>

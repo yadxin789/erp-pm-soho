@@ -143,7 +143,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($listings->hasPages())
+        @if($listings->total() > 0)
             <div class="card-footer">{{ $listings->links() }}</div>
         @endif
     </div>

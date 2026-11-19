@@ -1101,12 +1101,8 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 商品管理员扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:product_admin|product_reviewer')->group(function () {
-        Route::middleware('permission:sku.view')->get('product/sku', function () {
-            return view('placeholder', ['title' => 'SKU 管理', 'feature' => 'SKU 管理', 'status' => '开发中']);
-        })->name('product.sku');
-        Route::middleware('permission:product.view')->get('product/versions', function () {
-            return view('placeholder', ['title' => '商品版本', 'feature' => '商品版本历史', 'status' => '开发中']);
-        })->name('product.versions');
+        Route::middleware('permission:sku.view')->get('product/sku', [\App\Soho\Http\Controllers\Product\SkuController::class, 'index'])->name('product.sku');
+        Route::middleware('permission:product.view')->get('product/versions', [\App\Soho\Http\Controllers\Product\ProductVersionController::class, 'index'])->name('product.versions');
     });
     Route::middleware('soho_role:product_admin')->group(function () {
         Route::middleware('permission:product.create')->get('product/import', function () {

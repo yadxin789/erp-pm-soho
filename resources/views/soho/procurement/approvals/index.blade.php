@@ -117,7 +117,7 @@
                 </tbody>
             </table>
         </div>
-        @if($approvals->hasPages())
+        @if($approvals->total() > 0)
             <div class="card-footer">{{ $approvals->links() }}</div>
         @endif
     </div>

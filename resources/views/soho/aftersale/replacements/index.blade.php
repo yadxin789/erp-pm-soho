@@ -156,7 +156,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($replacements->hasPages())
+        @if($replacements->total() > 0)
             <div class="card-footer">{{ $replacements->links() }}</div>
         @endif
     </div>

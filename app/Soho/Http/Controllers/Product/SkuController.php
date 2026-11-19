@@ -15,7 +15,7 @@ class SkuController extends Controller
 {
     /**
      * SKU 列表
-     * 支持按编码、商品名称、状态、平台筛选
+     * 支持按 SKU 编码、条码、名称、状态筛选
      *
      * @param Request $request
      * @return \Illuminate\View\View
@@ -25,27 +25,30 @@ class SkuController extends Controller
         // 获取当前登录用户的租户ID，用于数据隔离
         $tenantId = Auth::user()->tenant_id;
 
+        $table = 'soho_product_skus';
+
         // SKU 列表查询：使用 when 条件查询实现动态筛选
-        $skus = DB::table('skus')
+        $skus = DB::table($table)
             ->when($tenantId, function ($query) use ($tenantId) {
                 $query->where('tenant_id', $tenantId);
             })
             ->when($search = $request->input('search'), function ($query) use ($search) {
-                // 关键字搜索：SKU 编码、商品名称、条码
+                // 关键字搜索：SKU 编码、条码、名称
                 $query->where(function ($q) use ($search) {
                     $q->where('sku_code', 'like', "%{$search}%")
                       ->orWhere('barcode', 'like', "%{$search}%")
-                      ->orWhere('product_name', 'like', "%{$search}%");
+                      ->orWhere('name', 'like', "%{$search}%");
                 });
             })
             ->when($status = $request->input('status'), function ($query) use ($status) {
                 $query->where('status', $status);
             })
-            ->when($platformId = $request->input('platform_id'), function ($query) use ($platformId) {
-                $query->where('platform_id', $platformId);
+            ->when($productId = $request->input('product_id'), function ($query) use ($productId) {
+                $query->where('product_id', $productId);
             })
             ->orderByDesc('id')
-            ->paginate(20);
+            ->paginate(20)
+            ->withQueryString();
 
         // 状态选项字典
         $statusOptions = [
@@ -56,17 +59,17 @@ class SkuController extends Controller
 
         // 统计卡片数据
         $stats = [
-            'total' => DB::table('skus')->when($tenantId, function ($query) use ($tenantId) {
+            'total' => DB::table($table)->when($tenantId, function ($query) use ($tenantId) {
                 $query->where('tenant_id', $tenantId);
             })->count(),
-            'active' => DB::table('skus')->when($tenantId, function ($query) use ($tenantId) {
+            'active' => DB::table($table)->when($tenantId, function ($query) use ($tenantId) {
                 $query->where('tenant_id', $tenantId);
             })->where('status', 'active')->count(),
-            'inactive' => DB::table('skus')->when($tenantId, function ($query) use ($tenantId) {
+            'inactive' => DB::table($table)->when($tenantId, function ($query) use ($tenantId) {
                 $query->where('tenant_id', $tenantId);
             })->where('status', 'inactive')->count(),
         ];
 
-        return view('product.sku.index', compact('skus', 'statusOptions', 'stats'));
+        return view('soho.product.sku.index', compact('skus', 'statusOptions', 'stats'));
     }
 }

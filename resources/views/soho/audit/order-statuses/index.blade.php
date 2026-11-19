@@ -150,7 +150,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($orderStatuses->hasPages())
+        @if($orderStatuses->total() > 0)
             <div class="card-footer">{{ $orderStatuses->links() }}</div>
         @endif
     </div>

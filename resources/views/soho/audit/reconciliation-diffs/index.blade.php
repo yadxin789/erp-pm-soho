@@ -160,7 +160,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($reconciliationDiffs->hasPages())
+        @if($reconciliationDiffs->total() > 0)
             <div class="card-footer">{{ $reconciliationDiffs->links() }}</div>
         @endif
     </div>

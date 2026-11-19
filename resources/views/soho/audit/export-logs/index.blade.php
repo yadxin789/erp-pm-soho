@@ -153,7 +153,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($exportLogs->hasPages())
+        @if($exportLogs->total() > 0)
             <div class="card-footer">{{ $exportLogs->links() }}</div>
         @endif
     </div>

@@ -174,7 +174,7 @@
         </div>
 
         <!-- 分页 -->
-        @if($shops->hasPages())
+        @if($shops->total() > 0)
         <div class="d-flex justify-content-center mt-3">
             {{ $shops->links() }}
         </div>

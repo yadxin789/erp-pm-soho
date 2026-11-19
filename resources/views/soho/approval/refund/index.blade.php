@@ -137,7 +137,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($refunds->hasPages())
+        @if($refunds->total() > 0)
             <div class="card-footer">{{ $refunds->links() }}</div>
         @endif
     </div>

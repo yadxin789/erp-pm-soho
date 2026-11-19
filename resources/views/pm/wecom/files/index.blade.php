@@ -156,7 +156,7 @@
             </tbody>
         </table>
     </div>
-    @if($files->hasPages())
+    @if($files->total() > 0)
     <div class="card-footer">
         {{ $files->links() }}
     </div>

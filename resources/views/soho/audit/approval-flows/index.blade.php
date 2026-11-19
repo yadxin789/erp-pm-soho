@@ -153,7 +153,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($approvalFlows->hasPages())
+        @if($approvalFlows->total() > 0)
             <div class="card-footer">{{ $approvalFlows->links() }}</div>
         @endif
     </div>

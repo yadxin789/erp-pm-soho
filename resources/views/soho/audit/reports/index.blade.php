@@ -124,7 +124,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($dailyStats->hasPages())
+        @if($dailyStats->total() > 0)
             <div class="card-footer">{{ $dailyStats->links() }}</div>
         @endif
     </div>

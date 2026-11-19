@@ -138,7 +138,7 @@
                 </tbody>
             </table>
         </div>
-        @if($orders->hasPages())
+        @if($orders->total() > 0)
             <div class="card-footer">{{ $orders->links() }}</div>
         @endif
     </div>

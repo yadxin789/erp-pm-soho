@@ -120,7 +120,7 @@
                 </tbody>
             </table>
         </div>
-        @if(method_exists($sales, 'hasPages') && $sales->hasPages())
+        @if(method_exists($sales,'total') && $sales->total() > 0)
             <div class="d-flex justify-content-center mt-3">
                 {{ $sales->links() }}
             </div>

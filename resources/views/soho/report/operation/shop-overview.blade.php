@@ -130,7 +130,7 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if($shops->hasPages())
+        @if($shops->total() > 0)
             <div class="card-footer">{{ $shops->links() }}</div>
         @endif
     </div>

@@ -157,9 +157,9 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if(isset($waybills) && $waybills->hasPages())
+        @if(isset($waybills) && $waybills->total() > 0)
             <div class="card-footer">{{ $waybills->links() }}</div>
-        @elseif(isset($items) && $items->hasPages())
+        @elseif(isset($items) && $items->total() > 0)
             <div class="card-footer">{{ $items->links() }}</div>
         @endif
     </div>

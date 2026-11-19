@@ -157,9 +157,9 @@
             </table>
         </div>
         {{-- 分页 --}}
-        @if(isset($trackings) && $trackings->hasPages())
+        @if(isset($trackings) && $trackings->total() > 0)
             <div class="card-footer">{{ $trackings->links() }}</div>
-        @elseif(isset($items) && $items->hasPages())
+        @elseif(isset($items) && $items->total() > 0)
             <div class="card-footer">{{ $items->links() }}</div>
         @endif
     </div>

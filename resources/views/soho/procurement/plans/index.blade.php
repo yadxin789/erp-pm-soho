@@ -137,7 +137,7 @@
                 </tbody>
             </table>
         </div>
-        @if($plans->hasPages())
+        @if($plans->total() > 0)
             <div class="card-footer">{{ $plans->links() }}</div>
         @endif
     </div>

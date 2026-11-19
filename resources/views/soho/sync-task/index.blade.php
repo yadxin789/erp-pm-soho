@@ -155,7 +155,7 @@
                 </tbody>
             </table>
         </div>
-        @if($tasks->hasPages())
+        @if($tasks->total() > 0)
             <div class="d-flex justify-content-center mt-3">
                 {{ $tasks->links() }}
             </div>
