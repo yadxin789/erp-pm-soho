@@ -1177,6 +1177,16 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:after_sale.view')->get('aftersale/operation-log', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'operationLog'])->name('aftersale.operation.log');
     });
 
+    // ==================== 退款执行闭环（P1-2） ====================
+    Route::middleware('soho_role:aftersale_manager|finance_manager|finance_staff|super_admin|tenant_admin')->prefix('refund')->name('refund.')->group(function () {
+        Route::middleware('permission:after_sale.refund')->get('records', [\App\Soho\Http\Controllers\Aftersale\RefundFlowController::class, 'index'])->name('records');
+        Route::middleware('permission:after_sale.refund')->get('records/{id}', [\App\Soho\Http\Controllers\Aftersale\RefundFlowController::class, 'show'])->whereNumber('id')->name('show');
+        Route::middleware('permission:refund.request')->post('records/store', [\App\Soho\Http\Controllers\Aftersale\RefundFlowController::class, 'store'])->name('store');
+        Route::middleware('permission:refund.approve')->post('records/{id}/approve', [\App\Soho\Http\Controllers\Aftersale\RefundFlowController::class, 'approve'])->whereNumber('id')->name('approve');
+        Route::middleware('permission:refund.approve')->post('records/{id}/reject', [\App\Soho\Http\Controllers\Aftersale\RefundFlowController::class, 'reject'])->whereNumber('id')->name('reject');
+        Route::middleware('permission:refund.execute')->post('records/{id}/execute', [\App\Soho\Http\Controllers\Aftersale\RefundFlowController::class, 'execute'])->whereNumber('id')->name('execute');
+    });
+
     // ==================== 财务人员/财务主管扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:finance_staff|finance_manager')->group(function () {
         Route::middleware('permission:finance.view')->get('finance/refund-flow', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'refundFlow'])->name('finance.refund.flow');

@@ -2,7 +2,12 @@
 @section('title', '退款记录')
 @section('content')
 <div class="card">
-    <div class="card-header"><h5 class="mb-0">退款记录</h5></div>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">退款记录</h5>
+        <a href="{{ route('soho.refund.records') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-money me-1"></i> 退款单台账（执行退款）
+        </a>
+    </div>
     <div class="card-body">
         <form method="GET" class="mb-3">
             <div class="row g-2">
