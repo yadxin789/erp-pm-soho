@@ -10,6 +10,7 @@ use App\Erp\Models\Project\ProjectLog;
 use App\Erp\Models\Project\ProjectTask;
 use App\Erp\Models\Project\TimeEntry;
 use App\Core\Models\User;
+use App\Core\Support\ModuleContext;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -143,8 +144,8 @@ class ProjectController extends Controller
 
         return view('app.projects.create', [
             'customers' => Customer::orderBy('name')->get(['id', 'name']),
-            'users' => User::orderBy('name')->get(['id', 'name']),
-            'departments' => Department::orderBy('name')->get(['id', 'name']),
+            'users' => $this->pickerUsers(),
+            'departments' => $this->pickerDepartments(),
             'statusLabels' => Project::STATUS,
             'taskTypes' => \App\Erp\Models\Project\TaskType::orderBy('sort_order')->get(),
         ]);
@@ -265,8 +266,8 @@ class ProjectController extends Controller
         return view('app.projects.show', [
             'project' => $project,
             'timeEntries' => $timeEntries,
-            'users' => User::orderBy('name')->get(['id', 'name']),
-            'departments' => Department::orderBy('name')->get(['id', 'name']),
+            'users' => $this->pickerUsers(),
+            'departments' => $this->pickerDepartments(),
             'statusLabels' => Project::STATUS,
             'taskStatusLabels' => ProjectTask::STATUS,
             'priorityLabels' => ProjectTask::PRIORITY,
@@ -282,7 +283,7 @@ class ProjectController extends Controller
         return view('app.projects.edit', [
             'project' => $project,
             'customers' => Customer::orderBy('name')->get(['id', 'name']),
-            'users' => User::orderBy('name')->get(['id', 'name']),
+            'users' => $this->pickerUsers(),
             'statusLabels' => Project::STATUS,
         ]);
     }
@@ -350,7 +351,7 @@ class ProjectController extends Controller
 
         return view('app.projects.change', [
             'project' => $project,
-            'users' => User::orderBy('name')->get(['id', 'name']),
+            'users' => $this->pickerUsers(),
         ]);
     }
 
@@ -561,5 +562,31 @@ class ProjectController extends Controller
         $entry->delete();
 
         return redirect()->route('app.projects.show', $projectId)->with('success', '工时记录已删除');
+    }
+
+    /**
+     * 人员选择器：按「部门↔模块」映射只列本模块账号（统一组织下的模块口径）。
+     */
+    private function pickerUsers()
+    {
+        $query = User::query();
+        if ($module = ModuleContext::current()) {
+            $query->where('module', $module);
+        }
+
+        return $query->orderBy('name')->get(['id', 'name']);
+    }
+
+    /**
+     * 部门选择器：只列本模块部门。
+     */
+    private function pickerDepartments()
+    {
+        $query = Department::query();
+        if ($module = ModuleContext::current()) {
+            $query->where('module', $module);
+        }
+
+        return $query->orderBy('name')->get(['id', 'name']);
     }
 }

@@ -66,6 +66,6 @@ class Employee extends Model
      */
     public function getRoleLabelAttribute(): string
     {
-        return $this->role_name ? \App\Support\RoleCatalog::label($this->role_name) : '—';
+        return $this->role_name ? \App\Erp\Support\RoleCatalog::label($this->role_name) : '—';
     }
 }

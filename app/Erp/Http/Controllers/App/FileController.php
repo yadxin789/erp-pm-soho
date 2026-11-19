@@ -81,7 +81,7 @@ class FileController extends Controller
 
     public function uploadDepartmentForm()
     {
-        $departments = \App\Core\Models\Department::orderBy('name')->get(['id', 'name']);
+        $departments = \App\Core\Models\Department::where('module', 'erp')->orderBy('name')->get(['id', 'name']);
 
         return view('app.files.upload-department', compact('departments'));
     }

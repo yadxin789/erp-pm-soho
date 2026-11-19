@@ -33,7 +33,7 @@ class ChatController extends Controller
             ->reverse()
             ->values();
 
-        $members = User::orderBy('name')->get();
+        $members = User::where('module', 'erp')->orderBy('name')->get();
 
         return view('app.chat.index', compact('messages', 'members'));
     }

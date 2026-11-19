@@ -25,14 +25,14 @@ class PositionController extends Controller
         }
 
         $positions = $query->orderBy('sort_order')->orderBy('code')->paginate(20);
-        $departments = Department::orderBy('sort_order')->orderBy('code')->get();
+        $departments = Department::where('module', 'erp')->orderBy('sort_order')->orderBy('code')->get();
 
         return view('admin.positions.index', compact('positions', 'departments'));
     }
 
     public function create()
     {
-        $departments = Department::orderBy('sort_order')->orderBy('code')->get();
+        $departments = Department::where('module', 'erp')->orderBy('sort_order')->orderBy('code')->get();
         $roles = Role::orderBy('name')->get(['id', 'name', 'display_name']);
 
         return view('admin.positions.create', compact('departments', 'roles'));
@@ -70,7 +70,7 @@ class PositionController extends Controller
 
     public function edit(Position $position)
     {
-        $departments = Department::orderBy('sort_order')->orderBy('code')->get();
+        $departments = Department::where('module', 'erp')->orderBy('sort_order')->orderBy('code')->get();
         $roles = Role::orderBy('name')->get(['id', 'name', 'display_name']);
 
         return view('admin.positions.edit', compact('position', 'departments', 'roles'));

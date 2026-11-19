@@ -11,6 +11,7 @@ use App\Erp\Models\HR\RecruitmentRequest;
 use App\Erp\Models\HR\SalaryRecord;
 use App\Core\Models\Department;
 use App\Core\Models\Position;
+use App\Core\Support\ModuleContext;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -51,7 +52,7 @@ class HrController extends Controller
         }
 
         $employees = $query->orderBy('emp_no')->paginate(20)->appends($request->query());
-        $departments = Department::orderBy('sort_order')->orderBy('code')->pluck('name');
+        $departments = $this->scopedDepartments(true);
 
         $stats = [
             'total' => Employee::count(),
@@ -64,9 +65,9 @@ class HrController extends Controller
 
     public function create()
     {
-        $departments = Department::orderBy('sort_order')->orderBy('code')->get();
-        $positions = Position::orderBy('sort_order')->orderBy('code')->get();
-        $users = \App\Core\Models\User::orderBy('name')->get(['id', 'name', 'email']);
+        $departments = $this->scopedDepartments();
+        $positions = $this->scopedPositions();
+        $users = $this->scopedUsers(['id', 'name', 'email']);
 
         return view('app.hr.employees.create', compact('departments', 'positions', 'users'));
     }
@@ -96,6 +97,50 @@ class HrController extends Controller
 
         return redirect()->route('app.hr.employees.index')
             ->with('success', '员工档案已创建' . $this->roleSyncTip($employee));
+    }
+
+    /**
+     * 部门下拉：按「部门↔模块」映射只取本模块部门（统一组织、单库的前提下保持模块页面口径）。
+     */
+    private function scopedDepartments($namesOnlyOrColumns = false)
+    {
+        $query = Department::query();
+        if ($module = ModuleContext::current()) {
+            $query->where('module', $module);
+        }
+        $query->orderBy('sort_order')->orderBy('code');
+
+        if ($namesOnlyOrColumns === true) {
+            return $query->pluck('name');
+        }
+
+        return is_array($namesOnlyOrColumns) ? $query->get($namesOnlyOrColumns) : $query->get();
+    }
+
+    /**
+     * 岗位下拉：只取本模块部门下的岗位。
+     */
+    private function scopedPositions(array $columns = ['*'])
+    {
+        $query = Position::query();
+        if ($module = ModuleContext::current()) {
+            $query->whereIn('department_id', Department::where('module', $module)->pluck('id')->all());
+        }
+
+        return $query->orderBy('sort_order')->orderBy('code')->get($columns);
+    }
+
+    /**
+     * 系统账号下拉：只取本模块账号。
+     */
+    private function scopedUsers(array $columns = ['*'])
+    {
+        $query = \App\Core\Models\User::query();
+        if ($module = ModuleContext::current()) {
+            $query->where('module', $module);
+        }
+
+        return $query->orderBy('name')->get($columns);
     }
 
     /**
@@ -132,9 +177,9 @@ class HrController extends Controller
 
     public function edit(Employee $employee)
     {
-        $departments = Department::orderBy('sort_order')->orderBy('code')->get();
-        $positions = Position::orderBy('sort_order')->orderBy('code')->get();
-        $users = \App\Core\Models\User::orderBy('name')->get(['id', 'name', 'email']);
+        $departments = $this->scopedDepartments();
+        $positions = $this->scopedPositions();
+        $users = $this->scopedUsers(['id', 'name', 'email']);
 
         return view('app.hr.employees.edit', compact('employee', 'departments', 'positions', 'users'));
     }
@@ -584,7 +629,7 @@ class HrController extends Controller
         }
 
         $requests = $query->latest()->paginate(20)->appends($request->query());
-        $departments = Department::orderBy('sort_order')->orderBy('code')->get(['id', 'name']);
+        $departments = $this->scopedDepartments(['id', 'name']);
 
         $stats = [
             'open' => RecruitmentRequest::where('status', 'open')->count(),
@@ -604,8 +649,8 @@ class HrController extends Controller
     public function recruitmentCreate()
     {
         return view('app.hr.recruitment.create', [
-            'positions' => Position::orderBy('sort_order')->orderBy('code')->get(['id', 'name']),
-            'departments' => Department::orderBy('sort_order')->orderBy('code')->get(['id', 'name']),
+            'positions' => $this->scopedPositions(['id', 'name']),
+            'departments' => $this->scopedDepartments(['id', 'name']),
             'statusLabels' => RecruitmentRequest::STATUS,
             'reasons' => RecruitmentRequest::REASONS,
             'employmentTypes' => RecruitmentRequest::EMPLOYMENT_TYPES,
@@ -644,8 +689,8 @@ class HrController extends Controller
     {
         return view('app.hr.recruitment.edit', [
             'recruitment' => $recruitment,
-            'positions' => Position::orderBy('sort_order')->orderBy('code')->get(['id', 'name']),
-            'departments' => Department::orderBy('sort_order')->orderBy('code')->get(['id', 'name']),
+            'positions' => $this->scopedPositions(['id', 'name']),
+            'departments' => $this->scopedDepartments(['id', 'name']),
             'statusLabels' => RecruitmentRequest::STATUS,
             'reasons' => RecruitmentRequest::REASONS,
             'employmentTypes' => RecruitmentRequest::EMPLOYMENT_TYPES,
@@ -714,7 +759,7 @@ class HrController extends Controller
         return view('app.hr.applications.index', [
             'applications' => $applications,
             'stats' => $stats,
-            'positions' => Position::orderBy('sort_order')->orderBy('code')->get(['id', 'name']),
+            'positions' => $this->scopedPositions(['id', 'name']),
             'statusLabels' => JobApplication::STATUS,
         ]);
     }
@@ -722,7 +767,7 @@ class HrController extends Controller
     public function applicationCreate()
     {
         return view('app.hr.applications.create', [
-            'positions' => Position::orderBy('sort_order')->orderBy('code')->get(['id', 'name']),
+            'positions' => $this->scopedPositions(['id', 'name']),
             'recruitments' => RecruitmentRequest::where('status', 'open')->get(['id', 'req_no', 'title']),
             'statusLabels' => JobApplication::STATUS,
             'sources' => JobApplication::SOURCES,
@@ -760,7 +805,7 @@ class HrController extends Controller
     {
         return view('app.hr.applications.edit', [
             'application' => $application,
-            'positions' => Position::orderBy('sort_order')->orderBy('code')->get(['id', 'name']),
+            'positions' => $this->scopedPositions(['id', 'name']),
             'recruitments' => RecruitmentRequest::get(['id', 'req_no', 'title']),
             'statusLabels' => JobApplication::STATUS,
             'sources' => JobApplication::SOURCES,
@@ -943,7 +988,7 @@ class HrController extends Controller
             return '';
         }
 
-        return '，已按岗位授予角色「' . \App\Support\RoleCatalog::label($role) . '」';
+        return '，已按岗位授予角色「' . \App\Erp\Support\RoleCatalog::label($role) . '」';
     }
 
     /**
