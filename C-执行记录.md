@@ -339,3 +339,32 @@ P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有�
 ### 32.3 回归
 
 - SOHO 305（200=301/302=4）、ERP 159（200=53/302=106）、PM 73（200=49/302=3/404=21），**0×500 / 0×403**，与 P2-1/P2-2/P2-3 基线一致。
+
+## 三十三、P3 数据迁移与切换（V1~V8 校验 + PM 组织补齐）
+
+### 33.1 发现
+
+- V1 源比对发现真实缺口：`pm_db` 58 个用户，合并站仅 9 个（8 个 `module=pm` + admin 复用）；`pm_db.departments` 13 个，合并站仅 5 个 PM 部门，缺 软件设计部/样品制作部/品质验证部/包装设计部/物料管理部/专利管理部/认证管理部 共 7 个。ERP 源 12 用户为 0 缺失。
+- SOHO 源不可比：`E:\ddwl-soho` 的 `DB_CONNECTION=sqlite`，但 `database/` 下无任何 sqlite/.db 文件；全盘候选 sqlite（`E:\ddwl-shop`、`E:\soho\mysoho`、`pm-server-openEuler/database/database.sqlite`、`ddwl-zm/ecmp`）与合并站 SOHO 账号不匹配，`ddwl-zm`(23 users, `@ecmp.local`) 为另一工程。按 D21 以合并站自身 + 基线文档为准。
+
+### 33.2 修复
+
+- 新增 `app/Console/Commands/P3MigratePmOrg.php`（`php artisan p3:migrate-pm-org [--apply]`，幂等）：部门按名称去重补建（`module=pm`、`code=PM-<源code大写>`），用户按 `username` 去重补建（`module=pm`、部门按名称映射、密码/头像/bio/企微字段原样继承、`status=is_active`），角色按源 `role_id` → `pm.admin/pm.project_creator/pm.project_manager/pm.task_executor/pm.task_auditor/pm.support` 写入 `model_has_roles`。
+- 写库前备份：`storage/backups/p3-org-before.sql`（users/departments/roles/permissions/model_has_roles/role_has_permissions/user_module_access，148 KB）。
+- 执行：dry-run 评审（部门 7 新建 / 用户 49 新建）→ `--apply`。
+
+### 33.3 复验
+
+- 数据：`users` 74→123、`departments` 20→27、`model_has_roles` 132→181；PM 源用户缺失 0、ERP 源用户缺失 0。
+- V2：username/email/phone 重复 0；V3：users→departments、model_has_roles→users/roles、tasks/projects/departments 指向用户 全部 0 孤儿；V5：123 账号全 `$2y$`（bcrypt）。
+- V4：随机 20 个启用账号统一登录 20/20 成功，`username` 通道（`admin`）302→/home；新迁 5 个 PM 账号（pm_manager_2/product_clerk_1/software_manager_1/packaging_designer_2/certification_clerk_2）登录 5/5 落地 `/pm` 200。
+- V6：裸名 127（ERP 源原文）与 `erp.*` 127 双命名并存，均被真实授权引用（454/127 与 581/127），`permission_candidates()` 任一命中放行 → 减项 0；`soho.*` 209、`pm.*` 45、`core.*` 8。
+- V7：`resolveModules()` 逐人解析 erp 13 / pm 58 / soho 52 / core 123；空 `module` 仅 #3（部门=运营部/soho）、#13（`user_module_access`=pm）；仅 core 的只有禁用账号 `disabled_user`。
+- V8：`notifications` 47（erp 41 / pm 2 / soho 3 / 空 1 私信）；`chat_messages` 无 `room_key`，口径改为 `(module, room_type, room_id)`：erp/group 5、erp/private 3、pm/project 3、soho/group 1；`chat_rooms` 表不存在（房间由 type+id 表达）。
+- 关键页巡检（erp/soho/pm 三个身份各 10 页：`/home`、`/erp/admin/dashboard|users`、`/soho/dashboard|admin/users`、`/pm`、`/pm/admin/users`、`/todos`、`/chat`、`/notifications`）：全部 200，0×500，0×403。
+- 命令幂等复跑：部门 0 新建、用户 0 新建。
+
+### 33.4 报告与遗留
+
+- 报告落盘 `docs/数据校验报告.md`（V1~V8 结论、口径、限制、改动、复跑方式）。
+- 遗留：`soho_platform_skus` 的 `(shop_id, platform_sku)` 3 组各 12 行重复，逐行核对 12 行的 `system_goods_id/platform_goods_id/价格/库存` 全不同，属演示种子把同一平台 SKU 复用到 12 个商品，非合并错误，是否改唯一待拍板；PM 49 个新迁用户源无 email，当前留空（如需邮箱登录按 `<username>@pm.local` 补造）。
