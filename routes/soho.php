@@ -1105,34 +1105,19 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:product.view')->get('product/versions', [\App\Soho\Http\Controllers\Product\ProductVersionController::class, 'index'])->name('product.versions');
     });
     Route::middleware('soho_role:product_admin')->group(function () {
-        Route::middleware('permission:product.create')->get('product/import', function () {
-            return view('placeholder', ['title' => '商品导入', 'feature' => '批量商品导入', 'status' => '开发中']);
-        })->name('product.import');
-        Route::middleware('permission:product.view')->get('product/tasks/pending-edit', function () {
-            return view('placeholder', ['title' => '待修改商品', 'feature' => '待修改商品列表', 'status' => '开发中']);
-        })->name('product.tasks.pending-edit');
-        Route::middleware('permission:product.view')->get('product/tasks/returned', function () {
-            return view('placeholder', ['title' => '退回商品', 'feature' => '退回商品处理', 'status' => '开发中']);
-        })->name('product.tasks.returned');
-        Route::middleware('permission:product.view')->get('product/tasks/exception', function () {
-            return view('placeholder', ['title' => '商品资料异常', 'feature' => '商品资料异常处理', 'status' => '开发中']);
-        })->name('product.tasks.exception');
+        Route::middleware('permission:product.create')->match(['get', 'post'], 'product/import', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'import'])->name('product.import');
+        Route::middleware('permission:product.create')->get('product/import/template', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'importTemplate'])->name('product.import.template');
+        Route::middleware('permission:product.view')->get('product/tasks/pending-edit', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'tasksPendingEdit'])->name('product.tasks.pending-edit');
+        Route::middleware('permission:product.view')->get('product/tasks/returned', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'tasksReturned'])->name('product.tasks.returned');
+        Route::middleware('permission:product.view')->get('product/tasks/exception', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'tasksException'])->name('product.tasks.exception');
     });
 
     // ==================== 商品审核员扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:product_reviewer')->group(function () {
-        Route::middleware('permission:product.review')->get('product/review/pending', function () {
-            return view('placeholder', ['title' => '待审核商品', 'feature' => '待审核商品列表', 'status' => '开发中']);
-        })->name('product.review.pending');
-        Route::middleware('permission:product.view')->get('product/review/record', function () {
-            return view('placeholder', ['title' => '商品审核记录', 'feature' => '审核历史记录', 'status' => '开发中']);
-        })->name('product.review.record');
-        Route::middleware('permission:product.review')->get('product/review/change', function () {
-            return view('placeholder', ['title' => '商品变更审核', 'feature' => '商品变更审核', 'status' => '开发中']);
-        })->name('product.review.change');
-        Route::middleware('permission:product.view')->get('product/spu/detail', function () {
-            return view('placeholder', ['title' => 'SPU 详情', 'feature' => 'SPU 详情查看', 'status' => '开发中']);
-        })->name('product.spu.detail');
+        Route::middleware('permission:product.review')->get('product/review/pending', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'reviewPending'])->name('product.review.pending');
+        Route::middleware('permission:product.view')->get('product/review/record', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'reviewRecord'])->name('product.review.record');
+        Route::middleware('permission:product.review')->get('product/review/change', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'reviewChange'])->name('product.review.change');
+        Route::middleware('permission:product.view')->get('product/spu/detail', [\App\Soho\Http\Controllers\Product\ProductBoardController::class, 'spuDetail'])->name('product.spu.detail');
     });
 
     // ==================== 订单主管扩展路由（V3.1补全） ====================
