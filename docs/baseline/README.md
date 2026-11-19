@@ -107,4 +107,4 @@ cd E:\erp-pm-soho
 
 探测账号（合并站）：erp `admin@erp.demo` / `sales@demo.com`、pm `admin@admin.com`、soho+core `admin@ddwl-soho.com`。
 
-> 增量截图基线（P1-5 PM 电话会议、P1-6 新建单据 / 盘点实盘录入 / 调整申请 共 4 页）尚未落入 `docs\screenshots-visual\`：这些页面要求 `warehouse_manager` 或 `super_admin` 登录态，当前浏览器会话为 `tenant_admin`，需人工登录后补拍。
+> 增量截图基线（P1-5 PM 电话会议、P1-6 新建单据 / 盘点实盘录入 / 调整申请 共 4 页）尚未落入 `docs\screenshots-visual\`：这些页面要求 `warehouse_manager` 或 `super_admin` 登录态，当前浏览器会话为 `tenant_admin`，按 D23 **待部署到服务器后一次性补拍**，本期不再逐页采集；功能验收以 功能基线清单.md 状态行为准。
