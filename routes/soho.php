@@ -1221,32 +1221,16 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 财务人员/财务主管扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:finance_staff|finance_manager')->group(function () {
-        Route::middleware('permission:finance.view')->get('finance/refund-flow', function () {
-            return view('placeholder', ['title' => '退款流水', 'feature' => '退款流水查询', 'status' => '开发中']);
-        })->name('finance.refund.flow');
-        Route::middleware('permission:finance.settle')->get('finance/platform-settlement', function () {
-            return view('placeholder', ['title' => '平台结算', 'feature' => '平台结算管理', 'status' => '开发中']);
-        })->name('finance.platform.settlement');
-        Route::middleware('permission:finance.view')->get('finance/settlement-detail', function () {
-            return view('placeholder', ['title' => '结算明细', 'feature' => '结算明细查询', 'status' => '开发中']);
-        })->name('finance.settlement.detail');
-        Route::middleware('permission:finance.view')->get('finance/cost-allocation', function () {
-            return view('placeholder', ['title' => '费用分摊', 'feature' => '费用分摊管理', 'status' => '开发中']);
-        })->name('finance.cost.allocation');
-        Route::middleware('permission:finance.reconcile')->get('finance/reconcile-task', function () {
-            return view('placeholder', ['title' => '对账任务', 'feature' => '对账任务管理', 'status' => '开发中']);
-        })->name('finance.reconcile.task');
+        Route::middleware('permission:finance.view')->get('finance/refund-flow', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'refundFlow'])->name('finance.refund.flow');
+        Route::middleware('permission:finance.settle')->get('finance/platform-settlement', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'platformSettlement'])->name('finance.platform.settlement');
+        Route::middleware('permission:finance.view')->get('finance/settlement-detail', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'settlementDetail'])->name('finance.settlement.detail');
+        Route::middleware('permission:finance.view')->get('finance/cost-allocation', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'costAllocation'])->name('finance.cost.allocation');
+        Route::middleware('permission:finance.reconcile')->get('finance/reconcile-task', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'reconcileTask'])->name('finance.reconcile.task');
     });
     Route::middleware('soho_role:finance_manager')->group(function () {
-        Route::middleware('permission:finance.settle')->get('finance/settlement-audit', function () {
-            return view('placeholder', ['title' => '结算审核', 'feature' => '结算审核流程', 'status' => '开发中']);
-        })->name('finance.settlement.audit');
-        Route::middleware('permission:finance.view')->get('finance/cost-audit', function () {
-            return view('placeholder', ['title' => '费用分摊审核', 'feature' => '费用分摊审核', 'status' => '开发中']);
-        })->name('finance.cost.audit');
-        Route::middleware('permission:finance.reconcile')->get('finance/diff-approval', function () {
-            return view('placeholder', ['title' => '大额差异审批', 'feature' => '大额差异审批流程', 'status' => '开发中']);
-        })->name('finance.diff.approval');
+        Route::middleware('permission:finance.settle')->get('finance/settlement-audit', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'settlementAudit'])->name('finance.settlement.audit');
+        Route::middleware('permission:finance.view')->get('finance/cost-audit', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'costAudit'])->name('finance.cost.audit');
+        Route::middleware('permission:finance.reconcile')->get('finance/diff-approval', [\App\Soho\Http\Controllers\Finance\FinanceBoardController::class, 'diffApproval'])->name('finance.diff.approval');
     });
 
     // ==================== 采购员/供应链主管扩展路由（已移至采购中心主路由组） ====================
