@@ -967,12 +967,8 @@ Route::middleware(['auth'])->group(function () {
     // ==================== 系统运维扩展（集成运维 + 超级管理员） ====================
     // V3.1：super_admin 可访问系统级日志用于监督
     Route::middleware('soho_role:integration_ops|super_admin')->group(function () {
-        Route::middleware('permission:log.api')->get('log/webhook', function () {
-            return view('placeholder', ['title' => 'Webhook日志', 'feature' => 'Webhook日志', 'status' => '开发中']);
-        })->name('log.webhook');
-        Route::middleware('permission:event.replay')->get('event/replay', function () {
-            return view('placeholder', ['title' => '事件重放', 'feature' => '事件重放', 'status' => '开发中']);
-        })->name('event.replay');
+        Route::middleware('permission:log.api')->get('log/webhook', [\App\Soho\Http\Controllers\Log\WebhookLogController::class, 'index'])->name('log.webhook');
+        Route::middleware('permission:event.replay')->match(['get', 'post'], 'event/replay', [\App\Soho\Http\Controllers\Log\WebhookLogController::class, 'replay'])->name('event.replay');
         // 队列监控 - 监视定时任务、队列脚本是否运行
         Route::middleware('permission:system.view')->get('queue/monitor', [\App\Soho\Http\Controllers\System\QueueMonitorController::class, 'index'])->name('queue.monitor');
         // 队列失败任务重试
@@ -1015,9 +1011,7 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== Webhook失败记录（集成运维 + 超级管理员） ====================
     Route::middleware('soho_role:integration_ops|super_admin')->group(function () {
-        Route::middleware('permission:log.api')->get('log/webhook/failures', function () {
-            return view('placeholder', ['title' => 'Webhook 失败记录', 'feature' => 'Webhook 接收失败记录', 'status' => '开发中']);
-        })->name('log.webhook.failures');
+        Route::middleware('permission:log.api')->get('log/webhook/failures', [\App\Soho\Http\Controllers\Log\WebhookLogController::class, 'failures'])->name('log.webhook.failures');
         // 限流监控：菜单 roles 为 ['integration_ops', 'super_admin']，路由中间件需保持一致
         Route::middleware('permission:system.view')->get('integration/rate-limit', [\App\Soho\Http\Controllers\Integration\IntegrationBoardController::class, 'rateLimit'])->name('integration.rate-limit');
     });
