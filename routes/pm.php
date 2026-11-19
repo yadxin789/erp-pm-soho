@@ -198,6 +198,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/{project}/voice/doc-config/{doc}', [VoiceController::class, 'docConfig'])->name('voice.doc-config');
         Route::post('/{project}/voice/upload-demo', [VoiceController::class, 'uploadDemoFile'])->name('voice.upload-demo');
         Route::get('/{project}/voice/history', [VoiceController::class, 'history'])->name('voice.history');
+        // 站内信令（去 Janus/Swoole 依赖）
+        Route::post('/{project}/voice/signal', [VoiceController::class, 'signal'])->name('voice.signal');
+        Route::get('/{project}/voice/poll', [VoiceController::class, 'poll'])->name('voice.poll');
+        Route::post('/{project}/voice/end', [VoiceController::class, 'end'])->name('voice.end');
     });
 
     Route::post('voice/hooks/enter', [VoiceController::class, 'hookEnter'])->name('voice.hooks.enter');

@@ -200,3 +200,25 @@ SOHO 库存单据（`soho_inventory_documents`）此前只有只读台账，无�
 ### 25.4 回归
 
 ERP 全模块 159 条路由：200=53 / 302=106 / 0×500 / 0×404 / 0×403（302 为销售角色权限跳转，符合预期）。
+## 二十六、P1-5 PM 项目电话会议去 Janus / Swoole 外部依赖
+
+### 26.1 原实现问题
+
+`pm/project/{project}/voice` 走 PM 原链路：前端 `new WebSocket(config('voice.signal_ws'))` → 外部 Swoole 信令服务（`wss://127.0.0.1:3001`）→ Janus AudioBridge（`ws://127.0.0.1:8188` + Admin REST `:7088`）。部署必须额外起 Swoole + Janus 两个进程并开放端口，内网/断外网即不可用；页面还绑 OnlyOffice iframe 做文档演示，同样依赖外部服务。
+
+### 26.2 改造
+
+- `App\Pm\Http\Controllers\VoiceController` 重写：`index / issueToken / signal / poll / end / members / history` 全部改走 `App\Core\Services\VoiceService`（`voice_rooms` + `voice_participants` + `voice_signals`，2 秒轮询，每信令只投递一次）。房间命名统一 `project-{id}`，`history` 按房间归集；`hookEnter/hookLeave` 保留为兼容入口。
+- 路由新增 `pm/project/{project}/voice/signal|poll|end` 3 条（`pm.project.voice.signal|poll|end`）。
+- 视图 `pm/project/voice.blade.php` 重写：保留项目 Tab 与原左成员栏 + 右侧会议舞台布局；去掉 WebSocket/OnlyOffice iframe，改为「加入/静音/离开 + 在会成员磁贴 + 会议日志 + 本项目会议历史 + 会议资料（下载 + 上传）」；全部 JS 走站内接口。
+- `config/voice.php` 精简：删除 `signal_ws / janus_ws / janus_admin / janus_admin_secret / signal_listen / signal_port / pm_internal_url`，仅留 `stun/turn/token_ttl`。
+- 删除死代码 `App\Pm\Http\Controllers\ProjectVoiceController`（无路由引用，且调用了不存在的 `Project::isMember()`，属潜在 500）。
+- `pm/project/partials/project-tabs.blade.php`：非项目参与者隐藏「电话会议」Tab（后端仍 404 兜底），符合「无权限隐藏入口」。
+
+### 26.3 E2E
+
+`E:\_tmp_v_e2e.php` 20 项断言 PASS：会议页 200、页面无 `new WebSocket` / 无 `signal_ws` / 无 janus 关键字、含加入会议/轮询/历史/资料区、Core 房间已创建、token 含 HMAC 签名且无 janus 字段、members/poll/history 结构正确、信令落库、poll 返回 open、结束会议 → 房间 closed 且未消费信令清零、再入页面自动重开房；3 项回滚校验（信令数、房间状态、房间数）全部还原。
+
+### 26.4 回归
+
+PM 全模块 73 条静态 GET 路由：200=49 / 302=3 / 404=21 / **0×500**（404 均为 `pm/admin/*`、`pm/ai/settings` 等管理员专属页对 `pm.project_creator` 的权限兜底，非本轮引入）。

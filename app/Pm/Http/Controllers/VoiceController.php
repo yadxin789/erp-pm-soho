@@ -2,54 +2,60 @@
 
 namespace App\Pm\Http\Controllers;
 
+use App\Core\Services\VoiceService;
 use App\Pm\Models\CollabDocument;
-use App\Pm\Models\DepartmentFile;
 use App\Pm\Models\Project;
-use App\Pm\Models\VoiceParticipant;
-use App\Pm\Models\VoiceRoom;
-use App\Pm\Models\VoiceSession;
 use App\Pm\Services\CollabOfficeService;
-use App\Pm\Services\VoiceTokenService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * 项目电话会议（去 Janus / Swoole 外部依赖版）
+ *
+ * 信令从原 PM 的 WebSocket（signal_ws → Swoole → Janus AudioBridge）改为
+ * Core 的站内中转（voice_signals 表 + 2 秒轮询），浏览器 WebRTC mesh 直连音频，
+ * 无需外部媒体服务器与信令服务，内网/断外网可用。
+ *
+ * 原 hookEnter/hookLeave（Swoole 回调）保留为兼容入口，有外部信令服务时仍可回写同一张表。
+ */
 class VoiceController extends Controller
 {
-    /**
-     * 严格鉴权：只有项目 participants() 包含的用户才能入会。
-     * 管理员/项目经理即使不在 participants 里也一律拒绝。
-     */
+    public function __construct(private readonly VoiceService $voice)
+    {
+    }
+
+    /** 严格鉴权：只有项目 participants() 包含的用户才能入会 */
     private function assertProjectMember(Project $project): void
     {
         $memberIds = $project->participants()->pluck('id');
         abort_unless($memberIds->contains(auth()->id()), 404, '非本项目成员，不能加入电话会议');
     }
 
-    /**
-     * 电话会议主页面（标签页入口）。
-     */
-    public function index(Project $project)
+    /** 复用/创建本项目房间（命名统一 project-{id}，便于历史归集） */
+    private function room(Project $project): \App\Core\Models\VoiceRoom
+    {
+        return $this->voice->ensureRoom('pm', 'project', (int) $project->id, auth()->user());
+    }
+
+    public function index(Request $request, Project $project)
     {
         $this->assertProjectMember($project);
 
-        $room = VoiceRoom::forProject($project);
-        $isHost = $project->creator_id === auth()->id();
+        $room = $this->room($project);
+        $isHost = (int) $project->creator_id === (int) auth()->id();
 
-        // OnlyOffice 支持的格式
-        $ooExt = ['docx','doc','xlsx','xls','pptx','ppt','pdf'];
-
-        // 项目文档
-        $projectDocs = CollabDocument::where('project_id', $project->id)
+        // 会议资料：项目内可下载的协作文档（在线预览依赖 OnlyOffice，本版以降级为下载查看）
+        $documents = CollabDocument::where('project_id', $project->id)
             ->whereNull('deleted_at')
-            ->whereIn('extension', $ooExt)
             ->orderBy('name')
             ->get(['id', 'name', 'extension'])
-            ->map(fn($d) => ['type' => 'project', 'id' => $d->id, 'name' => $d->name, 'ext' => $d->extension]);
-
-        // 资料库（后续再接，department_files 字段名不同）
-        // $libDocs = collect();
-        $documents = $projectDocs;
+            ->map(fn ($d) => [
+                'id' => $d->id,
+                'name' => $d->name,
+                'ext' => $d->extension,
+                'download_url' => route('pm.collab.download', $d),
+            ]);
 
         return view('pm::project.voice', [
             'project' => $project,
@@ -57,89 +63,120 @@ class VoiceController extends Controller
             'isHost' => $isHost,
             'activeTab' => 'voice',
             'documents' => $documents,
+            'members' => $this->voice->members($room),
+            'history' => $this->voice->history('pm', (int) $project->id),
         ]);
     }
 
-    /**
-     * 签发 WebSocket 入场 token（短期）。
-     */
-    public function issueToken(Request $request, Project $project, VoiceTokenService $tokens)
+    /** 入会令牌（HMAC，站内信令用） */
+    public function issueToken(Request $request, Project $project)
     {
         $this->assertProjectMember($project);
-        $room = VoiceRoom::forProject($project);
+        $room = $this->room($project);
+        $token = $this->voice->token($room, auth()->user());
 
-        return response()->json([
-            'token' => $tokens->issue(auth()->id(), $project->id, $room->id),
+        return response()->json(array_merge($token, [
             'room' => [
                 'id' => $room->id,
                 'project_id' => $project->id,
-                'host_id' => $room->host_id,
-                'current_presenter_id' => $room->current_presenter_id,
+                'status' => $room->status,
             ],
             'user' => [
                 'id' => auth()->id(),
-                'name' => auth()->user()->name,
+                'name' => auth()->user()->displayName(),
             ],
-            'is_host' => $project->creator_id === auth()->id(),
-            'signal_ws' => config('voice.signal_ws'),
-            'janus_ws' => config('voice.janus_ws'),
+            'is_host' => (int) $project->creator_id === (int) auth()->id(),
+            'signal_url' => route('pm.project.voice.signal', $project),
+            'poll_url' => route('pm.project.voice.poll', $project),
+            'end_url' => route('pm.project.voice.end', $project),
             'stun' => config('voice.stun'),
-        ]);
+        ]));
     }
 
-    /**
-     * 成员列表（严格 participants，在线状态沿用聊天室口径：5 分钟内活跃）。
-     */
+    /** 发信令：offer / answer / candidate / leave / heartbeat */
+    public function signal(Request $request, Project $project)
+    {
+        $this->assertProjectMember($project);
+        $data = $request->validate([
+            'to' => 'nullable|integer',
+            'type' => 'required|in:offer,answer,candidate,leave,heartbeat',
+            'payload' => 'nullable',
+        ]);
+
+        try {
+            $this->voice->signal($this->room($project), auth()->user(), $data['type'], $data['payload'] ?? null, $data['to'] ?? null);
+        } catch (\InvalidArgumentException $e) {
+            return response()->json(['ok' => false, 'error' => $e->getMessage()], 422);
+        }
+
+        return response()->json(['ok' => true]);
+    }
+
+    /** 拉信令 + 在会成员（每信令只投递一次） */
+    public function poll(Request $request, Project $project)
+    {
+        $this->assertProjectMember($project);
+
+        return response()->json($this->voice->poll($this->room($project), auth()->user()));
+    }
+
+    /** 结束会议（主持人） */
+    public function end(Request $request, Project $project)
+    {
+        $this->assertProjectMember($project);
+        $this->voice->close($this->room($project), auth()->user());
+
+        return $request->expectsJson()
+            ? response()->json(['ok' => true])
+            : back()->with('success', '会议已结束。');
+    }
+
+    /** 在会成员（前端下拉/侧栏刷新） */
     public function members(Project $project)
     {
         $this->assertProjectMember($project);
 
-        $participants = $project->participants();
-        $members = $participants->map(function ($u) use ($project) {
-            return [
-                'id' => $u->id,
-                'name' => $u->name,
-                'username' => $u->username,
-                'avatar' => $u->avatar,
-                'is_host' => (int) $u->id === (int) $project->creator_id,
-            ];
-        });
-
-        return response()->json(['members' => $members]);
+        return response()->json(['members' => $this->voice->members($this->room($project))]);
     }
 
-    /**
-     * 生成某篇文档的只读 OnlyOffice editor config（前端用来初始化 iframe）。
-     */
+    /** 会议历史（项目房间） */
+    public function history(Project $project)
+    {
+        $this->assertProjectMember($project);
+
+        return response()->json(['sessions' => $this->voice->history('pm', (int) $project->id)]);
+    }
+
+    /** 会议资料：只读 OnlyOffice 配置（保留兼容；前端已改为下载查看） */
     public function docConfig(Project $project, CollabDocument $doc, CollabOfficeService $office, Request $request)
     {
         $this->assertProjectMember($project);
         abort_unless($doc->project_id === $project->id, 404);
 
-        $canEdit = (bool) $request->query('edit', false);
-        $config = $office->buildEditorConfig($doc, auth()->user(), $canEdit);
+        try {
+            $config = $office->buildEditorConfig($doc, auth()->user(), (bool) $request->query('edit', false));
+        } catch (\Throwable $e) {
+            return response()->json(['error' => '在线预览服务未配置：'.$e->getMessage()], 503);
+        }
 
         return response()->json([
             'server_url' => $office->serverUrl(),
             'config' => $config,
-            'download_url' => url('/collab/download/' . $doc->id . '?k=' . urlencode($doc->doc_key)),
+            'download_url' => route('pm.collab.download', $doc),
         ]);
     }
 
-    /**
-     * 上传本地演示文件，创建临时 CollabDocument（7 天后自动清理）。
-     */
+    /** 上传本地演示/资料文件，创建临时 CollabDocument（7 天后自动清理） */
     public function uploadDemoFile(Project $project, Request $request)
     {
         $this->assertProjectMember($project);
-        $allowed = ['docx','xlsx','pptx','pdf','doc','xls','ppt'];
-        $data = $request->validate([
-            'file' => 'required|file|max:26214400',
-        ]);
+        $allowed = ['docx', 'xlsx', 'pptx', 'pdf', 'doc', 'xls', 'ppt'];
+        $data = $request->validate(['file' => 'required|file|max:26214400']);
         $ext = strtolower($request->file('file')->getClientOriginalExtension());
-        if (!in_array($ext, $allowed)) {
+        if (! in_array($ext, $allowed)) {
             return response()->json(['error' => '不支持的文件格式，仅支持 docx/xlsx/pptx/pdf'], 422);
         }
+
         $path = $request->file('file')->store('voice_demo', 'file_repository');
         $doc = CollabDocument::create([
             'project_id' => $project->id,
@@ -152,95 +189,29 @@ class VoiceController extends Controller
             'is_temp_demo' => true,
             'expires_at' => Carbon::now()->addDays(7),
         ]);
-        return response()->json(['id' => $doc->id]);
+
+        return response()->json(['id' => $doc->id, 'download_url' => route('pm.collab.download', $doc)]);
     }
 
-    /**
-     * Swoole 信令服务回调：成员入会，开启/复用 session 并写 participant 记录。
-     */
+    /** 兼容：外部信令服务回调入会 */
     public function hookEnter(Request $request)
     {
-        // TODO 第 3 步：用共享 secret 校验来源，防止伪造
-        $data = $request->validate([
-            'room_id' => 'required|integer',
-            'user_id' => 'required|integer',
-        ]);
+        $data = $request->validate(['room_id' => 'required|integer', 'user_id' => 'required|integer']);
+        $room = \App\Core\Models\VoiceRoom::findOrFail($data['room_id']);
+        $user = \App\Core\Models\User::findOrFail($data['user_id']);
+        $this->voice->join($room, $user);
 
-        $room = VoiceRoom::findOrFail($data['room_id']);
-        $room->update(['active' => true]);
-
-        // 找或开 session
-        $session = VoiceSession::where('voice_room_id', $room->id)
-            ->whereNull('ended_at')
-            ->latest('id')
-            ->first();
-        if (!$session) {
-            $session = VoiceSession::create([
-                'voice_room_id' => $room->id,
-                'started_by' => $room->host_id,
-                'started_at' => Carbon::now(),
-            ]);
-        }
-
-        VoiceParticipant::create([
-            'voice_session_id' => $session->id,
-            'user_id' => $data['user_id'],
-            'joined_at' => Carbon::now(),
-        ]);
-
-        return response()->json(['ok' => true, 'session_id' => $session->id]);
+        return response()->json(['ok' => true, 'room_id' => $room->id]);
     }
 
-    /**
-     * Swoole 信令服务回调：成员离会，补 left_at。
-     */
+    /** 兼容：外部信令服务回调离会 */
     public function hookLeave(Request $request)
     {
-        $data = $request->validate([
-            'room_id' => 'required|integer',
-            'user_id' => 'required|integer',
-            'reason' => 'nullable|string|max:30',
-        ]);
-
-        $p = VoiceParticipant::where('user_id', $data['user_id'])
-            ->whereNull('left_at')
-            ->latest('id')
-            ->first();
-        if ($p) {
-            $p->update([
-                'left_at' => Carbon::now(),
-                'leave_reason' => $data['reason'] ?? 'normal',
-            ]);
-        }
+        $data = $request->validate(['room_id' => 'required|integer', 'user_id' => 'required|integer']);
+        $room = \App\Core\Models\VoiceRoom::findOrFail($data['room_id']);
+        $user = \App\Core\Models\User::findOrFail($data['user_id']);
+        $this->voice->leave($room, $user);
 
         return response()->json(['ok' => true]);
-    }
-
-    /**
-     * 会议日志：历史 sessions + 参与人员。
-     */
-    public function history(Project $project)
-    {
-        $this->assertProjectMember($project);
-        $room = VoiceRoom::forProject($project);
-
-        $sessions = VoiceSession::where('voice_room_id', $room->id)
-            ->with(['participants.user:id,name,username'])
-            ->orderByDesc('started_at')
-            ->limit(20)
-            ->get()
-            ->map(fn($s) => [
-                'id' => $s->id,
-                'started_at' => $s->started_at?->toDateTimeString(),
-                'ended_at' => $s->ended_at?->toDateTimeString(),
-                'participants' => $s->participants->map(fn($p) => [
-                    'name' => $p->user?->name,
-                    'joined_at' => $p->joined_at?->toDateTimeString(),
-                    'left_at' => $p->left_at?->toDateTimeString(),
-                    'was_presenter' => $p->was_presenter,
-                ]),
-            ]);
-
-        return response()->json(['sessions' => $sessions]);
     }
 }

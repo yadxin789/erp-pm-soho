@@ -14,6 +14,12 @@
         'voice'    => ['label' => '电话会议', 'route' => route('pm.project.voice.index', $project),  'icon' => 'fa-phone'],
     ];
     $activeTab = $activeTab ?? 'overview';
+
+    // 电话会议仅对项目参与者开放：非成员隐藏入口（后端仍做 404 兜底）
+    $isProjectParticipant = $project->participants()->contains(fn ($u) => (int) $u->id === (int) auth()->id());
+    if (! $isProjectParticipant) {
+        unset($projectTabs['voice']);
+    }
 @endphp
 <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-3 mb-2">
     <div>
