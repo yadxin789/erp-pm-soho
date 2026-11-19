@@ -60,7 +60,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 $home = match ($user?->module) {
                     'pm'   => route('pm.dashboard'),
                     'soho' => route('soho.dashboard'),
-                    'erp'  => route('admin.dashboard'),
+                    'erp'  => \App\Erp\Support\RoleScope::home($user),
                     default => url('/'),
                 };
             } catch (\Throwable) {
@@ -86,7 +86,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 $home = match ($user?->module) {
                     'pm'   => route('pm.dashboard'),
                     'soho' => route('soho.dashboard'),
-                    'erp'  => route('admin.dashboard'),
+                    'erp'  => \App\Erp\Support\RoleScope::home($user),
                     default => url('/'),
                 };
             } catch (\Throwable) {
