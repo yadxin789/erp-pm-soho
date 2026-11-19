@@ -24,7 +24,7 @@
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered align-middle mb-0">
-                <thead><tr><th>单号</th><th>商品</th><th>仓库</th><th class="text-end">数量</th><th class="text-center">状态</th><th>原因</th><th class="text-center">提交时间</th></tr></thead>
+                <thead><tr><th>单号</th><th>商品</th><th>仓库</th><th class="text-end">数量</th><th class="text-center">状态</th><th>原因</th><th class="text-center">提交时间</th><th class="text-center">操作</th></tr></thead>
                 <tbody>
                     @forelse($approvals as $a)
                         <tr>
@@ -35,9 +35,26 @@
                             <td class="text-center"><span class="badge bg-secondary">{{ $a->status }}</span></td>
                             <td class="small">{{ $a->reason ?: '-' }}</td>
                             <td class="text-center small text-muted">{{ $a->submitted_at ?: '-' }}</td>
+                            <td class="text-center">
+                                @if($a->status === 'pending')
+                                    <div class="d-flex gap-1 justify-content-center">
+                                        <form method="POST" action="{{ route('soho.warehouse.adjust.approve', $a->id) }}">
+                                            @csrf
+                                            <button class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> 通过</button>
+                                        </form>
+                                        <form method="POST" action="{{ route('soho.warehouse.adjust.reject', $a->id) }}"
+                                              onsubmit="return confirm('确认驳回该调整申请？')">
+                                            @csrf
+                                            <button class="btn btn-outline-danger btn-sm"><i class="fa fa-times"></i> 驳回</button>
+                                        </form>
+                                    </div>
+                                @else
+                                    <span class="text-muted small">-</span>
+                                @endif
+                            </td>
                         </tr>
                     @empty
-                        <tr><td colspan="7" class="text-center text-muted py-4">暂无调整申请。</td></tr>
+                        <tr><td colspan="8" class="text-center text-muted py-4">暂无调整申请。</td></tr>
                     @endforelse
                 </tbody>
             </table>
@@ -100,6 +117,7 @@
                         <th class="text-center">状态</th>
                         <th class="text-center">创建</th>
                         <th class="text-center">完成</th>
+                        <th class="text-center">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -117,9 +135,14 @@
                             <td class="text-center"><span class="badge bg-{{ $st[$row->status] ?? 'secondary' }}">{{ $row->status }}</span></td>
                             <td class="text-center small text-muted">{{ $row->created_at }}</td>
                             <td class="text-center small text-muted">{{ $row->completed_at ?: '-' }}</td>
+                            <td class="text-center">
+                                <a href="{{ route('soho.warehouse.inventory-doc.flow', $row->id) }}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fa fa-search me-1"></i> 详情
+                                </a>
+                            </td>
                         </tr>
                     @empty
-                        <tr><td colspan="8" class="text-center text-muted py-4">暂无单据。</td></tr>
+                        <tr><td colspan="9" class="text-center text-muted py-4"><i class="fa fa-inbox fa-2x d-block mb-2"></i>暂无单据。</td></tr>
                     @endforelse
                 </tbody>
             </table>

@@ -146,3 +146,35 @@ E2E：19 项断言 PASS，覆盖生成→重复生成拦截→审核→执行→
 1. SOHO 库存调拨 / 盘点审批链（`soho_inventory_documents` + `soho_inventory_adjust_approvals` 目前只读）。
 2. ERP 只读模块补写操作（采购/生产/质检审批链）。
 3. PM 项目内电话会议去除 Janus 外部依赖（本地 WebRTC 或录音纪要降级）。
+
+## 二十四、P1-3 库存单据执行闭环 + 调整审批（2026-11-19）
+
+### 24.1 目标与范围
+
+SOHO 库存单据（`soho_inventory_documents`）此前只有只读台账，无法提交、审批、执行；库存调整申请（`soho_inventory_adjust_approvals`）只有待审批列表，无审批动作与落账路径。本轮补齐「单据 → 审批 → 执行 → 库存变动」与「调整申请 → 审批 → 库存变动」两条闭环，不改动原表既有列语义。
+
+### 24.2 表结构
+
+- 迁移 `2026_11_19_210000_create_soho_inventory_document_items_table`：
+  - `soho_inventory_documents` 新增 `target_warehouse_id`（调拨目标仓，可空）。
+  - 新建 `soho_inventory_document_items`（`tenant_id/document_id/sku_id/product_name/quantity/unit_cost/batch_no/remark/timestamps`），作为执行库存变动的明细来源。
+
+### 24.3 代码
+
+- 新增 `App\Soho\Http\Controllers\Warehouse\InventoryDocumentFlowController`：`show / addItem / removeItem / submit / approve / execute / cancel / approveAdjust / rejectAdjust`。
+- 新增视图 `soho/warehouse/inventory-doc-flow.blade.php`：四步状态条、明细表、追加明细、操作区、单据信息、本单库存流水。
+- `soho/warehouse/inventory-doc.blade.php`：单据表加「详情」列（`colspan` 8→9），调整审批队列加「通过/驳回」列（`colspan` 7→8）。
+- `routes/soho.php` warehouse 组新增 9 条路由（`view/create/approve/adjust/adjust.approve` 权限分别挂载）。
+
+状态机：`draft → pending → approved → completed`，非 `completed` 可 `cancelled`。
+执行分支：`inbound` 加库存（建/累加批次）、`outbound` 减库存（批次 FIFO）、`transfer` 源仓减目标仓加、`stocktake` 以明细数量为实盘数按差异走 `adjustment`。
+写账：`soho_inventories`（`actual_quantity` + `version+1`）、`soho_inventory_batches`、`soho_inventory_transactions`、`soho_inventory_flows`（`flow_no = FLW-{单号}-{仓}-{SKU}`）。
+
+### 24.4 E2E
+
+- `E:\_tmp_iv_e2e.php`：26 项断言 PASS —— 登录、详情 200、追加明细与合计同步、提交/审批（记审批人）、执行入库（主表 427→437、`version+1`、事务 inbound +1、流水 in +1、详情显示「已执行完成」）；调拨执行（源仓 437→432、目标仓 115→120、事务 +2、流水 +2）；取消链（已取消不可执行、已执行无追加表单）；7 项回滚校验全部还原。
+- `E:\_tmp_adj_e2e.php`：13 项断言 PASS —— 调整审批通过（库存 427→430、事务 `adjustment` +1、流水 +1）、驳回不落账、重复审批被拦截；4 项回滚校验全部还原。
+
+### 24.5 回归
+
+`soho` 全模块 303 条路由：200=299 / 302=4 / 0×500 / 0×404 / 0×403。
