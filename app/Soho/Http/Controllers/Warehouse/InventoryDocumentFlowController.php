@@ -24,6 +24,67 @@ use Illuminate\Support\Facades\DB;
  */
 class InventoryDocumentFlowController extends Controller
 {
+    /** 单据类型 → 单号前缀 */
+    private const NO_PREFIX = [
+        'inbound' => 'INB',
+        'outbound' => 'OUT',
+        'transfer' => 'TRA',
+        'stocktake' => 'STO',
+    ];
+
+    /** 新建单据（表单） */
+    public function create()
+    {
+        $warehouses = DB::table('soho_warehouses')->when(Auth::user()->tenant_id, fn ($q, $t) => $q->where('tenant_id', $t))
+            ->orderBy('code')->get(['id', 'code', 'name']);
+
+        return view('soho.warehouse.inventory-doc-create', compact('warehouses'));
+    }
+
+    /** 保存新建单据 */
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'document_type' => ['required', 'in:inbound,outbound,transfer,stocktake'],
+            'warehouse_id' => ['required', 'integer'],
+            'target_warehouse_id' => ['nullable', 'integer'],
+            'remark' => ['nullable', 'string', 'max:200'],
+        ], [], ['document_type' => '单据类型', 'warehouse_id' => '仓库', 'target_warehouse_id' => '目标仓']);
+
+        if (! DB::table('soho_warehouses')->where('id', $data['warehouse_id'])->exists()) {
+            return back()->withInput()->with('warning', '仓库不存在。');
+        }
+        if ($data['document_type'] === 'transfer') {
+            if (empty($data['target_warehouse_id'])) {
+                return back()->withInput()->with('warning', '调拨单必须选择目标仓。');
+            }
+            if ((int) $data['target_warehouse_id'] === (int) $data['warehouse_id']) {
+                return back()->withInput()->with('warning', '目标仓不能与来源仓相同。');
+            }
+        }
+
+        $warehouse = DB::table('soho_warehouses')->where('id', $data['warehouse_id'])->first();
+        $tenantId = Auth::user()->tenant_id ?? $warehouse->tenant_id;
+
+        $id = DB::table('soho_inventory_documents')->insertGetId([
+            'tenant_id' => $tenantId,
+            'warehouse_id' => $data['warehouse_id'],
+            'target_warehouse_id' => $data['document_type'] === 'transfer' ? $data['target_warehouse_id'] : null,
+            'document_type' => $data['document_type'],
+            'document_no' => $this->nextDocumentNo($data['document_type'], (int) $tenantId),
+            'status' => 'draft',
+            'total_quantity' => 0,
+            'total_amount' => 0,
+            'operator_id' => Auth::id(),
+            'remark' => $data['remark'] ?? null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('soho.warehouse.inventory-doc.flow', $id)
+            ->with('success', '单据已创建，请继续维护明细。');
+    }
+
     /** 单据详情 */
     public function show(int $id)
     {
@@ -100,6 +161,164 @@ class InventoryDocumentFlowController extends Controller
         $this->syncTotals($doc->id);
 
         return back()->with('success', '明细已删除。');
+    }
+
+    /** 盘点单：按 SKU 列表批量录入实盘数（表单） */
+    public function countSheet(int $id)
+    {
+        $doc = $this->findDoc($id);
+        if ($doc->document_type !== 'stocktake') {
+            return redirect()->route('soho.warehouse.inventory-doc.flow', $doc->id)
+                ->with('warning', '只有盘点单可以使用批量实盘录入。');
+        }
+        if (! in_array($doc->status, ['draft', 'pending'], true)) {
+            return redirect()->route('soho.warehouse.inventory-doc.flow', $doc->id)
+                ->with('warning', '只有草稿或待审批的盘点单可以录入实盘数。');
+        }
+
+        $warehouseId = (int) $doc->warehouse_id;
+
+        // 全部启用 SKU（含本仓当前库存），未盘点的留空即可
+        $rows = DB::table('soho_product_skus as s')
+            ->leftJoin('soho_inventories as i', function ($j) use ($warehouseId) {
+                $j->on('i.sku_id', '=', 's.id')->where('i.warehouse_id', '=', $warehouseId);
+            })
+            ->where('s.status', 'active')
+            ->orderBy('s.sku_code')
+            ->get(['s.id', 's.sku_code', 's.name', 's.cost_price', 'i.actual_quantity', 'i.locked_quantity']);
+
+        // 已在单据里的明细（数量即上次录入的实盘数）
+        $existing = DB::table('soho_inventory_document_items')->where('document_id', $doc->id)
+            ->get(['sku_id', 'quantity', 'batch_no', 'remark'])->keyBy('sku_id');
+
+        $onlyInDoc = DB::table('soho_product_skus')->whereIn('id', $existing->keys()->all() ?: [0])
+            ->whereNotIn('id', $rows->pluck('id')->all())
+            ->get(['id', 'sku_code', 'name', 'cost_price']);
+
+        foreach ($onlyInDoc as $sku) {
+            $rows->push((object) [
+                'id' => $sku->id, 'sku_code' => $sku->sku_code, 'name' => $sku->name,
+                'cost_price' => $sku->cost_price, 'actual_quantity' => null, 'locked_quantity' => null,
+            ]);
+        }
+
+        $warehouse = DB::table('soho_warehouses')->where('id', $doc->warehouse_id)->first();
+
+        return view('soho.warehouse.inventory-doc-count-sheet', compact('doc', 'rows', 'existing', 'warehouse'));
+    }
+
+    /** 盘点单：保存批量实盘数（覆盖本单明细） */
+    public function saveCountSheet(Request $request, int $id)
+    {
+        $doc = $this->findDoc($id);
+        if ($doc->document_type !== 'stocktake') {
+            return back()->with('warning', '只有盘点单可以录入实盘数。');
+        }
+        if (! in_array($doc->status, ['draft', 'pending'], true)) {
+            return back()->with('warning', '只有草稿或待审批的盘点单可以录入实盘数。');
+        }
+
+        $request->validate([
+            'items' => ['nullable', 'array'],
+            'items.*' => ['nullable', 'numeric', 'min:0'],
+        ], [], ['items' => '实盘数']);
+
+        $input = collect($request->input('items', []))
+            ->filter(fn ($v) => $v !== null && $v !== '')
+            ->map(fn ($v) => (float) $v);
+
+        if ($input->isEmpty()) {
+            return back()->with('warning', '请至少填写一个 SKU 的实盘数。');
+        }
+
+        $skus = DB::table('soho_product_skus')->whereIn('id', $input->keys())->get(['id', 'name', 'cost_price'])->keyBy('id');
+
+        DB::transaction(function () use ($doc, $input, $skus) {
+            DB::table('soho_inventory_document_items')->where('document_id', $doc->id)->delete();
+
+            foreach ($input as $skuId => $qty) {
+                $sku = $skus->get((int) $skuId);
+                if (! $sku) {
+                    continue;
+                }
+                DB::table('soho_inventory_document_items')->insert([
+                    'tenant_id' => $doc->tenant_id,
+                    'document_id' => $doc->id,
+                    'sku_id' => $sku->id,
+                    'product_name' => $sku->name,
+                    'quantity' => $qty,
+                    'unit_cost' => (float) ($sku->cost_price ?? 0),
+                    'batch_no' => null,
+                    'remark' => '盘点实盘',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            $this->syncTotals($doc->id);
+        });
+
+        return redirect()->route('soho.warehouse.inventory-doc.flow', $doc->id)
+            ->with('success', '实盘数已保存（共 '.$input->count().' 个 SKU）。');
+    }
+
+    /** 库存调整申请：表单 */
+    public function createAdjust()
+    {
+        $warehouses = DB::table('soho_warehouses')->when(Auth::user()->tenant_id, fn ($q, $t) => $q->where('tenant_id', $t))
+            ->orderBy('code')->get(['id', 'code', 'name']);
+        $skus = DB::table('soho_product_skus')->where('status', 'active')->orderBy('sku_code')->get(['id', 'sku_code', 'name']);
+
+        return view('soho.warehouse.adjust-create', compact('warehouses', 'skus'));
+    }
+
+    /** 库存调整申请：提交 */
+    public function storeAdjust(Request $request)
+    {
+        $data = $request->validate([
+            'warehouse_id' => ['required', 'integer'],
+            'sku_id' => ['required', 'integer'],
+            'quantity' => ['required', 'numeric', 'not_in:0'],
+            'reason' => ['required', 'string', 'max:100'],
+            'remark' => ['nullable', 'string', 'max:500'],
+        ], [], ['warehouse_id' => '仓库', 'sku_id' => 'SKU', 'quantity' => '调整数量', 'reason' => '调整原因']);
+
+        $warehouse = DB::table('soho_warehouses')->where('id', $data['warehouse_id'])->first();
+        if (! $warehouse) {
+            return back()->withInput()->with('warning', '仓库不存在。');
+        }
+        $sku = DB::table('soho_product_skus')->where('id', $data['sku_id'])->first();
+        if (! $sku) {
+            return back()->withInput()->with('warning', 'SKU 不存在。');
+        }
+
+        $qty = (float) $data['quantity'];
+        if ($qty < 0) {
+            $avail = $this->available((int) $warehouse->id, (int) $sku->id);
+            if ($avail < abs($qty)) {
+                return back()->withInput()->with('warning', "当前可用库存 {$avail}，不足以扣减 ".abs($qty)."。");
+            }
+        }
+
+        $id = DB::table('soho_inventory_adjust_approvals')->insertGetId([
+            'tenant_id' => Auth::user()->tenant_id ?? $warehouse->tenant_id,
+            'status' => 'pending',
+            'product_id' => $sku->product_id ?? null,
+            'sku_id' => $sku->id,
+            'product_name' => $sku->name,
+            'order_no' => 'ADJ-'.now()->format('Ymd').'-'.str_pad((string) (DB::table('soho_inventory_adjust_approvals')->whereDate('created_at', now()->toDateString())->count() + 1), 3, '0', STR_PAD_LEFT),
+            'warehouse_id' => $warehouse->id,
+            'quantity' => $qty,
+            'reason' => $data['reason'],
+            'remark' => $data['remark'] ?? null,
+            'submitted_by' => Auth::id(),
+            'submitted_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('soho.warehouse.inventory-doc')
+            ->with('success', '调整申请 #'.$id.' 已提交，等待审批。');
     }
 
     /** 提交审批 */
@@ -189,8 +408,8 @@ class InventoryDocumentFlowController extends Controller
                         break;
 
                     case 'stocktake':
-                        // 盘点数量即实盘数：以「数量」为实盘，按现有实际数算差异
-                        $current = $this->available((int) $doc->warehouse_id, (int) $item->sku_id);
+                        // 盘点数量即实盘数：与「实际库存」比较（可用量会扣掉锁定量，不能用于盘点比对）
+                        $current = $this->actualQuantity((int) $doc->warehouse_id, (int) $item->sku_id);
                         $diff = $qty - $current;
                         if (abs($diff) > 0.0001) {
                             $this->moveStock((int) $doc->warehouse_id, (int) $item->sku_id, $diff, $doc, $item, $diff > 0 ? 'in' : 'out', 'adjustment', $now, '盘点差异调整');
@@ -310,6 +529,22 @@ class InventoryDocumentFlowController extends Controller
 
     // ---------------------------------------------------------------- 内部方法
 
+    /** 生成单据号：INV-{INB|OUT|TRA|STO}-{YYYYMM}-{3 位序号}（同类型同月顺延） */
+    private function nextDocumentNo(string $type, int $tenantId): string
+    {
+        $prefix = 'INV-'.(self::NO_PREFIX[$type] ?? 'DOC').'-'.now()->format('Ym').'-';
+        $exists = DB::table('soho_inventory_documents')
+            ->where('document_no', 'like', $prefix.'%')
+            ->pluck('document_no');
+        $max = 0;
+        foreach ($exists as $no) {
+            $tail = (int) substr($no, -3);
+            $max = max($max, $tail);
+        }
+
+        return $prefix.str_pad((string) ($max + 1), 3, '0', STR_PAD_LEFT);
+    }
+
     private function findDoc(int $id): object
     {
         return DB::table('soho_inventory_documents')
@@ -334,6 +569,17 @@ class InventoryDocumentFlowController extends Controller
             'total_amount' => $items->sum(fn ($i) => (float) $i->quantity * (float) $i->unit_cost),
             'updated_at' => now(),
         ]);
+    }
+
+    /** 实际库存（未扣锁定量，用于盘点比对） */
+    private function actualQuantity(int $warehouseId, int $skuId): float
+    {
+        $row = DB::table('soho_inventories')->where('warehouse_id', $warehouseId)->where('sku_id', $skuId)->first(['actual_quantity']);
+        if ($row) {
+            return (float) $row->actual_quantity;
+        }
+
+        return (float) DB::table('soho_inventory_batches')->where('warehouse_id', $warehouseId)->where('sku_id', $skuId)->sum('quantity');
     }
 
     /** 可用库存（库存主表口径，缺失回落批次合计） */

@@ -22,6 +22,9 @@
 <div class="card mb-3">
     <div class="card-header"><h5 class="mb-0">库存调整审批队列</h5></div>
     <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="small text-muted">调整申请需提交后在此审批；通过即落账并写库存事务/流水。</div>
+        </div>
         <div class="table-responsive">
             <table class="table table-bordered align-middle mb-0">
                 <thead><tr><th>单号</th><th>商品</th><th>仓库</th><th class="text-end">数量</th><th class="text-center">状态</th><th>原因</th><th class="text-center">提交时间</th><th class="text-center">操作</th></tr></thead>
@@ -36,7 +39,7 @@
                             <td class="small">{{ $a->reason ?: '-' }}</td>
                             <td class="text-center small text-muted">{{ $a->submitted_at ?: '-' }}</td>
                             <td class="text-center">
-                                @if($a->status === 'pending')
+                                @if($a->status === 'pending' && can_perm('inventory.adjust.approve'))
                                     <div class="d-flex gap-1 justify-content-center">
                                         <form method="POST" action="{{ route('soho.warehouse.adjust.approve', $a->id) }}">
                                             @csrf
@@ -65,7 +68,21 @@
 @endif
 
 <div class="card">
-    <div class="card-header"><h5 class="mb-0">{{ $title ?? '库存单据' }}</h5></div>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">{{ $title ?? '库存单据' }}</h5>
+        <div class="d-flex gap-2">
+            @if(can_perm('inventory.adjust'))
+                <a href="{{ route('soho.warehouse.adjust.create') }}" class="btn btn-warning btn-sm">
+                    <i class="fa fa-plus me-1"></i> 提交调整申请
+                </a>
+            @endif
+            @if(can_perm('inventory.document.create'))
+                <a href="{{ route('soho.warehouse.inventory-doc.create') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-file-circle-plus me-1"></i> 新建单据
+                </a>
+            @endif
+        </div>
+    </div>
     <div class="card-body">
         <form method="GET" class="mb-3">
             <div class="row g-2 align-items-end">
@@ -152,3 +169,5 @@
     </div>
 </div>
 @endsection
+
+

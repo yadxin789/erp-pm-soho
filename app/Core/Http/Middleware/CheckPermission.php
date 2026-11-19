@@ -26,7 +26,15 @@ class CheckPermission
             return redirect()->guest('/login');
         }
 
-        if ($user->hasRole('super_admin') || $user->can($permission)) {
+        $allowed = false;
+        foreach (permission_candidates($permission) as $candidate) {
+            if ($user->can($candidate)) {
+                $allowed = true;
+                break;
+            }
+        }
+
+        if ($user->hasRole('super_admin') || $allowed) {
             return $next($request);
         }
 

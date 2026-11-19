@@ -27,6 +27,11 @@
         </div>
     </div>
     <div class="d-flex gap-2">
+        @if($doc->document_type === 'stocktake' && in_array($doc->status, ['draft', 'pending'], true) && can_perm('inventory.stocktake'))
+            <a href="{{ route('soho.warehouse.inventory-doc.count-sheet', $doc->id) }}" class="btn btn-info btn-sm text-white">
+                <i class="fa fa-clipboard-check me-1"></i> 批量录入实盘数
+            </a>
+        @endif
         <a href="{{ route('soho.warehouse.inventory-doc') }}" class="btn btn-outline-secondary btn-sm">
             <i class="fa fa-arrow-left me-1"></i> 返回单据
         </a>
@@ -84,7 +89,7 @@
                                     <td class="text-end">¥{{ number_format((float) $item->quantity * (float) $item->unit_cost, 2) }}</td>
                                     <td class="small font-monospace text-muted">{{ $item->batch_no ?: '-' }}</td>
                                     <td class="text-center">
-                                        @if(in_array($doc->status, ['draft', 'pending'], true))
+                                        @if(in_array($doc->status, ['draft', 'pending'], true) && can_perm('inventory.document.create'))
                                             <form method="POST" action="{{ route('soho.warehouse.inventory-doc.item.remove', [$doc->id, $item->id]) }}">
                                                 @csrf
                                                 <button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
@@ -103,7 +108,7 @@
             </div>
         </div>
 
-        @if(in_array($doc->status, ['draft', 'pending'], true))
+        @if(in_array($doc->status, ['draft', 'pending'], true) && can_perm('inventory.document.create'))
             <div class="card mb-3">
                 <div class="card-header"><h6 class="mb-0">追加明细</h6></div>
                 <div class="card-body">
@@ -142,17 +147,17 @@
             <div class="card-header"><h6 class="mb-0">单据操作</h6></div>
             <div class="card-body">
                 <div class="d-flex gap-2 flex-wrap">
-                    @if($doc->status === 'draft')
+                    @if($doc->status === 'draft' && can_perm('inventory.document.create'))
                         <form method="POST" action="{{ route('soho.warehouse.inventory-doc.submit', $doc->id) }}">
                             @csrf
                             <button class="btn btn-primary"><i class="fa fa-paper-plane me-1"></i> 提交审批</button>
                         </form>
-                    @elseif($doc->status === 'pending')
+                    @elseif($doc->status === 'pending' && can_perm('inventory.approve'))
                         <form method="POST" action="{{ route('soho.warehouse.inventory-doc.approve', $doc->id) }}">
                             @csrf
                             <button class="btn btn-primary"><i class="fa fa-check me-1"></i> 审批通过</button>
                         </form>
-                    @elseif($doc->status === 'approved')
+                    @elseif($doc->status === 'approved' && can_perm('inventory.adjust'))
                         <form method="POST" action="{{ route('soho.warehouse.inventory-doc.execute', $doc->id) }}"
                               onsubmit="return confirm('确认执行？将立即变更库存并写库存事务/流水。')">
                             @csrf
@@ -162,7 +167,7 @@
                         <div class="alert alert-success mb-0 py-2"><i class="fa fa-check-circle me-1"></i> 已执行完成（{{ $doc->completed_at }}），库存已更新。</div>
                     @endif
 
-                    @if(! in_array($doc->status, ['completed', 'cancelled'], true))
+                    @if(! in_array($doc->status, ['completed', 'cancelled'], true) && can_perm('inventory.document.create'))
                         <form method="POST" action="{{ route('soho.warehouse.inventory-doc.cancel', $doc->id) }}"
                               onsubmit="return confirm('确认取消该单据？')">
                             @csrf
@@ -209,3 +214,5 @@
     </div>
 </div>
 @endsection
+
+

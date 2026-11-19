@@ -222,3 +222,25 @@ ERP 全模块 159 条路由：200=53 / 302=106 / 0×500 / 0×404 / 0×403（302 
 ### 26.4 回归
 
 PM 全模块 73 条静态 GET 路由：200=49 / 302=3 / 404=21 / **0×500**（404 均为 `pm/admin/*`、`pm/ai/settings` 等管理员专属页对 `pm.project_creator` 的权限兜底，非本轮引入）。
+## 二十七、P1-6 库存单据创建 / 盘点批量实盘录入 / 调整申请提交
+
+### 27.1 补齐的缺口
+
+P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有创建入口**：`soho_inventory_documents` 仅由种子数据提供 12 行，盘点/入库/出库/调拨单据无法在界面产生；`soho_inventory_adjust_approvals` 只有 approve/reject，无提交入口（表长期 0 行）；盘点只能逐行追加明细，无法按 SKU 列表批量录入实盘数。
+
+### 27.2 新增能力
+
+- **新建单据**：`GET warehouse/inventory-doc/create`（`inventory.document.create`）+ `POST warehouse/inventory-doc`。类型 inbound/outbound/transfer/stocktake；调拨强制目标仓且不得与来源仓相同；单号沿用原格式 `INV-{INB|OUT|TRA|STO}-{YYYYMM}-{3 位顺延}`。
+- **盘点批量实盘录入**：`GET/POST warehouse/inventory-doc/{id}/count-sheet`。列全部启用 SKU（左连本仓库存显示账面数/锁定量），只填写实际盘到的数量，**留空 = 本次不盘点**；保存时覆盖本单明细（非累加）并同步合计；前端实时算差异、支持「全部按账面数填充 / 清空」。
+- **调整申请提交**：`GET warehouse/adjust/create` + `POST warehouse/adjust`（`inventory.adjust`）。写 `status=pending`、`submitted_by/submitted_at`、`product_name`、单号 `ADJ-{YYYYMMDD}-{3 位}`；负数申请先校验可用库存，不足直接拦回。
+
+### 27.3 同时修正的两个真问题
+
+1. **盘点差异口径错误**：原 `execute` 用「可用量（actual − locked）」与实盘数比较，锁定量会被算成盘盈（本次 E2E 实测 427 → 441，多补 14 件）。改为与实际库存比较（新增 `actualQuantity()`），实测 427 → 428。
+2. **产权限判定只认裸名**：`CheckPermission` 原用 `$user->can($permission)`，而 SOHO 角色同时存在 `inventory.view` 与 `soho.inventory.view` 两套命名，且 `Gate::check(array)` 是「全部通过」语义。新增 Core helper `permission_candidates()` / `can_perm()`：逐候选判定、任一命中即放行（super_admin 直通），`CheckPermission` 同步改造。视图入口（新建单据 / 提交调整申请 / 批量录入 / 追加明细 / 提交/审批/执行/取消 / 通过/驳回）全部改为 `can_perm()` 门控——无权限即不渲染，符合「无 403、隐藏入口」。
+
+### 27.4 验证
+
+- `E:\_tmp_s_e2e.php` 34 项断言 PASS：新建入库单（单号格式 + 跳详情）、新建盘点单、实盘页 200、批量录入生成 2 行、空值 SKU 不生成、合计同步、重复保存覆盖、提交→审批→执行、盘点差异落账（427→428）、生成流水；调整申请提交（单号/提交人/商品名）、审批落账（428→426）、写事务+流水、重复审批不重复落账、驳回不落账、超可用量提交被拦截；6 项回滚（单据/明细/申请/流水/事务/库存实际数）全部还原。
+- 角色验收：`warehouse_mgr@ddwl-soho.com`（`warehouse_manager`）访问列表页 200、`新建单据`+`提交调整申请` 均可见、无「无权」提示；`tenant_admin`（无 warehouse 角色）被角色中间件收回工作台，页面内也不再渲染这些入口。
+- 三模块回归：SOHO 305 路由 200=301/302=4、ERP 159 路由 200=53/302=106、PM 73 路由 200=49/302=3/404=21（管理员页权限兜底），全部 **0×500 / 0×403**。
