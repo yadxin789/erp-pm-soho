@@ -1152,9 +1152,10 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 客服扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:customer_service')->group(function () {
-        Route::middleware('permission:customer.view')->get('customer/tags', function () {
-            return view('placeholder', ['title' => '客户标签', 'feature' => '客户标签管理', 'status' => '开发中']);
-        })->name('customer.tags');
+        Route::middleware('permission:customer.view')->get('customer/tags', [\App\Soho\Http\Controllers\Customer\CustomerTagController::class, 'index'])->name('customer.tags');
+        Route::middleware('permission:customer.edit')->post('customer/tags', [\App\Soho\Http\Controllers\Customer\CustomerTagController::class, 'store'])->name('customer.tags.store');
+        Route::middleware('permission:customer.edit')->put('customer/tags/{tag}', [\App\Soho\Http\Controllers\Customer\CustomerTagController::class, 'update'])->name('customer.tags.update');
+        Route::middleware('permission:customer.edit')->delete('customer/tags/{tag}', [\App\Soho\Http\Controllers\Customer\CustomerTagController::class, 'destroy'])->name('customer.tags.destroy');
     });
     Route::middleware('soho_role:customer_service')->group(function () {
         Route::middleware('permission:customer.view')->get('customer/privacy', function () {
