@@ -368,3 +368,11 @@ P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有�
 
 - 报告落盘 `docs/数据校验报告.md`（V1~V8 结论、口径、限制、改动、复跑方式）。
 - 遗留：`soho_platform_skus` 的 `(shop_id, platform_sku)` 3 组各 12 行重复，逐行核对 12 行的 `system_goods_id/platform_goods_id/价格/库存` 全不同，属演示种子把同一平台 SKU 复用到 12 个商品，非合并错误，是否改唯一待拍板；PM 49 个新迁用户源无 email，当前留空（如需邮箱登录按 `<username>@pm.local` 补造）。
+
+### 33.5 收口（用户拍板项）
+
+- 用户决定：① 平台 SKU 重复要改唯一；② 全员邮箱或用户名均可登录。
+- 邮箱：新增 `p3:fix-uniqueness`（幂等，含 --apply），把 50 个无邮箱账号（均为 PM）按 `<username>@pm.local` 补造（冲突自动 `-N`）。现 `users.email` 缺失 0、重复 0，`@pm.local` 共 50 个。
+- 平台 SKU：同命令按 `(shop_id, platform_sku)` 分组，保留首行、其余加 `-02…-12` 后缀，改写 44 行；新增迁移 `2026_11_19_250000_unique_soho_platform_sku.php` 建唯一索引 `ux_platform_sku_shop(shop_id, platform_sku)`。现重复组 0，索引已生效。
+- 备份：`storage/backups/p3-uniqueness-before.sql`（users + soho_platform_skus，50 KB）。
+- 验收：邮箱通道 `pm_manager_2@pm.local` / `pm_director@pm.local` 与用户名通道 `pm_manager_2` 登录均 200 落地 `/pm`；`/soho/platform-sku`、`/soho/goods`、`/soho/dashboard` 200；PM 侧 `/pm`、`/pm/dashboard` 200，0×500 / 0×403。
