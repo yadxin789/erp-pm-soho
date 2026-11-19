@@ -1160,18 +1160,13 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:customer.view')->get('customer/privacy', function () {
             return view('placeholder', ['title' => '客户隐私请求', 'feature' => '客户隐私请求处理', 'status' => '开发中']);
         })->name('customer.privacy');
-        Route::middleware('permission:after_sale.view')->get('aftersale/apply', function () {
-            return view('placeholder', ['title' => '售后申请', 'feature' => '售后申请处理', 'status' => '开发中']);
-        })->name('aftersale.apply');
-        Route::middleware('permission:after_sale.view')->get('aftersale/supplement', function () {
-            return view('placeholder', ['title' => '待补充资料', 'feature' => '待补充资料列表', 'status' => '开发中']);
-        })->name('aftersale.supplement');
-        Route::middleware('permission:after_sale.view')->get('aftersale/progress', function () {
-            return view('placeholder', ['title' => '售后进度', 'feature' => '售后进度跟踪', 'status' => '开发中']);
-        })->name('aftersale.progress');
-        Route::middleware('permission:after_sale.view')->get('aftersale/communication', function () {
-            return view('placeholder', ['title' => '售后沟通记录', 'feature' => '售后沟通记录', 'status' => '开发中']);
-        })->name('aftersale.communication');
+        Route::middleware('permission:after_sale.view')->get('aftersale/apply', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'apply'])->name('aftersale.apply');
+        Route::middleware('permission:after_sale.view')->post('aftersale/apply/store', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'store'])->name('aftersale.apply.store');
+        Route::middleware('permission:after_sale.view')->get('aftersale/supplement', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'supplement'])->name('aftersale.supplement');
+        Route::middleware('permission:after_sale.view')->post('aftersale/supplement/save', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'saveSupplement'])->name('aftersale.supplement.save');
+        Route::middleware('permission:after_sale.view')->get('aftersale/progress', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'progress'])->name('aftersale.progress');
+        Route::middleware('permission:after_sale.view')->get('aftersale/communication', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'communication'])->name('aftersale.communication');
+        Route::middleware('permission:after_sale.view')->post('aftersale/communication/store', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'storeCommunication'])->name('aftersale.communication.store');
     });
 
     // ==================== 仓库主管扩展路由（V3.1补全） ====================
@@ -1244,9 +1239,7 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:after_sale.handle')->get('aftersale/dispute', [\App\Soho\Http\Controllers\Aftersale\DisputeController::class, 'index'])->name('aftersale.dispute');
 
         // 售后操作记录（占位 - 待实现）
-        Route::middleware('permission:after_sale.view')->get('aftersale/operation-log', function () {
-            return view('placeholder', ['title' => '售后操作记录', 'feature' => '售后操作历史', 'status' => '开发中']);
-        })->name('aftersale.operation.log');
+        Route::middleware('permission:after_sale.view')->get('aftersale/operation-log', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'operationLog'])->name('aftersale.operation.log');
     });
 
     // ==================== 财务人员/财务主管扩展路由（V3.1补全） ====================
