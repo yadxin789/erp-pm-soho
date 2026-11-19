@@ -1109,9 +1109,9 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:customer.edit')->delete('customer/tags/{tag}', [\App\Soho\Http\Controllers\Customer\CustomerTagController::class, 'destroy'])->name('customer.tags.destroy');
     });
     Route::middleware('soho_role:customer_service')->group(function () {
-        Route::middleware('permission:customer.view')->get('customer/privacy', function () {
-            return view('placeholder', ['title' => '客户隐私请求', 'feature' => '客户隐私请求处理', 'status' => '开发中']);
-        })->name('customer.privacy');
+        Route::middleware('permission:customer.view')->get('customer/privacy', [\App\Soho\Http\Controllers\Customer\CustomerPrivacyController::class, 'index'])->name('customer.privacy');
+        Route::middleware('permission:customer.edit')->post('customer/privacy/store', [\App\Soho\Http\Controllers\Customer\CustomerPrivacyController::class, 'store'])->name('customer.privacy.store');
+        Route::middleware('permission:customer.edit')->post('customer/privacy/{id}/handle', [\App\Soho\Http\Controllers\Customer\CustomerPrivacyController::class, 'handle'])->name('customer.privacy.handle');
         Route::middleware('permission:after_sale.view')->get('aftersale/apply', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'apply'])->name('aftersale.apply');
         Route::middleware('permission:after_sale.view')->post('aftersale/apply/store', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'store'])->name('aftersale.apply.store');
         Route::middleware('permission:after_sale.view')->get('aftersale/supplement', [\App\Soho\Http\Controllers\Aftersale\AfterSaleBoardController::class, 'supplement'])->name('aftersale.supplement');
