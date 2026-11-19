@@ -803,9 +803,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // 调价历史
-        Route::middleware('permission:price.view')->get('price/change/history', function () {
-            return view('placeholder', ['title' => '调价历史', 'feature' => '调价历史', 'status' => '开发中']);
-        })->name('price.change.history');
+        Route::middleware('permission:price.view')->get('price/change/history', [\App\Soho\Http\Controllers\Price\PriceReportController::class, 'priceChangeHistory'])->name('price.change.history');
     });
 
     // ==================== 履约作业（仓库岗位专用） ====================
@@ -897,9 +895,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // 采购报表（占位 - 待实现）
-        Route::middleware('permission:report.procurement')->get('report/procurement', function () {
-            return view('placeholder', ['title' => '采购报表', 'feature' => '采购报表', 'status' => '开发中']);
-        })->name('report.procurement');
+        Route::middleware('permission:report.procurement')->get('report/procurement', [\App\Soho\Http\Controllers\Price\PriceReportController::class, 'procurementReport'])->name('report.procurement');
     });
 
     // ==================== 物流中心扩展（物流专员） ====================
