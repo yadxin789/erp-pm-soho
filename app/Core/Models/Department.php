@@ -47,6 +47,17 @@ class Department extends Model
         return $this->hasMany(User::class);
     }
 
+    /** 跨模块共享部门（公司级单一组织行，归口 ERP，各模块可见可挂人） */
+    public const SHARED_CODES = ['GM', 'WH', 'FIN', 'HR'];
+
+    /** 某模块可见的部门集合：本模块部门 + 公司级共享部门 */
+    public function scopeVisibleTo($query, string $module)
+    {
+        return $query->where(function ($q) use ($module) {
+            $q->where('module', $module)->orWhereIn('code', self::SHARED_CODES);
+        });
+    }
+
     /** 向上追溯模块归属：自身 module 为空时继承父级（01 字典 §2.2） */
     public function resolveModule(): ?string
     {

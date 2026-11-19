@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $departments = \App\Core\Models\Department::orderBy('name')->get();
+        $departments = \App\Core\Models\Department::visibleTo('soho')->orderBy('name')->get();
         return view('admin.users.create', compact('departments'));
     }
 
@@ -59,7 +59,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $departments = \App\Core\Models\Department::visibleTo('soho')->orderBy('name')->get();
+        return view('admin.users.edit', compact('user', 'departments'));
     }
 
     public function update(Request $request, User $user)

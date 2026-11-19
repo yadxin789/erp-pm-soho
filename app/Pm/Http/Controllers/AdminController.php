@@ -96,7 +96,7 @@ class AdminController extends Controller
 
     public function createUser()
     {
-        $departments = Department::all();
+        $departments = Department::where('module', 'pm')->orderBy('sort_order')->get();
         $roles = Role::all();
         return view('pm::admin.create-user', compact('departments', 'roles'));
     }
@@ -127,7 +127,7 @@ class AdminController extends Controller
 
     public function editUser(User $user)
     {
-        $departments = Department::all();
+        $departments = Department::where('module', 'pm')->orderBy('sort_order')->get();
         $roles = Role::all();
         return view('pm::admin.edit-user', compact('user', 'departments', 'roles'));
     }
@@ -167,7 +167,7 @@ class AdminController extends Controller
 
     public function departments()
     {
-        $departments = Department::paginate(10);
+        $departments = Department::where('module', 'pm')->paginate(10);
         return view('pm::admin.departments', compact('departments'));
     }
 
@@ -185,7 +185,7 @@ class AdminController extends Controller
             'sort_order' => 'required|integer',
         ]);
 
-        Department::create($request->all());
+        Department::create($request->all() + ['module' => 'pm']);
 
         OperationLogHelper::log('部门管理', '创建部门', "管理员创建部门「{$request->name}」");
 
@@ -708,7 +708,7 @@ class AdminController extends Controller
      */
     public function importUsersForm()
     {
-        $departments = Department::all();
+        $departments = Department::where('module', 'pm')->orderBy('sort_order')->get();
         $roles = Role::all();
         return view('pm::admin.import-users', compact('departments', 'roles'));
     }

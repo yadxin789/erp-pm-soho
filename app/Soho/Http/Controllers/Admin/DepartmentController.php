@@ -12,6 +12,7 @@ class DepartmentController extends Controller
     public function index(Request $request)
     {
         $departments = Department::with('parent')
+            ->visibleTo('soho')
             ->when($request->search, function($query) use ($request) {
                 $query->where('name', 'like', "%{$request->search}%");
             })
@@ -24,7 +25,7 @@ class DepartmentController extends Controller
 
     public function create()
     {
-        $departments = Department::whereNull('parent_id')->orderBy('name')->get();
+        $departments = Department::visibleTo('soho')->whereNull('parent_id')->orderBy('name')->get();
         return view('admin.departments.create', compact('departments'));
     }
 
@@ -38,14 +39,30 @@ class DepartmentController extends Controller
             'remark' => 'nullable|string|max:500',
         ]);
 
+        $validated['module'] = 'soho';
+        $validated['code'] = $this->nextCode();
+        $validated['status'] = $validated['status'] ?? 1;
+
         Department::create($validated);
 
         return redirect()->route('admin.departments.index')->with('success', '部门创建成功');
     }
 
+    /** SOHO 部门编码延续 soho_dept_N 序列 */
+    private function nextCode(): string
+    {
+        $max = Department::where('code', 'like', 'soho_dept_%')
+            ->pluck('code')
+            ->map(fn ($code) => (int) substr($code, strlen('soho_dept_')))
+            ->max() ?? 0;
+
+        return 'soho_dept_' . ($max + 1);
+    }
+
     public function edit(Department $department)
     {
-        $departments = Department::whereNull('parent_id')
+        $departments = Department::visibleTo('soho')
+            ->whereNull('parent_id')
             ->where('id', '!=', $department->id)
             ->orderBy('name')
             ->get();

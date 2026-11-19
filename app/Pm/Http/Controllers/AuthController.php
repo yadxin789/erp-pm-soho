@@ -63,7 +63,7 @@ class AuthController extends Controller
 
     public function showRegisterForm()
     {
-        $departments = Department::all();
+        $departments = Department::where('module', 'pm')->orderBy('sort_order')->get();
         $roles = Role::all();
         return view('pm::auth.register', compact('departments', 'roles'));
     }
