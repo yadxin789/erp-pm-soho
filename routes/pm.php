@@ -161,7 +161,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::prefix('project')->name('project.')->group(function () {
+    Route::prefix('project')->name('project.')->middleware('pm.project')->group(function () {
         Route::get('/', [ProjectController::class, 'index'])->name('index');
         Route::get('/my-projects', [ProjectController::class, 'myProjects'])->name('my-projects');
         Route::get('/my-projects/overdue', [ProjectController::class, 'myOverdueProjects'])->name('my-projects.overdue');
@@ -208,20 +208,20 @@ Route::middleware('auth')->group(function () {
     Route::post('voice/hooks/leave', [VoiceController::class, 'hookLeave'])->name('voice.hooks.leave');
     
     Route::prefix('history')->name('history.')->group(function () {
-        Route::get('/project/{project}', [HistoryController::class, 'projectHistory'])->name('project.history');
+        Route::get('/project/{project}', [HistoryController::class, 'projectHistory'])->name('project.history')->middleware('pm.project');
     });
     
-    Route::get('project/{projectId}/messages', [MessageController::class, 'index'])->name('messages.index');
-    Route::post('project/{projectId}/messages', [MessageController::class, 'store'])->name('messages.store');
-    Route::post('project/{projectId}/messages/clear', [MessageController::class, 'clearMine'])->name('messages.clear-mine');
-    Route::delete('project/{projectId}/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
+    Route::get('project/{projectId}/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('pm.project');
+    Route::post('project/{projectId}/messages', [MessageController::class, 'store'])->name('messages.store')->middleware('pm.project');
+    Route::post('project/{projectId}/messages/clear', [MessageController::class, 'clearMine'])->name('messages.clear-mine')->middleware('pm.project');
+    Route::delete('project/{projectId}/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware('pm.project');
     Route::get('messages/{id}/file', [MessageController::class, 'file'])->name('messages.file');
     
-    Route::get('project/{projectId}/chat/{targetUserId}', [PrivateMessageController::class, 'show'])->name('messages.private');
-    Route::post('project/{projectId}/chat/{targetUserId}/clear', [PrivateMessageController::class, 'clearMine'])->name('messages.private.clear-mine');
-    Route::get('api/project/{projectId}/chat/members', [PrivateMessageController::class, 'members'])->name('api.chat.members');
-    Route::get('api/project/{projectId}/chat/history/{targetUserId}', [PrivateMessageController::class, 'history'])->name('api.chat.history');
-    Route::post('api/project/{projectId}/chat/send', [PrivateMessageController::class, 'send'])->name('api.chat.send');
+    Route::get('project/{projectId}/chat/{targetUserId}', [PrivateMessageController::class, 'show'])->name('messages.private')->middleware('pm.project');
+    Route::post('project/{projectId}/chat/{targetUserId}/clear', [PrivateMessageController::class, 'clearMine'])->name('messages.private.clear-mine')->middleware('pm.project');
+    Route::get('api/project/{projectId}/chat/members', [PrivateMessageController::class, 'members'])->name('api.chat.members')->middleware('pm.project');
+    Route::get('api/project/{projectId}/chat/history/{targetUserId}', [PrivateMessageController::class, 'history'])->name('api.chat.history')->middleware('pm.project');
+    Route::post('api/project/{projectId}/chat/send', [PrivateMessageController::class, 'send'])->name('api.chat.send')->middleware('pm.project');
 
     Route::get('profile/avatar', [ProfileController::class, 'avatar'])->name('profile.avatar');
     Route::post('profile/avatar/upload', [ProfileController::class, 'uploadAvatar'])->name('profile.avatar.upload');
@@ -237,7 +237,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/settings', [UserWecomController::class, 'updateSettings'])->name('settings.update');
     });
 
-    Route::prefix('task')->name('task.')->group(function () {
+    Route::prefix('task')->name('task.')->middleware('pm.project')->group(function () {
         Route::get('/', [TaskController::class, 'index'])->name('index');
         Route::get('/my-tasks', [TaskController::class, 'myTasks'])->name('my-tasks');
         Route::get('/my-tasks/pending-execution', [TaskController::class, 'myPendingExecutionTasks'])->name('my-tasks.pending-execution');
@@ -344,3 +344,4 @@ Route::middleware('auth')->group(function () {
 Route::get('collab/download/{doc}', [CollabDocumentController::class, 'download'])->name('collab.download');
 Route::post('collab/callback/{doc}', [CollabDocumentController::class, 'callback'])->name('collab.callback');
 });
+

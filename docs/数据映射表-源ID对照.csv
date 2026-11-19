@@ -1,4 +1,4 @@
-﻿domain,source_db,source_id,source_key,target_table,target_id,target_key,status
+domain,source_db,source_id,source_key,target_table,target_id,target_key,status
 user,dedao_erp,8,admin@admin.com,users,13,,mapped
 user,dedao_erp,9,sales@demo.com,users,14,,mapped
 user,dedao_erp,10,purchase@demo.com,users,15,,mapped
@@ -136,5 +136,5 @@ entity,dedao_erp,16,F-002,erp_items,9,F-002,mapped
 entity,dedao_erp,17,P-001,erp_items,10,P-001,mapped
 entity,dedao_erp,18,P-002,erp_items,11,P-002,mapped
 entity,pm_db,1,G20260928173306,projects,1,G20260928173306,mapped
-entity,dedao_erp,1,PRJ0001,projects,,,missing
-entity,dedao_erp,2,PRJ0002,projects,,,missing
+entity,dedao_erp,1,PRJ0001,projects,,,dropped_by_d27
+entity,dedao_erp,2,PRJ0002,projects,,,dropped_by_d27

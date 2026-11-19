@@ -8,11 +8,15 @@ use App\Core\Models\User;
 class ProjectPolicy
 {
     /**
-     * 查看项目详情 — 仅项目参与者可查看
+     * 查看项目详情 — 项目只属 PM 模块（D27）：PM 模块用户且与项目相关的人可看。
+     * 跨模块管理员（erp.admin / soho.super_admin 等）不再直放，避免 ERP 侧出现项目入口。
      */
     public function view(User $user, Project $project): bool
     {
-        if ($user->isAdmin() || $user->isProjectManager()) {
+        if (! $this->inPmModule($user)) {
+            return false;
+        }
+        if ($this->isPmAdmin($user)) {
             return true;
         }
         if ($user->id === $project->creator_id) {
@@ -26,12 +30,24 @@ class ProjectPolicy
             ->exists();
     }
 
+    /** 是否属于 PM 模块（含 core.super_admin 全局口径） */
+    private function inPmModule(User $user): bool
+    {
+        return $user->canEnterModule('pm') || $user->hasRole('core.super_admin');
+    }
+
+    /** PM 模块管理员（pm.admin / 原 admin 角色 / 项目负责人） */
+    private function isPmAdmin(User $user): bool
+    {
+        return $user->hasAnyRole(['admin', 'pm.admin']) || $user->isProjectManager();
+    }
+
     /**
      * 创建项目 — 项目发起人或管理员
      */
     public function create(User $user): bool
     {
-        return $user->isProjectCreator() || $user->isAdmin();
+        return $this->inPmModule($user) && ($user->isProjectCreator() || $this->isPmAdmin($user));
     }
 
     /**
@@ -39,7 +55,7 @@ class ProjectPolicy
      */
     public function update(User $user, Project $project): bool
     {
-        return $user->id === $project->creator_id || $user->isAdmin();
+        return $this->inPmModule($user) && ($user->id === $project->creator_id || $this->isPmAdmin($user));
     }
 
     /**
@@ -47,7 +63,7 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project): bool
     {
-        return $user->id === $project->creator_id || $user->isAdmin();
+        return $this->inPmModule($user) && ($user->id === $project->creator_id || $this->isPmAdmin($user));
     }
 
     /**

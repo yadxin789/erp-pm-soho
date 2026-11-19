@@ -10,32 +10,7 @@
 </a>
 @endif
 
-<div class="{{ $section }}">项目管理</div>
-@if(\App\Erp\Support\Menu::can('app.projects.index'))
-<a href="{{ erp_route('app.projects.index') }}" class="{{ $item(request()->routeIs('app.projects.*')) }}">
-    <i class="fa-solid fa-diagram-project"></i>项目列表
-</a>
-@endif
-@if(\App\Erp\Support\Menu::can('app.projects.create'))
-<a href="{{ erp_route('app.projects.create') }}" class="{{ $item(request()->routeIs('app.projects.create')) }}">
-    <i class="fa-solid fa-circle-plus"></i>新建项目
-</a>
-@endif
-@if(\App\Erp\Support\Menu::can('app.projects.my-projects'))
-<a href="{{ erp_route('app.projects.my-projects') }}" class="{{ $item(request()->routeIs('app.projects.my-projects*')) }}">
-    <i class="fa-solid fa-user-check"></i>我的项目
-</a>
-@endif
-@if(\App\Erp\Support\Menu::can('app.tasks.my-tasks'))
-<a href="{{ erp_route('app.tasks.my-tasks') }}" class="{{ $item(request()->routeIs('app.tasks.my-tasks*')) }}">
-    <i class="fa-solid fa-list-check"></i>我的任务
-</a>
-@endif
-@if(\App\Erp\Support\Menu::can('app.tasks.my-audit-tasks'))
-<a href="{{ erp_route('app.tasks.my-audit-tasks') }}" class="{{ $item(request()->routeIs('app.tasks.my-audit-tasks*')) }}">
-    <i class="fa-solid fa-clipboard-check"></i>我的审核任务
-</a>
-@endif
+{{-- ERP 不保留项目/任务入口：项目只属 PM 模块（D27） --}}
 
 <div class="{{ $section }}">智能助手</div>
 @if(\App\Erp\Support\Menu::can('app.ai.chat'))

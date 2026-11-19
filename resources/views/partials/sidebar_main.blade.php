@@ -219,20 +219,7 @@
     <i class="fa-solid fa-users-viewfinder"></i>应聘者
 </a>
 @endif
-@if(\App\Erp\Support\Menu::can('app.projects.index'))
-<a href="{{ erp_route('app.projects.index') }}" class="{{ $item(request()->routeIs('app.projects.*')) }}">
-    <i class="fa-solid fa-folder-open"></i>项目管理
-</a>
-@endif
-@if(\App\Erp\Support\Menu::can('app.tasks.my-tasks'))
-<a href="{{ erp_route('app.tasks.my-tasks') }}" class="{{ $item(request()->routeIs('app.tasks.my-tasks*')) }}">
-    <i class="fa-solid fa-list-check"></i>我的任务
-</a>
-@endif
-@if(\App\Erp\Support\Menu::can('app.tasks.my-audit-tasks'))
-<a href="{{ erp_route('app.tasks.my-audit-tasks') }}" class="{{ $item(request()->routeIs('app.tasks.my-audit-tasks*')) }}">
-    <i class="fa-solid fa-clipboard-check"></i>我的审核任务
-</a>
+@if(false){{-- ERP 不保留项目/任务入口（项目只属 PM 模块，D27） --}}
 @endif
 @if(\App\Erp\Support\Menu::can('app.assets.index'))
 <a href="{{ erp_route('app.assets.index') }}" class="{{ $item(request()->routeIs('app.assets.*')) }}">

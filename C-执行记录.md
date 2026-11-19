@@ -383,3 +383,36 @@ P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有�
 - ID 对照表 139 行：user 70 全映射；department 21 同名映射 + `项目部`→`项目管理部`（D16）+ `电商部` 不保留（D16 人员已删）；role 18 全映射；业务主数据 26 映射、2 条 ERP 演示项目未迁（`projects` 表缺 `description/budget/customer_id`，登记为遗留）。
 - 新增 `docs/P3-切换与回滚.md`：环境基线、首次部署、数据补齐（幂等命令）、切换 9 步、验收 11 项、代码/数据回滚、切换前必读遗留（含 ERP 演示项目、projects/tasks 无 module 区分、SOHO 源缺失、D23 截图延后）。
 - 结论：P3 出口达成；剩余为部署后动作（真机验证、截图基线）。
+
+### 34.1 D27：ERP 去项目化 + 项目访问闸门（2026-11-19）
+
+用户裁决：① ERP 源演示项目 `PRJ0001/PRJ0002` 不迁；② ERP 不保留项目，只有 PM 有项目；不向 ERP 其它用户提供项目入口；只有 PM 中与项目相关的人能进项目。
+
+改动清单：
+
+| 文件 | 改动 |
+|---|---|
+| `routes/erp.php` | 删除 `app/projects`（项目 CRUD/日志/甘特/变更/暂停恢复/任务/工时/项目群聊/项目内私聊/协同/电话会议）、`app/tasks`、`app/messages/{message}/file`、`app/api/projects*`、`app/api/voice*`、`app/collab/*`（OnlyOffice 服务端）、`app/project-templates`、`app/pm-dashboard`、`app/recycle`、`app/todos`、`app/extensions` 全部路由块 |
+| `resources/views/partials/sidebar_main.blade.php` | 移除"项目管理 / 我的任务 / 我的审核任务"三项菜单 |
+| `resources/views/partials/sidebar_project.blade.php` | 移除整个"项目管理"分区（项目列表/新建/我的项目/我的任务/我的审核任务） |
+| `app/Pm/Http/Middleware/EnsureProjectMember.php` | 新增：路由层项目闸门。解析 `{project}`/`{projectId}`/`{task}` → 项目，`Gate::denies('view')` 时回落模块工作台并提示（JSON 请求返回 404），不产生 403 |
+| `bootstrap/app.php` | 注册别名 `pm.project` |
+| `routes/pm.php` | `project` 组、`task` 组、`project/{projectId}/messages|chat`、`api/project/{projectId}/chat`、`history/project/{project}` 挂 `pm.project` |
+| `app/Pm/Policies/ProjectPolicy.php` | `view/create/update/delete` 增加 PM 模块归属判定；跨模块管理员（`erp.admin`/`soho.super_admin`）不再直放；PM 管理员口径用 `['admin','pm.admin']` + `isProjectManager()` |
+| `docs/数据映射表-源ID对照.csv` | `PRJ0001/PRJ0002` 状态 `missing` → `dropped_by_d27` |
+| `docs/数据校验报告.md` §8.3、`docs/P3-切换与回滚.md` §七 | 两条遗留改为 D27 定案口径 |
+| 交付目录 `P0-决策与基线.md` | 新增 §十三 D27 |
+
+验收（真机 HTTP）：
+
+| 场景 | 结果 |
+|---|---|
+| 项目创建人 `pm_manager_1` → `/pm/project/1`、`/collab`、`/voice`、`/messages` | 200 |
+| 项目执行人 `product_designer_1` → `/pm/project/1` | 200 |
+| 非相关 PM 用户 `pm_manager_2`、`product_manager_2` → `/pm/project/1` | 回落 `/pm/dashboard`（无 403） |
+| ERP 管理员 `admin@erp.demo` → `/pm/project/1` | 回落 `/` |
+| ERP 管理员 → `/erp/app/projects` | 404（路由已下线） |
+| ERP 管理员 → `/erp/admin/dashboard`、`/erp/app/chat`、`/files/1/preview` | 200，页面无"项目管理/我的任务/我的审核任务" |
+| ERP 全量回归 | 147 页，500=0 |
+| PM 全量回归 | 73 页，500=0（404 仍为 `pm/admin/*` 非管理员既有行为） |
+| 路由总数 | 1393 → 1309（-84） |

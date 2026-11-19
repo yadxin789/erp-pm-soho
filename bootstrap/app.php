@@ -40,6 +40,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'role'               => \App\Core\Http\Middleware\CheckRole::class,
         'role_scope'         => \App\Erp\Http\Middleware\EnsureRoleScope::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+            // D27：项目只属 PM，且只有与项目相关的人能进入（不产生 403 页）
+            'pm.project'         => \App\Pm\Http\Middleware\EnsureProjectMember::class,
         ]);
 
         // 注意：erp 的 EnsureRoleScope、soho 的 LogUserActivity 一律不得全局 append，

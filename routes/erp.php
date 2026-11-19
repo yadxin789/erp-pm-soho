@@ -229,101 +229,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('applications/{application}', [\App\Erp\Http\Controllers\App\HrController::class, 'applicationDestroy'])->name('applications.destroy');
     });
 
-    // ============ 产品研发项目模块：项目 ============
-    // 进入范围由 RoleScope 判定：项目部角色，或参与了某个项目的人（创建人/负责人/任务执行人/审核人）
-    Route::prefix('app/projects')->name('app.projects.')->group(function () {
-        Route::get('/', [\App\Erp\Http\Controllers\App\ProjectController::class, 'index'])->name('index');
-        Route::get('my-projects', [\App\Erp\Http\Controllers\App\ProjectController::class, 'myProjects'])->name('my-projects');
-        Route::get('my-projects/{status}', [\App\Erp\Http\Controllers\App\ProjectController::class, 'myProjectsStatus'])->name('my-projects.status');
-        Route::get('create', [\App\Erp\Http\Controllers\App\ProjectController::class, 'create'])->name('create');
-        Route::post('/', [\App\Erp\Http\Controllers\App\ProjectController::class, 'store'])->name('store');
-        Route::get('{project}', [\App\Erp\Http\Controllers\App\ProjectController::class, 'show'])->name('show');
-        Route::get('{project}/edit', [\App\Erp\Http\Controllers\App\ProjectController::class, 'edit'])->name('edit');
-        Route::put('{project}', [\App\Erp\Http\Controllers\App\ProjectController::class, 'update'])->name('update');
-        Route::delete('{project}', [\App\Erp\Http\Controllers\App\ProjectController::class, 'destroy'])->name('destroy');
-        Route::get('{project}/logs', [\App\Erp\Http\Controllers\App\ProjectController::class, 'logs'])->name('logs');
-        Route::get('{project}/gantt', [\App\Erp\Http\Controllers\App\ProjectController::class, 'gantt'])->name('gantt');
-        Route::get('{project}/change', [\App\Erp\Http\Controllers\App\ProjectController::class, 'changeForm'])->name('change');
-        Route::put('{project}/change', [\App\Erp\Http\Controllers\App\ProjectController::class, 'changeUpdate'])->name('change.update');
-        Route::post('{project}/pause', [\App\Erp\Http\Controllers\App\ProjectController::class, 'pause'])->name('pause');
-        Route::post('{project}/resume', [\App\Erp\Http\Controllers\App\ProjectController::class, 'resume'])->name('resume');
-
-        Route::post('{project}/tasks', [\App\Erp\Http\Controllers\App\ProjectController::class, 'storeTask'])->name('tasks.store');
-        Route::put('tasks/{task}', [\App\Erp\Http\Controllers\App\ProjectController::class, 'updateTask'])->name('tasks.update');
-        Route::delete('tasks/{task}', [\App\Erp\Http\Controllers\App\ProjectController::class, 'destroyTask'])->name('tasks.destroy');
-        Route::post('tasks/{task}/time', [\App\Erp\Http\Controllers\App\ProjectController::class, 'storeTime'])->name('tasks.time.store');
-        Route::delete('time/{entry}', [\App\Erp\Http\Controllers\App\ProjectController::class, 'destroyTime'])->name('time.destroy');
-
-        // 项目组群聊
-        Route::get('{project}/messages', [\App\Erp\Http\Controllers\App\MessageController::class, 'index'])->name('messages.index');
-        Route::post('{project}/messages', [\App\Erp\Http\Controllers\App\MessageController::class, 'store'])->name('messages.store');
-        Route::post('{project}/messages/clear', [\App\Erp\Http\Controllers\App\MessageController::class, 'clearMine'])->name('messages.clear-mine');
-        Route::delete('{project}/messages/{message}', [\App\Erp\Http\Controllers\App\MessageController::class, 'destroy'])->name('messages.destroy');
-
-        // 项目组内私聊
-        Route::get('{project}/chat/{user}', [\App\Erp\Http\Controllers\App\PrivateMessageController::class, 'show'])->name('messages.private');
-        Route::post('{project}/chat/{user}/clear', [\App\Erp\Http\Controllers\App\PrivateMessageController::class, 'clearMine'])->name('messages.private.clear-mine');
-
-        // 协同办公（在线文档）
-        Route::get('{project}/collab', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'index'])->name('collab.index');
-        Route::get('{project}/collab/create', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'create'])->name('collab.create');
-        Route::post('{project}/collab', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'store'])->name('collab.store');
-        Route::get('{project}/collab/{doc}/open', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'open'])->name('collab.open');
-        Route::post('{project}/collab/{doc}/save', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'save'])->name('collab.save');
-        Route::get('{project}/collab/{doc}/download', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'download'])->name('collab.download');
-        Route::delete('{project}/collab/{doc}', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'destroy'])->name('collab.destroy');
-
-        // 电话会议
-        Route::get('{project}/voice', [\App\Erp\Http\Controllers\App\VoiceController::class, 'index'])->name('voice.index');
-        Route::get('{project}/voice/token', [\App\Erp\Http\Controllers\App\VoiceController::class, 'issueToken'])->name('voice.token');
-        Route::get('{project}/voice/members', [\App\Erp\Http\Controllers\App\VoiceController::class, 'members'])->name('voice.members');
-        Route::get('{project}/voice/history', [\App\Erp\Http\Controllers\App\VoiceController::class, 'history'])->name('voice.history');
-        Route::post('{project}/voice/upload-demo', [\App\Erp\Http\Controllers\App\VoiceController::class, 'uploadDemo'])->name('voice.upload-demo');
-        Route::get('{project}/voice/demo', [\App\Erp\Http\Controllers\App\VoiceController::class, 'demo'])->name('voice.demo');
-        Route::post('{project}/voice/end', [\App\Erp\Http\Controllers\App\VoiceController::class, 'end'])->name('voice.end');
-    });
-
-    // ============ 产品研发项目模块：任务 ============
-    Route::prefix('app/tasks')->name('app.tasks.')->group(function () {
-        Route::get('/', [\App\Erp\Http\Controllers\App\TaskController::class, 'index'])->name('index');
-        Route::get('my-tasks', [\App\Erp\Http\Controllers\App\TaskController::class, 'myTasks'])->name('my-tasks');
-        Route::get('my-tasks/{group}', [\App\Erp\Http\Controllers\App\TaskController::class, 'myTasksStatus'])->name('my-tasks.status');
-        Route::get('my-audit-tasks', [\App\Erp\Http\Controllers\App\TaskController::class, 'myAuditTasks'])->name('my-audit-tasks');
-        Route::get('my-audit-tasks/{group}', [\App\Erp\Http\Controllers\App\TaskController::class, 'myAuditTasksStatus'])->name('my-audit-tasks.status');
-
-        Route::get('{task}', [\App\Erp\Http\Controllers\App\TaskController::class, 'show'])->name('show');
-        Route::post('{task}/start', [\App\Erp\Http\Controllers\App\TaskController::class, 'start'])->name('start');
-        Route::get('{task}/upload', [\App\Erp\Http\Controllers\App\TaskController::class, 'uploadForm'])->name('upload');
-        Route::post('{task}/upload', [\App\Erp\Http\Controllers\App\TaskController::class, 'storeUpload'])->name('upload.store');
-        Route::get('{task}/audit', [\App\Erp\Http\Controllers\App\TaskController::class, 'auditForm'])->name('audit');
-        Route::post('{task}/audit/approve', [\App\Erp\Http\Controllers\App\TaskController::class, 'approve'])->name('audit.approve');
-        Route::post('{task}/audit/reject', [\App\Erp\Http\Controllers\App\TaskController::class, 'reject'])->name('audit.reject');
-        Route::get('{task}/update', [\App\Erp\Http\Controllers\App\TaskController::class, 'updateFileForm'])->name('update-file');
-        Route::post('{task}/update', [\App\Erp\Http\Controllers\App\TaskController::class, 'storeUpdateFile'])->name('update-file.store');
-        Route::get('{task}/files/{file}/download', [\App\Erp\Http\Controllers\App\TaskController::class, 'download'])->name('files.download');
-        Route::get('{task}/apply-extension', [\App\Erp\Http\Controllers\App\TaskController::class, 'applyExtension'])->name('apply-extension');
-        Route::post('{task}/apply-extension', [\App\Erp\Http\Controllers\App\TaskController::class, 'storeExtension'])->name('store-extension');
-    });
-
-    // 群聊附件下载
-    Route::get('app/messages/{message}/file', [\App\Erp\Http\Controllers\App\MessageController::class, 'file'])->name('app.messages.file');
-
-    // 私聊 JSON 接口
-    Route::prefix('app/api/projects')->name('app.api.chat.')->group(function () {
-        Route::get('{project}/chat/members', [\App\Erp\Http\Controllers\App\PrivateMessageController::class, 'members'])->name('members');
-        Route::get('{project}/chat/history/{user}', [\App\Erp\Http\Controllers\App\PrivateMessageController::class, 'history'])->name('history');
-        Route::post('{project}/chat/send', [\App\Erp\Http\Controllers\App\PrivateMessageController::class, 'send'])->name('send');
-    });
-
-    // 电话会议信令接口（应用内置中转，断网可用）
-    Route::prefix('app/api/voice')->name('app.api.voice.')->group(function () {
-        Route::post('{project}/signal', [\App\Erp\Http\Controllers\App\VoiceController::class, 'signal'])->name('signal');
-        Route::get('{project}/poll', [\App\Erp\Http\Controllers\App\VoiceController::class, 'poll'])->name('poll');
-    });
-
-    // 协同办公服务端接口（OnlyOffice 回调 / 下载，CSRF 豁免见 bootstrap/app.php）
-    Route::get('app/collab/download/{doc}', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'serverDownload'])->name('app.collab.download');
-    Route::post('app/collab/callback/{doc}', [\App\Erp\Http\Controllers\App\CollabDocumentController::class, 'callback'])->name('app.collab.callback');
 
     // 文件中心
     Route::prefix('app/files')->name('app.files.')->group(function () {
@@ -341,19 +246,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('resource/{file}/download', [\App\Erp\Http\Controllers\App\FileController::class, 'downloadResourceFile'])->name('download-resource');
     });
 
-    // 待办
-    Route::prefix('app/todos')->name('app.todos.')->group(function () {
-        Route::get('/', [\App\Erp\Http\Controllers\App\TodoController::class, 'index'])->name('index');
-        Route::post('{todo}/complete', [\App\Erp\Http\Controllers\App\TodoController::class, 'complete'])->name('complete');
-    });
-
-    // 延期审批台
-    Route::prefix('app/extensions')->name('app.extensions.')->group(function () {
-        Route::get('/', [\App\Erp\Http\Controllers\App\ExtensionController::class, 'index'])->name('index');
-        Route::post('{application}/approve', [\App\Erp\Http\Controllers\App\ExtensionController::class, 'approve'])->name('approve');
-        Route::post('{application}/reject', [\App\Erp\Http\Controllers\App\ExtensionController::class, 'reject'])->name('reject');
-    });
-
     // 知识库
     Route::prefix('app/knowledge')->name('app.knowledge.')->group(function () {
         Route::get('/', [\App\Erp\Http\Controllers\App\KnowledgeController::class, 'index'])->name('index');
@@ -368,17 +260,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('{knowledge}/docs/{doc}', [\App\Erp\Http\Controllers\App\KnowledgeController::class, 'docDestroy'])->name('doc.destroy');
     });
 
-    // 项目模板
-    Route::prefix('app/project-templates')->name('app.project-templates.')->group(function () {
-        Route::get('/', [\App\Erp\Http\Controllers\App\ProjectTemplateController::class, 'index'])->name('index');
-        Route::get('create', [\App\Erp\Http\Controllers\App\ProjectTemplateController::class, 'create'])->name('create');
-        Route::post('/', [\App\Erp\Http\Controllers\App\ProjectTemplateController::class, 'store'])->name('store');
-        Route::get('{template}/edit', [\App\Erp\Http\Controllers\App\ProjectTemplateController::class, 'edit'])->name('edit');
-        Route::put('{template}', [\App\Erp\Http\Controllers\App\ProjectTemplateController::class, 'update'])->name('update');
-        Route::delete('{template}', [\App\Erp\Http\Controllers\App\ProjectTemplateController::class, 'destroy'])->name('destroy');
-        Route::get('{template}/config', [\App\Erp\Http\Controllers\App\ProjectTemplateController::class, 'config'])->name('config');
-    });
-
     // 部门支援
     Route::prefix('app/support')->name('app.support.')->group(function () {
         Route::get('/', [\App\Erp\Http\Controllers\App\SupportController::class, 'index'])->name('index');
@@ -387,18 +268,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('send-notification', [\App\Erp\Http\Controllers\App\SupportController::class, 'sendNotification'])->name('notification.post');
         Route::get('upload-resource-file', [\App\Erp\Http\Controllers\App\SupportController::class, 'uploadResourceForm'])->name('upload-resource-file');
         Route::post('upload-resource-file', [\App\Erp\Http\Controllers\App\SupportController::class, 'storeResourceFile'])->name('store-resource-file');
-    });
-
-    // 项目仪表盘
-    Route::prefix('app/pm-dashboard')->name('app.pm-dashboard.')->group(function () {
-        Route::get('/', [\App\Erp\Http\Controllers\App\ProjectDashboardController::class, 'index'])->name('index');
-    });
-
-    // 回收站
-    Route::prefix('app/recycle')->name('app.recycle.')->group(function () {
-        Route::get('/', [\App\Erp\Http\Controllers\App\RecycleController::class, 'index'])->name('index');
-        Route::post('{type}/{id}/restore', [\App\Erp\Http\Controllers\App\RecycleController::class, 'restore'])->name('restore');
-        Route::delete('{type}/{id}', [\App\Erp\Http\Controllers\App\RecycleController::class, 'forceDelete'])->name('force-delete');
     });
 
     // ============ 固定资产模块（资产管理员 / 只读访客）============
