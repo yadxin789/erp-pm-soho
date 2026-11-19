@@ -78,19 +78,32 @@ class RuntimeInspector
 
                 return [
                     'ok' => $result->successful(),
-                    'output' => trim((string) $result->output()),
-                    'error' => trim((string) $result->errorOutput()),
+                    'output' => self::toUtf8(trim((string) $result->output())),
+                    'error' => self::toUtf8(trim((string) $result->errorOutput())),
                     'exit' => $result->exitCode(),
                 ];
             } catch (\Throwable $e) {
                 return [
                     'ok' => false,
                     'output' => '',
-                    'error' => $e->getMessage(),
+                    'error' => self::toUtf8($e->getMessage()),
                     'exit' => -1,
                 ];
             }
         });
+    }
+
+    /**
+     * 命令输出统一转 UTF-8：Windows 控制台（schtasks / wmic / powershell）会输出 GBK，
+     * 直接写进 MySQL 的 cache.value 会报 1366 Incorrect string value。
+     */
+    private static function toUtf8(string $value): string
+    {
+        if ($value === '' || mb_check_encoding($value, 'UTF-8')) {
+            return $value;
+        }
+
+        return mb_convert_encoding($value, 'UTF-8', 'GB18030');
     }
 
     /** 只取标准输出，失败返回 null */

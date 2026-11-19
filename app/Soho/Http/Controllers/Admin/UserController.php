@@ -48,7 +48,7 @@ class UserController extends Controller
         
         $user = User::create($validated);
 
-        return redirect()->route('admin.users.index')->with('success', '用户创建成功');
+        return redirect()->route('soho.admin.users.index')->with('success', '用户创建成功');
     }
 
     public function show(User $user)
@@ -83,7 +83,7 @@ class UserController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('admin.users.index')->with('success', '用户更新成功');
+        return redirect()->route('soho.admin.users.index')->with('success', '用户更新成功');
     }
 
     public function destroy(User $user)
@@ -93,6 +93,6 @@ class UserController extends Controller
         }
 
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success', '用户删除成功');
+        return redirect()->route('soho.admin.users.index')->with('success', '用户删除成功');
     }
 }

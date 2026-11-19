@@ -2,6 +2,7 @@
 
 namespace App\Core\Http\Middleware;
 
+use App\Core\Support\ModuleContext;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,10 +26,28 @@ class CheckPermission
             return redirect()->guest('/login');
         }
 
-        if ($user->can($permission)) {
+        if ($user->hasRole('super_admin') || $user->can($permission)) {
             return $next($request);
         }
 
-        abort_unless($user->can($permission), 404);
+        if ($request->expectsJson() || $request->is('api/*')) {
+            abort(403);
+        }
+
+        $home = url('/');
+        try {
+            $home = match (ModuleContext::id()) {
+                'pm' => route('pm.dashboard'),
+                'soho' => route('soho.dashboard'),
+                'erp' => class_exists(\App\Erp\Support\RoleScope::class)
+                    ? \App\Erp\Support\RoleScope::home($user)
+                    : route('app.dashboard'),
+                default => url('/'),
+            };
+        } catch (\Throwable) {
+            $home = url('/');
+        }
+
+        return redirect()->to($home)->with('warning', '当前账号没有该功能权限，已返回工作台。');
     }
 }

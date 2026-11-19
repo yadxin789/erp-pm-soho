@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
             Route::get('/create', [\App\Soho\Http\Controllers\Admin\UserController::class, 'create'])->name('create');
             Route::post('/', [\App\Soho\Http\Controllers\Admin\UserController::class, 'store'])->name('store');
-            Route::get('/{user}', [\App\Soho\Http\Controllers\Admin\UserController::class, 'show'])->name('show');
+            Route::get('/{user}', [\App\Soho\Http\Controllers\Admin\UserController::class, 'show'])->name('show')->whereNumber('user');
             Route::get('/{user}/edit', [\App\Soho\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit');
             Route::put('/{user}', [\App\Soho\Http\Controllers\Admin\UserController::class, 'update'])->name('update');
             Route::delete('/{user}', [\App\Soho\Http\Controllers\Admin\UserController::class, 'destroy'])->name('destroy');
@@ -106,7 +106,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('soho_role:super_admin|integration_ops')->group(function () {
         Route::middleware('permission:event.view')->prefix('event-log')->name('event-log.')->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\EventLogController::class, 'index'])->name('index');
-            Route::get('/{eventLog}', [\App\Soho\Http\Controllers\EventLogController::class, 'show'])->name('show');
+            Route::get('/{eventLog}', [\App\Soho\Http\Controllers\EventLogController::class, 'show'])->name('show')->whereNumber('eventLog');
             Route::post('/{eventLog}/reprocess', [\App\Soho\Http\Controllers\EventLogController::class, 'reprocess'])->name('reprocess');
         });
     });
@@ -275,12 +275,12 @@ Route::middleware(['auth'])->group(function () {
         // 授权操作日志（已实现）
         Route::middleware('permission:shop.authorize')->prefix('shop/authorization-logs')->name('shop.authorization-logs.')->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\Shop\AuthorizationLogController::class, 'index'])->name('index');
-            Route::get('/{log}', [\App\Soho\Http\Controllers\Shop\AuthorizationLogController::class, 'show'])->name('show');
+            Route::get('/{log}', [\App\Soho\Http\Controllers\Shop\AuthorizationLogController::class, 'show'])->name('show')->whereNumber('log');
         });
         // 授权失败记录
         Route::middleware('permission:shop.authorize')->prefix('shop/authorization-failures')->name('shop.authorization-failures.')->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\Shop\AuthorizationFailureController::class, 'index'])->name('index');
-            Route::get('/{failure}', [\App\Soho\Http\Controllers\Shop\AuthorizationFailureController::class, 'show'])->name('show');
+            Route::get('/{failure}', [\App\Soho\Http\Controllers\Shop\AuthorizationFailureController::class, 'show'])->name('show')->whereNumber('failure');
             Route::post('/{failure}/resolve', [\App\Soho\Http\Controllers\Shop\AuthorizationFailureController::class, 'resolve'])->name('resolve');
         });
         // Token刷新记录
@@ -291,7 +291,7 @@ Route::middleware(['auth'])->group(function () {
         // 授权异常（已实现）
         Route::middleware('permission:shop.authorize')->prefix('shop/authorization-exceptions')->name('shop.authorization-exceptions.')->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\Shop\AuthorizationExceptionController::class, 'index'])->name('index');
-            Route::get('/{authorizationException}', [\App\Soho\Http\Controllers\Shop\AuthorizationExceptionController::class, 'show'])->name('show');
+            Route::get('/{authorizationException}', [\App\Soho\Http\Controllers\Shop\AuthorizationExceptionController::class, 'show'])->name('show')->whereNumber('authorizationException');
             Route::post('/{authorizationException}/handle', [\App\Soho\Http\Controllers\Shop\AuthorizationExceptionController::class, 'handle'])->name('handle');
         });
     });
@@ -321,7 +321,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\ProductController::class, 'index'])->name('index');
             Route::get('/create', [\App\Soho\Http\Controllers\ProductController::class, 'create'])->name('create');
             Route::post('/', [\App\Soho\Http\Controllers\ProductController::class, 'store'])->name('store');
-            Route::get('/{product}', [\App\Soho\Http\Controllers\ProductController::class, 'show'])->name('show');
+            Route::get('/{product}', [\App\Soho\Http\Controllers\ProductController::class, 'show'])->name('show')->whereNumber('product');
             Route::get('/{product}/edit', [\App\Soho\Http\Controllers\ProductController::class, 'edit'])->name('edit');
             Route::put('/{product}', [\App\Soho\Http\Controllers\ProductController::class, 'update'])->name('update');
             Route::delete('/{product}', [\App\Soho\Http\Controllers\ProductController::class, 'destroy'])->name('destroy');
@@ -419,7 +419,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/completed', [\App\Soho\Http\Controllers\OrderController::class, 'completed'])->name('completed');
             Route::get('/cancelled', [\App\Soho\Http\Controllers\OrderController::class, 'cancelled'])->name('cancelled');
             Route::get('/exception', [\App\Soho\Http\Controllers\OrderController::class, 'exception'])->name('exception');
-            Route::get('/{order}', [\App\Soho\Http\Controllers\OrderController::class, 'show'])->name('show');
+            Route::get('/{order}', [\App\Soho\Http\Controllers\OrderController::class, 'show'])->name('show')->whereNumber('order');
             Route::post('/{order}/ship', [\App\Soho\Http\Controllers\OrderController::class, 'ship'])->name('ship');
             Route::post('/{order}/freeze', [\App\Soho\Http\Controllers\OrderController::class, 'freeze'])->name('freeze');
             Route::put('/{order}/remark', [\App\Soho\Http\Controllers\OrderController::class, 'remark'])->name('remark');
@@ -438,7 +438,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/groups', [\App\Soho\Http\Controllers\CustomerController::class, 'groupStore'])->name('groups.store');
             Route::put('/groups/{group}', [\App\Soho\Http\Controllers\CustomerController::class, 'groupUpdate'])->name('groups.update');
             Route::delete('/groups/{group}', [\App\Soho\Http\Controllers\CustomerController::class, 'groupDestroy'])->name('groups.destroy');
-            Route::get('/{customer}', [\App\Soho\Http\Controllers\CustomerController::class, 'show'])->name('show');
+            Route::get('/{customer}', [\App\Soho\Http\Controllers\CustomerController::class, 'show'])->name('show')->whereNumber('customer');
             Route::get('/{customer}/edit', [\App\Soho\Http\Controllers\CustomerController::class, 'edit'])->name('edit');
             Route::put('/{customer}', [\App\Soho\Http\Controllers\CustomerController::class, 'update'])->name('update');
             Route::delete('/{customer}', [\App\Soho\Http\Controllers\CustomerController::class, 'destroy'])->name('destroy');
@@ -582,7 +582,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\AftersaleController::class, 'index'])->name('index');
             Route::middleware('permission:after_sale.approve')->get('/pending', [\App\Soho\Http\Controllers\AftersaleController::class, 'pending'])->name('pending');
             Route::middleware('permission:after_sale.refund')->get('/refunds', [\App\Soho\Http\Controllers\AftersaleController::class, 'refunds'])->name('refunds');
-            Route::get('/{aftersale}', [\App\Soho\Http\Controllers\AftersaleController::class, 'show'])->name('show');
+            Route::get('/{aftersale}', [\App\Soho\Http\Controllers\AftersaleController::class, 'show'])->name('show')->whereNumber('aftersale');
             Route::put('/{aftersale}/handle', [\App\Soho\Http\Controllers\AftersaleController::class, 'handle'])->name('handle');
         });
     });
@@ -648,7 +648,7 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:sync_task.view')->prefix('sync-task')->name('sync-task.')->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\SyncTaskController::class, 'index'])->name('index');
             Route::post('/batch-execute', [\App\Soho\Http\Controllers\SyncTaskController::class, 'batchExecute'])->name('batch-execute');
-            Route::get('/{syncTask}', [\App\Soho\Http\Controllers\SyncTaskController::class, 'show'])->name('show');
+            Route::get('/{syncTask}', [\App\Soho\Http\Controllers\SyncTaskController::class, 'show'])->name('show')->whereNumber('syncTask');
             Route::post('/{syncTask}/execute', [\App\Soho\Http\Controllers\SyncTaskController::class, 'execute'])->name('execute');
         });
 
@@ -688,7 +688,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('soho_role:integration_ops|super_admin')->group(function () {
         Route::middleware('permission:exception.view')->prefix('exceptions')->name('exceptions.')->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\ExceptionCaseController::class, 'index'])->name('index');
-            Route::get('/{exceptionCase}', [\App\Soho\Http\Controllers\ExceptionCaseController::class, 'show'])->name('show');
+            Route::get('/{exceptionCase}', [\App\Soho\Http\Controllers\ExceptionCaseController::class, 'show'])->name('show')->whereNumber('exceptionCase');
             Route::post('/{exceptionCase}/handle', [\App\Soho\Http\Controllers\ExceptionCaseController::class, 'handle'])->name('handle');
             Route::post('/{exceptionCase}/assign', [\App\Soho\Http\Controllers\ExceptionCaseController::class, 'assign'])->name('assign');
             Route::post('/{exceptionCase}/resolve', [\App\Soho\Http\Controllers\ExceptionCaseController::class, 'resolve'])->name('resolve');
@@ -778,7 +778,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\Price\PriceChangeRequestController::class, 'index'])->name('index');
             Route::get('/create', [\App\Soho\Http\Controllers\Price\PriceChangeRequestController::class, 'create'])->name('create');
             Route::post('/', [\App\Soho\Http\Controllers\Price\PriceChangeRequestController::class, 'store'])->name('store');
-            Route::get('/{priceChangeRequest}', [\App\Soho\Http\Controllers\Price\PriceChangeRequestController::class, 'show'])->name('show');
+            Route::get('/{priceChangeRequest}', [\App\Soho\Http\Controllers\Price\PriceChangeRequestController::class, 'show'])->name('show')->whereNumber('priceChangeRequest');
             Route::get('/{priceChangeRequest}/edit', [\App\Soho\Http\Controllers\Price\PriceChangeRequestController::class, 'edit'])->name('edit');
             Route::put('/{priceChangeRequest}', [\App\Soho\Http\Controllers\Price\PriceChangeRequestController::class, 'update'])->name('update');
             Route::delete('/{priceChangeRequest}', [\App\Soho\Http\Controllers\Price\PriceChangeRequestController::class, 'destroy'])->name('destroy');
@@ -787,7 +787,7 @@ Route::middleware(['auth'])->group(function () {
         // 调价审批
         Route::middleware('permission:price.change.approve')->prefix('price/change/approvals')->name('price.change.approvals.')->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\Price\PriceChangeApprovalController::class, 'index'])->name('index');
-            Route::get('/{priceChangeRequest}', [\App\Soho\Http\Controllers\Price\PriceChangeApprovalController::class, 'show'])->name('show');
+            Route::get('/{priceChangeRequest}', [\App\Soho\Http\Controllers\Price\PriceChangeApprovalController::class, 'show'])->name('show')->whereNumber('priceChangeRequest');
             Route::post('/{priceChangeRequest}/approve', [\App\Soho\Http\Controllers\Price\PriceChangeApprovalController::class, 'approve'])->name('approve');
             Route::post('/{priceChangeRequest}/reject', [\App\Soho\Http\Controllers\Price\PriceChangeApprovalController::class, 'reject'])->name('reject');
         });
@@ -797,7 +797,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\Price\PriceChangeTaskController::class, 'index'])->name('index');
             Route::get('/create', [\App\Soho\Http\Controllers\Price\PriceChangeTaskController::class, 'create'])->name('create');
             Route::post('/', [\App\Soho\Http\Controllers\Price\PriceChangeTaskController::class, 'store'])->name('store');
-            Route::get('/{priceChangeTask}', [\App\Soho\Http\Controllers\Price\PriceChangeTaskController::class, 'show'])->name('show');
+            Route::get('/{priceChangeTask}', [\App\Soho\Http\Controllers\Price\PriceChangeTaskController::class, 'show'])->name('show')->whereNumber('priceChangeTask');
             Route::post('/{priceChangeTask}/execute', [\App\Soho\Http\Controllers\Price\PriceChangeTaskController::class, 'execute'])->name('execute');
             Route::delete('/{priceChangeTask}', [\App\Soho\Http\Controllers\Price\PriceChangeTaskController::class, 'destroy'])->name('destroy');
         });
@@ -986,7 +986,7 @@ Route::middleware(['auth'])->group(function () {
         // 系统告警 - 完整CRUD（告警监控、确认、解决、忽略）
         Route::middleware('permission:system.view')->prefix('system/alerts')->name('system.alerts.')->group(function () {
             Route::get('/', [\App\Soho\Http\Controllers\System\SystemAlertController::class, 'index'])->name('index');
-            Route::get('/{alert}', [\App\Soho\Http\Controllers\System\SystemAlertController::class, 'show'])->name('show');
+            Route::get('/{alert}', [\App\Soho\Http\Controllers\System\SystemAlertController::class, 'show'])->name('show')->whereNumber('alert');
             Route::post('/{alert}/acknowledge', [\App\Soho\Http\Controllers\System\SystemAlertController::class, 'acknowledge'])->name('acknowledge');
             Route::post('/{alert}/resolve', [\App\Soho\Http\Controllers\System\SystemAlertController::class, 'resolve'])->name('resolve');
             Route::post('/{alert}/ignore', [\App\Soho\Http\Controllers\System\SystemAlertController::class, 'ignore'])->name('ignore');

@@ -43,3 +43,10 @@
 - 协作文档只落记录，OnlyOffice 未配置时明确提示；在线编辑、版本、`callback` 待接（原 PM 走 `collab.open` + Document Server）。
 - 电话会议是 Core WebRTC 信令实现（`voice_rooms/voice_signals`），**不是**原 PM 的 Janus；会议界面目前是「成员网格 + 加入语音房」，加入后跳 Core 语音房页面。
 - 项目内私聊页面复用同一聊天室视图（左栏切换 peer），未做参考的「未读/清空单聊」细分。
+## 2026-11-19 收尾修复（A-ERP 对齐）
+- `warehouse_manager` 缺 22 条采购/生产权限（数据缺口，非代码）→ 已按参考补齐，`role_has_permissions` 只补不删。
+- 授权失败回落由 `admin.dashboard` 改为 `RoleScope::home($user)`（业务角色回 `app.dashboard`）。
+- `AppServiceProvider` 补 `Paginator::useBootstrapFive()` + `pagination.custom`，恢复「共 N 条…」分页行。
+- 人事/项目/文件/岗位/聊天页的部门、岗位、账号下拉按 `ModuleContext` 收敛到本模块（人事新建 46.8%→93.5%，项目新建 56.5%→97.4%）。
+- `positions` 导入 16 条（电商部岗位按已删规则跳过）；修正 `App\Support\RoleCatalog` → `App\Erp\Support\RoleCatalog` 残留引用。
+- 155 页正文比对：hr/asset/ec 152/155，project 150/155，warehouse/quality/accounting 仅剩「参考 403 vs 合并 302」刻意偏差。SOHO/PM 全量回归无变化（0×500 / 0×403）。

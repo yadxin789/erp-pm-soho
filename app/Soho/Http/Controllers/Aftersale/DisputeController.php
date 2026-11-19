@@ -93,6 +93,6 @@ class DisputeController extends Controller
             'other'      => '其他',
         ];
 
-        return view('aftersale.disputes.index', compact('disputes', 'stats', 'statusOptions', 'levelOptions', 'typeOptions'));
+        return view('soho.aftersale.disputes.index', compact('disputes', 'stats', 'statusOptions', 'levelOptions', 'typeOptions'));
     }
 }

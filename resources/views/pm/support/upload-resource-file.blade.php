@@ -45,7 +45,7 @@
                 <ul class="mb-0 mt-2">
                     <li><strong>文件版本号：</strong>系统搜索同名文件，首次上传为v1.0，以后依次增加</li>
                     <li><strong>文件名：</strong>用户上传文件的文件名</li>
-                    <li><strong>部门：</strong>当前用户所属部门（{{ auth()->user()->department->name }}）</li>
+                    <li><strong>部门：</strong>当前用户所属部门（{{ auth()->user()?->department?->name ?: '未归属部门' }}）</li>
                     <li><strong>上传人：</strong>当前用户的用户名（{{ auth()->user()->name }}）</li>
                     <li><strong>权限范围：</strong>按页面选择的文件权限范围控制可见性</li>
                     <li><strong>上传时间：</strong>当前上传时的系统时间</li>

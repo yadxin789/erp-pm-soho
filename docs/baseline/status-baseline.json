@@ -1,0 +1,4934 @@
+[
+    {
+        "module": "core",
+        "uri": "",
+        "name": "core.home",
+        "controller": "App\\Core\\Http\\Controllers\\PortalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "approvals",
+        "name": "core.approvals.index",
+        "controller": "App\\Core\\Http\\Controllers\\ApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "approvals\/create",
+        "name": "core.approvals.create",
+        "controller": "App\\Core\\Http\\Controllers\\ApprovalController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "chat",
+        "name": "core.chat.index",
+        "controller": "App\\Core\\Http\\Controllers\\ChatController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "chat\/messages",
+        "name": "core.chat.messages",
+        "controller": "App\\Core\\Http\\Controllers\\ChatController",
+        "action": "messages",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "core\/ping",
+        "name": "core.ping",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "core\/ui",
+        "name": "core.ui",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "files",
+        "name": "core.files.index",
+        "controller": "App\\Core\\Http\\Controllers\\FileController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "home",
+        "name": "core.home.redirect",
+        "controller": "App\\Core\\Http\\Controllers\\HomeController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/soho"
+    },
+    {
+        "module": "core",
+        "uri": "login",
+        "name": "core.login",
+        "controller": "App\\Core\\Http\\Controllers\\Auth\\LoginController",
+        "action": "showLoginForm",
+        "status": "302",
+        "detail": "管理员=302→\/home"
+    },
+    {
+        "module": "core",
+        "uri": "notifications",
+        "name": "core.notifications.index",
+        "controller": "App\\Core\\Http\\Controllers\\NotificationController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "notifications\/unread-count",
+        "name": "core.notifications.unread-count",
+        "controller": "App\\Core\\Http\\Controllers\\NotificationController",
+        "action": "unreadCount",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "profile",
+        "name": "core.profile",
+        "controller": "App\\Core\\Http\\Controllers\\ProfileController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "voice",
+        "name": "core.voice.index",
+        "controller": "App\\Core\\Http\\Controllers\\VoiceController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "voice\/history",
+        "name": "core.voice.history",
+        "controller": "App\\Core\\Http\\Controllers\\VoiceController",
+        "action": "history",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "voice\/members",
+        "name": "core.voice.members",
+        "controller": "App\\Core\\Http\\Controllers\\VoiceController",
+        "action": "members",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "core",
+        "uri": "voice\/poll",
+        "name": "core.voice.poll",
+        "controller": "App\\Core\\Http\\Controllers\\VoiceController",
+        "action": "poll",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp",
+        "name": "erp.home",
+        "controller": "Closure",
+        "action": "",
+        "status": "302",
+        "detail": "管理员=302→ | 业务员=302→"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/ai-settings",
+        "name": "admin.ai-settings.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\AiSettingController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/approval-flows",
+        "name": "admin.approval-flows.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\ApprovalFlowController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/audit-logs",
+        "name": "admin.audit-logs.index",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/boms",
+        "name": "admin.boms.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "boms",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/customers",
+        "name": "admin.customers.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "customers",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/customers\/create",
+        "name": "admin.customers.create",
+        "controller": "App\\Erp\\Http\\Controllers\\MasterData\\CustomerController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/dashboard",
+        "name": "admin.dashboard",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\DashboardController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/departments",
+        "name": "admin.departments.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\DepartmentController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/departments\/create",
+        "name": "admin.departments.create",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\DepartmentController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/items",
+        "name": "admin.items.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "items",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/items\/barcode-labels",
+        "name": "admin.items.barcode-labels",
+        "controller": "App\\Erp\\Http\\Controllers\\MasterData\\ItemController",
+        "action": "barcodeLabels",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/items\/create",
+        "name": "admin.items.create",
+        "controller": "App\\Erp\\Http\\Controllers\\MasterData\\ItemController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/logistics\/guide",
+        "name": "admin.logistics.guide",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\LogisticsController",
+        "action": "guide",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/logistics\/settings",
+        "name": "admin.logistics.settings",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\LogisticsController",
+        "action": "settings",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/logistics\/shipments",
+        "name": "admin.logistics.shipments",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\LogisticsController",
+        "action": "shipments",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/monitor\/auto-start",
+        "name": "admin.monitor.auto-start",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\AutoStartController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/monitor\/queue",
+        "name": "admin.monitor.queue",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\QueueMonitorController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/monitor\/scheduled-tasks",
+        "name": "admin.monitor.scheduled-tasks",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\ScheduledTaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/monitor\/system-status",
+        "name": "admin.monitor.system-status",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\SystemStatusController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/permissions",
+        "name": "admin.permissions.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\PermissionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/permissions\/create",
+        "name": "admin.permissions.create",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\PermissionController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/positions",
+        "name": "admin.positions.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\PositionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/positions\/create",
+        "name": "admin.positions.create",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\PositionController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/roles",
+        "name": "admin.roles.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\RoleController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/roles\/create",
+        "name": "admin.roles.create",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\RoleController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/routings",
+        "name": "admin.routings.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "routings",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/settings",
+        "name": "admin.settings.index",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/suppliers",
+        "name": "admin.suppliers.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "suppliers",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/suppliers\/create",
+        "name": "admin.suppliers.create",
+        "controller": "App\\Erp\\Http\\Controllers\\MasterData\\SupplierController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/system-health",
+        "name": "admin.system-health",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\SystemHealthController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/users",
+        "name": "admin.users.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\UserController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/users\/create",
+        "name": "admin.users.create",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\UserController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/warehouses",
+        "name": "admin.warehouses.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "warehouses",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/admin\/warehouses\/create",
+        "name": "admin.warehouses.create",
+        "controller": "App\\Erp\\Http\\Controllers\\MasterData\\WarehouseController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/analysis",
+        "name": "app.ai.analysis-center",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/anomaly-detection",
+        "name": "app.ai.anomaly-detection",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "anomalyDetection",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/chat",
+        "name": "app.ai.chat",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AiChatController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/erp\/admin\/ai-settings | 业务员=302→\/erp\/app\/ai\/notice"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/customer-credit",
+        "name": "app.ai.customer-credit",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "customerCredit",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/daily-report",
+        "name": "app.ai.daily-report",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "dailyReport",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/ecommerce-merge",
+        "name": "app.ai.ecommerce-merge",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "ecommerceMerge",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/invoice-ocr",
+        "name": "app.ai.invoice-ocr",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\InvoiceOcrController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/notice",
+        "name": "app.ai.notice",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AiChatController",
+        "action": "notice",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/production-cost",
+        "name": "app.ai.production-cost",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "productionCost",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/sales-forecast",
+        "name": "app.ai.sales-forecast",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "salesForecast",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/scheduling",
+        "name": "app.ai.scheduling",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "scheduling",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/stock-alerts",
+        "name": "app.ai.stock-alerts",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "stockAlerts",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/supplier-quality",
+        "name": "app.ai.supplier-quality",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AIAnalysisController",
+        "action": "supplierQuality",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ai\/welcome",
+        "name": "app.ai.welcome",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/ai\/notice"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/approvals\/my-tasks",
+        "name": "app.approvals.my-tasks",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\ApprovalFlowController",
+        "action": "myTasks",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/assets",
+        "name": "app.assets.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AssetController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/assets\/create",
+        "name": "app.assets.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\AssetController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/chat",
+        "name": "app.chat",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ChatController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/chat\/members",
+        "name": "app.chat.members",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\PrivateChatController",
+        "action": "members",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/chat\/messages",
+        "name": "app.chat.messages",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ChatController",
+        "action": "messages",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/crm\/leads",
+        "name": "app.crm.leads",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\CrmController",
+        "action": "leads",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/crm\/leads\/create",
+        "name": "app.crm.leads.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\CrmController",
+        "action": "createLead",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/crm\/opportunities",
+        "name": "app.crm.opportunities",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\CrmController",
+        "action": "opportunities",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/crm\/opportunities\/create",
+        "name": "app.crm.opportunities.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\CrmController",
+        "action": "createOpportunity",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/crm\/pipeline",
+        "name": "app.crm.pipeline",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\CrmController",
+        "action": "pipeline",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/dashboard",
+        "name": "app.dashboard",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\DashboardController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ecommerce",
+        "name": "app.ecommerce.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\EcommerceController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/ecommerce\/create",
+        "name": "app.ecommerce.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\EcommerceController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/extensions",
+        "name": "app.extensions.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ExtensionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/files",
+        "name": "app.files.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FileController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/files\/manage-resource-files",
+        "name": "app.files.manage-resource-files",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FileController",
+        "action": "manageResourceFiles",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/files\/resource-files",
+        "name": "app.files.resource-files",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FileController",
+        "action": "resourceFiles",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/files\/upload-department",
+        "name": "app.files.upload-department",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FileController",
+        "action": "uploadDepartmentForm",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/finance\/bills",
+        "name": "app.finance.bills",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FinanceController",
+        "action": "bills",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/finance\/bills\/create",
+        "name": "app.finance.bills.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FinanceController",
+        "action": "createBill",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/finance\/invoices",
+        "name": "app.finance.invoices",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FinanceController",
+        "action": "invoices",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/finance\/invoices\/create",
+        "name": "app.finance.invoices.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FinanceController",
+        "action": "createInvoice",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/finance\/payments",
+        "name": "app.finance.payments",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FinanceController",
+        "action": "payments",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/finance\/payments\/create",
+        "name": "app.finance.payments.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FinanceController",
+        "action": "createPayment",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/finance\/statements",
+        "name": "app.finance.statements",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\FinanceController",
+        "action": "statements",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/applications",
+        "name": "app.hr.applications.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "applications",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/applications\/create",
+        "name": "app.hr.applications.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "applicationCreate",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/attendances",
+        "name": "app.hr.attendances.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "attendance",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/attendances\/create",
+        "name": "app.hr.attendances.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "attendanceCreate",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/employees",
+        "name": "app.hr.employees.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "employees",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/employees\/create",
+        "name": "app.hr.employees.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/payroll",
+        "name": "app.hr.payroll.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "payroll",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/payroll\/create",
+        "name": "app.hr.payroll.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "payrollCreate",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/performances",
+        "name": "app.hr.performances.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "performance",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/performances\/create",
+        "name": "app.hr.performances.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "performanceCreate",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/recruitments",
+        "name": "app.hr.recruitments.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "recruitment",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/hr\/recruitments\/create",
+        "name": "app.hr.recruitments.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\HrController",
+        "action": "recruitmentCreate",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/inventory",
+        "name": "app.inventory.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Inventory\\InventoryController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/inventory\/adjust",
+        "name": "app.inventory.adjust",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Inventory\\InventoryController",
+        "action": "adjust",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/inventory\/freeze",
+        "name": "app.inventory.freeze",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Inventory\\InventoryController",
+        "action": "freeze",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/inventory\/logistics",
+        "name": "app.inventory.logistics",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Inventory\\LogisticsQueryController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/inventory\/stocktake",
+        "name": "app.inventory.stocktake",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Inventory\\InventoryController",
+        "action": "stocktake",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/inventory\/trace",
+        "name": "app.inventory.trace",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Inventory\\InventoryController",
+        "action": "trace",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/inventory\/transactions",
+        "name": "app.inventory.transactions",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Inventory\\InventoryController",
+        "action": "transactions",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/inventory\/transfer",
+        "name": "app.inventory.transfer",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Inventory\\InventoryController",
+        "action": "transfer",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/knowledge",
+        "name": "app.knowledge.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\KnowledgeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/knowledge\/create",
+        "name": "app.knowledge.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\KnowledgeController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/masterdata\/boms",
+        "name": "app.masterdata.boms.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "boms",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/masterdata\/customers",
+        "name": "app.masterdata.customers.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "customers",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/masterdata\/items",
+        "name": "app.masterdata.items.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "items",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/masterdata\/routings",
+        "name": "app.masterdata.routings.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "routings",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/masterdata\/suppliers",
+        "name": "app.masterdata.suppliers.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "suppliers",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/masterdata\/warehouses",
+        "name": "app.masterdata.warehouses.index",
+        "controller": "App\\Erp\\Http\\Controllers\\Admin\\MasterDataController",
+        "action": "warehouses",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/pm-dashboard",
+        "name": "app.pm-dashboard.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ProjectDashboardController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/issues",
+        "name": "app.production.issues.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\MaterialIssueController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/issues\/create",
+        "name": "app.production.issues.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\MaterialIssueController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/orders",
+        "name": "app.production.orders.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\ProductionOrderController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/orders\/create",
+        "name": "app.production.orders.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\ProductionOrderController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/plans",
+        "name": "app.production.plans.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\ProductionPlanController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/plans\/create",
+        "name": "app.production.plans.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\ProductionPlanController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/receipts",
+        "name": "app.production.receipts.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\ProductionReceiptController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/receipts\/create",
+        "name": "app.production.receipts.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\ProductionReceiptController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/reports",
+        "name": "app.production.reports.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\ProductionReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/production\/reports\/create",
+        "name": "app.production.reports.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Production\\ProductionReportController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/profile",
+        "name": "app.profile.edit",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ProfileController",
+        "action": "edit",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/profile\/avatar",
+        "name": "app.profile.avatar",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ProfileController",
+        "action": "avatar",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/project-templates",
+        "name": "app.project-templates.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ProjectTemplateController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/project-templates\/create",
+        "name": "app.project-templates.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ProjectTemplateController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/projects",
+        "name": "app.projects.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ProjectController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/projects\/create",
+        "name": "app.projects.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ProjectController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/projects\/my-projects",
+        "name": "app.projects.my-projects",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ProjectController",
+        "action": "myProjects",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/purchase\/orders",
+        "name": "app.purchase.orders.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Purchase\\PurchaseOrderController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/purchase\/orders\/create",
+        "name": "app.purchase.orders.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Purchase\\PurchaseOrderController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/purchase\/receipts",
+        "name": "app.purchase.receipts.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Purchase\\ReceiptController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/purchase\/receipts\/create",
+        "name": "app.purchase.receipts.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Purchase\\ReceiptController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/purchase\/requisitions",
+        "name": "app.purchase.requisitions.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Purchase\\PurchaseRequisitionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/purchase\/requisitions\/create",
+        "name": "app.purchase.requisitions.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Purchase\\PurchaseRequisitionController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/purchase\/returns",
+        "name": "app.purchase.returns.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Purchase\\PurchaseReturnController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/purchase\/returns\/create",
+        "name": "app.purchase.returns.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Purchase\\PurchaseReturnController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/quality\/defects",
+        "name": "app.quality.defects.index",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/quality\/inspections",
+        "name": "app.quality.inspections.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Quality\\QualityController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/quality\/inspections\/create",
+        "name": "app.quality.inspections.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Quality\\QualityController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/quality\/reports",
+        "name": "app.quality.reports",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Quality\\QualityController",
+        "action": "reports",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/recycle",
+        "name": "app.recycle.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\RecycleController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/reports",
+        "name": "app.reports.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/reports\/inventory",
+        "name": "app.reports.inventory",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ReportController",
+        "action": "inventory",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/reports\/purchase",
+        "name": "app.reports.purchase",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ReportController",
+        "action": "purchase",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/reports\/quality",
+        "name": "app.reports.quality",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ReportController",
+        "action": "quality",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/reports\/sales",
+        "name": "app.reports.sales",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\ReportController",
+        "action": "sales",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/sales\/orders",
+        "name": "app.sales.orders.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Sales\\SalesOrderController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/sales\/orders\/create",
+        "name": "app.sales.orders.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Sales\\SalesOrderController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/sales\/quotations",
+        "name": "app.sales.quotations.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Sales\\QuotationController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/sales\/quotations\/create",
+        "name": "app.sales.quotations.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Sales\\QuotationController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/sales\/returns",
+        "name": "app.sales.returns.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Sales\\SalesReturnController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/sales\/returns\/create",
+        "name": "app.sales.returns.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Sales\\SalesReturnController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/sales\/shipments",
+        "name": "app.sales.shipments.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Sales\\ShipmentController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/sales\/shipments\/create",
+        "name": "app.sales.shipments.create",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\Sales\\ShipmentController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/support",
+        "name": "app.support.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\SupportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/support\/department-files",
+        "name": "app.support.department-files",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\SupportController",
+        "action": "departmentFiles",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/support\/send-notification",
+        "name": "app.support.send-notification",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\SupportController",
+        "action": "sendNotificationForm",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/support\/upload-resource-file",
+        "name": "app.support.upload-resource-file",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\SupportController",
+        "action": "uploadResourceForm",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/tasks",
+        "name": "app.tasks.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\TaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/tasks\/my-audit-tasks",
+        "name": "app.tasks.my-audit-tasks",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\TaskController",
+        "action": "myAuditTasks",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/tasks\/my-tasks",
+        "name": "app.tasks.my-tasks",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\TaskController",
+        "action": "myTasks",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/app\/todos",
+        "name": "app.todos.index",
+        "controller": "App\\Erp\\Http\\Controllers\\App\\TodoController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=302→\/erp\/app\/dashboard"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/notifications",
+        "name": "notifications.index",
+        "controller": "App\\Erp\\Http\\Controllers\\NotificationController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "erp",
+        "uri": "erp\/notifications\/unread-count",
+        "name": "notifications.unread-count",
+        "controller": "App\\Erp\\Http\\Controllers\\NotificationController",
+        "action": "unreadCount",
+        "status": 200,
+        "detail": "管理员=200 | 业务员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm",
+        "name": "pm.home",
+        "controller": "App\\Pm\\Http\\Controllers\\WelcomeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin",
+        "name": "pm.admin.index",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/chat-messages",
+        "name": "pm.admin.chat-messages",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "chatMessages",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/collab-trash",
+        "name": "pm.admin.trash",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminTrashController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/departments",
+        "name": "pm.admin.departments",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "departments",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/departments\/create",
+        "name": "pm.admin.departments.create",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "createDepartment",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/file-repository",
+        "name": "pm.admin.file-repository",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "fileRepository",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/operation-logs",
+        "name": "pm.admin.operation-logs",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "operationLogs",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/roles",
+        "name": "pm.admin.roles",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "roles",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/roles\/create",
+        "name": "pm.admin.roles.create",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "createRole",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/send-notification",
+        "name": "pm.admin.send-notification",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "sendNotification",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/services",
+        "name": "pm.admin.services",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "services",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/statuses",
+        "name": "pm.admin.statuses",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "statuses",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/task-types",
+        "name": "pm.admin.task-types",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "taskTypes",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/task-types\/create",
+        "name": "pm.admin.task-types.create",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "createTaskType",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/todos",
+        "name": "pm.admin.todos",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "todos",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/users",
+        "name": "pm.admin.users",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "users",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/users\/create",
+        "name": "pm.admin.users.create",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "createUser",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/users\/deleted",
+        "name": "pm.admin.users.deleted",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "deletedUsers",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/users\/import",
+        "name": "pm.admin.users.import-form",
+        "controller": "App\\Pm\\Http\\Controllers\\AdminController",
+        "action": "importUsersForm",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/wecom\/message-logs",
+        "name": "pm.admin.wecom.message-logs",
+        "controller": "App\\Pm\\Http\\Controllers\\WecomSettingsController",
+        "action": "messageLogs",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/wecom\/settings",
+        "name": "pm.admin.wecom.settings",
+        "controller": "App\\Pm\\Http\\Controllers\\WecomSettingsController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/admin\/wecom\/test",
+        "name": "pm.admin.wecom.test",
+        "controller": "App\\Pm\\Http\\Controllers\\WecomSettingsController",
+        "action": "testConnection",
+        "status": "302",
+        "detail": "管理员=302→\/pm\/admin\/wecom\/settings"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/ai",
+        "name": "pm.ai.welcome",
+        "controller": "App\\Pm\\Http\\Controllers\\AiController",
+        "action": "welcome",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/ai-delegation",
+        "name": "pm.ai-delegation.index",
+        "controller": "App\\Pm\\Http\\Controllers\\AiDelegationController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/ai\/chat",
+        "name": "pm.ai.chat",
+        "controller": "App\\Pm\\Http\\Controllers\\AiController",
+        "action": "chat",
+        "status": "302",
+        "detail": "管理员=302→\/pm\/ai\/settings"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/ai\/docs",
+        "name": "pm.ai.docs",
+        "controller": "App\\Pm\\Http\\Controllers\\AiController",
+        "action": "docs",
+        "status": "302",
+        "detail": "管理员=302→\/pm\/ai\/settings"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/ai\/notice",
+        "name": "pm.ai.notice",
+        "controller": "App\\Pm\\Http\\Controllers\\AiController",
+        "action": "notice",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/ai\/settings",
+        "name": "pm.ai.settings",
+        "controller": "App\\Pm\\Http\\Controllers\\AiController",
+        "action": "settings",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/ai\/settings\/test",
+        "name": "pm.ai.settings.test",
+        "controller": "App\\Pm\\Http\\Controllers\\AiController",
+        "action": "test",
+        "status": "302",
+        "detail": "管理员=302→\/pm\/ai\/settings"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/dashboard",
+        "name": "pm.dashboard",
+        "controller": "App\\Pm\\Http\\Controllers\\DashboardController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/extension",
+        "name": "pm.extension.index",
+        "controller": "App\\Pm\\Http\\Controllers\\ExtensionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/file",
+        "name": "pm.file.index",
+        "controller": "App\\Pm\\Http\\Controllers\\FileController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/file\/manage-resource-files",
+        "name": "pm.file.manage-resource-files",
+        "controller": "App\\Pm\\Http\\Controllers\\FileController",
+        "action": "manageResourceFiles",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/file\/resource-files",
+        "name": "pm.file.resource-files",
+        "controller": "App\\Pm\\Http\\Controllers\\FileController",
+        "action": "resourceFiles",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/file\/upload-department",
+        "name": "pm.file.upload-department",
+        "controller": "App\\Pm\\Http\\Controllers\\FileController",
+        "action": "uploadDepartmentFile",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/knowledge",
+        "name": "pm.knowledge.index",
+        "controller": "App\\Pm\\Http\\Controllers\\KnowledgeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/knowledge\/create",
+        "name": "pm.knowledge.create",
+        "controller": "App\\Pm\\Http\\Controllers\\KnowledgeController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/my-trash",
+        "name": "pm.my-trash",
+        "controller": "App\\Pm\\Http\\Controllers\\MyTrashController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/pm\/admin\/collab-trash"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/notification",
+        "name": "pm.notification.index",
+        "controller": "App\\Pm\\Http\\Controllers\\NotificationController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/profile\/avatar",
+        "name": "pm.profile.avatar",
+        "controller": "App\\Pm\\Http\\Controllers\\ProfileController",
+        "action": "avatar",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/profile\/edit",
+        "name": "pm.profile.edit",
+        "controller": "App\\Pm\\Http\\Controllers\\ProfileController",
+        "action": "editPersonal",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/profile\/password",
+        "name": "pm.profile.password.edit",
+        "controller": "App\\Pm\\Http\\Controllers\\ProfileController",
+        "action": "editPassword",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/profile\/wecom",
+        "name": "pm.profile.wecom.index",
+        "controller": "App\\Pm\\Http\\Controllers\\UserWecomController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project",
+        "name": "pm.project.index",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project-template",
+        "name": "pm.project-template.index",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectTemplateController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project-template\/create",
+        "name": "pm.project-template.create",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectTemplateController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project\/create",
+        "name": "pm.project.create",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project\/my-projects",
+        "name": "pm.project.my-projects",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectController",
+        "action": "myProjects",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project\/my-projects\/completed",
+        "name": "pm.project.my-projects.completed",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectController",
+        "action": "myCompletedProjects",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project\/my-projects\/in-progress",
+        "name": "pm.project.my-projects.in-progress",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectController",
+        "action": "myInProgressProjects",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project\/my-projects\/overdue",
+        "name": "pm.project.my-projects.overdue",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectController",
+        "action": "myOverdueProjects",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/project\/my-projects\/suspended",
+        "name": "pm.project.my-projects.suspended",
+        "controller": "App\\Pm\\Http\\Controllers\\ProjectController",
+        "action": "mySuspendedProjects",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/support",
+        "name": "pm.support.index",
+        "controller": "App\\Pm\\Http\\Controllers\\SupportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/support\/department-files",
+        "name": "pm.support.department-files",
+        "controller": "App\\Pm\\Http\\Controllers\\SupportController",
+        "action": "departmentFiles",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/support\/send-notification",
+        "name": "pm.support.send-notification",
+        "controller": "App\\Pm\\Http\\Controllers\\SupportController",
+        "action": "sendNotification",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/support\/upload-resource-file",
+        "name": "pm.support.upload-resource-file",
+        "controller": "App\\Pm\\Http\\Controllers\\SupportController",
+        "action": "uploadResourceFile",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task",
+        "name": "pm.task.index",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-audit-tasks",
+        "name": "pm.task.my-audit-tasks",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myAuditTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-audit-tasks\/completed",
+        "name": "pm.task.my-audit-tasks.completed",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myCompletedAuditTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-audit-tasks\/in-progress",
+        "name": "pm.task.my-audit-tasks.in-progress",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myInProgressAuditTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-audit-tasks\/overdue",
+        "name": "pm.task.my-audit-tasks.overdue",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myOverdueAuditTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-audit-tasks\/pending-audit",
+        "name": "pm.task.my-audit-tasks.pending-audit",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myPendingAuditTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-audit-tasks\/suspended",
+        "name": "pm.task.my-audit-tasks.suspended",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "mySuspendedAuditTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-tasks",
+        "name": "pm.task.my-tasks",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-tasks\/completed",
+        "name": "pm.task.my-tasks.completed",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myCompletedTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-tasks\/in-progress",
+        "name": "pm.task.my-tasks.in-progress",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myInProgressTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-tasks\/overdue",
+        "name": "pm.task.my-tasks.overdue",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myOverdueTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-tasks\/pending-execution",
+        "name": "pm.task.my-tasks.pending-execution",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "myPendingExecutionTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/task\/my-tasks\/suspended",
+        "name": "pm.task.my-tasks.suspended",
+        "controller": "App\\Pm\\Http\\Controllers\\TaskController",
+        "action": "mySuspendedTasks",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/todo",
+        "name": "pm.todo.index",
+        "controller": "App\\Pm\\Http\\Controllers\\TodoController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/wecom-file",
+        "name": "pm.wecom.file.index",
+        "controller": "App\\Pm\\Http\\Controllers\\WecomFileController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "pm",
+        "uri": "pm\/wecom-file\/api\/bound-users",
+        "name": "pm.wecom.file.bound-users",
+        "controller": "App\\Pm\\Http\\Controllers\\WecomFileController",
+        "action": "boundUsers",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho",
+        "name": "soho.home",
+        "controller": "Closure",
+        "action": "",
+        "status": "302",
+        "detail": "管理员=302→\/soho\/dashboard"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/admin\/departments",
+        "name": "soho.admin.departments.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Admin\\DepartmentController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/admin\/departments\/create",
+        "name": "soho.admin.departments.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Admin\\DepartmentController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/admin\/roles",
+        "name": "soho.admin.roles.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Admin\\RoleController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/admin\/roles\/create",
+        "name": "soho.admin.roles.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Admin\\RoleController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/admin\/users",
+        "name": "soho.admin.users.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Admin\\UserController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/admin\/users\/create",
+        "name": "soho.admin.users.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Admin\\UserController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale",
+        "name": "soho.aftersale.index",
+        "controller": "App\\Soho\\Http\\Controllers\\AftersaleController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/apply",
+        "name": "soho.aftersale.apply",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/communication",
+        "name": "soho.aftersale.communication",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/dispute",
+        "name": "soho.aftersale.dispute",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\DisputeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/exchange",
+        "name": "soho.aftersale.exchange",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\ReplacementController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/operation-log",
+        "name": "soho.aftersale.operation.log",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/pending",
+        "name": "soho.aftersale.pending",
+        "controller": "App\\Soho\\Http\\Controllers\\AftersaleController",
+        "action": "pending",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/progress",
+        "name": "soho.aftersale.progress",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/refunds",
+        "name": "soho.aftersale.refunds",
+        "controller": "App\\Soho\\Http\\Controllers\\AftersaleController",
+        "action": "refunds",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/aftersale\/supplement",
+        "name": "soho.aftersale.supplement",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/after-sales",
+        "name": "soho.api.after-sales.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\AfterSale\\AfterSaleController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/inventory",
+        "name": "soho.api.inventory.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Inventory\\InventoryController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/logistics\/companies",
+        "name": "soho.api.logistics.companies",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Logistics\\LogisticsController",
+        "action": "companies",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/orders",
+        "name": "soho.api.orders.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Order\\OrderController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/products",
+        "name": "soho.api.products.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Product\\ProductController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/reports\/inventory",
+        "name": "soho.api.reports.inventory",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Report\\ReportController",
+        "action": "inventory",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/reports\/profit",
+        "name": "soho.api.reports.profit",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Report\\ReportController",
+        "action": "profit",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/reports\/sales",
+        "name": "soho.api.reports.sales",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Report\\ReportController",
+        "action": "sales",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/shops",
+        "name": "soho.api.shops.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Shop\\ShopController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/sync\/tasks",
+        "name": "soho.api.sync.tasks",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Sync\\SyncController",
+        "action": "tasks",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/api\/v1\/warehouses",
+        "name": "soho.api.warehouses.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Api\\Warehouse\\WarehouseController",
+        "action": "index",
+        "status": "302",
+        "detail": "管理员=302→\/login"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval-flows",
+        "name": "soho.approval_flows.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ApprovalFlowController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval-flows\/create",
+        "name": "soho.approval_flows.create",
+        "controller": "App\\Soho\\Http\\Controllers\\ApprovalFlowController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval-instances",
+        "name": "soho.approval_instances.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ApprovalInstanceController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval\/finance-diff",
+        "name": "soho.approval.finance-diff.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Approval\\FinanceDiffApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval\/inventory-adjust",
+        "name": "soho.approval.inventory-adjust.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Approval\\InventoryAdjustApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval\/order-cancel",
+        "name": "soho.approval.order-cancel.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Approval\\OrderCancelApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval\/price-change",
+        "name": "soho.approval.price-change.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Approval\\PriceChangeApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval\/product-publish",
+        "name": "soho.approval.product-publish.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Approval\\ProductPublishApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/approval\/refund",
+        "name": "soho.approval.refund.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Approval\\RefundApprovalCenterController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/audit\/approval-flow",
+        "name": "soho.audit.approval-flow",
+        "controller": "App\\Soho\\Http\\Controllers\\Audit\\ApprovalFlowController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/audit\/export-log",
+        "name": "soho.audit.export-log",
+        "controller": "App\\Soho\\Http\\Controllers\\Audit\\ExportLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/audit\/order-status",
+        "name": "soho.audit.order-status",
+        "controller": "App\\Soho\\Http\\Controllers\\Audit\\OrderStatusController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/audit\/product-change",
+        "name": "soho.audit.product-change",
+        "controller": "App\\Soho\\Http\\Controllers\\Audit\\ProductChangeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/audit\/reconciliation-diff",
+        "name": "soho.audit.reconciliation-diff",
+        "controller": "App\\Soho\\Http\\Controllers\\Audit\\ReconciliationDiffController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/audit\/reports",
+        "name": "soho.audit.reports",
+        "controller": "App\\Soho\\Http\\Controllers\\Audit\\AuditReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/brand",
+        "name": "soho.brand.index",
+        "controller": "App\\Soho\\Http\\Controllers\\BrandController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/brand\/create",
+        "name": "soho.brand.create",
+        "controller": "App\\Soho\\Http\\Controllers\\BrandController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/category",
+        "name": "soho.category.index",
+        "controller": "App\\Soho\\Http\\Controllers\\CategoryController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/category\/create",
+        "name": "soho.category.create",
+        "controller": "App\\Soho\\Http\\Controllers\\CategoryController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/chat",
+        "name": "soho.chat.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ChatController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/chat\/conversations",
+        "name": "soho.chat.conversations",
+        "controller": "App\\Soho\\Http\\Controllers\\ChatController",
+        "action": "conversations",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/chat\/messages",
+        "name": "soho.chat.messages",
+        "controller": "App\\Soho\\Http\\Controllers\\ChatController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/check\/tasks",
+        "name": "soho.check.tasks.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\CheckTaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/check\/tasks\/completed",
+        "name": "soho.check.tasks.completed",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\CheckTaskController",
+        "action": "completed",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/check\/tasks\/exception",
+        "name": "soho.check.tasks.exception",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\CheckTaskController",
+        "action": "exception",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/check\/tasks\/record",
+        "name": "soho.check.tasks.record",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\CheckTaskController",
+        "action": "record",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/check\/tasks\/scan",
+        "name": "soho.check.tasks.scan",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\CheckTaskController",
+        "action": "scan",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/coupon",
+        "name": "soho.coupon.index",
+        "controller": "App\\Soho\\Http\\Controllers\\CouponController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/coupon\/create",
+        "name": "soho.coupon.create",
+        "controller": "App\\Soho\\Http\\Controllers\\CouponController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/currency",
+        "name": "soho.currencies.index",
+        "controller": "App\\Soho\\Http\\Controllers\\CurrencyController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/currency\/create",
+        "name": "soho.currencies.create",
+        "controller": "App\\Soho\\Http\\Controllers\\CurrencyController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/customer",
+        "name": "soho.customer.index",
+        "controller": "App\\Soho\\Http\\Controllers\\CustomerController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/customer\/create",
+        "name": "soho.customer.create",
+        "controller": "App\\Soho\\Http\\Controllers\\CustomerController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/customer\/groups",
+        "name": "soho.customer.groups",
+        "controller": "App\\Soho\\Http\\Controllers\\CustomerController",
+        "action": "groups",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/customer\/privacy",
+        "name": "soho.customer.privacy",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/customer\/tags",
+        "name": "soho.customer.tags",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/dashboard",
+        "name": "soho.dashboard",
+        "controller": "App\\Soho\\Http\\Controllers\\DashboardController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/data-scopes",
+        "name": "soho.data_scopes.index",
+        "controller": "App\\Soho\\Http\\Controllers\\DataScopeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/data-scopes\/create",
+        "name": "soho.data_scopes.create",
+        "controller": "App\\Soho\\Http\\Controllers\\DataScopeController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/dispute",
+        "name": "soho.dispute.handle",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\DisputeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/event-log",
+        "name": "soho.event-log.index",
+        "controller": "App\\Soho\\Http\\Controllers\\EventLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/event\/replay",
+        "name": "soho.event.replay",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/exceptions",
+        "name": "soho.exceptions.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ExceptionCaseController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/exchange-rates",
+        "name": "soho.exchange_rates.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ExchangeRateController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/export-tasks",
+        "name": "soho.export_tasks.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ExportTaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/express",
+        "name": "soho.express.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ExpressController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/express\/create",
+        "name": "soho.express.create",
+        "controller": "App\\Soho\\Http\\Controllers\\ExpressController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/cost-allocation",
+        "name": "soho.finance.cost.allocation",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/cost-audit",
+        "name": "soho.finance.cost.audit",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/diff-approval",
+        "name": "soho.finance.diff.approval",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/platform-settlement",
+        "name": "soho.finance.platform.settlement",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/receive",
+        "name": "soho.finance.receive",
+        "controller": "App\\Soho\\Http\\Controllers\\FinanceController",
+        "action": "receive",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/reconcile",
+        "name": "soho.finance.reconcile",
+        "controller": "App\\Soho\\Http\\Controllers\\FinanceController",
+        "action": "reconcile",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/reconcile-task",
+        "name": "soho.finance.reconcile.task",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/refund-flow",
+        "name": "soho.finance.refund.flow",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/refunds",
+        "name": "soho.finance.refunds",
+        "controller": "App\\Soho\\Http\\Controllers\\FinanceController",
+        "action": "refunds",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/settle",
+        "name": "soho.finance.settle",
+        "controller": "App\\Soho\\Http\\Controllers\\FinanceController",
+        "action": "settle",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/settlement-audit",
+        "name": "soho.finance.settlement.audit",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/settlement-detail",
+        "name": "soho.finance.settlement.detail",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/finance\/transactions",
+        "name": "soho.finance.transactions",
+        "controller": "App\\Soho\\Http\\Controllers\\FinanceTransactionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/fulfillment\/assignments",
+        "name": "soho.fulfillment.assignments.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\FulfillmentAssignmentController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/fulfillment\/exception",
+        "name": "soho.fulfillment.exception",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\FulfillmentExceptionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/goods",
+        "name": "soho.goods.index",
+        "controller": "App\\Soho\\Http\\Controllers\\GoodsController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/goods\/create",
+        "name": "soho.goods.create",
+        "controller": "App\\Soho\\Http\\Controllers\\GoodsController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/integration\/api\/health",
+        "name": "soho.integration.api.health",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/integration\/connection\/status",
+        "name": "soho.integration.connection.status",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/integration\/rate-limit",
+        "name": "soho.integration.rate-limit",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory",
+        "name": "soho.inventory.index",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/batches",
+        "name": "soho.inventory.batches",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryBatchController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/documents",
+        "name": "soho.inventory.documents",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryDocumentController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/export",
+        "name": "soho.inventory.export",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryController",
+        "action": "export",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/flow",
+        "name": "soho.inventory.flow",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryController",
+        "action": "flow",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/in",
+        "name": "soho.inventory.in",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryController",
+        "action": "inbound",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/out",
+        "name": "soho.inventory.out",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryController",
+        "action": "outbound",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/overview",
+        "name": "soho.inventory.overview",
+        "controller": "App\\Soho\\Http\\Controllers\\DashboardController",
+        "action": "inventoryOverview",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/stocktake",
+        "name": "soho.inventory.stocktake",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryController",
+        "action": "stocktake",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/inventory\/transfer",
+        "name": "soho.inventory.transfer",
+        "controller": "App\\Soho\\Http\\Controllers\\InventoryController",
+        "action": "transfer",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/audit",
+        "name": "soho.log.audit.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Log\\AuditLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/login",
+        "name": "soho.log.login",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\LoginLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/permission-change",
+        "name": "soho.log.permission-change",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\PermissionChangeLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/platform-api",
+        "name": "soho.log.platform-api.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Log\\PlatformApiLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/sensitive-access",
+        "name": "soho.log.sensitive-access",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\SensitiveAccessLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/stock-sync",
+        "name": "soho.log.stock-sync.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Log\\StockSyncLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/sync-task",
+        "name": "soho.log.sync-task.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Log\\SyncTaskLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/webhook",
+        "name": "soho.log.webhook",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/log\/webhook\/failures",
+        "name": "soho.log.webhook.failures",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/logistics\/batch-callback",
+        "name": "soho.logistics.batch.callback",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\ShipmentController",
+        "action": "batchCallback",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/logistics\/bill",
+        "name": "soho.logistics.bill",
+        "controller": "App\\Soho\\Http\\Controllers\\Logistics\\LogisticsBillController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/logistics\/exception",
+        "name": "soho.logistics.exception",
+        "controller": "App\\Soho\\Http\\Controllers\\Logistics\\LogisticsExceptionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/logistics\/lead-time",
+        "name": "soho.logistics.lead-time",
+        "controller": "App\\Soho\\Http\\Controllers\\Logistics\\LogisticsMetricsController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/logistics\/on-time",
+        "name": "soho.logistics.on-time",
+        "controller": "App\\Soho\\Http\\Controllers\\Logistics\\LogisticsMetricsController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/logistics\/ship-callback",
+        "name": "soho.logistics.ship.callback",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\ShipmentController",
+        "action": "callback",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/logistics\/tracking",
+        "name": "soho.logistics.tracking",
+        "controller": "App\\Soho\\Http\\Controllers\\Logistics\\LogisticsTrackingController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/marketing\/campaign-join",
+        "name": "soho.marketing.campaign.join",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/marketing\/campaign-rule",
+        "name": "soho.marketing.campaign.rule",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/media",
+        "name": "soho.media.index",
+        "controller": "App\\Soho\\Http\\Controllers\\MediumController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/monitor\/shop-connection",
+        "name": "soho.monitor.shop-connection",
+        "controller": "App\\Soho\\Http\\Controllers\\Shop\\ShopConnectionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/notifications",
+        "name": "soho.notifications.index",
+        "controller": "App\\Soho\\Http\\Controllers\\NotificationController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/notifications\/delete-read",
+        "name": "soho.notifications.delete-read",
+        "controller": "App\\Soho\\Http\\Controllers\\NotificationController",
+        "action": "deleteRead",
+        "status": "302",
+        "detail": "管理员=302→\/soho\/notifications"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/notifications\/read-all",
+        "name": "soho.notifications.read-all",
+        "controller": "App\\Soho\\Http\\Controllers\\NotificationController",
+        "action": "markAllAsRead",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/notifications\/unread-count",
+        "name": "soho.notifications.unread-count",
+        "controller": "App\\Soho\\Http\\Controllers\\NotificationController",
+        "action": "unreadCount",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/operation-logs",
+        "name": "soho.operation-logs.index",
+        "controller": "App\\Soho\\Http\\Controllers\\OperationLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/operation\/aftersale-rate",
+        "name": "soho.operation.aftersale.rate",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\AftersaleRateController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/operation\/dashboard",
+        "name": "soho.operation.dashboard",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\OperationDashboardController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/operation\/inventory-warning",
+        "name": "soho.operation.inventory.warning",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\InventoryWarningController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/operation\/order-exception",
+        "name": "soho.operation.order.exception",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\OrderExceptionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/operation\/ship-on-time",
+        "name": "soho.operation.ship.on-time",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ShipOnTimeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/operation\/shop-overview",
+        "name": "soho.operation.shop.overview",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ShopOverviewController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order",
+        "name": "soho.order.index",
+        "controller": "App\\Soho\\Http\\Controllers\\OrderController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/cancelled",
+        "name": "soho.order.cancelled",
+        "controller": "App\\Soho\\Http\\Controllers\\OrderController",
+        "action": "cancelled",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/completed",
+        "name": "soho.order.completed",
+        "controller": "App\\Soho\\Http\\Controllers\\OrderController",
+        "action": "completed",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/exception",
+        "name": "soho.order.exception",
+        "controller": "App\\Soho\\Http\\Controllers\\OrderController",
+        "action": "exception",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/export",
+        "name": "soho.order.export",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/fulfillment",
+        "name": "soho.order.fulfillment",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/merge",
+        "name": "soho.order.merge",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/pending-fulfill",
+        "name": "soho.order.pending-fulfill",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/pending-payment",
+        "name": "soho.order.pending-payment",
+        "controller": "App\\Soho\\Http\\Controllers\\OrderController",
+        "action": "pendingPayment",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/pending-ship",
+        "name": "soho.order.pending-ship",
+        "controller": "App\\Soho\\Http\\Controllers\\OrderController",
+        "action": "pendingShip",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/shipped",
+        "name": "soho.order.shipped",
+        "controller": "App\\Soho\\Http\\Controllers\\OrderController",
+        "action": "shipped",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/split",
+        "name": "soho.order.split",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/stock-shortage",
+        "name": "soho.order.stock-shortage",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/order\/warehouse-assign",
+        "name": "soho.order.warehouse.assign",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pack\/tasks",
+        "name": "soho.pack.tasks.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PackTaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pack\/tasks\/completed",
+        "name": "soho.pack.tasks.completed",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PackTaskController",
+        "action": "completed",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pack\/tasks\/exception",
+        "name": "soho.pack.tasks.exception",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PackTaskController",
+        "action": "exception",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pack\/tasks\/material",
+        "name": "soho.pack.tasks.material",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PackTaskController",
+        "action": "material",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pack\/tasks\/parcel",
+        "name": "soho.pack.tasks.parcel",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PackTaskController",
+        "action": "parcel",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pack\/tasks\/scan",
+        "name": "soho.pack.tasks.scan",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PackTaskController",
+        "action": "scan",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pack\/tasks\/weight",
+        "name": "soho.pack.tasks.weight",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PackTaskController",
+        "action": "weight",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/package",
+        "name": "soho.package.index",
+        "controller": "App\\Soho\\Http\\Controllers\\PackageController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/package\/create",
+        "name": "soho.package.create",
+        "controller": "App\\Soho\\Http\\Controllers\\PackageController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pick\/tasks",
+        "name": "soho.pick.tasks.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PickTaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pick\/tasks\/completed",
+        "name": "soho.pick.tasks.completed",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PickTaskController",
+        "action": "completed",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pick\/tasks\/exception",
+        "name": "soho.pick.tasks.exception",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PickTaskController",
+        "action": "exception",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pick\/tasks\/progress",
+        "name": "soho.pick.tasks.progress",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PickTaskController",
+        "action": "progress",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/pick\/tasks\/scan",
+        "name": "soho.pick.tasks.scan",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\PickTaskController",
+        "action": "scan",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform-accounts",
+        "name": "soho.platform_accounts.index",
+        "controller": "App\\Soho\\Http\\Controllers\\PlatformAccountController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform-accounts\/create",
+        "name": "soho.platform_accounts.create",
+        "controller": "App\\Soho\\Http\\Controllers\\PlatformAccountController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform-capabilities",
+        "name": "soho.platform_capabilities.index",
+        "controller": "App\\Soho\\Http\\Controllers\\PlatformCapabilityController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform-sku",
+        "name": "soho.platform-sku.index",
+        "controller": "App\\Soho\\Http\\Controllers\\PlatformSkuController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform-sku\/create",
+        "name": "soho.platform-sku.create",
+        "controller": "App\\Soho\\Http\\Controllers\\PlatformSkuController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform\/attribute",
+        "name": "soho.platform.attribute",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform\/category-mapping",
+        "name": "soho.platform.category.mapping",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform\/listing",
+        "name": "soho.platform.listing",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform\/product-publish",
+        "name": "soho.platform.product.publish",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/platform\/publish-task",
+        "name": "soho.platform.publish.task",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/calculate",
+        "name": "soho.price.calculate",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceCalculateController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/change\/approvals",
+        "name": "soho.price.change.approvals.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceChangeApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/change\/history",
+        "name": "soho.price.change.history",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/change\/requests",
+        "name": "soho.price.change.requests.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceChangeRequestController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/change\/requests\/create",
+        "name": "soho.price.change.requests.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceChangeRequestController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/change\/tasks",
+        "name": "soho.price.change.tasks.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceChangeTaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/change\/tasks\/create",
+        "name": "soho.price.change.tasks.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceChangeTaskController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/query",
+        "name": "soho.price.query",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceQueryController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/rules",
+        "name": "soho.price.rules.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceRuleController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/price\/rules\/create",
+        "name": "soho.price.rules.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Price\\PriceRuleController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/procurement\/approvals",
+        "name": "soho.procurement.approvals.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Procurement\\ProcurementApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/procurement\/arrivals",
+        "name": "soho.procurement.arrivals.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Procurement\\ProcurementArrivalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/procurement\/inbounds",
+        "name": "soho.procurement.inbounds.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Procurement\\ProcurementInboundController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/procurement\/orders",
+        "name": "soho.procurement.orders.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Procurement\\ProcurementOrderController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/procurement\/plans",
+        "name": "soho.procurement.plans.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Procurement\\ProcurementPlanController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/procurement\/requests",
+        "name": "soho.procurement.requests.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Procurement\\ProcurementRequestController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/procurement\/safe-stocks",
+        "name": "soho.procurement.safe-stocks.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Procurement\\SafeStockController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/procurement\/suppliers",
+        "name": "soho.procurement.suppliers.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Procurement\\SupplierController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product",
+        "name": "soho.product.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ProductController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product-attribute",
+        "name": "soho.product-attribute.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ProductAttributeController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product-attribute\/create",
+        "name": "soho.product-attribute.create",
+        "controller": "App\\Soho\\Http\\Controllers\\ProductAttributeController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/create",
+        "name": "soho.product.create",
+        "controller": "App\\Soho\\Http\\Controllers\\ProductController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/import",
+        "name": "soho.product.import",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/ranking",
+        "name": "soho.product.ranking",
+        "controller": "App\\Soho\\Http\\Controllers\\DashboardController",
+        "action": "productRanking",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/review\/change",
+        "name": "soho.product.review.change",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/review\/pending",
+        "name": "soho.product.review.pending",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/review\/record",
+        "name": "soho.product.review.record",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/sku",
+        "name": "soho.product.sku",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/spu\/detail",
+        "name": "soho.product.spu.detail",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/tasks\/exception",
+        "name": "soho.product.tasks.exception",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/tasks\/pending-edit",
+        "name": "soho.product.tasks.pending-edit",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/tasks\/returned",
+        "name": "soho.product.tasks.returned",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/product\/versions",
+        "name": "soho.product.versions",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/profile\/avatar\/defaults",
+        "name": "soho.profile.avatar.defaults",
+        "controller": "App\\Soho\\Http\\Controllers\\ProfileController",
+        "action": "defaultAvatars",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/promotion",
+        "name": "soho.promotion.index",
+        "controller": "App\\Soho\\Http\\Controllers\\PromotionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/promotion\/analysis",
+        "name": "soho.promotion.analysis",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/promotion\/create",
+        "name": "soho.promotion.create",
+        "controller": "App\\Soho\\Http\\Controllers\\PromotionController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/promotion\/internal",
+        "name": "soho.promotion.internal",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/queue\/monitor",
+        "name": "soho.queue.monitor",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\QueueMonitorController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/readonly\/inventory-warning",
+        "name": "soho.readonly.inventory.warning",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ReadonlyController",
+        "action": "inventoryWarning",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/readonly\/listing-view",
+        "name": "soho.readonly.listing.view",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ReadonlyController",
+        "action": "listingView",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/readonly\/order-report",
+        "name": "soho.readonly.order.report",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ReadonlyController",
+        "action": "orderReport",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/refund\/approve",
+        "name": "soho.refund.approve",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\RefundApprovalController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/replacement",
+        "name": "soho.replacement.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\ReplacementController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/aftersale",
+        "name": "soho.report.aftersale",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\AftersaleReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/aftersale-detail",
+        "name": "soho.report.aftersale-detail",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\AftersaleDetailController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/inventory",
+        "name": "soho.report.inventory",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\InventoryReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/inventory-turnover",
+        "name": "soho.report.inventory.turnover",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\InventoryTurnoverController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/inventory\/export",
+        "name": "soho.report.inventory.export",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\InventoryReportController",
+        "action": "export",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/metrics-definition",
+        "name": "soho.report.metrics.definition",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\MetricsDefinitionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/order",
+        "name": "soho.report.order",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\OrderReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/order-timeliness",
+        "name": "soho.report.order-timeliness",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\OrderTimelinessController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/order-timeliness\/export",
+        "name": "soho.report.order-timeliness.export",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\OrderTimelinessController",
+        "action": "export",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/procurement",
+        "name": "soho.report.procurement",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/product",
+        "name": "soho.report.product",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ProductReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/product\/export",
+        "name": "soho.report.product.export",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ProductReportController",
+        "action": "export",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/profit",
+        "name": "soho.report.profit",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ProfitReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/profit\/export",
+        "name": "soho.report.profit.export",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ProfitReportController",
+        "action": "export",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/sales",
+        "name": "soho.report.sales",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\SalesReportController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/sales\/export",
+        "name": "soho.report.sales.export",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\SalesReportController",
+        "action": "export",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/shop-analysis",
+        "name": "soho.report.shop.analysis",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\ShopAnalysisController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/report\/sku-analysis",
+        "name": "soho.report.sku.analysis",
+        "controller": "App\\Soho\\Http\\Controllers\\Report\\SkuAnalysisController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/return\/inspect",
+        "name": "soho.return.inspect",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\ReturnInspectController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/return\/receive",
+        "name": "soho.return.receive",
+        "controller": "App\\Soho\\Http\\Controllers\\Aftersale\\ReturnReceiveController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/sales\/report",
+        "name": "soho.sales.report",
+        "controller": "App\\Soho\\Http\\Controllers\\DashboardController",
+        "action": "salesReport",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security",
+        "name": "soho.security.index",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\SecurityController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/devices",
+        "name": "soho.security.devices",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\DeviceController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/event",
+        "name": "soho.security.event",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\SecurityEventController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/ip-whitelist",
+        "name": "soho.security.ip-whitelist.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\IpWhitelistController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/ip-whitelist\/create",
+        "name": "soho.security.ip-whitelist.create",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\IpWhitelistController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/lockouts",
+        "name": "soho.security.lockouts",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\AccountLockoutController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/login-failures",
+        "name": "soho.security.login.failures",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\LoginFailureController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/mfa",
+        "name": "soho.security.mfa",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\SecurityPolicyController",
+        "action": "mfaIndex",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/password-policy",
+        "name": "soho.security.password-policy",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\SecurityPolicyController",
+        "action": "passwordIndex",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/security\/sessions",
+        "name": "soho.security.sessions",
+        "controller": "App\\Soho\\Http\\Controllers\\Security\\SessionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shipment\/pending",
+        "name": "soho.shipment.pending",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\ShipmentController",
+        "action": "pending",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shipment\/push\/failed",
+        "name": "soho.shipment.push.failed",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\ShipmentController",
+        "action": "pushFailed",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shipment\/push\/pending",
+        "name": "soho.shipment.push.pending",
+        "controller": "App\\Soho\\Http\\Controllers\\Fulfillment\\ShipmentController",
+        "action": "pushPending",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shipping-method",
+        "name": "soho.shipping-method.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ShippingMethodController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shipping-method\/create",
+        "name": "soho.shipping-method.create",
+        "controller": "App\\Soho\\Http\\Controllers\\ShippingMethodController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shipping-template",
+        "name": "soho.shipping-templates.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ShippingTemplateController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shipping-template\/create",
+        "name": "soho.shipping-templates.create",
+        "controller": "App\\Soho\\Http\\Controllers\\ShippingTemplateController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop",
+        "name": "soho.shop.index",
+        "controller": "App\\Soho\\Http\\Controllers\\ShopController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop\/authorization-exceptions",
+        "name": "soho.shop.authorization-exceptions.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Shop\\AuthorizationExceptionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop\/authorization-failures",
+        "name": "soho.shop.authorization-failures.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Shop\\AuthorizationFailureController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop\/authorization-logs",
+        "name": "soho.shop.authorization-logs.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Shop\\AuthorizationLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop\/authorization-status",
+        "name": "soho.shop.authorization-status.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Shop\\AuthorizationStatusController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop\/authorize",
+        "name": "soho.shop.authorize",
+        "controller": "App\\Soho\\Http\\Controllers\\ShopController",
+        "action": "authorize",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop\/create",
+        "name": "soho.shop.create",
+        "controller": "App\\Soho\\Http\\Controllers\\ShopController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop\/token-refresh-logs",
+        "name": "soho.shop.token-refresh-logs.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Shop\\TokenRefreshLogController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/shop\/token-status",
+        "name": "soho.shop.token-status",
+        "controller": "App\\Soho\\Http\\Controllers\\Shop\\TokenStatusController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/sync-cursors",
+        "name": "soho.sync_cursors.index",
+        "controller": "App\\Soho\\Http\\Controllers\\SyncCursorController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/sync-task",
+        "name": "soho.sync-task.index",
+        "controller": "App\\Soho\\Http\\Controllers\\SyncTaskController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/sync-task\/failed",
+        "name": "soho.sync-task.failed",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/sync-task\/retry",
+        "name": "soho.sync-task.retry",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/alerts",
+        "name": "soho.system.alerts.index",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\SystemAlertController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/features",
+        "name": "soho.system.features.index",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\FeatureSwitchController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/features\/create",
+        "name": "soho.system.features.create",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\FeatureSwitchController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/health",
+        "name": "soho.system.health",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\SystemHealthController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/notifications",
+        "name": "soho.system.notifications.index",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\NotificationTemplateController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/notifications\/create",
+        "name": "soho.system.notifications.create",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\NotificationTemplateController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/parameters",
+        "name": "soho.system.parameters.index",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\SystemParameterController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/parameters\/create",
+        "name": "soho.system.parameters.create",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\SystemParameterController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/settings",
+        "name": "soho.system.settings",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\SettingsController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/storage",
+        "name": "soho.system.storage.index",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\FileStorageController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/storage\/create",
+        "name": "soho.system.storage.create",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\FileStorageController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/system\/version",
+        "name": "soho.system.version",
+        "controller": "App\\Soho\\Http\\Controllers\\System\\SystemVersionController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/tax-entities",
+        "name": "soho.tax_entities.index",
+        "controller": "App\\Soho\\Http\\Controllers\\TaxEntityController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/tax-entities\/create",
+        "name": "soho.tax_entities.create",
+        "controller": "App\\Soho\\Http\\Controllers\\TaxEntityController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/tax-rate",
+        "name": "soho.tax-rate.index",
+        "controller": "App\\Soho\\Http\\Controllers\\TaxRateController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/tax-rate\/create",
+        "name": "soho.tax-rate.create",
+        "controller": "App\\Soho\\Http\\Controllers\\TaxRateController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/unauthorized",
+        "name": "soho.unauthorized",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse",
+        "name": "soho.warehouse.index",
+        "controller": "App\\Soho\\Http\\Controllers\\WarehouseController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/create",
+        "name": "soho.warehouse.create",
+        "controller": "App\\Soho\\Http\\Controllers\\WarehouseController",
+        "action": "create",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/inbound",
+        "name": "soho.warehouse.inbound",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/inventory-doc",
+        "name": "soho.warehouse.inventory-doc",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/inventory-turnover",
+        "name": "soho.warehouse.inventory.turnover",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/locations",
+        "name": "soho.warehouse.locations",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/outbound",
+        "name": "soho.warehouse.outbound",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/return-inspect",
+        "name": "soho.warehouse.return.inspect",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/return-receive",
+        "name": "soho.warehouse.return.receive",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/stock-adjust",
+        "name": "soho.warehouse.stock-adjust",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/stock-age",
+        "name": "soho.warehouse.stock.age",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/stock-warning",
+        "name": "soho.warehouse.stock-warning",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/stocktake",
+        "name": "soho.warehouse.stocktake",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/warehouse\/zones",
+        "name": "soho.warehouse.zones",
+        "controller": "Closure",
+        "action": "",
+        "status": 200,
+        "detail": "管理员=200"
+    },
+    {
+        "module": "soho",
+        "uri": "soho\/waybill",
+        "name": "soho.waybill.index",
+        "controller": "App\\Soho\\Http\\Controllers\\Logistics\\WaybillController",
+        "action": "index",
+        "status": 200,
+        "detail": "管理员=200"
+    }
+]

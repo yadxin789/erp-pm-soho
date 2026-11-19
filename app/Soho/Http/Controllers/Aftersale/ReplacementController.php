@@ -78,6 +78,6 @@ class ReplacementController extends Controller
             'reship'   => '补发',
         ];
 
-        return view('aftersale.replacements.index', compact('replacements', 'stats', 'statusOptions', 'typeOptions'));
+        return view('soho.aftersale.replacements.index', compact('replacements', 'stats', 'statusOptions', 'typeOptions'));
     }
 }

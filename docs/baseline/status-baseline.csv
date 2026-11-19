@@ -1,0 +1,549 @@
+﻿模块,URI,路由名,控制器,动作,基线状态,各账号实测
+core,,core.home,"App\Core\Http\Controllers\PortalController",index,200,管理员=200
+core,approvals,core.approvals.index,"App\Core\Http\Controllers\ApprovalController",index,200,管理员=200
+core,approvals/create,core.approvals.create,"App\Core\Http\Controllers\ApprovalController",create,200,管理员=200
+core,chat,core.chat.index,"App\Core\Http\Controllers\ChatController",index,200,管理员=200
+core,chat/messages,core.chat.messages,"App\Core\Http\Controllers\ChatController",messages,200,管理员=200
+core,core/ping,core.ping,Closure,,200,管理员=200
+core,core/ui,core.ui,Closure,,200,管理员=200
+core,files,core.files.index,"App\Core\Http\Controllers\FileController",index,200,管理员=200
+core,home,core.home.redirect,"App\Core\Http\Controllers\HomeController",index,302,管理员=302→/soho
+core,login,core.login,"App\Core\Http\Controllers\Auth\LoginController",showLoginForm,302,管理员=302→/home
+core,notifications,core.notifications.index,"App\Core\Http\Controllers\NotificationController",index,200,管理员=200
+core,notifications/unread-count,core.notifications.unread-count,"App\Core\Http\Controllers\NotificationController",unreadCount,200,管理员=200
+core,profile,core.profile,"App\Core\Http\Controllers\ProfileController",index,200,管理员=200
+core,voice,core.voice.index,"App\Core\Http\Controllers\VoiceController",index,200,管理员=200
+core,voice/history,core.voice.history,"App\Core\Http\Controllers\VoiceController",history,200,管理员=200
+core,voice/members,core.voice.members,"App\Core\Http\Controllers\VoiceController",members,200,管理员=200
+core,voice/poll,core.voice.poll,"App\Core\Http\Controllers\VoiceController",poll,200,管理员=200
+erp,erp,erp.home,Closure,,302,"管理员=302→ | 业务员=302→"
+erp,erp/admin/ai-settings,admin.ai-settings.index,"App\Erp\Http\Controllers\Admin\AiSettingController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/approval-flows,admin.approval-flows.index,"App\Erp\Http\Controllers\Admin\ApprovalFlowController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/audit-logs,admin.audit-logs.index,Closure,,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/boms,admin.boms.index,"App\Erp\Http\Controllers\Admin\MasterDataController",boms,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/customers,admin.customers.index,"App\Erp\Http\Controllers\Admin\MasterDataController",customers,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/customers/create,admin.customers.create,"App\Erp\Http\Controllers\MasterData\CustomerController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/dashboard,admin.dashboard,"App\Erp\Http\Controllers\Admin\DashboardController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/departments,admin.departments.index,"App\Erp\Http\Controllers\Admin\DepartmentController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/departments/create,admin.departments.create,"App\Erp\Http\Controllers\Admin\DepartmentController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/items,admin.items.index,"App\Erp\Http\Controllers\Admin\MasterDataController",items,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/items/barcode-labels,admin.items.barcode-labels,"App\Erp\Http\Controllers\MasterData\ItemController",barcodeLabels,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/items/create,admin.items.create,"App\Erp\Http\Controllers\MasterData\ItemController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/logistics/guide,admin.logistics.guide,"App\Erp\Http\Controllers\Admin\LogisticsController",guide,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/logistics/settings,admin.logistics.settings,"App\Erp\Http\Controllers\Admin\LogisticsController",settings,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/logistics/shipments,admin.logistics.shipments,"App\Erp\Http\Controllers\Admin\LogisticsController",shipments,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/monitor/auto-start,admin.monitor.auto-start,"App\Erp\Http\Controllers\Admin\AutoStartController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/monitor/queue,admin.monitor.queue,"App\Erp\Http\Controllers\Admin\QueueMonitorController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/monitor/scheduled-tasks,admin.monitor.scheduled-tasks,"App\Erp\Http\Controllers\Admin\ScheduledTaskController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/monitor/system-status,admin.monitor.system-status,"App\Erp\Http\Controllers\Admin\SystemStatusController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/permissions,admin.permissions.index,"App\Erp\Http\Controllers\Admin\PermissionController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/permissions/create,admin.permissions.create,"App\Erp\Http\Controllers\Admin\PermissionController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/positions,admin.positions.index,"App\Erp\Http\Controllers\Admin\PositionController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/positions/create,admin.positions.create,"App\Erp\Http\Controllers\Admin\PositionController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/roles,admin.roles.index,"App\Erp\Http\Controllers\Admin\RoleController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/roles/create,admin.roles.create,"App\Erp\Http\Controllers\Admin\RoleController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/routings,admin.routings.index,"App\Erp\Http\Controllers\Admin\MasterDataController",routings,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/settings,admin.settings.index,Closure,,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/suppliers,admin.suppliers.index,"App\Erp\Http\Controllers\Admin\MasterDataController",suppliers,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/suppliers/create,admin.suppliers.create,"App\Erp\Http\Controllers\MasterData\SupplierController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/system-health,admin.system-health,"App\Erp\Http\Controllers\Admin\SystemHealthController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/users,admin.users.index,"App\Erp\Http\Controllers\Admin\UserController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/users/create,admin.users.create,"App\Erp\Http\Controllers\Admin\UserController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/warehouses,admin.warehouses.index,"App\Erp\Http\Controllers\Admin\MasterDataController",warehouses,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/admin/warehouses/create,admin.warehouses.create,"App\Erp\Http\Controllers\MasterData\WarehouseController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/ai/analysis,app.ai.analysis-center,"App\Erp\Http\Controllers\App\AIAnalysisController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/anomaly-detection,app.ai.anomaly-detection,"App\Erp\Http\Controllers\App\AIAnalysisController",anomalyDetection,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/chat,app.ai.chat,"App\Erp\Http\Controllers\App\AiChatController",index,302,"管理员=302→/erp/admin/ai-settings | 业务员=302→/erp/app/ai/notice"
+erp,erp/app/ai/customer-credit,app.ai.customer-credit,"App\Erp\Http\Controllers\App\AIAnalysisController",customerCredit,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/daily-report,app.ai.daily-report,"App\Erp\Http\Controllers\App\AIAnalysisController",dailyReport,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/ecommerce-merge,app.ai.ecommerce-merge,"App\Erp\Http\Controllers\App\AIAnalysisController",ecommerceMerge,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/invoice-ocr,app.ai.invoice-ocr,"App\Erp\Http\Controllers\App\InvoiceOcrController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/notice,app.ai.notice,"App\Erp\Http\Controllers\App\AiChatController",notice,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/production-cost,app.ai.production-cost,"App\Erp\Http\Controllers\App\AIAnalysisController",productionCost,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/sales-forecast,app.ai.sales-forecast,"App\Erp\Http\Controllers\App\AIAnalysisController",salesForecast,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/scheduling,app.ai.scheduling,"App\Erp\Http\Controllers\App\AIAnalysisController",scheduling,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/stock-alerts,app.ai.stock-alerts,"App\Erp\Http\Controllers\App\AIAnalysisController",stockAlerts,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/supplier-quality,app.ai.supplier-quality,"App\Erp\Http\Controllers\App\AIAnalysisController",supplierQuality,200,"管理员=200 | 业务员=200"
+erp,erp/app/ai/welcome,app.ai.welcome,Closure,,200,"管理员=200 | 业务员=302→/erp/app/ai/notice"
+erp,erp/app/approvals/my-tasks,app.approvals.my-tasks,"App\Erp\Http\Controllers\Admin\ApprovalFlowController",myTasks,200,"管理员=200 | 业务员=200"
+erp,erp/app/assets,app.assets.index,"App\Erp\Http\Controllers\App\AssetController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/assets/create,app.assets.create,"App\Erp\Http\Controllers\App\AssetController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/chat,app.chat,"App\Erp\Http\Controllers\App\ChatController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/chat/members,app.chat.members,"App\Erp\Http\Controllers\App\PrivateChatController",members,200,"管理员=200 | 业务员=200"
+erp,erp/app/chat/messages,app.chat.messages,"App\Erp\Http\Controllers\App\ChatController",messages,200,"管理员=200 | 业务员=200"
+erp,erp/app/crm/leads,app.crm.leads,"App\Erp\Http\Controllers\App\CrmController",leads,200,"管理员=200 | 业务员=200"
+erp,erp/app/crm/leads/create,app.crm.leads.create,"App\Erp\Http\Controllers\App\CrmController",createLead,200,"管理员=200 | 业务员=200"
+erp,erp/app/crm/opportunities,app.crm.opportunities,"App\Erp\Http\Controllers\App\CrmController",opportunities,200,"管理员=200 | 业务员=200"
+erp,erp/app/crm/opportunities/create,app.crm.opportunities.create,"App\Erp\Http\Controllers\App\CrmController",createOpportunity,200,"管理员=200 | 业务员=200"
+erp,erp/app/crm/pipeline,app.crm.pipeline,"App\Erp\Http\Controllers\App\CrmController",pipeline,200,"管理员=200 | 业务员=200"
+erp,erp/app/dashboard,app.dashboard,"App\Erp\Http\Controllers\App\DashboardController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/ecommerce,app.ecommerce.index,"App\Erp\Http\Controllers\App\EcommerceController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/ecommerce/create,app.ecommerce.create,"App\Erp\Http\Controllers\App\EcommerceController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/extensions,app.extensions.index,"App\Erp\Http\Controllers\App\ExtensionController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/files,app.files.index,"App\Erp\Http\Controllers\App\FileController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/files/manage-resource-files,app.files.manage-resource-files,"App\Erp\Http\Controllers\App\FileController",manageResourceFiles,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/files/resource-files,app.files.resource-files,"App\Erp\Http\Controllers\App\FileController",resourceFiles,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/files/upload-department,app.files.upload-department,"App\Erp\Http\Controllers\App\FileController",uploadDepartmentForm,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/finance/bills,app.finance.bills,"App\Erp\Http\Controllers\App\FinanceController",bills,200,"管理员=200 | 业务员=200"
+erp,erp/app/finance/bills/create,app.finance.bills.create,"App\Erp\Http\Controllers\App\FinanceController",createBill,200,"管理员=200 | 业务员=200"
+erp,erp/app/finance/invoices,app.finance.invoices,"App\Erp\Http\Controllers\App\FinanceController",invoices,200,"管理员=200 | 业务员=200"
+erp,erp/app/finance/invoices/create,app.finance.invoices.create,"App\Erp\Http\Controllers\App\FinanceController",createInvoice,200,"管理员=200 | 业务员=200"
+erp,erp/app/finance/payments,app.finance.payments,"App\Erp\Http\Controllers\App\FinanceController",payments,200,"管理员=200 | 业务员=200"
+erp,erp/app/finance/payments/create,app.finance.payments.create,"App\Erp\Http\Controllers\App\FinanceController",createPayment,200,"管理员=200 | 业务员=200"
+erp,erp/app/finance/statements,app.finance.statements,"App\Erp\Http\Controllers\App\FinanceController",statements,200,"管理员=200 | 业务员=200"
+erp,erp/app/hr/applications,app.hr.applications.index,"App\Erp\Http\Controllers\App\HrController",applications,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/applications/create,app.hr.applications.create,"App\Erp\Http\Controllers\App\HrController",applicationCreate,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/attendances,app.hr.attendances.index,"App\Erp\Http\Controllers\App\HrController",attendance,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/attendances/create,app.hr.attendances.create,"App\Erp\Http\Controllers\App\HrController",attendanceCreate,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/employees,app.hr.employees.index,"App\Erp\Http\Controllers\App\HrController",employees,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/employees/create,app.hr.employees.create,"App\Erp\Http\Controllers\App\HrController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/payroll,app.hr.payroll.index,"App\Erp\Http\Controllers\App\HrController",payroll,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/payroll/create,app.hr.payroll.create,"App\Erp\Http\Controllers\App\HrController",payrollCreate,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/performances,app.hr.performances.index,"App\Erp\Http\Controllers\App\HrController",performance,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/performances/create,app.hr.performances.create,"App\Erp\Http\Controllers\App\HrController",performanceCreate,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/recruitments,app.hr.recruitments.index,"App\Erp\Http\Controllers\App\HrController",recruitment,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/hr/recruitments/create,app.hr.recruitments.create,"App\Erp\Http\Controllers\App\HrController",recruitmentCreate,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/inventory,app.inventory.index,"App\Erp\Http\Controllers\App\Inventory\InventoryController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/inventory/adjust,app.inventory.adjust,"App\Erp\Http\Controllers\App\Inventory\InventoryController",adjust,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/inventory/freeze,app.inventory.freeze,"App\Erp\Http\Controllers\App\Inventory\InventoryController",freeze,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/inventory/logistics,app.inventory.logistics,"App\Erp\Http\Controllers\App\Inventory\LogisticsQueryController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/inventory/stocktake,app.inventory.stocktake,"App\Erp\Http\Controllers\App\Inventory\InventoryController",stocktake,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/inventory/trace,app.inventory.trace,"App\Erp\Http\Controllers\App\Inventory\InventoryController",trace,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/inventory/transactions,app.inventory.transactions,"App\Erp\Http\Controllers\App\Inventory\InventoryController",transactions,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/inventory/transfer,app.inventory.transfer,"App\Erp\Http\Controllers\App\Inventory\InventoryController",transfer,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/knowledge,app.knowledge.index,"App\Erp\Http\Controllers\App\KnowledgeController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/knowledge/create,app.knowledge.create,"App\Erp\Http\Controllers\App\KnowledgeController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/masterdata/boms,app.masterdata.boms.index,"App\Erp\Http\Controllers\Admin\MasterDataController",boms,200,"管理员=200 | 业务员=200"
+erp,erp/app/masterdata/customers,app.masterdata.customers.index,"App\Erp\Http\Controllers\Admin\MasterDataController",customers,200,"管理员=200 | 业务员=200"
+erp,erp/app/masterdata/items,app.masterdata.items.index,"App\Erp\Http\Controllers\Admin\MasterDataController",items,200,"管理员=200 | 业务员=200"
+erp,erp/app/masterdata/routings,app.masterdata.routings.index,"App\Erp\Http\Controllers\Admin\MasterDataController",routings,200,"管理员=200 | 业务员=200"
+erp,erp/app/masterdata/suppliers,app.masterdata.suppliers.index,"App\Erp\Http\Controllers\Admin\MasterDataController",suppliers,200,"管理员=200 | 业务员=200"
+erp,erp/app/masterdata/warehouses,app.masterdata.warehouses.index,"App\Erp\Http\Controllers\Admin\MasterDataController",warehouses,200,"管理员=200 | 业务员=200"
+erp,erp/app/pm-dashboard,app.pm-dashboard.index,"App\Erp\Http\Controllers\App\ProjectDashboardController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/issues,app.production.issues.index,"App\Erp\Http\Controllers\App\Production\MaterialIssueController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/issues/create,app.production.issues.create,"App\Erp\Http\Controllers\App\Production\MaterialIssueController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/orders,app.production.orders.index,"App\Erp\Http\Controllers\App\Production\ProductionOrderController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/orders/create,app.production.orders.create,"App\Erp\Http\Controllers\App\Production\ProductionOrderController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/plans,app.production.plans.index,"App\Erp\Http\Controllers\App\Production\ProductionPlanController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/plans/create,app.production.plans.create,"App\Erp\Http\Controllers\App\Production\ProductionPlanController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/receipts,app.production.receipts.index,"App\Erp\Http\Controllers\App\Production\ProductionReceiptController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/receipts/create,app.production.receipts.create,"App\Erp\Http\Controllers\App\Production\ProductionReceiptController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/reports,app.production.reports.index,"App\Erp\Http\Controllers\App\Production\ProductionReportController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/production/reports/create,app.production.reports.create,"App\Erp\Http\Controllers\App\Production\ProductionReportController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/profile,app.profile.edit,"App\Erp\Http\Controllers\App\ProfileController",edit,200,"管理员=200 | 业务员=200"
+erp,erp/app/profile/avatar,app.profile.avatar,"App\Erp\Http\Controllers\App\ProfileController",avatar,200,"管理员=200 | 业务员=200"
+erp,erp/app/project-templates,app.project-templates.index,"App\Erp\Http\Controllers\App\ProjectTemplateController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/project-templates/create,app.project-templates.create,"App\Erp\Http\Controllers\App\ProjectTemplateController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/projects,app.projects.index,"App\Erp\Http\Controllers\App\ProjectController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/projects/create,app.projects.create,"App\Erp\Http\Controllers\App\ProjectController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/projects/my-projects,app.projects.my-projects,"App\Erp\Http\Controllers\App\ProjectController",myProjects,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/purchase/orders,app.purchase.orders.index,"App\Erp\Http\Controllers\App\Purchase\PurchaseOrderController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/purchase/orders/create,app.purchase.orders.create,"App\Erp\Http\Controllers\App\Purchase\PurchaseOrderController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/purchase/receipts,app.purchase.receipts.index,"App\Erp\Http\Controllers\App\Purchase\ReceiptController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/purchase/receipts/create,app.purchase.receipts.create,"App\Erp\Http\Controllers\App\Purchase\ReceiptController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/purchase/requisitions,app.purchase.requisitions.index,"App\Erp\Http\Controllers\App\Purchase\PurchaseRequisitionController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/purchase/requisitions/create,app.purchase.requisitions.create,"App\Erp\Http\Controllers\App\Purchase\PurchaseRequisitionController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/purchase/returns,app.purchase.returns.index,"App\Erp\Http\Controllers\App\Purchase\PurchaseReturnController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/purchase/returns/create,app.purchase.returns.create,"App\Erp\Http\Controllers\App\Purchase\PurchaseReturnController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/quality/defects,app.quality.defects.index,Closure,,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/quality/inspections,app.quality.inspections.index,"App\Erp\Http\Controllers\App\Quality\QualityController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/quality/inspections/create,app.quality.inspections.create,"App\Erp\Http\Controllers\App\Quality\QualityController",create,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/quality/reports,app.quality.reports,"App\Erp\Http\Controllers\App\Quality\QualityController",reports,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/recycle,app.recycle.index,"App\Erp\Http\Controllers\App\RecycleController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/reports,app.reports.index,"App\Erp\Http\Controllers\App\ReportController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/reports/inventory,app.reports.inventory,"App\Erp\Http\Controllers\App\ReportController",inventory,200,"管理员=200 | 业务员=200"
+erp,erp/app/reports/purchase,app.reports.purchase,"App\Erp\Http\Controllers\App\ReportController",purchase,200,"管理员=200 | 业务员=200"
+erp,erp/app/reports/quality,app.reports.quality,"App\Erp\Http\Controllers\App\ReportController",quality,200,"管理员=200 | 业务员=200"
+erp,erp/app/reports/sales,app.reports.sales,"App\Erp\Http\Controllers\App\ReportController",sales,200,"管理员=200 | 业务员=200"
+erp,erp/app/sales/orders,app.sales.orders.index,"App\Erp\Http\Controllers\App\Sales\SalesOrderController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/sales/orders/create,app.sales.orders.create,"App\Erp\Http\Controllers\App\Sales\SalesOrderController",create,200,"管理员=200 | 业务员=200"
+erp,erp/app/sales/quotations,app.sales.quotations.index,"App\Erp\Http\Controllers\App\Sales\QuotationController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/sales/quotations/create,app.sales.quotations.create,"App\Erp\Http\Controllers\App\Sales\QuotationController",create,200,"管理员=200 | 业务员=200"
+erp,erp/app/sales/returns,app.sales.returns.index,"App\Erp\Http\Controllers\App\Sales\SalesReturnController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/sales/returns/create,app.sales.returns.create,"App\Erp\Http\Controllers\App\Sales\SalesReturnController",create,200,"管理员=200 | 业务员=200"
+erp,erp/app/sales/shipments,app.sales.shipments.index,"App\Erp\Http\Controllers\App\Sales\ShipmentController",index,200,"管理员=200 | 业务员=200"
+erp,erp/app/sales/shipments/create,app.sales.shipments.create,"App\Erp\Http\Controllers\App\Sales\ShipmentController",create,200,"管理员=200 | 业务员=200"
+erp,erp/app/support,app.support.index,"App\Erp\Http\Controllers\App\SupportController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/support/department-files,app.support.department-files,"App\Erp\Http\Controllers\App\SupportController",departmentFiles,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/support/send-notification,app.support.send-notification,"App\Erp\Http\Controllers\App\SupportController",sendNotificationForm,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/support/upload-resource-file,app.support.upload-resource-file,"App\Erp\Http\Controllers\App\SupportController",uploadResourceForm,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/tasks,app.tasks.index,"App\Erp\Http\Controllers\App\TaskController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/tasks/my-audit-tasks,app.tasks.my-audit-tasks,"App\Erp\Http\Controllers\App\TaskController",myAuditTasks,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/tasks/my-tasks,app.tasks.my-tasks,"App\Erp\Http\Controllers\App\TaskController",myTasks,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/app/todos,app.todos.index,"App\Erp\Http\Controllers\App\TodoController",index,200,"管理员=200 | 业务员=302→/erp/app/dashboard"
+erp,erp/notifications,notifications.index,"App\Erp\Http\Controllers\NotificationController",index,200,"管理员=200 | 业务员=200"
+erp,erp/notifications/unread-count,notifications.unread-count,"App\Erp\Http\Controllers\NotificationController",unreadCount,200,"管理员=200 | 业务员=200"
+pm,pm,pm.home,"App\Pm\Http\Controllers\WelcomeController",index,200,管理员=200
+pm,pm/admin,pm.admin.index,"App\Pm\Http\Controllers\AdminController",index,200,管理员=200
+pm,pm/admin/chat-messages,pm.admin.chat-messages,"App\Pm\Http\Controllers\AdminController",chatMessages,200,管理员=200
+pm,pm/admin/collab-trash,pm.admin.trash,"App\Pm\Http\Controllers\AdminTrashController",index,200,管理员=200
+pm,pm/admin/departments,pm.admin.departments,"App\Pm\Http\Controllers\AdminController",departments,200,管理员=200
+pm,pm/admin/departments/create,pm.admin.departments.create,"App\Pm\Http\Controllers\AdminController",createDepartment,200,管理员=200
+pm,pm/admin/file-repository,pm.admin.file-repository,"App\Pm\Http\Controllers\AdminController",fileRepository,200,管理员=200
+pm,pm/admin/operation-logs,pm.admin.operation-logs,"App\Pm\Http\Controllers\AdminController",operationLogs,200,管理员=200
+pm,pm/admin/roles,pm.admin.roles,"App\Pm\Http\Controllers\AdminController",roles,200,管理员=200
+pm,pm/admin/roles/create,pm.admin.roles.create,"App\Pm\Http\Controllers\AdminController",createRole,200,管理员=200
+pm,pm/admin/send-notification,pm.admin.send-notification,"App\Pm\Http\Controllers\AdminController",sendNotification,200,管理员=200
+pm,pm/admin/services,pm.admin.services,"App\Pm\Http\Controllers\AdminController",services,200,管理员=200
+pm,pm/admin/statuses,pm.admin.statuses,"App\Pm\Http\Controllers\AdminController",statuses,200,管理员=200
+pm,pm/admin/task-types,pm.admin.task-types,"App\Pm\Http\Controllers\AdminController",taskTypes,200,管理员=200
+pm,pm/admin/task-types/create,pm.admin.task-types.create,"App\Pm\Http\Controllers\AdminController",createTaskType,200,管理员=200
+pm,pm/admin/todos,pm.admin.todos,"App\Pm\Http\Controllers\AdminController",todos,200,管理员=200
+pm,pm/admin/users,pm.admin.users,"App\Pm\Http\Controllers\AdminController",users,200,管理员=200
+pm,pm/admin/users/create,pm.admin.users.create,"App\Pm\Http\Controllers\AdminController",createUser,200,管理员=200
+pm,pm/admin/users/deleted,pm.admin.users.deleted,"App\Pm\Http\Controllers\AdminController",deletedUsers,200,管理员=200
+pm,pm/admin/users/import,pm.admin.users.import-form,"App\Pm\Http\Controllers\AdminController",importUsersForm,200,管理员=200
+pm,pm/admin/wecom/message-logs,pm.admin.wecom.message-logs,"App\Pm\Http\Controllers\WecomSettingsController",messageLogs,200,管理员=200
+pm,pm/admin/wecom/settings,pm.admin.wecom.settings,"App\Pm\Http\Controllers\WecomSettingsController",index,200,管理员=200
+pm,pm/admin/wecom/test,pm.admin.wecom.test,"App\Pm\Http\Controllers\WecomSettingsController",testConnection,302,管理员=302→/pm/admin/wecom/settings
+pm,pm/ai,pm.ai.welcome,"App\Pm\Http\Controllers\AiController",welcome,200,管理员=200
+pm,pm/ai-delegation,pm.ai-delegation.index,"App\Pm\Http\Controllers\AiDelegationController",index,200,管理员=200
+pm,pm/ai/chat,pm.ai.chat,"App\Pm\Http\Controllers\AiController",chat,302,管理员=302→/pm/ai/settings
+pm,pm/ai/docs,pm.ai.docs,"App\Pm\Http\Controllers\AiController",docs,302,管理员=302→/pm/ai/settings
+pm,pm/ai/notice,pm.ai.notice,"App\Pm\Http\Controllers\AiController",notice,200,管理员=200
+pm,pm/ai/settings,pm.ai.settings,"App\Pm\Http\Controllers\AiController",settings,200,管理员=200
+pm,pm/ai/settings/test,pm.ai.settings.test,"App\Pm\Http\Controllers\AiController",test,302,管理员=302→/pm/ai/settings
+pm,pm/dashboard,pm.dashboard,"App\Pm\Http\Controllers\DashboardController",index,200,管理员=200
+pm,pm/extension,pm.extension.index,"App\Pm\Http\Controllers\ExtensionController",index,200,管理员=200
+pm,pm/file,pm.file.index,"App\Pm\Http\Controllers\FileController",index,200,管理员=200
+pm,pm/file/manage-resource-files,pm.file.manage-resource-files,"App\Pm\Http\Controllers\FileController",manageResourceFiles,200,管理员=200
+pm,pm/file/resource-files,pm.file.resource-files,"App\Pm\Http\Controllers\FileController",resourceFiles,200,管理员=200
+pm,pm/file/upload-department,pm.file.upload-department,"App\Pm\Http\Controllers\FileController",uploadDepartmentFile,200,管理员=200
+pm,pm/knowledge,pm.knowledge.index,"App\Pm\Http\Controllers\KnowledgeController",index,200,管理员=200
+pm,pm/knowledge/create,pm.knowledge.create,"App\Pm\Http\Controllers\KnowledgeController",create,200,管理员=200
+pm,pm/my-trash,pm.my-trash,"App\Pm\Http\Controllers\MyTrashController",index,302,管理员=302→/pm/admin/collab-trash
+pm,pm/notification,pm.notification.index,"App\Pm\Http\Controllers\NotificationController",index,200,管理员=200
+pm,pm/profile/avatar,pm.profile.avatar,"App\Pm\Http\Controllers\ProfileController",avatar,200,管理员=200
+pm,pm/profile/edit,pm.profile.edit,"App\Pm\Http\Controllers\ProfileController",editPersonal,200,管理员=200
+pm,pm/profile/password,pm.profile.password.edit,"App\Pm\Http\Controllers\ProfileController",editPassword,200,管理员=200
+pm,pm/profile/wecom,pm.profile.wecom.index,"App\Pm\Http\Controllers\UserWecomController",index,200,管理员=200
+pm,pm/project,pm.project.index,"App\Pm\Http\Controllers\ProjectController",index,200,管理员=200
+pm,pm/project-template,pm.project-template.index,"App\Pm\Http\Controllers\ProjectTemplateController",index,200,管理员=200
+pm,pm/project-template/create,pm.project-template.create,"App\Pm\Http\Controllers\ProjectTemplateController",create,200,管理员=200
+pm,pm/project/create,pm.project.create,"App\Pm\Http\Controllers\ProjectController",create,200,管理员=200
+pm,pm/project/my-projects,pm.project.my-projects,"App\Pm\Http\Controllers\ProjectController",myProjects,200,管理员=200
+pm,pm/project/my-projects/completed,pm.project.my-projects.completed,"App\Pm\Http\Controllers\ProjectController",myCompletedProjects,200,管理员=200
+pm,pm/project/my-projects/in-progress,pm.project.my-projects.in-progress,"App\Pm\Http\Controllers\ProjectController",myInProgressProjects,200,管理员=200
+pm,pm/project/my-projects/overdue,pm.project.my-projects.overdue,"App\Pm\Http\Controllers\ProjectController",myOverdueProjects,200,管理员=200
+pm,pm/project/my-projects/suspended,pm.project.my-projects.suspended,"App\Pm\Http\Controllers\ProjectController",mySuspendedProjects,200,管理员=200
+pm,pm/support,pm.support.index,"App\Pm\Http\Controllers\SupportController",index,200,管理员=200
+pm,pm/support/department-files,pm.support.department-files,"App\Pm\Http\Controllers\SupportController",departmentFiles,200,管理员=200
+pm,pm/support/send-notification,pm.support.send-notification,"App\Pm\Http\Controllers\SupportController",sendNotification,200,管理员=200
+pm,pm/support/upload-resource-file,pm.support.upload-resource-file,"App\Pm\Http\Controllers\SupportController",uploadResourceFile,200,管理员=200
+pm,pm/task,pm.task.index,"App\Pm\Http\Controllers\TaskController",index,200,管理员=200
+pm,pm/task/my-audit-tasks,pm.task.my-audit-tasks,"App\Pm\Http\Controllers\TaskController",myAuditTasks,200,管理员=200
+pm,pm/task/my-audit-tasks/completed,pm.task.my-audit-tasks.completed,"App\Pm\Http\Controllers\TaskController",myCompletedAuditTasks,200,管理员=200
+pm,pm/task/my-audit-tasks/in-progress,pm.task.my-audit-tasks.in-progress,"App\Pm\Http\Controllers\TaskController",myInProgressAuditTasks,200,管理员=200
+pm,pm/task/my-audit-tasks/overdue,pm.task.my-audit-tasks.overdue,"App\Pm\Http\Controllers\TaskController",myOverdueAuditTasks,200,管理员=200
+pm,pm/task/my-audit-tasks/pending-audit,pm.task.my-audit-tasks.pending-audit,"App\Pm\Http\Controllers\TaskController",myPendingAuditTasks,200,管理员=200
+pm,pm/task/my-audit-tasks/suspended,pm.task.my-audit-tasks.suspended,"App\Pm\Http\Controllers\TaskController",mySuspendedAuditTasks,200,管理员=200
+pm,pm/task/my-tasks,pm.task.my-tasks,"App\Pm\Http\Controllers\TaskController",myTasks,200,管理员=200
+pm,pm/task/my-tasks/completed,pm.task.my-tasks.completed,"App\Pm\Http\Controllers\TaskController",myCompletedTasks,200,管理员=200
+pm,pm/task/my-tasks/in-progress,pm.task.my-tasks.in-progress,"App\Pm\Http\Controllers\TaskController",myInProgressTasks,200,管理员=200
+pm,pm/task/my-tasks/overdue,pm.task.my-tasks.overdue,"App\Pm\Http\Controllers\TaskController",myOverdueTasks,200,管理员=200
+pm,pm/task/my-tasks/pending-execution,pm.task.my-tasks.pending-execution,"App\Pm\Http\Controllers\TaskController",myPendingExecutionTasks,200,管理员=200
+pm,pm/task/my-tasks/suspended,pm.task.my-tasks.suspended,"App\Pm\Http\Controllers\TaskController",mySuspendedTasks,200,管理员=200
+pm,pm/todo,pm.todo.index,"App\Pm\Http\Controllers\TodoController",index,200,管理员=200
+pm,pm/wecom-file,pm.wecom.file.index,"App\Pm\Http\Controllers\WecomFileController",index,200,管理员=200
+pm,pm/wecom-file/api/bound-users,pm.wecom.file.bound-users,"App\Pm\Http\Controllers\WecomFileController",boundUsers,200,管理员=200
+soho,soho,soho.home,Closure,,302,管理员=302→/soho/dashboard
+soho,soho/admin/departments,soho.admin.departments.index,"App\Soho\Http\Controllers\Admin\DepartmentController",index,200,管理员=200
+soho,soho/admin/departments/create,soho.admin.departments.create,"App\Soho\Http\Controllers\Admin\DepartmentController",create,200,管理员=200
+soho,soho/admin/roles,soho.admin.roles.index,"App\Soho\Http\Controllers\Admin\RoleController",index,200,管理员=200
+soho,soho/admin/roles/create,soho.admin.roles.create,"App\Soho\Http\Controllers\Admin\RoleController",create,200,管理员=200
+soho,soho/admin/users,soho.admin.users.index,"App\Soho\Http\Controllers\Admin\UserController",index,200,管理员=200
+soho,soho/admin/users/create,soho.admin.users.create,"App\Soho\Http\Controllers\Admin\UserController",create,200,管理员=200
+soho,soho/aftersale,soho.aftersale.index,"App\Soho\Http\Controllers\AftersaleController",index,200,管理员=200
+soho,soho/aftersale/apply,soho.aftersale.apply,Closure,,200,管理员=200
+soho,soho/aftersale/communication,soho.aftersale.communication,Closure,,200,管理员=200
+soho,soho/aftersale/dispute,soho.aftersale.dispute,"App\Soho\Http\Controllers\Aftersale\DisputeController",index,200,管理员=200
+soho,soho/aftersale/exchange,soho.aftersale.exchange,"App\Soho\Http\Controllers\Aftersale\ReplacementController",index,200,管理员=200
+soho,soho/aftersale/operation-log,soho.aftersale.operation.log,Closure,,200,管理员=200
+soho,soho/aftersale/pending,soho.aftersale.pending,"App\Soho\Http\Controllers\AftersaleController",pending,200,管理员=200
+soho,soho/aftersale/progress,soho.aftersale.progress,Closure,,200,管理员=200
+soho,soho/aftersale/refunds,soho.aftersale.refunds,"App\Soho\Http\Controllers\AftersaleController",refunds,200,管理员=200
+soho,soho/aftersale/supplement,soho.aftersale.supplement,Closure,,200,管理员=200
+soho,soho/api/v1/after-sales,soho.api.after-sales.index,"App\Soho\Http\Controllers\Api\AfterSale\AfterSaleController",index,302,管理员=302→/login
+soho,soho/api/v1/inventory,soho.api.inventory.index,"App\Soho\Http\Controllers\Api\Inventory\InventoryController",index,302,管理员=302→/login
+soho,soho/api/v1/logistics/companies,soho.api.logistics.companies,"App\Soho\Http\Controllers\Api\Logistics\LogisticsController",companies,302,管理员=302→/login
+soho,soho/api/v1/orders,soho.api.orders.index,"App\Soho\Http\Controllers\Api\Order\OrderController",index,302,管理员=302→/login
+soho,soho/api/v1/products,soho.api.products.index,"App\Soho\Http\Controllers\Api\Product\ProductController",index,302,管理员=302→/login
+soho,soho/api/v1/reports/inventory,soho.api.reports.inventory,"App\Soho\Http\Controllers\Api\Report\ReportController",inventory,302,管理员=302→/login
+soho,soho/api/v1/reports/profit,soho.api.reports.profit,"App\Soho\Http\Controllers\Api\Report\ReportController",profit,302,管理员=302→/login
+soho,soho/api/v1/reports/sales,soho.api.reports.sales,"App\Soho\Http\Controllers\Api\Report\ReportController",sales,302,管理员=302→/login
+soho,soho/api/v1/shops,soho.api.shops.index,"App\Soho\Http\Controllers\Api\Shop\ShopController",index,302,管理员=302→/login
+soho,soho/api/v1/sync/tasks,soho.api.sync.tasks,"App\Soho\Http\Controllers\Api\Sync\SyncController",tasks,302,管理员=302→/login
+soho,soho/api/v1/warehouses,soho.api.warehouses.index,"App\Soho\Http\Controllers\Api\Warehouse\WarehouseController",index,302,管理员=302→/login
+soho,soho/approval-flows,soho.approval_flows.index,"App\Soho\Http\Controllers\ApprovalFlowController",index,200,管理员=200
+soho,soho/approval-flows/create,soho.approval_flows.create,"App\Soho\Http\Controllers\ApprovalFlowController",create,200,管理员=200
+soho,soho/approval-instances,soho.approval_instances.index,"App\Soho\Http\Controllers\ApprovalInstanceController",index,200,管理员=200
+soho,soho/approval/finance-diff,soho.approval.finance-diff.index,"App\Soho\Http\Controllers\Approval\FinanceDiffApprovalController",index,200,管理员=200
+soho,soho/approval/inventory-adjust,soho.approval.inventory-adjust.index,"App\Soho\Http\Controllers\Approval\InventoryAdjustApprovalController",index,200,管理员=200
+soho,soho/approval/order-cancel,soho.approval.order-cancel.index,"App\Soho\Http\Controllers\Approval\OrderCancelApprovalController",index,200,管理员=200
+soho,soho/approval/price-change,soho.approval.price-change.index,"App\Soho\Http\Controllers\Approval\PriceChangeApprovalController",index,200,管理员=200
+soho,soho/approval/product-publish,soho.approval.product-publish.index,"App\Soho\Http\Controllers\Approval\ProductPublishApprovalController",index,200,管理员=200
+soho,soho/approval/refund,soho.approval.refund.index,"App\Soho\Http\Controllers\Approval\RefundApprovalCenterController",index,200,管理员=200
+soho,soho/audit/approval-flow,soho.audit.approval-flow,"App\Soho\Http\Controllers\Audit\ApprovalFlowController",index,200,管理员=200
+soho,soho/audit/export-log,soho.audit.export-log,"App\Soho\Http\Controllers\Audit\ExportLogController",index,200,管理员=200
+soho,soho/audit/order-status,soho.audit.order-status,"App\Soho\Http\Controllers\Audit\OrderStatusController",index,200,管理员=200
+soho,soho/audit/product-change,soho.audit.product-change,"App\Soho\Http\Controllers\Audit\ProductChangeController",index,200,管理员=200
+soho,soho/audit/reconciliation-diff,soho.audit.reconciliation-diff,"App\Soho\Http\Controllers\Audit\ReconciliationDiffController",index,200,管理员=200
+soho,soho/audit/reports,soho.audit.reports,"App\Soho\Http\Controllers\Audit\AuditReportController",index,200,管理员=200
+soho,soho/brand,soho.brand.index,"App\Soho\Http\Controllers\BrandController",index,200,管理员=200
+soho,soho/brand/create,soho.brand.create,"App\Soho\Http\Controllers\BrandController",create,200,管理员=200
+soho,soho/category,soho.category.index,"App\Soho\Http\Controllers\CategoryController",index,200,管理员=200
+soho,soho/category/create,soho.category.create,"App\Soho\Http\Controllers\CategoryController",create,200,管理员=200
+soho,soho/chat,soho.chat.index,"App\Soho\Http\Controllers\ChatController",index,200,管理员=200
+soho,soho/chat/conversations,soho.chat.conversations,"App\Soho\Http\Controllers\ChatController",conversations,200,管理员=200
+soho,soho/chat/messages,soho.chat.messages,"App\Soho\Http\Controllers\ChatController",index,200,管理员=200
+soho,soho/check/tasks,soho.check.tasks.index,"App\Soho\Http\Controllers\Fulfillment\CheckTaskController",index,200,管理员=200
+soho,soho/check/tasks/completed,soho.check.tasks.completed,"App\Soho\Http\Controllers\Fulfillment\CheckTaskController",completed,200,管理员=200
+soho,soho/check/tasks/exception,soho.check.tasks.exception,"App\Soho\Http\Controllers\Fulfillment\CheckTaskController",exception,200,管理员=200
+soho,soho/check/tasks/record,soho.check.tasks.record,"App\Soho\Http\Controllers\Fulfillment\CheckTaskController",record,200,管理员=200
+soho,soho/check/tasks/scan,soho.check.tasks.scan,"App\Soho\Http\Controllers\Fulfillment\CheckTaskController",scan,200,管理员=200
+soho,soho/coupon,soho.coupon.index,"App\Soho\Http\Controllers\CouponController",index,200,管理员=200
+soho,soho/coupon/create,soho.coupon.create,"App\Soho\Http\Controllers\CouponController",create,200,管理员=200
+soho,soho/currency,soho.currencies.index,"App\Soho\Http\Controllers\CurrencyController",index,200,管理员=200
+soho,soho/currency/create,soho.currencies.create,"App\Soho\Http\Controllers\CurrencyController",create,200,管理员=200
+soho,soho/customer,soho.customer.index,"App\Soho\Http\Controllers\CustomerController",index,200,管理员=200
+soho,soho/customer/create,soho.customer.create,"App\Soho\Http\Controllers\CustomerController",create,200,管理员=200
+soho,soho/customer/groups,soho.customer.groups,"App\Soho\Http\Controllers\CustomerController",groups,200,管理员=200
+soho,soho/customer/privacy,soho.customer.privacy,Closure,,200,管理员=200
+soho,soho/customer/tags,soho.customer.tags,Closure,,200,管理员=200
+soho,soho/dashboard,soho.dashboard,"App\Soho\Http\Controllers\DashboardController",index,200,管理员=200
+soho,soho/data-scopes,soho.data_scopes.index,"App\Soho\Http\Controllers\DataScopeController",index,200,管理员=200
+soho,soho/data-scopes/create,soho.data_scopes.create,"App\Soho\Http\Controllers\DataScopeController",create,200,管理员=200
+soho,soho/dispute,soho.dispute.handle,"App\Soho\Http\Controllers\Aftersale\DisputeController",index,200,管理员=200
+soho,soho/event-log,soho.event-log.index,"App\Soho\Http\Controllers\EventLogController",index,200,管理员=200
+soho,soho/event/replay,soho.event.replay,Closure,,200,管理员=200
+soho,soho/exceptions,soho.exceptions.index,"App\Soho\Http\Controllers\ExceptionCaseController",index,200,管理员=200
+soho,soho/exchange-rates,soho.exchange_rates.index,"App\Soho\Http\Controllers\ExchangeRateController",index,200,管理员=200
+soho,soho/export-tasks,soho.export_tasks.index,"App\Soho\Http\Controllers\ExportTaskController",index,200,管理员=200
+soho,soho/express,soho.express.index,"App\Soho\Http\Controllers\ExpressController",index,200,管理员=200
+soho,soho/express/create,soho.express.create,"App\Soho\Http\Controllers\ExpressController",create,200,管理员=200
+soho,soho/finance/cost-allocation,soho.finance.cost.allocation,Closure,,200,管理员=200
+soho,soho/finance/cost-audit,soho.finance.cost.audit,Closure,,200,管理员=200
+soho,soho/finance/diff-approval,soho.finance.diff.approval,Closure,,200,管理员=200
+soho,soho/finance/platform-settlement,soho.finance.platform.settlement,Closure,,200,管理员=200
+soho,soho/finance/receive,soho.finance.receive,"App\Soho\Http\Controllers\FinanceController",receive,200,管理员=200
+soho,soho/finance/reconcile,soho.finance.reconcile,"App\Soho\Http\Controllers\FinanceController",reconcile,200,管理员=200
+soho,soho/finance/reconcile-task,soho.finance.reconcile.task,Closure,,200,管理员=200
+soho,soho/finance/refund-flow,soho.finance.refund.flow,Closure,,200,管理员=200
+soho,soho/finance/refunds,soho.finance.refunds,"App\Soho\Http\Controllers\FinanceController",refunds,200,管理员=200
+soho,soho/finance/settle,soho.finance.settle,"App\Soho\Http\Controllers\FinanceController",settle,200,管理员=200
+soho,soho/finance/settlement-audit,soho.finance.settlement.audit,Closure,,200,管理员=200
+soho,soho/finance/settlement-detail,soho.finance.settlement.detail,Closure,,200,管理员=200
+soho,soho/finance/transactions,soho.finance.transactions,"App\Soho\Http\Controllers\FinanceTransactionController",index,200,管理员=200
+soho,soho/fulfillment/assignments,soho.fulfillment.assignments.index,"App\Soho\Http\Controllers\Fulfillment\FulfillmentAssignmentController",index,200,管理员=200
+soho,soho/fulfillment/exception,soho.fulfillment.exception,"App\Soho\Http\Controllers\Fulfillment\FulfillmentExceptionController",index,200,管理员=200
+soho,soho/goods,soho.goods.index,"App\Soho\Http\Controllers\GoodsController",index,200,管理员=200
+soho,soho/goods/create,soho.goods.create,"App\Soho\Http\Controllers\GoodsController",create,200,管理员=200
+soho,soho/integration/api/health,soho.integration.api.health,Closure,,200,管理员=200
+soho,soho/integration/connection/status,soho.integration.connection.status,Closure,,200,管理员=200
+soho,soho/integration/rate-limit,soho.integration.rate-limit,Closure,,200,管理员=200
+soho,soho/inventory,soho.inventory.index,"App\Soho\Http\Controllers\InventoryController",index,200,管理员=200
+soho,soho/inventory/batches,soho.inventory.batches,"App\Soho\Http\Controllers\InventoryBatchController",index,200,管理员=200
+soho,soho/inventory/documents,soho.inventory.documents,"App\Soho\Http\Controllers\InventoryDocumentController",index,200,管理员=200
+soho,soho/inventory/export,soho.inventory.export,"App\Soho\Http\Controllers\InventoryController",export,200,管理员=200
+soho,soho/inventory/flow,soho.inventory.flow,"App\Soho\Http\Controllers\InventoryController",flow,200,管理员=200
+soho,soho/inventory/in,soho.inventory.in,"App\Soho\Http\Controllers\InventoryController",inbound,200,管理员=200
+soho,soho/inventory/out,soho.inventory.out,"App\Soho\Http\Controllers\InventoryController",outbound,200,管理员=200
+soho,soho/inventory/overview,soho.inventory.overview,"App\Soho\Http\Controllers\DashboardController",inventoryOverview,200,管理员=200
+soho,soho/inventory/stocktake,soho.inventory.stocktake,"App\Soho\Http\Controllers\InventoryController",stocktake,200,管理员=200
+soho,soho/inventory/transfer,soho.inventory.transfer,"App\Soho\Http\Controllers\InventoryController",transfer,200,管理员=200
+soho,soho/log/audit,soho.log.audit.index,"App\Soho\Http\Controllers\Log\AuditLogController",index,200,管理员=200
+soho,soho/log/login,soho.log.login,"App\Soho\Http\Controllers\Security\LoginLogController",index,200,管理员=200
+soho,soho/log/permission-change,soho.log.permission-change,"App\Soho\Http\Controllers\Security\PermissionChangeLogController",index,200,管理员=200
+soho,soho/log/platform-api,soho.log.platform-api.index,"App\Soho\Http\Controllers\Log\PlatformApiLogController",index,200,管理员=200
+soho,soho/log/sensitive-access,soho.log.sensitive-access,"App\Soho\Http\Controllers\Security\SensitiveAccessLogController",index,200,管理员=200
+soho,soho/log/stock-sync,soho.log.stock-sync.index,"App\Soho\Http\Controllers\Log\StockSyncLogController",index,200,管理员=200
+soho,soho/log/sync-task,soho.log.sync-task.index,"App\Soho\Http\Controllers\Log\SyncTaskLogController",index,200,管理员=200
+soho,soho/log/webhook,soho.log.webhook,Closure,,200,管理员=200
+soho,soho/log/webhook/failures,soho.log.webhook.failures,Closure,,200,管理员=200
+soho,soho/logistics/batch-callback,soho.logistics.batch.callback,"App\Soho\Http\Controllers\Fulfillment\ShipmentController",batchCallback,200,管理员=200
+soho,soho/logistics/bill,soho.logistics.bill,"App\Soho\Http\Controllers\Logistics\LogisticsBillController",index,200,管理员=200
+soho,soho/logistics/exception,soho.logistics.exception,"App\Soho\Http\Controllers\Logistics\LogisticsExceptionController",index,200,管理员=200
+soho,soho/logistics/lead-time,soho.logistics.lead-time,"App\Soho\Http\Controllers\Logistics\LogisticsMetricsController",index,200,管理员=200
+soho,soho/logistics/on-time,soho.logistics.on-time,"App\Soho\Http\Controllers\Logistics\LogisticsMetricsController",index,200,管理员=200
+soho,soho/logistics/ship-callback,soho.logistics.ship.callback,"App\Soho\Http\Controllers\Fulfillment\ShipmentController",callback,200,管理员=200
+soho,soho/logistics/tracking,soho.logistics.tracking,"App\Soho\Http\Controllers\Logistics\LogisticsTrackingController",index,200,管理员=200
+soho,soho/marketing/campaign-join,soho.marketing.campaign.join,Closure,,200,管理员=200
+soho,soho/marketing/campaign-rule,soho.marketing.campaign.rule,Closure,,200,管理员=200
+soho,soho/media,soho.media.index,"App\Soho\Http\Controllers\MediumController",index,200,管理员=200
+soho,soho/monitor/shop-connection,soho.monitor.shop-connection,"App\Soho\Http\Controllers\Shop\ShopConnectionController",index,200,管理员=200
+soho,soho/notifications,soho.notifications.index,"App\Soho\Http\Controllers\NotificationController",index,200,管理员=200
+soho,soho/notifications/delete-read,soho.notifications.delete-read,"App\Soho\Http\Controllers\NotificationController",deleteRead,302,管理员=302→/soho/notifications
+soho,soho/notifications/read-all,soho.notifications.read-all,"App\Soho\Http\Controllers\NotificationController",markAllAsRead,200,管理员=200
+soho,soho/notifications/unread-count,soho.notifications.unread-count,"App\Soho\Http\Controllers\NotificationController",unreadCount,200,管理员=200
+soho,soho/operation-logs,soho.operation-logs.index,"App\Soho\Http\Controllers\OperationLogController",index,200,管理员=200
+soho,soho/operation/aftersale-rate,soho.operation.aftersale.rate,"App\Soho\Http\Controllers\Report\AftersaleRateController",index,200,管理员=200
+soho,soho/operation/dashboard,soho.operation.dashboard,"App\Soho\Http\Controllers\Report\OperationDashboardController",index,200,管理员=200
+soho,soho/operation/inventory-warning,soho.operation.inventory.warning,"App\Soho\Http\Controllers\Report\InventoryWarningController",index,200,管理员=200
+soho,soho/operation/order-exception,soho.operation.order.exception,"App\Soho\Http\Controllers\Report\OrderExceptionController",index,200,管理员=200
+soho,soho/operation/ship-on-time,soho.operation.ship.on-time,"App\Soho\Http\Controllers\Report\ShipOnTimeController",index,200,管理员=200
+soho,soho/operation/shop-overview,soho.operation.shop.overview,"App\Soho\Http\Controllers\Report\ShopOverviewController",index,200,管理员=200
+soho,soho/order,soho.order.index,"App\Soho\Http\Controllers\OrderController",index,200,管理员=200
+soho,soho/order/cancelled,soho.order.cancelled,"App\Soho\Http\Controllers\OrderController",cancelled,200,管理员=200
+soho,soho/order/completed,soho.order.completed,"App\Soho\Http\Controllers\OrderController",completed,200,管理员=200
+soho,soho/order/exception,soho.order.exception,"App\Soho\Http\Controllers\OrderController",exception,200,管理员=200
+soho,soho/order/export,soho.order.export,Closure,,200,管理员=200
+soho,soho/order/fulfillment,soho.order.fulfillment,Closure,,200,管理员=200
+soho,soho/order/merge,soho.order.merge,Closure,,200,管理员=200
+soho,soho/order/pending-fulfill,soho.order.pending-fulfill,Closure,,200,管理员=200
+soho,soho/order/pending-payment,soho.order.pending-payment,"App\Soho\Http\Controllers\OrderController",pendingPayment,200,管理员=200
+soho,soho/order/pending-ship,soho.order.pending-ship,"App\Soho\Http\Controllers\OrderController",pendingShip,200,管理员=200
+soho,soho/order/shipped,soho.order.shipped,"App\Soho\Http\Controllers\OrderController",shipped,200,管理员=200
+soho,soho/order/split,soho.order.split,Closure,,200,管理员=200
+soho,soho/order/stock-shortage,soho.order.stock-shortage,Closure,,200,管理员=200
+soho,soho/order/warehouse-assign,soho.order.warehouse.assign,Closure,,200,管理员=200
+soho,soho/pack/tasks,soho.pack.tasks.index,"App\Soho\Http\Controllers\Fulfillment\PackTaskController",index,200,管理员=200
+soho,soho/pack/tasks/completed,soho.pack.tasks.completed,"App\Soho\Http\Controllers\Fulfillment\PackTaskController",completed,200,管理员=200
+soho,soho/pack/tasks/exception,soho.pack.tasks.exception,"App\Soho\Http\Controllers\Fulfillment\PackTaskController",exception,200,管理员=200
+soho,soho/pack/tasks/material,soho.pack.tasks.material,"App\Soho\Http\Controllers\Fulfillment\PackTaskController",material,200,管理员=200
+soho,soho/pack/tasks/parcel,soho.pack.tasks.parcel,"App\Soho\Http\Controllers\Fulfillment\PackTaskController",parcel,200,管理员=200
+soho,soho/pack/tasks/scan,soho.pack.tasks.scan,"App\Soho\Http\Controllers\Fulfillment\PackTaskController",scan,200,管理员=200
+soho,soho/pack/tasks/weight,soho.pack.tasks.weight,"App\Soho\Http\Controllers\Fulfillment\PackTaskController",weight,200,管理员=200
+soho,soho/package,soho.package.index,"App\Soho\Http\Controllers\PackageController",index,200,管理员=200
+soho,soho/package/create,soho.package.create,"App\Soho\Http\Controllers\PackageController",create,200,管理员=200
+soho,soho/pick/tasks,soho.pick.tasks.index,"App\Soho\Http\Controllers\Fulfillment\PickTaskController",index,200,管理员=200
+soho,soho/pick/tasks/completed,soho.pick.tasks.completed,"App\Soho\Http\Controllers\Fulfillment\PickTaskController",completed,200,管理员=200
+soho,soho/pick/tasks/exception,soho.pick.tasks.exception,"App\Soho\Http\Controllers\Fulfillment\PickTaskController",exception,200,管理员=200
+soho,soho/pick/tasks/progress,soho.pick.tasks.progress,"App\Soho\Http\Controllers\Fulfillment\PickTaskController",progress,200,管理员=200
+soho,soho/pick/tasks/scan,soho.pick.tasks.scan,"App\Soho\Http\Controllers\Fulfillment\PickTaskController",scan,200,管理员=200
+soho,soho/platform-accounts,soho.platform_accounts.index,"App\Soho\Http\Controllers\PlatformAccountController",index,200,管理员=200
+soho,soho/platform-accounts/create,soho.platform_accounts.create,"App\Soho\Http\Controllers\PlatformAccountController",create,200,管理员=200
+soho,soho/platform-capabilities,soho.platform_capabilities.index,"App\Soho\Http\Controllers\PlatformCapabilityController",index,200,管理员=200
+soho,soho/platform-sku,soho.platform-sku.index,"App\Soho\Http\Controllers\PlatformSkuController",index,200,管理员=200
+soho,soho/platform-sku/create,soho.platform-sku.create,"App\Soho\Http\Controllers\PlatformSkuController",create,200,管理员=200
+soho,soho/platform/attribute,soho.platform.attribute,Closure,,200,管理员=200
+soho,soho/platform/category-mapping,soho.platform.category.mapping,Closure,,200,管理员=200
+soho,soho/platform/listing,soho.platform.listing,Closure,,200,管理员=200
+soho,soho/platform/product-publish,soho.platform.product.publish,Closure,,200,管理员=200
+soho,soho/platform/publish-task,soho.platform.publish.task,Closure,,200,管理员=200
+soho,soho/price/calculate,soho.price.calculate,"App\Soho\Http\Controllers\Price\PriceCalculateController",index,200,管理员=200
+soho,soho/price/change/approvals,soho.price.change.approvals.index,"App\Soho\Http\Controllers\Price\PriceChangeApprovalController",index,200,管理员=200
+soho,soho/price/change/history,soho.price.change.history,Closure,,200,管理员=200
+soho,soho/price/change/requests,soho.price.change.requests.index,"App\Soho\Http\Controllers\Price\PriceChangeRequestController",index,200,管理员=200
+soho,soho/price/change/requests/create,soho.price.change.requests.create,"App\Soho\Http\Controllers\Price\PriceChangeRequestController",create,200,管理员=200
+soho,soho/price/change/tasks,soho.price.change.tasks.index,"App\Soho\Http\Controllers\Price\PriceChangeTaskController",index,200,管理员=200
+soho,soho/price/change/tasks/create,soho.price.change.tasks.create,"App\Soho\Http\Controllers\Price\PriceChangeTaskController",create,200,管理员=200
+soho,soho/price/query,soho.price.query,"App\Soho\Http\Controllers\Price\PriceQueryController",index,200,管理员=200
+soho,soho/price/rules,soho.price.rules.index,"App\Soho\Http\Controllers\Price\PriceRuleController",index,200,管理员=200
+soho,soho/price/rules/create,soho.price.rules.create,"App\Soho\Http\Controllers\Price\PriceRuleController",create,200,管理员=200
+soho,soho/procurement/approvals,soho.procurement.approvals.index,"App\Soho\Http\Controllers\Procurement\ProcurementApprovalController",index,200,管理员=200
+soho,soho/procurement/arrivals,soho.procurement.arrivals.index,"App\Soho\Http\Controllers\Procurement\ProcurementArrivalController",index,200,管理员=200
+soho,soho/procurement/inbounds,soho.procurement.inbounds.index,"App\Soho\Http\Controllers\Procurement\ProcurementInboundController",index,200,管理员=200
+soho,soho/procurement/orders,soho.procurement.orders.index,"App\Soho\Http\Controllers\Procurement\ProcurementOrderController",index,200,管理员=200
+soho,soho/procurement/plans,soho.procurement.plans.index,"App\Soho\Http\Controllers\Procurement\ProcurementPlanController",index,200,管理员=200
+soho,soho/procurement/requests,soho.procurement.requests.index,"App\Soho\Http\Controllers\Procurement\ProcurementRequestController",index,200,管理员=200
+soho,soho/procurement/safe-stocks,soho.procurement.safe-stocks.index,"App\Soho\Http\Controllers\Procurement\SafeStockController",index,200,管理员=200
+soho,soho/procurement/suppliers,soho.procurement.suppliers.index,"App\Soho\Http\Controllers\Procurement\SupplierController",index,200,管理员=200
+soho,soho/product,soho.product.index,"App\Soho\Http\Controllers\ProductController",index,200,管理员=200
+soho,soho/product-attribute,soho.product-attribute.index,"App\Soho\Http\Controllers\ProductAttributeController",index,200,管理员=200
+soho,soho/product-attribute/create,soho.product-attribute.create,"App\Soho\Http\Controllers\ProductAttributeController",create,200,管理员=200
+soho,soho/product/create,soho.product.create,"App\Soho\Http\Controllers\ProductController",create,200,管理员=200
+soho,soho/product/import,soho.product.import,Closure,,200,管理员=200
+soho,soho/product/ranking,soho.product.ranking,"App\Soho\Http\Controllers\DashboardController",productRanking,200,管理员=200
+soho,soho/product/review/change,soho.product.review.change,Closure,,200,管理员=200
+soho,soho/product/review/pending,soho.product.review.pending,Closure,,200,管理员=200
+soho,soho/product/review/record,soho.product.review.record,Closure,,200,管理员=200
+soho,soho/product/sku,soho.product.sku,Closure,,200,管理员=200
+soho,soho/product/spu/detail,soho.product.spu.detail,Closure,,200,管理员=200
+soho,soho/product/tasks/exception,soho.product.tasks.exception,Closure,,200,管理员=200
+soho,soho/product/tasks/pending-edit,soho.product.tasks.pending-edit,Closure,,200,管理员=200
+soho,soho/product/tasks/returned,soho.product.tasks.returned,Closure,,200,管理员=200
+soho,soho/product/versions,soho.product.versions,Closure,,200,管理员=200
+soho,soho/profile/avatar/defaults,soho.profile.avatar.defaults,"App\Soho\Http\Controllers\ProfileController",defaultAvatars,200,管理员=200
+soho,soho/promotion,soho.promotion.index,"App\Soho\Http\Controllers\PromotionController",index,200,管理员=200
+soho,soho/promotion/analysis,soho.promotion.analysis,Closure,,200,管理员=200
+soho,soho/promotion/create,soho.promotion.create,"App\Soho\Http\Controllers\PromotionController",create,200,管理员=200
+soho,soho/promotion/internal,soho.promotion.internal,Closure,,200,管理员=200
+soho,soho/queue/monitor,soho.queue.monitor,"App\Soho\Http\Controllers\System\QueueMonitorController",index,200,管理员=200
+soho,soho/readonly/inventory-warning,soho.readonly.inventory.warning,"App\Soho\Http\Controllers\Report\ReadonlyController",inventoryWarning,200,管理员=200
+soho,soho/readonly/listing-view,soho.readonly.listing.view,"App\Soho\Http\Controllers\Report\ReadonlyController",listingView,200,管理员=200
+soho,soho/readonly/order-report,soho.readonly.order.report,"App\Soho\Http\Controllers\Report\ReadonlyController",orderReport,200,管理员=200
+soho,soho/refund/approve,soho.refund.approve,"App\Soho\Http\Controllers\Aftersale\RefundApprovalController",index,200,管理员=200
+soho,soho/replacement,soho.replacement.create,"App\Soho\Http\Controllers\Aftersale\ReplacementController",index,200,管理员=200
+soho,soho/report/aftersale,soho.report.aftersale,"App\Soho\Http\Controllers\Report\AftersaleReportController",index,200,管理员=200
+soho,soho/report/aftersale-detail,soho.report.aftersale-detail,"App\Soho\Http\Controllers\Report\AftersaleDetailController",index,200,管理员=200
+soho,soho/report/inventory,soho.report.inventory,"App\Soho\Http\Controllers\Report\InventoryReportController",index,200,管理员=200
+soho,soho/report/inventory-turnover,soho.report.inventory.turnover,"App\Soho\Http\Controllers\Report\InventoryTurnoverController",index,200,管理员=200
+soho,soho/report/inventory/export,soho.report.inventory.export,"App\Soho\Http\Controllers\Report\InventoryReportController",export,200,管理员=200
+soho,soho/report/metrics-definition,soho.report.metrics.definition,"App\Soho\Http\Controllers\Report\MetricsDefinitionController",index,200,管理员=200
+soho,soho/report/order,soho.report.order,"App\Soho\Http\Controllers\Report\OrderReportController",index,200,管理员=200
+soho,soho/report/order-timeliness,soho.report.order-timeliness,"App\Soho\Http\Controllers\Report\OrderTimelinessController",index,200,管理员=200
+soho,soho/report/order-timeliness/export,soho.report.order-timeliness.export,"App\Soho\Http\Controllers\Report\OrderTimelinessController",export,200,管理员=200
+soho,soho/report/procurement,soho.report.procurement,Closure,,200,管理员=200
+soho,soho/report/product,soho.report.product,"App\Soho\Http\Controllers\Report\ProductReportController",index,200,管理员=200
+soho,soho/report/product/export,soho.report.product.export,"App\Soho\Http\Controllers\Report\ProductReportController",export,200,管理员=200
+soho,soho/report/profit,soho.report.profit,"App\Soho\Http\Controllers\Report\ProfitReportController",index,200,管理员=200
+soho,soho/report/profit/export,soho.report.profit.export,"App\Soho\Http\Controllers\Report\ProfitReportController",export,200,管理员=200
+soho,soho/report/sales,soho.report.sales,"App\Soho\Http\Controllers\Report\SalesReportController",index,200,管理员=200
+soho,soho/report/sales/export,soho.report.sales.export,"App\Soho\Http\Controllers\Report\SalesReportController",export,200,管理员=200
+soho,soho/report/shop-analysis,soho.report.shop.analysis,"App\Soho\Http\Controllers\Report\ShopAnalysisController",index,200,管理员=200
+soho,soho/report/sku-analysis,soho.report.sku.analysis,"App\Soho\Http\Controllers\Report\SkuAnalysisController",index,200,管理员=200
+soho,soho/return/inspect,soho.return.inspect,"App\Soho\Http\Controllers\Aftersale\ReturnInspectController",index,200,管理员=200
+soho,soho/return/receive,soho.return.receive,"App\Soho\Http\Controllers\Aftersale\ReturnReceiveController",index,200,管理员=200
+soho,soho/sales/report,soho.sales.report,"App\Soho\Http\Controllers\DashboardController",salesReport,200,管理员=200
+soho,soho/security,soho.security.index,"App\Soho\Http\Controllers\System\SecurityController",index,200,管理员=200
+soho,soho/security/devices,soho.security.devices,"App\Soho\Http\Controllers\Security\DeviceController",index,200,管理员=200
+soho,soho/security/event,soho.security.event,"App\Soho\Http\Controllers\Security\SecurityEventController",index,200,管理员=200
+soho,soho/security/ip-whitelist,soho.security.ip-whitelist.index,"App\Soho\Http\Controllers\Security\IpWhitelistController",index,200,管理员=200
+soho,soho/security/ip-whitelist/create,soho.security.ip-whitelist.create,"App\Soho\Http\Controllers\Security\IpWhitelistController",create,200,管理员=200
+soho,soho/security/lockouts,soho.security.lockouts,"App\Soho\Http\Controllers\Security\AccountLockoutController",index,200,管理员=200
+soho,soho/security/login-failures,soho.security.login.failures,"App\Soho\Http\Controllers\Security\LoginFailureController",index,200,管理员=200
+soho,soho/security/mfa,soho.security.mfa,"App\Soho\Http\Controllers\Security\SecurityPolicyController",mfaIndex,200,管理员=200
+soho,soho/security/password-policy,soho.security.password-policy,"App\Soho\Http\Controllers\Security\SecurityPolicyController",passwordIndex,200,管理员=200
+soho,soho/security/sessions,soho.security.sessions,"App\Soho\Http\Controllers\Security\SessionController",index,200,管理员=200
+soho,soho/shipment/pending,soho.shipment.pending,"App\Soho\Http\Controllers\Fulfillment\ShipmentController",pending,200,管理员=200
+soho,soho/shipment/push/failed,soho.shipment.push.failed,"App\Soho\Http\Controllers\Fulfillment\ShipmentController",pushFailed,200,管理员=200
+soho,soho/shipment/push/pending,soho.shipment.push.pending,"App\Soho\Http\Controllers\Fulfillment\ShipmentController",pushPending,200,管理员=200
+soho,soho/shipping-method,soho.shipping-method.index,"App\Soho\Http\Controllers\ShippingMethodController",index,200,管理员=200
+soho,soho/shipping-method/create,soho.shipping-method.create,"App\Soho\Http\Controllers\ShippingMethodController",create,200,管理员=200
+soho,soho/shipping-template,soho.shipping-templates.index,"App\Soho\Http\Controllers\ShippingTemplateController",index,200,管理员=200
+soho,soho/shipping-template/create,soho.shipping-templates.create,"App\Soho\Http\Controllers\ShippingTemplateController",create,200,管理员=200
+soho,soho/shop,soho.shop.index,"App\Soho\Http\Controllers\ShopController",index,200,管理员=200
+soho,soho/shop/authorization-exceptions,soho.shop.authorization-exceptions.index,"App\Soho\Http\Controllers\Shop\AuthorizationExceptionController",index,200,管理员=200
+soho,soho/shop/authorization-failures,soho.shop.authorization-failures.index,"App\Soho\Http\Controllers\Shop\AuthorizationFailureController",index,200,管理员=200
+soho,soho/shop/authorization-logs,soho.shop.authorization-logs.index,"App\Soho\Http\Controllers\Shop\AuthorizationLogController",index,200,管理员=200
+soho,soho/shop/authorization-status,soho.shop.authorization-status.index,"App\Soho\Http\Controllers\Shop\AuthorizationStatusController",index,200,管理员=200
+soho,soho/shop/authorize,soho.shop.authorize,"App\Soho\Http\Controllers\ShopController",authorize,200,管理员=200
+soho,soho/shop/create,soho.shop.create,"App\Soho\Http\Controllers\ShopController",create,200,管理员=200
+soho,soho/shop/token-refresh-logs,soho.shop.token-refresh-logs.index,"App\Soho\Http\Controllers\Shop\TokenRefreshLogController",index,200,管理员=200
+soho,soho/shop/token-status,soho.shop.token-status,"App\Soho\Http\Controllers\Shop\TokenStatusController",index,200,管理员=200
+soho,soho/sync-cursors,soho.sync_cursors.index,"App\Soho\Http\Controllers\SyncCursorController",index,200,管理员=200
+soho,soho/sync-task,soho.sync-task.index,"App\Soho\Http\Controllers\SyncTaskController",index,200,管理员=200
+soho,soho/sync-task/failed,soho.sync-task.failed,Closure,,200,管理员=200
+soho,soho/sync-task/retry,soho.sync-task.retry,Closure,,200,管理员=200
+soho,soho/system/alerts,soho.system.alerts.index,"App\Soho\Http\Controllers\System\SystemAlertController",index,200,管理员=200
+soho,soho/system/features,soho.system.features.index,"App\Soho\Http\Controllers\System\FeatureSwitchController",index,200,管理员=200
+soho,soho/system/features/create,soho.system.features.create,"App\Soho\Http\Controllers\System\FeatureSwitchController",create,200,管理员=200
+soho,soho/system/health,soho.system.health,"App\Soho\Http\Controllers\System\SystemHealthController",index,200,管理员=200
+soho,soho/system/notifications,soho.system.notifications.index,"App\Soho\Http\Controllers\System\NotificationTemplateController",index,200,管理员=200
+soho,soho/system/notifications/create,soho.system.notifications.create,"App\Soho\Http\Controllers\System\NotificationTemplateController",create,200,管理员=200
+soho,soho/system/parameters,soho.system.parameters.index,"App\Soho\Http\Controllers\System\SystemParameterController",index,200,管理员=200
+soho,soho/system/parameters/create,soho.system.parameters.create,"App\Soho\Http\Controllers\System\SystemParameterController",create,200,管理员=200
+soho,soho/system/settings,soho.system.settings,"App\Soho\Http\Controllers\System\SettingsController",index,200,管理员=200
+soho,soho/system/storage,soho.system.storage.index,"App\Soho\Http\Controllers\System\FileStorageController",index,200,管理员=200
+soho,soho/system/storage/create,soho.system.storage.create,"App\Soho\Http\Controllers\System\FileStorageController",create,200,管理员=200
+soho,soho/system/version,soho.system.version,"App\Soho\Http\Controllers\System\SystemVersionController",index,200,管理员=200
+soho,soho/tax-entities,soho.tax_entities.index,"App\Soho\Http\Controllers\TaxEntityController",index,200,管理员=200
+soho,soho/tax-entities/create,soho.tax_entities.create,"App\Soho\Http\Controllers\TaxEntityController",create,200,管理员=200
+soho,soho/tax-rate,soho.tax-rate.index,"App\Soho\Http\Controllers\TaxRateController",index,200,管理员=200
+soho,soho/tax-rate/create,soho.tax-rate.create,"App\Soho\Http\Controllers\TaxRateController",create,200,管理员=200
+soho,soho/unauthorized,soho.unauthorized,Closure,,200,管理员=200
+soho,soho/warehouse,soho.warehouse.index,"App\Soho\Http\Controllers\WarehouseController",index,200,管理员=200
+soho,soho/warehouse/create,soho.warehouse.create,"App\Soho\Http\Controllers\WarehouseController",create,200,管理员=200
+soho,soho/warehouse/inbound,soho.warehouse.inbound,Closure,,200,管理员=200
+soho,soho/warehouse/inventory-doc,soho.warehouse.inventory-doc,Closure,,200,管理员=200
+soho,soho/warehouse/inventory-turnover,soho.warehouse.inventory.turnover,Closure,,200,管理员=200
+soho,soho/warehouse/locations,soho.warehouse.locations,Closure,,200,管理员=200
+soho,soho/warehouse/outbound,soho.warehouse.outbound,Closure,,200,管理员=200
+soho,soho/warehouse/return-inspect,soho.warehouse.return.inspect,Closure,,200,管理员=200
+soho,soho/warehouse/return-receive,soho.warehouse.return.receive,Closure,,200,管理员=200
+soho,soho/warehouse/stock-adjust,soho.warehouse.stock-adjust,Closure,,200,管理员=200
+soho,soho/warehouse/stock-age,soho.warehouse.stock.age,Closure,,200,管理员=200
+soho,soho/warehouse/stock-warning,soho.warehouse.stock-warning,Closure,,200,管理员=200
+soho,soho/warehouse/stocktake,soho.warehouse.stocktake,Closure,,200,管理员=200
+soho,soho/warehouse/zones,soho.warehouse.zones,Closure,,200,管理员=200
+soho,soho/waybill,soho.waybill.index,"App\Soho\Http\Controllers\Logistics\WaybillController",index,200,管理员=200

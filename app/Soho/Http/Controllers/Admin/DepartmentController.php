@@ -45,7 +45,7 @@ class DepartmentController extends Controller
 
         Department::create($validated);
 
-        return redirect()->route('admin.departments.index')->with('success', '部门创建成功');
+        return redirect()->route('soho.admin.departments.index')->with('success', '部门创建成功');
     }
 
     /** SOHO 部门编码延续 soho_dept_N 序列 */
@@ -81,7 +81,7 @@ class DepartmentController extends Controller
 
         $department->update($validated);
 
-        return redirect()->route('admin.departments.index')->with('success', '部门更新成功');
+        return redirect()->route('soho.admin.departments.index')->with('success', '部门更新成功');
     }
 
     public function destroy(Department $department)
@@ -95,6 +95,6 @@ class DepartmentController extends Controller
         }
 
         $department->delete();
-        return redirect()->route('admin.departments.index')->with('success', '部门删除成功');
+        return redirect()->route('soho.admin.departments.index')->with('success', '部门删除成功');
     }
 }

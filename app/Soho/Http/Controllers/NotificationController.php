@@ -117,7 +117,7 @@ class NotificationController extends Controller
             ->whereNotNull('read_at')
             ->delete();
 
-        return redirect()->route('notifications.index')->with('success', '已删除所有已读通知');
+        return redirect()->route('soho.notifications.index')->with('success', '已删除所有已读通知');
     }
 
     /**
@@ -147,7 +147,7 @@ class NotificationController extends Controller
             return redirect()->back()->with('error', '无效的操作');
         }
 
-        return redirect()->route('notifications.index')->with('success', $message);
+        return redirect()->route('soho.notifications.index')->with('success', $message);
     }
 
     /**
