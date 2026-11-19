@@ -50,3 +50,56 @@
 - 人事/项目/文件/岗位/聊天页的部门、岗位、账号下拉按 `ModuleContext` 收敛到本模块（人事新建 46.8%→93.5%，项目新建 56.5%→97.4%）。
 - `positions` 导入 16 条（电商部岗位按已删规则跳过）；修正 `App\Support\RoleCatalog` → `App\Erp\Support\RoleCatalog` 残留引用。
 - 155 页正文比对：hr/asset/ec 152/155，project 150/155，warehouse/quality/accounting 仅剩「参考 403 vs 合并 302」刻意偏差。SOHO/PM 全量回归无变化（0×500 / 0×403）。
+
+---
+
+## §二十二 P0 四项收口（2026-11-19）
+
+> 完整逐批记录见交付目录 `C-执行记录.md` §38~§55；此处为仓库内摘要。
+
+### 22.1 P0-1 列表计数与空态（`b244299`）
+
+48 个模板的「计数 + 分页」由 `hasPages()` 改为 `total() > 0`；`pagination/custom.blade.php` 单页只渲染计数行；空态统一为「图标 + 一句说明」。
+
+### 22.2 P0-2 SOHO 占位页清零（`b244299` → `7bf8baa`，16 个批次）
+
+| 批次 | 页面数 | 控制器 |
+| --- | --- | --- |
+| SKU / 商品版本 / 订单拆分合并缺货 | 5 | `Order\OrderOperationController` |
+| 订单待履约 / 履约单 / 分仓 / 导出 | 4 | 同上 |
+| 售后（申请/补充/进度/沟通/日志） | 5 | `Aftersale\AfterSaleBoardController` |
+| 客户标签 CRUD | 1 | `Customer\CustomerTagController` |
+| 仓储 12 页（库区/库位/预警/入出库/盘点/调整/单据/退货/库龄/周转） | 12 | `Warehouse\WarehouseBoardController` |
+| 财务 8 页（退款/结算/成本分摊/对账/结算审计/成本审计/差异审批） | 8 | `Finance\FinanceBoardController` |
+| 商品 8 页（导入/审核/变更/SPU/待改/退回/异常） | 8 | `Product\ProductBoardController` |
+| 平台 5 页（Listing/一键上架/任务/类目映射/属性） | 5 | `Platform\PlatformBoardController` |
+| 集成同步 5 页（连接状态/API 健康/限流/失败/重试） | 5 | `Integration\IntegrationBoardController` |
+| 日志事件 3 页（Webhook/失败/事件重放） | 3 | `Log\WebhookLogController` |
+| 促销营销 4 页（内部促销/分析/报名/规则） | 4 | `Promotion\PromotionBoardController` |
+| 价格报表 2 页（调价历史/采购报表） | 2 | `Price\PriceReportController` |
+| 客户隐私（方案①建表全流程） | 1 | `Customer\CustomerPrivacyController` |
+
+结果：`routes/soho.php` 中 `view('placeholder')` 计数 = **0**；全量 548 页 0×500 / 0×404 / 0×403。
+
+**新增表**：`soho_customer_privacy_requests`（迁移 `2026_11_19_200000_*`，已执行）。
+
+### 22.3 P0-3 表单防护（`f1540f7`）
+
+`layouts/partials/form-guard.blade.php`（提交锁 + 原生化校验放行 + 提示条 6 秒收起）接入 5 套布局；flash 补 `warning` / `info` 两档。
+
+### 22.4 P0-4 响应式（`6599e54`）
+
+`public/assets/core/css/responsive.css` + `layouts/partials/responsive.blade.php`：裸表格自动补 `.table-responsive`、窄屏注入汉堡按钮。踩坑：Core 侧栏类名 `.dw-nav`、表格类名 `dw-table`。
+
+### 22.5 验收基线（`aa74f10`）
+
+| 模块 | 200 | 302 | 500/404/403 |
+| --- | --- | --- | --- |
+| core | 15 | 2 | 0 |
+| erp | 155 | 2 | 0 |
+| pm | 68 | 5 | 0 |
+| soho | 288 | 13 | 0 |
+
+### 22.6 下一步
+
+P1 业务深化：SOHO 高价值页补深度闭环（履约执行、退款闭环、调拨审批链）；ERP 只读模块补写操作；PM 项目内电话会议去除 Janus 外部依赖。
