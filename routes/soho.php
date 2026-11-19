@@ -993,12 +993,8 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 营销中心扩展（营销专员 V3.1新增） ====================
     Route::middleware('soho_role:marketing_staff')->group(function () {
-        Route::middleware('permission:promotion.view')->get('promotion/internal', function () {
-            return view('placeholder', ['title' => '内部促销', 'feature' => '内部促销', 'status' => '开发中']);
-        })->name('promotion.internal');
-        Route::middleware('permission:promotion.view')->get('promotion/analysis', function () {
-            return view('placeholder', ['title' => '促销分析', 'feature' => '促销分析', 'status' => '开发中']);
-        })->name('promotion.analysis');
+        Route::middleware('permission:promotion.view')->get('promotion/internal', [\App\Soho\Http\Controllers\Promotion\PromotionBoardController::class, 'internal'])->name('promotion.internal');
+        Route::middleware('permission:promotion.view')->get('promotion/analysis', [\App\Soho\Http\Controllers\Promotion\PromotionBoardController::class, 'analysis'])->name('promotion.analysis');
     });
 
     // ==================== 集成运维扩展（V3.1遗漏补全） ====================
@@ -1215,12 +1211,8 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 营销专员扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:marketing_staff')->group(function () {
-        Route::middleware('permission:promotion.edit')->get('marketing/campaign-join', function () {
-            return view('placeholder', ['title' => '活动报名', 'feature' => '平台活动报名', 'status' => '开发中']);
-        })->name('marketing.campaign.join');
-        Route::middleware('permission:promotion.edit')->get('marketing/campaign-rule', function () {
-            return view('placeholder', ['title' => '活动规则', 'feature' => '活动规则管理', 'status' => '开发中']);
-        })->name('marketing.campaign.rule');
+        Route::middleware('permission:promotion.edit')->match(['get', 'post'], 'marketing/campaign-join', [\App\Soho\Http\Controllers\Promotion\PromotionBoardController::class, 'campaignJoin'])->name('marketing.campaign.join');
+        Route::middleware('permission:promotion.edit')->match(['get', 'post'], 'marketing/campaign-rule', [\App\Soho\Http\Controllers\Promotion\PromotionBoardController::class, 'campaignRule'])->name('marketing.campaign.rule');
     });
 
     // ==================== 统一审批中心（各业务模块审批统一入口） ====================
