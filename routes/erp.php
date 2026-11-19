@@ -653,11 +653,15 @@ Route::middleware(['auth', 'role:admin|warehouse_manager'])->prefix('app/invento
 // ============================================================
 Route::middleware(['auth', 'role:admin|quality_manager|accountant|viewer'])->prefix('app/quality')->name('app.quality.')->group(function () {
     Route::resource('inspections', \App\Erp\Http\Controllers\App\Quality\QualityController::class)->only(['index', 'create', 'store', 'show']);
-    Route::get('defects', function () {
-        $defectCodes = \App\Erp\Models\Quality\DefectCode::orderBy('category')->paginate(20);
-        $defectRecords = \App\Erp\Models\Quality\DefectRecord::with(['defectCode', 'item'])->latest()->take(10)->get();
-        return view('app.quality.defects.index', compact('defectCodes', 'defectRecords'));
-    })->name('defects.index');
+    // 检验项明细与判定（P1 质检闭环）
+    Route::post('inspections/{inspection}/lines', [\App\Erp\Http\Controllers\App\Quality\QualityController::class, 'addLine'])->name('inspections.lines.store');
+    Route::post('inspections/{inspection}/judge', [\App\Erp\Http\Controllers\App\Quality\QualityController::class, 'judge'])->name('inspections.judge');
+    // 不合格品台账与处置
+    Route::get('defects', [\App\Erp\Http\Controllers\App\Quality\DefectRecordController::class, 'index'])->name('defects.index');
+    Route::get('defects/create', [\App\Erp\Http\Controllers\App\Quality\DefectRecordController::class, 'create'])->name('defects.create');
+    Route::post('defects', [\App\Erp\Http\Controllers\App\Quality\DefectRecordController::class, 'store'])->name('defects.store');
+    Route::get('defects/{defect}', [\App\Erp\Http\Controllers\App\Quality\DefectRecordController::class, 'show'])->name('defects.show');
+    Route::post('defects/{defect}/handle', [\App\Erp\Http\Controllers\App\Quality\DefectRecordController::class, 'handle'])->name('defects.handle');
     Route::get('reports', [\App\Erp\Http\Controllers\App\Quality\QualityController::class, 'reports'])->name('reports');
 });
 

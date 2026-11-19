@@ -178,3 +178,25 @@ SOHO 库存单据（`soho_inventory_documents`）此前只有只读台账，无�
 ### 24.5 回归
 
 `soho` 全模块 303 条路由：200=299 / 302=4 / 0×500 / 0×404 / 0×403。
+## 二十五、P1-4 ERP 质检闭环（不合格品台账 + 检验项判定）
+
+### 25.1 缺口
+
+`app/quality` 下只有检验单的列表/新建/详情与只读的「缺陷代码 + 最近缺陷记录」（且列表用路由闭包实现），不合格品没有登记入口、没有处置动作，检验项明细表（`erp_quality_inspection_lines`）从未写入。
+
+### 25.2 代码
+
+- 新增 `App\Erp\Http\Controllers\App\Quality\DefectRecordController`：`index / create / store / show / handle` + `nextRecordNo()`（`DR-{年}-{6位序号}`，冲突顺延）。
+- `QualityController` 增 `addLine`（检验项明细追加，行号顺延）、`judge`（判定：结果/合格数/不合格数/备注 + `approved_by/approved_at` + 状态 completed）；`store` 与 `judge` 判不合格时自动登记缺陷记录（`disposition=pending`，数量取不合格数）。
+- 视图：新增 `app/quality/defects/{create,show}.blade.php`；`defects/index` 重写为「统计卡 + 不合格品记录（按类型/处置/关键字筛选，含详情入口）+ 缺陷代码字典」；`inspections/show` 增「检验项明细（列表 + 追加表单）」与「检验判定」区。
+- 路由：`defects` 由闭包改为控制器（index/create/store/show/handle 5 条），新增 `inspections/{inspection}/lines`、`inspections/{inspection}/judge`，共 7 条。
+
+业务规则：存在判「不合格」的检验项时，判定不能选合格/豁免接收；处置为返工/退货/让步接收/报废时必须填纠正措施，否则拦截。
+
+### 25.3 E2E
+
+`E:\_tmp_q_e2e.php` 22 项断言 PASS：缺陷台账/登记页 200、登记生成 `DR-2026-000004`、详情处置表单可用、缺纠正措施被拦截、处置 → rework 且措施落库；检验单详情 200、检验项追加、fail 明细阻挡判合格、判定保存（审批人 + 数量）、不合格自动生成缺陷记录（数量=2、pending）、审计日志写入；3 项回滚校验（缺陷数、明细数、检验单字段）全部还原。
+
+### 25.4 回归
+
+ERP 全模块 159 条路由：200=53 / 302=106 / 0×500 / 0×404 / 0×403（302 为销售角色权限跳转，符合预期）。

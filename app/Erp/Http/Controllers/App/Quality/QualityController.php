@@ -5,6 +5,8 @@ namespace App\Erp\Http\Controllers\App\Quality;
 use App\Erp\Enums\QualityInspectionStatus;
 use App\Erp\Http\Controllers\Controller;
 use App\Erp\Models\Quality\QualityInspection;
+use App\Erp\Models\Quality\QualityInspectionLine;
+use App\Erp\Models\Quality\DefectRecord;
 use App\Erp\Models\MasterData\Item;
 use App\Erp\Models\MasterData\Warehouse;
 use App\Erp\Models\Quality\DefectCode;
@@ -75,7 +77,19 @@ class QualityController extends Controller
 
         event(new QualityCompleted($inspection));
 
+        // 判定不合格时自动生成缺陷记录（不合格品台账入口），待质检处置
         if ($inspection->result === \App\Erp\Enums\QualityResult::Fail) {
+            DefectRecord::create([
+                'record_no' => DefectRecordController::nextRecordNo(),
+                'defect_type' => $inspection->inspection_type?->value ?? 'iqc',
+                'item_id' => $inspection->item_id,
+                'batch_number' => $inspection->batch_number,
+                'quantity' => max((float) $inspection->rejected_size, 0.0001),
+                'disposition' => 'pending',
+                'description' => '检验单 '.$inspection->inspection_no.' 判定不合格，待处置',
+                'created_by' => auth()->id(),
+            ]);
+
             $this->notificationService->sendToRole(
                 'warehouse_manager',
                 '质检不合格通知',
@@ -86,6 +100,83 @@ class QualityController extends Controller
         }
 
         return redirect()->route('app.quality.inspections.show', $inspection)->with('success', '检验单创建成功');
+    }
+
+    /** 追加检验项明细 */
+    public function addLine(Request $request, QualityInspection $inspection)
+    {
+        Gate::authorize('create quality inspections');
+
+        $data = $request->validate([
+            'inspection_item' => 'required|string|max:200',
+            'specification' => 'nullable|string|max:200',
+            'result' => 'nullable|string|max:200',
+            'judgment' => 'required|in:pass,fail,rework,pending',
+            'remark' => 'nullable|string|max:2000',
+        ], [], ['inspection_item' => '检验项目', 'judgment' => '判定']);
+
+        $next = (int) ($inspection->lines()->max('line_number') ?? 0) + 1;
+
+        QualityInspectionLine::create([
+            'quality_inspection_id' => $inspection->id,
+            'line_number' => $next,
+            'inspection_item' => $data['inspection_item'],
+            'specification' => $data['specification'] ?? null,
+            'result' => $data['result'] ?? null,
+            'judgment' => $data['judgment'],
+            'remark' => $data['remark'] ?? null,
+        ]);
+
+        return back()->with('success', '检验项已追加。');
+    }
+
+    /** 检验判定：写结论、审批人，并对不合格项自动登记缺陷记录 */
+    public function judge(Request $request, QualityInspection $inspection)
+    {
+        Gate::authorize('complete quality inspections');
+
+        $data = $request->validate([
+            'result' => 'required|in:pass,fail,conditional,waived',
+            'qualified_size' => 'nullable|integer|min:0',
+            'rejected_size' => 'nullable|integer|min:0',
+            'remark' => 'nullable|string|max:2000',
+        ], [], ['result' => '检验结论']);
+
+        // 有 fail 明细行时必须判不合格或让步，禁止直接判合格
+        $hasFailLine = $inspection->lines()->where('judgment', 'fail')->exists();
+        if ($hasFailLine && in_array($data['result'], ['pass', 'waived'], true)) {
+            return back()->with('warning', '存在判「不合格」的检验项，不能选择合格/豁免接收。');
+        }
+
+        $inspection->update([
+            'result' => $data['result'],
+            'qualified_size' => $data['qualified_size'] ?? $inspection->qualified_size,
+            'rejected_size' => $data['rejected_size'] ?? $inspection->rejected_size,
+            'remark' => $data['remark'] ?? $inspection->remark,
+            'status' => QualityInspectionStatus::Completed,
+            'approved_by' => auth()->id(),
+            'approved_at' => now(),
+        ]);
+
+        $this->auditLog('judge', 'QualityInspection', $inspection, '检验判定 '.$inspection->inspection_no.' → '.$data['result']);
+
+        if ($data['result'] === 'fail') {
+            $exists = DefectRecord::where('description', 'like', '%'.$inspection->inspection_no.'%')->exists();
+            if (! $exists) {
+                DefectRecord::create([
+                    'record_no' => DefectRecordController::nextRecordNo(),
+                    'defect_type' => $inspection->inspection_type?->value ?? 'iqc',
+                    'item_id' => $inspection->item_id,
+                    'batch_number' => $inspection->batch_number,
+                    'quantity' => max((float) ($data['rejected_size'] ?? $inspection->rejected_size), 0.0001),
+                    'disposition' => 'pending',
+                    'description' => '检验单 '.$inspection->inspection_no.' 判定不合格（'.$data['remark'].'）',
+                    'created_by' => auth()->id(),
+                ]);
+            }
+        }
+
+        return redirect()->route('app.quality.inspections.show', $inspection)->with('success', '检验判定已保存。');
     }
 
     public function show(QualityInspection $inspection)
