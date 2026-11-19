@@ -43,9 +43,11 @@
                 <div class="col-md-3">
                     <select name="status" class="form-select">
                         <option value="">全部状态</option>
-                        <option value="pending" @selected(request('status') === 'pending')>待处理</option>
-                        <option value="picking" @selected(request('status') === 'picking')>拣货中</option>
-                        <option value="done" @selected(request('status') === 'done')>已完成</option>
+                        <option value="pending" @selected(request('status') === 'pending')>待拣货</option>
+                        <option value="picked" @selected(request('status') === 'picked')>已拣货</option>
+                        <option value="packed" @selected(request('status') === 'packed')>已打包</option>
+                        <option value="shipped" @selected(request('status') === 'shipped')>已发货</option>
+                        <option value="cancelled" @selected(request('status') === 'cancelled')>已取消</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -67,6 +69,7 @@
                         <th class="text-center">状态</th>
                         <th>备注</th>
                         <th class="text-center">生成时间</th>
+                        <th class="text-center">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,9 +83,11 @@
                             <td class="text-center">
                                 @php
                                     $map = [
-                                        'pending' => ['待处理', 'warning'],
-                                        'picking' => ['拣货中', 'info'],
-                                        'done' => ['已完成', 'success'],
+                                        'pending' => ['待拣货', 'warning'],
+                                        'picked' => ['已拣货', 'info'],
+                                        'packed' => ['已打包', 'primary'],
+                                        'shipped' => ['已发货', 'success'],
+                                        'cancelled' => ['已取消', 'secondary'],
                                     ];
                                     [$label, $class] = $map[$row->status] ?? [$row->status, 'secondary'];
                                 @endphp
@@ -90,10 +95,16 @@
                             </td>
                             <td class="small text-muted">{{ $row->remark ?: '-' }}</td>
                             <td class="text-center small text-muted">{{ $row->created_at }}</td>
+                            <td class="text-center">
+                                <a href="{{ route('soho.order.fulfillment.show', $row->id) }}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fa fa-play-circle me-1"></i> 执行
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center text-muted py-4">
+                            <td colspan="9" class="text-center text-muted py-4">
+                                <i class="fa fa-inbox fa-2x d-block mb-2"></i>
                                 还没有履约单。先到「待履约」页面为已付款订单生成履约单。
                             </td>
                         </tr>

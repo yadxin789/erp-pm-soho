@@ -1098,6 +1098,13 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('permission:order.edit')->get('order/warehouse-assign', [App\Soho\Http\Controllers\Order\OrderOperationController::class, 'warehouseAssign'])->name('order.warehouse.assign');
         Route::middleware('permission:order.edit')->post('order/warehouse-assign/apply', [App\Soho\Http\Controllers\Order\OrderOperationController::class, 'applyWarehouseAssign'])->name('order.warehouse.assign.apply');
         Route::middleware('permission:order.view')->get('order/fulfillment', [App\Soho\Http\Controllers\Order\OrderOperationController::class, 'fulfillments'])->name('order.fulfillment');
+        // 履约执行闭环（P1-1）
+        Route::middleware('permission:order.view')->get('order/fulfillment/{id}', [\App\Soho\Http\Controllers\Order\FulfillmentFlowController::class, 'show'])->whereNumber('id')->name('order.fulfillment.show');
+        Route::middleware('permission:order.edit')->post('order/fulfillment/{id}/assign', [\App\Soho\Http\Controllers\Order\FulfillmentFlowController::class, 'assign'])->whereNumber('id')->name('order.fulfillment.assign');
+        Route::middleware('permission:order.edit')->post('order/fulfillment/{id}/pick', [\App\Soho\Http\Controllers\Order\FulfillmentFlowController::class, 'pick'])->whereNumber('id')->name('order.fulfillment.pick');
+        Route::middleware('permission:order.edit')->post('order/fulfillment/{id}/pack', [\App\Soho\Http\Controllers\Order\FulfillmentFlowController::class, 'pack'])->whereNumber('id')->name('order.fulfillment.pack');
+        Route::middleware('permission:order.edit')->post('order/fulfillment/{id}/ship', [\App\Soho\Http\Controllers\Order\FulfillmentFlowController::class, 'ship'])->whereNumber('id')->name('order.fulfillment.ship');
+        Route::middleware('permission:order.edit')->post('order/fulfillment/{id}/cancel', [\App\Soho\Http\Controllers\Order\FulfillmentFlowController::class, 'cancel'])->whereNumber('id')->name('order.fulfillment.cancel');
         Route::middleware('permission:order.view')->get('order/stock-shortage', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'shortage'])->name('order.stock-shortage');
     });
 
