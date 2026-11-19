@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', '项目管理系统')</title>
     <link rel="stylesheet" href="{{ asset('assets/pm/css/app.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/core/css/responsive.css') }}">
 </head>
 <body>
     <div class="container mt-5">

@@ -8,4 +8,5 @@
 <link rel="stylesheet" href="{{ asset('assets/erp/css/erp.css') }}">
 {{-- 过渡用：兼容原 Tailwind 原子类，页面改用 Bootstrap 后可移除 --}}
 <link rel="stylesheet" href="{{ asset('assets/erp/css/erp-utilities.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/core/css/responsive.css') }}">
 @yield('head')

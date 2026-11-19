@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('assets/core/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/core/font-awesome/css/fontawesome-all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/core/css/ddwl.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/core/css/responsive.css') }}">
     @stack('styles')
 </head>
 @hasSection('plain')
@@ -29,6 +30,7 @@
 
     <script src="{{ asset('assets/core/bootstrap/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/core/js/ddwl.js') }}"></script>
+    @include('layouts.partials.responsive')
     @stack('scripts')
 </body>
 </html>

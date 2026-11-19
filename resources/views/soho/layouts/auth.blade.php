@@ -7,6 +7,7 @@
     <title>@yield('title', '登录') - 得道未来多平台电商店铺统一管理系统</title>
     <link rel="stylesheet" href="{{ asset('assets/soho/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/soho/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/core/css/responsive.css') }}">
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

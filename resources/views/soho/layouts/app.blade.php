@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/soho/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/soho/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/soho/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/core/css/responsive.css') }}">
     <style>
         body {
             background-color: #f5f7fa;
@@ -503,6 +504,7 @@
         });
     </script>
     @yield('scripts')
+@include('layouts.partials.responsive')
 @include('layouts.partials.form-guard')
 </body>
 </html>

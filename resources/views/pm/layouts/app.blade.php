@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/pm/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/pm/css/v4-shims.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/pm/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/core/css/responsive.css') }}">
     <style>
         body {
             background-color: #f5f7fa;
@@ -774,6 +775,7 @@
         })();
     </script>
     @yield('scripts')
+@include('layouts.partials.responsive')
 @include('layouts.partials.form-guard')
 </body>
 </html>
