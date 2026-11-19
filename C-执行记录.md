@@ -376,3 +376,10 @@ P1-3 只做了「已有单据」的明细、提交、审批、执行，**没有�
 - 平台 SKU：同命令按 `(shop_id, platform_sku)` 分组，保留首行、其余加 `-02…-12` 后缀，改写 44 行；新增迁移 `2026_11_19_250000_unique_soho_platform_sku.php` 建唯一索引 `ux_platform_sku_shop(shop_id, platform_sku)`。现重复组 0，索引已生效。
 - 备份：`storage/backups/p3-uniqueness-before.sql`（users + soho_platform_skus，50 KB）。
 - 验收：邮箱通道 `pm_manager_2@pm.local` / `pm_director@pm.local` 与用户名通道 `pm_manager_2` 登录均 200 落地 `/pm`；`/soho/platform-sku`、`/soho/goods`、`/soho/dashboard` 200；PM 侧 `/pm`、`/pm/dashboard` 200，0×500 / 0×403。
+
+### 33.6 P3 收尾（校验固化为命令 + ID 对照 + 切换手册）
+
+- 新增 `app/Console/Commands/P3Verify.php`（`p3:verify`）：一次跑完 V1~V8 并输出表格与 `storage/app/p3-verify-*.json` 快照；`--base` 走真实 HTTP 登录抽样（本次 10/10 成功）；`--export-map` 导出 `docs/数据映射表-源ID对照.csv`。实测 V1~V8 全 ✓。
+- ID 对照表 139 行：user 70 全映射；department 21 同名映射 + `项目部`→`项目管理部`（D16）+ `电商部` 不保留（D16 人员已删）；role 18 全映射；业务主数据 26 映射、2 条 ERP 演示项目未迁（`projects` 表缺 `description/budget/customer_id`，登记为遗留）。
+- 新增 `docs/P3-切换与回滚.md`：环境基线、首次部署、数据补齐（幂等命令）、切换 9 步、验收 11 项、代码/数据回滚、切换前必读遗留（含 ERP 演示项目、projects/tasks 无 module 区分、SOHO 源缺失、D23 截图延后）。
+- 结论：P3 出口达成；剩余为部署后动作（真机验证、截图基线）。
