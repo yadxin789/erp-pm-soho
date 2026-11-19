@@ -1137,22 +1137,16 @@ Route::middleware(['auth'])->group(function () {
 
     // ==================== 订单主管扩展路由（V3.1补全） ====================
     Route::middleware('soho_role:order_manager')->group(function () {
-        Route::middleware('permission:order.view')->get('order/pending-fulfill', function () {
-            return view('placeholder', ['title' => '待履约', 'feature' => '待履约订单列表', 'status' => '开发中']);
-        })->name('order.pending-fulfill');
+        Route::middleware('permission:order.view')->get('order/pending-fulfill', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'pendingFulfill'])->name('order.pending-fulfill');
+        Route::middleware('permission:order.view')->post('order/pending-fulfill/store', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'storeFulfillment'])->name('order.pending-fulfill.store');
         Route::middleware('permission:order.edit')->get('order/split', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'split'])->name('order.split');
         Route::middleware('permission:order.edit')->post('order/split/apply', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'applySplit'])->name('order.split.apply');
         Route::middleware('permission:order.edit')->get('order/merge', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'merge'])->name('order.merge');
         Route::middleware('permission:order.edit')->post('order/merge/apply', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'applyMerge'])->name('order.merge.apply');
-        Route::middleware('permission:order.view')->get('order/export', function () {
-            return view('placeholder', ['title' => '订单导出', 'feature' => '订单数据导出', 'status' => '开发中']);
-        })->name('order.export');
-        Route::middleware('permission:order.edit')->get('order/warehouse-assign', function () {
-            return view('placeholder', ['title' => '分仓管理', 'feature' => '订单分仓管理', 'status' => '开发中']);
-        })->name('order.warehouse.assign');
-        Route::middleware('permission:order.view')->get('order/fulfillment', function () {
-            return view('placeholder', ['title' => '履约单', 'feature' => '履约单管理', 'status' => '开发中']);
-        })->name('order.fulfillment');
+        Route::middleware('permission:order.view')->get('order/export', [App\Soho\Http\Controllers\Order\OrderOperationController::class, 'export'])->name('order.export');
+        Route::middleware('permission:order.edit')->get('order/warehouse-assign', [App\Soho\Http\Controllers\Order\OrderOperationController::class, 'warehouseAssign'])->name('order.warehouse.assign');
+        Route::middleware('permission:order.edit')->post('order/warehouse-assign/apply', [App\Soho\Http\Controllers\Order\OrderOperationController::class, 'applyWarehouseAssign'])->name('order.warehouse.assign.apply');
+        Route::middleware('permission:order.view')->get('order/fulfillment', [App\Soho\Http\Controllers\Order\OrderOperationController::class, 'fulfillments'])->name('order.fulfillment');
         Route::middleware('permission:order.view')->get('order/stock-shortage', [\App\Soho\Http\Controllers\Order\OrderOperationController::class, 'shortage'])->name('order.stock-shortage');
     });
 
